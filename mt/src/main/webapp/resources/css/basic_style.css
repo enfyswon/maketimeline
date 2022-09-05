@@ -2,4 +2,11 @@
 
 * {
 	margin: 0 auto;
+	background-color: #f4fbff;
+}
+a {
+	text-decoration: none;
+}
+li {
+	list-style: none;
 }
