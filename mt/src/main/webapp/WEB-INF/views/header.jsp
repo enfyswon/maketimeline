@@ -7,10 +7,10 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#header").mouseover(function() {
-			$("#icon-bar").stop().slideDown(300);
+			$("#header-icon").stop().slideDown(300);
 		});
 		$("#header").mouseout(function() {
-			$("#icon-bar").stop().slideUp(300);
+			$("#header-icon").stop().slideUp(300);
 		});
 	});
 	</script>
@@ -19,26 +19,28 @@
 	<a href="${pageContext.request.contextPath}/">
 		<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 	</a>
-	<div id="icon-bar">
-		<div>
-			<a href="${pageContext.request.contextPath}/travel">
-				<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
-			</a>
-		</div>
-		<div>
-			<a href="#">
-				<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
-			</a>
-		</div>
-		<div>
-			<a href="#">
-				<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
-			</a>
-		</div>
-		<div>
-			<a href="#">
-				<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
-			</a>
+	<div id="header-icon">
+		<div id="icon-bar">
+			<div>
+				<a href="${pageContext.request.contextPath}/travel">
+					<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
+				</a>
+			</div>
+			<div>
+				<a href="#">
+					<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
+				</a>
+			</div>
+			<div>
+				<a href="#">
+					<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
+				</a>
+			</div>
+			<div>
+				<a href="#">
+					<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
