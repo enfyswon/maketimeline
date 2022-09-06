@@ -19,4 +19,10 @@ public class TravelController {
 	public String list() {
 		return "/travel/list";
 	}
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String categoryAdd() {
+		
+		return "/travel/category_write";
+	}
 }
