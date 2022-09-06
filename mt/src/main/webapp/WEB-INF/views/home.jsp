@@ -6,21 +6,39 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/basic_style.css" />
-
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
-		
-		<!-- 메인페이지 사진 -->
-				<section class="carousel">
-					<div class="reel" align="center">
-						<article class="col-1 col-1-mobile special" >
-							<a class="image featured" ><img  src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" style="width:400px;" /></a>
-						</article >
-					</div>
-				</section>
-				<br>
-				<br>
+		<div id="header">
+			<a href="${pageContext.request.contextPath}/">
+				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			</a>
+		</div>
+		<main>
+			<div id="icon-bar">
+				<div>
+					<a href="${pageContext.request.contextPath}/travel">
+						<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
+					</a>
+				</div>
+				<div>
+					<a href="#">
+						<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
+					</a>
+				</div>
+				<div>
+					<a href="#">
+						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
+					</a>
+				</div>
+				<div>
+					<a href="#">
+						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
+					</a>
+				</div>
+			</div>
+			<div>
+			</div>
+		</main>
 	</body>
 </html>
