@@ -10,6 +10,6 @@
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<h2>Make Timeline</h2>
-		
+		<h4>이미지</h4>
 	</body>
 </html>
