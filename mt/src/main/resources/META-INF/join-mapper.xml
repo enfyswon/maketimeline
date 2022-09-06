@@ -2,7 +2,20 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
 <mapper namespace="JoinMapper">
-	
+
+	<insert id="join" parameterType="kr.co.mt.util.dto.MemberDTO">
+	INSERT INTO member ( mem_nick, mem_pwd, mem_email, pnum, mem_photo
+		, mem_photopath, mem_desc)
+	VALUES ( #{mem_nick}, #{mem_pwd}, #{mem_email}, #{pnum}, mem_photo
+		,#{mem_photopath}, #{mem_desc})
+	</insert>
+
+	<select id="idCheck" parameterType="java.lang.String" resultType="int">
+	select count(mem_nick) cnt
+	from member
+	where mem_nick = #{mem_nick}
+	</select>
+
 </mapper>

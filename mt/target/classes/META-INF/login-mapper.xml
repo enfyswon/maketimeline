@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LoginMapper">
+
+	<select id="login" parameterType="kr.co.mt.util.dto.MemberDTO"
+						resultType="kr.co.mt.util.dto.MemberDTO">
+	select mem_no, mem_nick, mem_email, mem_pwd, pnum
+	from member
+	where mem_nick = #{mem_nick} and mem_pwd = #{mem_pwd}
+	</select>
+
+</mapper>

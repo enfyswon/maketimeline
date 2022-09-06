@@ -6,10 +6,21 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/basic_style.css" />
+
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-		<h2>Make Timeline</h2>
-		<h4>이미지</h4>
+		
+		<!-- 메인페이지 사진 -->
+				<section class="carousel">
+					<div class="reel" align="center">
+						<article class="col-1 col-1-mobile special" >
+							<a class="image featured" ><img  src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" style="width:400px;" /></a>
+						</article >
+					</div>
+				</section>
+				<br>
+				<br>
 	</body>
 </html>
