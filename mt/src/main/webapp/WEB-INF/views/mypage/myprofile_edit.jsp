@@ -42,7 +42,7 @@
 					<input class="form-control" type="text" id="userName" name="mem_desc" value="${member.mem_desc}"/>
 				</div>
 				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
+					<button class="btn btn-success" type="submit" id="submit">저장</button>
 				</div>
 			</form>
 		</section>
