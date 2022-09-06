@@ -26,8 +26,6 @@
 				}
 			});
 			
-				
-			
 		})
 	</script>
 	<body>
@@ -46,11 +44,7 @@
 				</div>
 			</form>
 		</section>
-		
 	</body>
-	
 
 </head>
-
-</body>
 </html>
