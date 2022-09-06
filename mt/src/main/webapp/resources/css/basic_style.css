@@ -29,6 +29,11 @@ button {
 #logo {
 	height: 100px;
 }
+
+#photo img {
+	margin: 40px 0;
+	height: 20px;
+}
 main {
 	width: 80%;
 }

@@ -32,13 +32,21 @@
 					</a>
 				</div>
 				<div>
-					<a href="#">
+					<a href="${pageContext.request.contextPath}/chat/chat_list">
 						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 					</a>
 				</div>
 			</div>
 			<div>
 			</div>
+			<!-- Carousel -->
+				
+					<div class="col-sm-2" align="center">
+						<img id="photo" alt="photo" src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
+					</div>
+				
+				<br>
+				<br>
 		</main>
 	</body>
 </html>

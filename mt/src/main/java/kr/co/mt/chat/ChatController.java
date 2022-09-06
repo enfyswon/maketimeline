@@ -61,10 +61,8 @@ public class ChatController {
 		List<ChatDTO> list = service.chatDetail(dto);
 		String mem_name = service.selectName(other_no);
 		
-		
 		model.addAttribute("chat_detail", list);
 		model.addAttribute("other_name", mem_name);
-		
 		
 		return "/chat/chat_contents";
 	}

@@ -18,7 +18,7 @@
 	</select>
 	
 	<select id="getName" parameterType="kr.co.mt.chat.ChatDTO" resultType="java.lang.String">
-	select mem_name from member
+	select mem_nick from member
 	<choose>
 		<when test="send_no == mem_no">
 			where mem_no = #{recv_mno}
@@ -42,7 +42,7 @@
 	</select>
 	
 	<select id="chatDetail" parameterType="kr.co.mt.chat.ChatDTO" resultType="kr.co.mt.chat.ChatDTO">
-	select chat_no, chat_roomno, send_no, recv_mno, chat_date, chat_photo, chat_photopath, chat_contents, chat_yn
+	select chat_no, chat_roomno, send_no, recv_mno, chat_date, chat_contents, chat_yn
 	from chat
 	<choose>
 		<when test="chat_roomno != 0">

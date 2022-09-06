@@ -20,30 +20,13 @@
 				<tr>
 					<th> 아 이 디 </th>
 					<td>
-						<input type="text" id="mid" name="mid" maxlength="20" class="form-control">
+						<input type="text" id="mem_nick" name="mem_nick" maxlength="20" class="form-control">
 					</td>
 				</tr>
 				<tr>
 					<th> 패 스 워 드 </th>
 					<td>
-						<input type="password" id="mpwd" name="mpwd" maxlength="20" class="form-control">
-					</td>
-				</tr>
-				<tr>
-					<th> 테스트 ID 선택 -> 테스트 후 삭제 </th>
-					<td>
-						<div class="input-group">
-							<input type="radio" id="rdo1" name="test_id_selector" value="tea">
-							<h3><label for="rdo1">tea</label></h3>
-						</div>
-						<div class="input-group">
-							<input type="radio" id="rdo2" name="test_id_selector" value="teacher">
-							<h3><label for="rdo2">teacher</label></h3>
-						</div>
-						<div class="input-group">
-							<input type="radio" id="rdo3" name="test_id_selector" value="sellerfruit">
-							<h3><label for="rdo3">sellerfruit</label></h3>
-						</div>
+						<input type="password" id="mem_pwd" name="mem_pwd" maxlength="20" class="form-control">
 					</td>
 				</tr>
 				<tr>
@@ -55,14 +38,7 @@
 		</table>
 
 
-	<script type="text/javascript">
-	$(document).ready(function() {//테스트용 스크립트 -> 테스트 후 삭제
-		$("input[type='radio']").click(function() {
-			$("#mid").val( $(this).val() );
-			$("#mpwd").val("1111");
-		});//click
-	});//ready
-	</script>
+	
 
 	<script type="text/javascript">
 	$(document).ready(function() {
@@ -71,8 +47,8 @@
 			$.post(
 					"${pageContext.request.contextPath}/login"
 					, {
-						mid : $("#mid").val()
-						, mpwd : $("#mpwd").val()
+						mem_nick : $("#mem_nick").val()
+						, mem_pwd : $("#mem_pwd").val()
 					}
 					, function(data, status) {
 						if(data == 0){

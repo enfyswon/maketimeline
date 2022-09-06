@@ -3,7 +3,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
-
+	<div class="container text-right">
+			<div class="text-right">
+				<c:choose>
+                        <c:when test="${login_info != null && login_info.mem_nick != null}">
+                        ${login_info.mem_nick}
+                           <a href="${pageContext.request.contextPath}/logout">
+                        <button type="button">LOGOUT</button></a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="${pageContext.request.contextPath}/login_form">
+                           <button>LOGIN</button></a>
+                           <a href="${pageContext.request.contextPath}/join_form">
+                           <button>JOIN</button></a>
+                        </c:otherwise>
+                     </c:choose>
+			</div>
+			</div>
 	<script type="text/javascript">
 	$(document).ready(function(){
 		$("#header").mouseover(function() {
@@ -36,7 +52,7 @@
 			</a>
 		</div>
 		<div>
-			<a href="#">
+			<a href="${pageContext.request.contextPath}/chat/chat_list">
 				<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 			</a>
 		</div>
