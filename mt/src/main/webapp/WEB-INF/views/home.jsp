@@ -10,7 +10,9 @@
 	</head>
 	<body>
 		<div id="header">
-			<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			<a href="${pageContext.request.contextPath}/">
+				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			</a>
 		</div>
 		<main>
 			<div id="icon-bar">
