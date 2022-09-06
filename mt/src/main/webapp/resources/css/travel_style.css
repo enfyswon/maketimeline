@@ -63,3 +63,12 @@
 	height: 50px;
 	object-fit: cover;
 }
+.write_label {
+	color: red;
+	font-size: small;
+	margin-left: 10px;
+}
+#add_btn {
+	padding: 8px;
+	border-radius: 7px;
+}
