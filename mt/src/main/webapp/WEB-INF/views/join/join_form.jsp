@@ -122,7 +122,7 @@
                , function(data, status) {
                   if(data == 1){
                      alert("회원 가입에 성공 하셨습니다. 로그인 해주세요.");
-                     location.href="${pageContext.request.contextPath}/login/login_form";
+                     location.href="${pageContext.request.contextPath}/login";
                   } else {
                      alert("잠시 후 다시 시도해 주세요.");
                   }
