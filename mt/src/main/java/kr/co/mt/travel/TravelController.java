@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 
-import kr.co.mt.util.dto.RegionDTO;
+import kr.co.mt.dto.RegionDTO;
 
 @Controller
 @RequestMapping(value = "/travel")

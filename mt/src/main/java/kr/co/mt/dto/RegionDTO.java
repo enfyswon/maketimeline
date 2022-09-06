@@ -1,4 +1,4 @@
-package kr.co.mt.util.dto;
+package kr.co.mt.dto;
 
 public class RegionDTO {
 	private String region_no;
