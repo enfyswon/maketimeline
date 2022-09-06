@@ -7,6 +7,42 @@
 a {
 	text-decoration: none;
 }
+a :hover {
+	text-decoration: none;
+}
 li {
 	list-style: none;
+}
+button {
+	outline: 0;
+	border: 0;
+}
+#header {
+	height: 100px;
+	text-align: center;
+	border-bottom: 1px solid #58606D;
+}
+#header > a {
+	height: 100px;
+	background-color: rgba(0, 0, 0, 0);
+}
+#logo {
+	height: 100px;
+}
+main {
+	width: 80%;
+}
+#icon-bar {
+	width: 50%;
+	height: 200px;
+	display: flex;
+	flex-direction: row;
+}
+#icon-bar > div {
+	width: 25%;
+	text-align: center;
+}
+#icon-bar img {
+	margin: 60px 0;
+	height: 80px;
 }
