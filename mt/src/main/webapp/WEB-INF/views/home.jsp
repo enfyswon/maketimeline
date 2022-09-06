@@ -16,10 +16,12 @@
 		</div>
 		<main>
 		
-		<div >
+		<div>
              <a href="${pageContext.request.contextPath}/join">
                  <button>JOIN</button></a>
-        </div>   
+             <a href="${pageContext.request.contextPath}/login">
+                 <button>LOGIN</button></a>
+        </div>  
               
 			<div id="icon-bar">
 				<div>
