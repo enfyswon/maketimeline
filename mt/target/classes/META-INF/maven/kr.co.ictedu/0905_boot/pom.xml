@@ -8,10 +8,10 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>kr.co.mt</groupId>
-	<artifactId>mt</artifactId>
+	<groupId>kr.co.ictedu</groupId>
+	<artifactId>0905_boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>mt</name>
+	<name>0905_boot</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
@@ -37,8 +37,8 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- jsp 설정 -->
+
+		<!-- jsp servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -47,8 +47,8 @@
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
-		
-		<!-- DB 설정 -->
+
+		<!-- jdbc -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
@@ -62,15 +62,35 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+
+		<!-- json -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
-		  	<artifactId>json-simple</artifactId>
-		  	<version>1.1.1</version>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.15.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>3.9.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

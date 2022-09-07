@@ -5,7 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> My Memo List </title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
 		
 	</head>
 	<body>
@@ -43,6 +43,7 @@
          $("#open_room_btn").click(function() {
             if( $.trim( $("#mno_to").val() ) == "" ){
                alert("대화 상대방 아이디를 입력 하세요.");
+               return;
             }
             $.get(
                   "${pageContext.request.contextPath}/memo/start"
@@ -52,7 +53,7 @@
                   , function(data, status) {
                      if(data >= 1){
                         alert("쪽지방이 성공적으로 만들어졌습니다.");
-                        location.href="${pageContext.request.contextPath}/memo/room_form";
+                        location.href="${pageContext.request.contextPath}/memo/open_room?room_no=mno";
                      } else if(data <= 0){
                         alert("쪽지방 만들기가 실패 하였습니다.");
                      } else {
@@ -70,12 +71,13 @@
             $.post(
                   "${pageContext.request.contextPath}/memo/delete"
                   , {
-                     room : $(this).val()
+                     room_no : $(this).val()
+                     
                   }
                   , function(data, status) {
                      if( data >= 1 ){
                         alert("채팅방이 삭제 되었습니다.");
-                        location.href="${pageContext.request.contextPath}/memo/room_list";
+                        location.href="${pageContext.request.contextPath}/memo/my_room_list";
                      } else if( data <= 0 ) {
                         alert("채팅방이 삭제를 실패 하였습니다.");
                      } else {

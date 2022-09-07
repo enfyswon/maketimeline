@@ -19,6 +19,7 @@
 	</head>
 	<body>
 
+
 		<div id="chat_list_div">
 			<c:forEach var="dto" items="${chat_list}">
 				<c:choose>
