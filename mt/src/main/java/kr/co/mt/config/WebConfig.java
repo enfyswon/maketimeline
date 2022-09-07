@@ -12,7 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println(11111);
 		registry.addResourceHandler(uploadPath)
 				.addResourceLocations(resourcePath);
 	}
