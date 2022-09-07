@@ -4,46 +4,63 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>내 프로필</title>
-		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<title>Make Timeline</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
 	
-	
-	
-	<div class="info-contents">
-		<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
-		<img alt="profile_photo" src="${myinfo.mpho_path}">
-		</c:if>
-		<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
-		<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
-		</c:if>
-		<input type="file" id="profile" name="profile">
+	<div id="header">
+			<a href="${pageContext.request.contextPath}/">
+				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			</a>
 	</div>
 	
-							<div class="info-line">
-								<div class="info-label">
-									<label for="mni">닉네임</label>
-								</div>
-								<div class="info-contents">
-									<input type="text" id="mni" name="mni"  value="${myinfo.mni}">
-									<label id="mni_label" for="mni"></label>
-								</div>
-							</div>
-							
-							<div class="info-line">
-								<div class="info-label">
-									<label for="mdes">소개</label>
-								</div>
-								<div class="info-contents">
-									<input type="text" id="mdes" name="mdes"  value="${myinfo.mdes}">
-									<label id="mdes_label" for="mdes"></label>
-								</div>
-							</div>
-							
-							<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">저장</button>
-				</div>
 	
+	<div id="icon-bar">
+				<div>
+					<a href="${pageContext.request.contextPath}/travel">
+						<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
+					</a>
+				</div>
+				<div>
+					<a href="#">
+						<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
+					</a>
+				</div>
+				<div>
+				<a href="${pageContext.request.contextPath}/mypage/myprofile">
+						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
+					</a>
+				</div>
+				<div>
+					<a href="#">
+						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
+					</a>
+				</div>
+			</div>
+			<div>
+			</div>
+			
+		<div class="info-contents">
+		<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
+		</div>
+		<hr>
+		<div class="info-line">
+			<div class="info-label">
+				<label for="mni">닉네임</label>
+			</div>
+		</div>
+		<hr>
+		<div class="info-line">
+			<div class="info-label">
+				<label for="mdes">소개</label>
+			</div>
+		</div>
+		<hr>
+		
+		<button type="button" onclick="location.href='/src/WEB-INF/views/mypage/myinfo_up'">회원정보 수정</button>
+		<button type="button" onclick="location.href='/src/WEB-INF/views/mypage/myprofile_up'">프로필 수정</button>
+		<button type="button" onclick="location.href='chat'">관리자 문의</button>
+		
 	</body>
 </html>
