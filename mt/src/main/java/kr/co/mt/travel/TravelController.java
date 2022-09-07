@@ -153,4 +153,13 @@ public class TravelController {
 		out.print(successCnt);
 		out.close();
 	}
+	
+	@RequestMapping(value = "/plan", method = RequestMethod.GET)
+	public String plan(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = service.cate_select(cate_no);
+		model.addAttribute("category", dto);
+		
+		return "/travel/plan";
+	}
 }

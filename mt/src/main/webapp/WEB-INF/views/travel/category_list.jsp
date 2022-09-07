@@ -16,7 +16,7 @@
 				<c:forEach var="dto" items="${catelist}">
 				<div class="ticket">
 					<div class="travel-ticket">
-						<a href="#" class="travel-ticket-link">
+						<a href="${pageContext.request.contextPath}/travel/plan?cate_no=${dto.cate_no}" class="travel-ticket-link">
 							<div class="ticket-desc">
 								<div class="ticket-desc-border">
 									<p>Travel Ticket</p>
