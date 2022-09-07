@@ -15,20 +15,18 @@ public class MyPageService {
 	@Autowired
 	MyPageDAO dao;
 		
-	public MemberDTO infoSelect(String mno) {
-		MemberDTO dto = null;
-		dto = dao.infoSelect(mno);
-		
-		return dto;
-	}
-
 	public int infoUpdate(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = dao.infoUpdate(dto);
-		
 		return updateYN;
 	}
 
+	public Object profileUpdate(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = dao.infoUpdate(dto);
+		return updateYN;
+	}
+	
 	public int completeCnt(String mno) {
 		int completeCnt = 0;
 		completeCnt = dao.completeCnt(mno);
@@ -36,8 +34,4 @@ public class MyPageService {
 		return completeCnt;
 	}
 
-	public Object update_mypage(MemberDTO member) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

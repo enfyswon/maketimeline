@@ -4,9 +4,12 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>My profile</title>
+		<title>내 프로필</title>
+		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	</head>
 	<body>
+	
+	
 	
 	<div class="info-contents">
 		<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
@@ -18,7 +21,29 @@
 		<input type="file" id="profile" name="profile">
 	</div>
 	
-	
+							<div class="info-line">
+								<div class="info-label">
+									<label for="mni">닉네임</label>
+								</div>
+								<div class="info-contents">
+									<input type="text" id="mni" name="mni"  value="${myinfo.mni}">
+									<label id="mni_label" for="mni"></label>
+								</div>
+							</div>
+							
+							<div class="info-line">
+								<div class="info-label">
+									<label for="mdes">소개</label>
+								</div>
+								<div class="info-contents">
+									<input type="text" id="mdes" name="mdes"  value="${myinfo.mdes}">
+									<label id="mdes_label" for="mdes"></label>
+								</div>
+							</div>
+							
+							<div class="form-group has-feedback">
+					<button class="btn btn-success" type="submit" id="submit">저장</button>
+				</div>
 	
 	</body>
 </html>
