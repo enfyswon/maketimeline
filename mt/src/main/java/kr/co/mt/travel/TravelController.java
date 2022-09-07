@@ -1,17 +1,30 @@
 package kr.co.mt.travel;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.dto.RegionDTO;
 
 @Controller
@@ -23,7 +36,14 @@ public class TravelController {
 	private TravelService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String list() {
+	public String list(HttpSession session, Model model) {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		
+		List<CategoryDTO> list = null;
+		list = service.cateList(mno);
+		
+		model.addAttribute("catelist", list);
+		
 		return "/travel/category_list";
 	}
 	
@@ -39,6 +59,45 @@ public class TravelController {
 		list = service.regionList();
 		
 		out.print( new Gson().toJson(list) );
+		out.close();
+	}
+	
+	@RequestMapping(value = "/cate_insert", method = RequestMethod.POST)
+	public void cate_insert(CategoryDTO dto, HttpSession session, PrintWriter out) throws IOException {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		dto.setMno(mno);
+		
+		Date today = new Date();
+		DateFormat nalja = new SimpleDateFormat("YYYYMMdd");
+		DateFormat sigan = new SimpleDateFormat("HHmmss");
+		String todayNalja = nalja.format(today);
+		String todaySigan = sigan.format(today);
+		
+		String email = ((MemberDTO)session.getAttribute("login_info")).getEmail();
+		File newFolder = new File("C:/upload/category/" + email + "/");
+		if (!newFolder.exists()) {
+			newFolder.mkdirs();
+		}
+		
+		
+		MultipartFile cate_photo = dto.getCate_photo();
+		if (cate_photo != null && !cate_photo.getOriginalFilename().equals("")) {
+			InputStream is = cate_photo.getInputStream();
+			FileOutputStream fos = new FileOutputStream("C:/upload/category/" + email + "/" + todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+			FileCopyUtils.copy(is, fos);
+			is.close();
+			fos.close();
+			
+			dto.setCate_photoname(todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+			dto.setCate_photopath("/upload/category/" + email + "/" + todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+		}
+		
+		System.out.println(dto.toString());
+		
+		int successCnt = 0;
+		successCnt = service.cate_insert(dto);
+		
+		out.print(successCnt);
 		out.close();
 	}
 }
