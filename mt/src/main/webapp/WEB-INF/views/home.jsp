@@ -15,6 +15,23 @@
 			</a>
 		</div>
 		<main>
+		
+		<div>
+		<c:choose>
+                        <c:when test="${login_info != null && login_info.mni != null}">
+                        ${login_info.mni}
+                           <a href="${pageContext.request.contextPath}/login/logout">
+                        <button type="button">LOGOUT</button></a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="${pageContext.request.contextPath}/login/">
+                           <button>LOGIN</button></a>
+                           <a href="${pageContext.request.contextPath}/join/">
+                           <button>JOIN</button></a>
+                        </c:otherwise>
+                     </c:choose>
+        </div>  
+              
 			<div id="icon-bar">
 				<div>
 					<a href="${pageContext.request.contextPath}/travel">

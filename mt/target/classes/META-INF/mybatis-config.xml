@@ -7,6 +7,8 @@
 	
 	<mappers>
 		<mapper resource="META-INF/join-mapper.xml" />
+		<mapper resource="META-INF/travel-mapper.xml" />
+		<mapper resource="META-INF/login-mapper.xml" />
 	</mappers>
 
 </configuration>
