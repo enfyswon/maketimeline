@@ -18,8 +18,8 @@
 		
 		<div>
 		<c:choose>
-                        <c:when test="${login_info != null && login_info.email != null}">
-                        ${login_info.email}
+                        <c:when test="${login_info != null && login_info.mni != null}">
+                        ${login_info.mni}
                            <a href="${pageContext.request.contextPath}/login/logout">
                         <button type="button">LOGOUT</button></a>
                         </c:when>
@@ -44,25 +44,18 @@
 					</a>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/mypage/list">
+					<a href="#">
 						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
 					</a>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/memo/my_room_list">
+					<a href="#">
 						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 					</a>
 				</div>
 			</div>
-			
-			<div class="text-center">
-													
+			<div>
 			</div>
-						 <!-- container start -->
-						<div class="container width=100px align-center">
-										<img src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
-									</div >
-						<!-- container end -->
 		</main>
 	</body>
 </html>

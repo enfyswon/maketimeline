@@ -120,13 +120,13 @@
                   , tel : $("#tel").val()
                }
                , function(data, status) {
-					if(data == 1){
-						alert("회원 가입에 성공 하셨습니다. 로그인 해주세요.");
-						location.href="${pageContext.request.contextPath}/login/";
-					} else {
-						alert("잠시 후 다시 시도해 주세요.");
-					}
-				}//call back function
+                  if(data == 1){
+                     alert("회원 가입에 성공 하셨습니다. 로그인 해주세요.");
+                     location.href="${pageContext.request.contextPath}/login";
+                  } else {
+                     alert("잠시 후 다시 시도해 주세요.");
+                  }
+               }//call back function
          );//post
 
       });//click
@@ -138,11 +138,18 @@
          if( $.trim( $("#email").val() ) == "" ){
             return;
          }
+
          if( $("#email").val().match(onlyEmail) == null ){//허용되지 않은 글자는 null.
-            $("#email_label").text("영문 대소문자와 숫자 . @만 허용 됩니다.");
-            $("#email_label").css("color", "red");
-            return;
-         } else { $("#email_label").text(""); }
+             $("#email_label").text("영문 대소문자와 숫자 . @만 허용 됩니다.");
+             $("#email_label").css("color", "red");
+             return;
+          } else { $("#email_label").text(""); }
+
+         if( $("#email").val().includes(".") == false || $("#email").val().includes("@") == false ){//허용되지 않은 글자는 null.
+             $("#email_label").text("이메일 형식이 올바르지 않습니다.");
+             $("#email_label").css("color", "red");
+             return;
+          } else { $("#email_label").text(""); }
 
          $.get(
                "${pageContext.request.contextPath}/join/email_chk"

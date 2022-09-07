@@ -11,11 +11,12 @@
       </style>
 	<script type="text/javascript">
 	$(document).ready(function(){
-		$("#header").mouseover(function() {
-			$("#header-icon").stop().slideDown(300);
-		});
 		$("#header").mouseout(function() {
 			$("#header-icon").stop().slideUp(300);
+		});
+		$("#header").mouseover(function() {
+			$("#header-icon").css("visibility", "visible");
+			$("#header-icon").stop().slideDown(300);
 		});
 	});
 	</script>

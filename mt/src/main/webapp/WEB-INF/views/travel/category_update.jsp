@@ -13,26 +13,28 @@
 		<main>
 			<div id="category-input">
 				<form id="category_form">
+					<input type="hidden" id="cate_no" name="cate_no" value="${category.cate_no}">
 					<div class="category-detail">
 						<p>
 							<label for="cate_name">카테고리 이름</label>
 							<label for="cate_name" id="cate_name_label" class="write_label"></label>
 						</p>
-						<input type="text" id="cate_name" name="cate_name">
+						<input type="text" id="cate_name" name="cate_name" value="${category.cate_name}">
 					</div>
 					<div class="category-detail">
 						<p>
 							<label for="cate_startdate">여행 기간</label>
 							<label for="cate_startdate" id="cate_date_label" class="write_label"></label>
 						</p>
-						<input type="date" id="cate_startdate" name="cate_startdate" onchange="limitdate(event)">
+						<input type="date" id="cate_startdate" name="cate_startdate" onchange="limitdate(event)" value="${category.cate_startdate}">
 						~
-						<input type="date" id="cate_enddate" name="cate_enddate">
+						<input type="date" id="cate_enddate" name="cate_enddate" value="${category.cate_enddate}">
 					</div>
 					<div class="category-detail">
 						<p>여행 지역
 							<label id="cate_region_label" class="write_label"></label>
 						</p>
+						<input type="hidden" id="region" value="${category.region_no}">
 						<div id="category-region">
 							
 						</div>
@@ -45,7 +47,8 @@
 						<input type="file" id="cate_photo" name="cate_photo">
 					</div>
 				</form>
-				<button type="button" id="add_btn" name="add_btn">등록</button>
+				<button type="button" id="cancel_btn">취소</button>
+				<button type="button" id="update_btn">수정</button>
 			</div>
 		</main>
 		<script type="text/javascript">
@@ -63,6 +66,9 @@
 									"</label>"
 							);
 						});
+						if($("#region").val() > 0) {
+							$("input[name='region_no'][value='" + $("#region").val() + "']").prop("checked", true);
+						}
 					}
 			);
 		});
@@ -71,7 +77,12 @@
 			document.getElementById("cate_enddate").setAttribute("min", startdate);
 		}
 		$(document).ready(function() {
-			$("#add_btn").click(function() {
+			$("#cancel_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/travel";
+			});
+		});
+		$(document).ready(function() {
+			$("#update_btn").click(function() {
 				if ($.trim($("#cate_name").val()) == "") {
 					$("#cate_name_label").text("이름을 입력하세요.");
 					return;
@@ -111,13 +122,13 @@
 				$.ajax({
 					type : "POST", 
 					encType : "multipart/form-data", 
-					url : "${pageContext.request.contextPath}/travel/cate_insert", 
+					url : "${pageContext.request.contextPath}/travel/cate_update", 
 					data : form, 
 					processData : false, 
 					contentType : false, 
 					cache : false, 
 					success : function(result) {
-						alert("카테고리가 생성되었습니다.");
+						alert("카테고리가 수정되었습니다.");
 						location.href = "${pageContext.request.contextPath}/travel";
 					}, 
 					error : function(xhr) {
