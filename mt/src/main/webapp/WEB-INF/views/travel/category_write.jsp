@@ -68,37 +68,39 @@ input[type="radio"]:checked + div {
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
 			<div id="category-input">
-				<div class="category-detail">
-					<p>
-						<label for="cate_name">카테고리 이름</label>
-						<label for="cate_name" id="cate_name_label" class="write_label"></label><br>
-					</p>
-					<input type="text" id="cate_name">
-				</div>
-				<div class="category-detail">
-					<p>
-						<label for="cate_startdate">여행 기간</label><br>
-					</p>
-					<input type="date" id="cate_startdate" onchange="limitdate(event)">
-					~
-					<input type="date" id="cate_enddate">
-				</div>
-				<div class="category-detail">
-					<p>여행 지역
-					<label id="cate_region_label" class="write_label"></label>
-					</p>
-					<div id="category-region">
-						
+				<form id="category_form">
+					<div class="category-detail">
+						<p>
+							<label for="cate_name">카테고리 이름</label>
+							<label for="cate_name" id="cate_name_label" class="write_label"></label><br>
+						</p>
+						<input type="text" id="cate_name" name="cate_name">
 					</div>
-				</div>
-				<div class="category-detail">
-					<p>
-						이미지
-						<label id="cate_photo_label" class="write_label"></label>
-					</p>
-					<input type="file" id="cate_photo">
-				</div>
-				<button type="button" id="add_btn">등록</button>
+					<div class="category-detail">
+						<p>
+							<label for="cate_startdate">여행 기간</label><br>
+						</p>
+						<input type="date" id="cate_startdate" name="cate_startdate" onchange="limitdate(event)">
+						~
+						<input type="date" id="cate_enddate" name="cate_enddate">
+					</div>
+					<div class="category-detail">
+						<p>여행 지역
+						<label id="cate_region_label" class="write_label"></label>
+						</p>
+						<div id="category-region">
+							
+						</div>
+					</div>
+					<div class="category-detail">
+						<p>
+							이미지
+							<label id="cate_photo_label" class="write_label"></label>
+						</p>
+						<input type="file" id="cate_photo" name="cate_photo">
+					</div>
+				</form>
+				<button type="button" id="add_btn" name="add_btn">등록</button>
 			</div>
 		</main>
 		<script type="text/javascript">
@@ -108,7 +110,7 @@ input[type="radio"]:checked + div {
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#category-region").append("<label>" + 
-									"	<input type='radio' name='region' value='" + dto.region_no + "'>" + 
+									"	<input type='radio' name='region_no' value='" + dto.region_no + "'>" + 
 									"	<div class='region-box'>" + 
 									"		<img alt='" + dto.region_name + "' src='${pageContext.request.contextPath}/resources/img/" + dto.region_photoname + "' class='region-img'>" + 
 									"		<p>" + dto.region_name + "</p>" + 
@@ -132,7 +134,7 @@ input[type="radio"]:checked + div {
 					$("#cate_name_label").text("");
 				}
 				
-				if ($("input:radio[name=region]:checked").val() == null) {
+				if ($("input:radio[name=region_no]:checked").val() == null) {
 					$("#cate_region_label").text("지역을 선택하세요.");
 					return;
 				} else {
@@ -146,6 +148,30 @@ input[type="radio"]:checked + div {
 					$("#cate_photo_label").text("jpg/jpeg/gif/png 파일만 허용 됩니다.");
 					return;
 				} else { $("#cate_photo_label").text(""); }
+				
+				let form = new FormData( document.getElementById("category_form"));
+				let keys = form.keys();
+				for(key of keys) console.log(key);
+				
+				let values = form.values();
+				for(value of values) console.log(value);
+				
+				$.ajax({
+					type : "POST", 
+					encType : "multipart/form-data", 
+					url : "${pageContext.request.contextPath}/travel/cate_insert", 
+					data : form, 
+					processData : false, 
+					contentType : false, 
+					cache : false, 
+					success : function(result) {
+						alert("카테고리가 생성되었습니다.");
+						location.href = "${pageContext.request.contextPath}/travel";
+					}, 
+					error : function(xhr) {
+						alert("잠시 후 다시 시도해 주세요.");
+					}
+				});
 			});
 		});
 		</script>

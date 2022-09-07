@@ -19,4 +19,18 @@ public class TravelDAO {
 		
 		return list;
 	}
+
+	public int cate_insert(CategoryDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.insert("TravelMapper.cateInsert", dto);
+		
+		return successCnt;
+	}
+
+	public List<CategoryDTO> cateList(String mno) {
+		List<CategoryDTO> list = null;
+		list = sqlSession.selectList("TravelMapper.cateList", mno);
+		
+		return list;
+	}
 }
