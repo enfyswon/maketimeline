@@ -18,8 +18,8 @@
 		
 		<div>
 		<c:choose>
-                        <c:when test="${login_info != null && login_info.email != null}">
-                        ${login_info.email}
+                        <c:when test="${login_info != null && login_info.mni != null}">
+                        ${login_info.mni}
                            <a href="${pageContext.request.contextPath}/login/logout">
                         <button type="button">LOGOUT</button></a>
                         </c:when>
@@ -55,7 +55,6 @@
 				</div>
 			</div>
 			<div>
-				<h4>TEST</h4>
 			</div>
 		</main>
 	</body>
