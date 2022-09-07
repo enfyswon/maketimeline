@@ -33,4 +33,25 @@ public class TravelDAO {
 		
 		return list;
 	}
+
+	public int cate_delete(String cate_no) {
+		int successCnt = 0;
+		successCnt = sqlSession.delete("TravelMapper.cateDelete", cate_no);
+		
+		return successCnt;
+	}
+
+	public CategoryDTO cate_select(String cate_no) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = sqlSession.selectOne("TravelMapper.cateSelect", cate_no);
+		
+		return dto;
+	}
+
+	public int cate_update(CategoryDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("TravelMapper.cateUpdate", dto);
+		
+		return successCnt;
+	}
 }
