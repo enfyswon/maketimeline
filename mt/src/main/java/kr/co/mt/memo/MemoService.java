@@ -39,12 +39,14 @@ public class MemoService {
 	public String getRoomNo(MemoDTO dto) {
 		String roomNo = null;
 		roomNo = dao.getRoomNo(dto);
-
+System.out.println(roomNo);
 		if(roomNo == null) {
 			int successCnt = 0;
 			successCnt = dao.createRoomNo(dto);
 			if(successCnt == 0) roomNo = "0";
 			else roomNo = dto.getRoom_no();
+System.out.println(successCnt);
+System.out.println(roomNo);
 		}
 		return roomNo;
 	}//getRoomNo

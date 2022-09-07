@@ -5,29 +5,30 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> ChatRoom </title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-		<br><br><br><br><br>
-		<h3> ChatRoom : ${room_dto.mno_from} &lt;=&gt; ${room_dto.mno_to} </h3>
-		
 		<hr>
+		<h3> ChatRoom : ${room_dto.mni_from} &lt;=&gt; ${room_dto.mni_to} </h3>
+		<hr>
+
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
-				name="chatList" width="100%" height="600px" frameborder="0" scrolling="no" class="mb-1"></iframe>
-		
-		
+				name="chatList" width="100%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
+
 		<div>
 			<textarea id="cnts" name="cnts" class="form-control" style="height:100px;"></textarea>
 			<script type="text/javascript">
 				CKEDITOR.replace('cnts');
 			</script>
-		<hr>
-		<hr>
-			<button id="chat_send_btn" class="btn btn-primary btn-block float-right"> 글 전 송 </button>
+			<button id="chat_send_btn" class="btn btn-dark btn-sm float-right"> 글 전 송 </button>
 		</div>
-		
+
+	
 
 	<script type="text/javascript">
 	$(document).ready(function() {

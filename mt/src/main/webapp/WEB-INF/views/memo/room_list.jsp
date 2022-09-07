@@ -22,7 +22,7 @@
 									<button type="submit" class="btn_delete" value="${dto.room_no}"> 채팅방 삭제 </button>
 								<a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"
 									style="text-decoration:none;" class="text-dark">
-									${dto.mno_from} &lt;=&gt; ${dto.mno_to} 
+									${dto.room_no} : ${dto.mni_from} &lt;=&gt; ${dto.mni_to} 
 								</a>
 							</h3>
 						</td>
@@ -32,7 +32,7 @@
 			<div class="input-group">
          <div class="input-group-prepend">
          </div>
-         <input class="bar_search" id="mno_to" name="mno_to">
+         <input class="bar_search" id="mni_to" name="mni_to">
          <div class="input-group-append">
             <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
          </div>
@@ -41,19 +41,19 @@
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
-            if( $.trim( $("#mno_to").val() ) == "" ){
+            if( $.trim( $("#mni_to").val() ) == "" ){
                alert("대화 상대방 아이디를 입력 하세요.");
                return;
             }
             $.get(
                   "${pageContext.request.contextPath}/memo/start"
                   , {
-                	  mno_to : $("#mno_to").val()
+                	  mni_to : $("#mni_to").val()
                   }
                   , function(data, status) {
                      if(data >= 1){
                         alert("쪽지방이 성공적으로 만들어졌습니다.");
-                        location.href="${pageContext.request.contextPath}/memo/open_room?room_no=mno";
+                        location.href="${pageContext.request.contextPath}/memo/open_room?room_no="+data;
                      } else if(data <= 0){
                         alert("쪽지방 만들기가 실패 하였습니다.");
                      } else {
