@@ -39,5 +39,19 @@ public class TravelService {
 		
 		return successCnt;
 	}
+
+	public CategoryDTO cate_select(String cate_no) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = dao.cate_select(cate_no);
+		
+		return dto;
+	}
+
+	public int cate_update(CategoryDTO dto) {
+		int successCnt = 0;
+		successCnt = dao.cate_update(dto);
+		
+		return successCnt;
+	}
 	
 }

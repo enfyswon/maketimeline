@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/category_style.css">
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	</head>
 	<body>
@@ -23,7 +23,9 @@
 								</div>
 								<div class="ticket-desc-main">
 									<p class="ticket-title">${dto.cate_name}</p>
-									<p class="ticket-date">${dto.cate_startdate} ~ ${dto.cate_enddate}</p>
+									<c:if test="${dto.cate_startdate != null}">
+										<p class="ticket-date">${dto.cate_startdate} ~ ${dto.cate_enddate}</p>
+									</c:if>
 								</div>
 								<div class="ticket-desc-border">
 									<p class="none">test</p>
@@ -80,6 +82,11 @@
 							}
 						}
 				);
+			});
+		});
+		$(document).ready(function() {
+			$(".update_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/travel/update?cate_no=" + $(this).val();
 			});
 		});
 		</script>
