@@ -12,9 +12,6 @@ package kr.co.mt.mypage;
 		@Autowired
 		SqlSession sqlSession;
 
-		public void updateSellerYN(String mem_no) {
-			sqlSession.update("MyPageMapper.updateSellerYN", mem_no);
-		}
 
 	
 }
