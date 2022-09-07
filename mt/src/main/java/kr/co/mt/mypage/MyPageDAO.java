@@ -1,17 +1,35 @@
 package kr.co.mt.mypage;
 
-	import java.util.List;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-	import org.apache.ibatis.session.SqlSession;
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Repository;
+import kr.co.mt.dto.MemberDTO;
 
-	@Repository
-	public class MyPageDAO {
-		
-		@Autowired
-		SqlSession sqlSession;
-
-
+@Repository
+public class MyPageDAO {
 	
+	@Autowired
+	SqlSession sqlSession;
+		
+	public MemberDTO infoSelect(String mno) {
+		MemberDTO dto = null;
+		dto = sqlSession.selectOne("MyPageMapper.infoSelect", mno);
+		
+		return dto;
+	}
+	
+	public int infoUpdate(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = sqlSession.update("MyPageMapper.infoUpdate", dto);
+		
+		return updateYN;
+	}
+
+	public int completeCnt(String mno) {
+		int completeCnt = 0;
+		completeCnt = sqlSession.selectOne("MyPageMapper.completeCnt", mno);
+		
+		return completeCnt;
+	}
 }

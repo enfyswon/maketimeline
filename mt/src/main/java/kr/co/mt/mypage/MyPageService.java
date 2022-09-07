@@ -1,15 +1,43 @@
 package kr.co.mt.mypage;
 
-	import java.util.List;
+import java.util.List;
 
-	import org.springframework.beans.factory.annotation.Autowired;
-	import org.springframework.stereotype.Service;
+import javax.servlet.http.HttpServletResponse;
 
-	@Service
-	public class MyPageService {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-		@Autowired
-		MyPageDAO dao;
+import kr.co.mt.dto.MemberDTO;
 
-	
+@Service
+public class MyPageService {
+
+	@Autowired
+	MyPageDAO dao;
+		
+	public MemberDTO infoSelect(String mno) {
+		MemberDTO dto = null;
+		dto = dao.infoSelect(mno);
+		
+		return dto;
+	}
+
+	public int infoUpdate(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = dao.infoUpdate(dto);
+		
+		return updateYN;
+	}
+
+	public int completeCnt(String mno) {
+		int completeCnt = 0;
+		completeCnt = dao.completeCnt(mno);
+		
+		return completeCnt;
+	}
+
+	public Object update_mypage(MemberDTO member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
