@@ -65,11 +65,21 @@
                   <label for="tel" id="tel_label"></label>
                </td>
             </tr>
-            
+            <tr id="terms-box">
+            	<td>
+					<input type="checkbox" id="selectAll" name="selectAll" onclick="selectAll(this)"> 필수 내용 모두 동의합니다.
+					<hr>
+					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 만 14세 이상입니다. (필수)<br>
+					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 이용약관 필수 동의 (필수)<br>
+					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 개인정보 수집 및 이용 동의 (필수)
+					<label id="terms_label"></label>
+				<td>
+           </tr>
          </tbody>
+         
       </table>
       <div class="clearfix" id="buttons">
-         <button id="join_btn" class="btn btn-secondary float-right"> J O I N </button>
+         <button id="join_btn" class="btn btn-secondary float-right"> 회원 가입 </button>
       </div>
       <br><br><br>
    <script type="text/javascript">
@@ -110,6 +120,12 @@
             return;
          } else { $("#tel_label").text(""); }
 
+
+		 if (!$("#selectAll").is(':checked')) {
+			 $("#terms_label").text("필수 사항을 모두 체크해야합니다.");
+			 $("#terms_label").css("color", "red");
+			 return;
+		 } else { $("#terms_label").text(""); }
 
          $.post(
                "${pageContext.request.contextPath}/join/"
@@ -169,7 +185,34 @@
          );//get
       });//click
    });//ready
-         
+     
+	function checkSelectAll()  {
+		  const checkboxes 
+		    = document.querySelectorAll('input[name="terms"]');
+		  // 선택된 체크박스
+		  const checked 
+		    = document.querySelectorAll('input[name="terms"]:checked');
+		  // select all 체크박스
+		  const selectAll 
+		    = document.querySelector('input[name="selectAll"]');
+		  
+		  if(checkboxes.length === checked.length)  {
+		    selectAll.checked = true;
+		  } else {
+		    selectAll.checked = false;
+		  }
+
+		}
+
+		function selectAll(selectAll)  {
+		  const checkboxes 
+		     = document.getElementsByName('terms');
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked
+		  })
+		}
+		
    </script>
    </body>
 </html>
