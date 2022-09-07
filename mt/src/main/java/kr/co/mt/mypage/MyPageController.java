@@ -27,7 +27,7 @@ public class MyPageController {
 	
 	@RequestMapping(value = "/myprofile")
 	public String mypage() throws Exception{
-		return "/mypage/myprofile";//jsp file name
+		return "/mypage/myprofile";
 	}
 
 	
@@ -36,7 +36,7 @@ public class MyPageController {
 	public String profileUpdate(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
 		session.setAttribute("member", service.profileUpdate(member));
 		rttr.addFlashAttribute("msg", "프로필 수정 완료");
-		return "/mypage/myprofile";
+		return "/mypage/myprofile_up";
 	}
 
 	// 회원정보 수정
@@ -44,7 +44,7 @@ public class MyPageController {
 	public String infoUpdate(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
 		session.setAttribute("member", service.infoUpdate(member));
 		rttr.addFlashAttribute("msg", "회원정보 수정 완료");
-		return "/mypage/myinfo";
+		return "/mypage/myinfo_up";
 	}
 	
 	
