@@ -22,7 +22,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("login_info");
 		if( dto == null || dto.getMno() == null || dto.getMno().equals("") ) {
-			response.sendRedirect( request.getContextPath() + "/" );
+			response.sendRedirect( request.getContextPath() + "/login" );
 			return false;//계속 진행할 메소드 호출 중지.
 		}
 		return super.preHandle(request, response, handler);//계속 진행할 메소드 호출.
