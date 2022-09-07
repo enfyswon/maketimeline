@@ -10,6 +10,7 @@
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
+	<br><br><br><br><br><br><br>
 		<main>
 			<div id="ticket-box">
 				<div class="travel-ticket">

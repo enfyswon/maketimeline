@@ -7,9 +7,10 @@
 
 	<select id="login" parameterType="kr.co.mt.util.dto.MemberDTO"
 						resultType="kr.co.mt.util.dto.MemberDTO">
-	select mem_no, mem_nick, mem_email, mem_pwd, pnum
+	select mno, email, mpwd, mni, tel
 	from member
-	where mem_nick = #{mem_nick} and mem_pwd = #{mem_pwd}
+	where email = #{email} 
+	and mpwd = #{mpwd}
 	</select>
 
 </mapper>

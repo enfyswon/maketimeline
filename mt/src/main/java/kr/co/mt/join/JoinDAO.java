@@ -18,10 +18,9 @@ public class JoinDAO {
 		return successCount;
 	}//join
 
-	public int idCheck( String mid ) {
+	public int emailCheck( String email ) {
 		int isYN = 0;
-		isYN = sqlSession.selectOne("JoinMapper.idCheck", mid);
+		isYN = sqlSession.selectOne("JoinMapper.emailCheck", email);
 		return isYN;
-	}//idCheck
-
+	}//emailCheck
 }//class

@@ -2,69 +2,63 @@ package kr.co.mt.util.dto;
 
 public class MemberDTO {
 
-	private String mem_no;
-	private String mem_nick;
-	private String mem_email;
-	private String mem_pwd;
-	private String pnum;
-	private String mem_photo;
-	private String mem_photopath;
-	private String mem_desc;
-	public String getMem_no() {
-		return mem_no;
+	private String mno;
+	private String mni;
+	private String email;
+	private String mpwd;
+	private String tel;
+	
+	private String mpho;
+	private String mpho_path;
+	private String mdes;
+	public String getMno() {
+		return mno;
 	}
-	public void setMem_no(String mem_no) {
-		this.mem_no = mem_no;
+	public void setMno(String mno) {
+		this.mno = mno;
 	}
-	public String getMem_nick() {
-		return mem_nick;
+	public String getMni() {
+		return mni;
 	}
-	public void setMem_nick(String mem_nick) {
-		this.mem_nick = mem_nick;
+	public void setMni(String mni) {
+		this.mni = mni;
 	}
-	public String getMem_email() {
-		return mem_email;
+	public String getEmail() {
+		return email;
 	}
-	public void setMem_email(String mem_email) {
-		this.mem_email = mem_email;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getMem_pwd() {
-		return mem_pwd;
+	public String getMpwd() {
+		return mpwd;
 	}
-	public void setMem_pwd(String mem_pwd) {
-		this.mem_pwd = mem_pwd;
+	public void setMpwd(String mpwd) {
+		this.mpwd = mpwd;
 	}
-	public String getPnum() {
-		return pnum;
+	public String getTel() {
+		return tel;
 	}
-	public void setPnum(String pnum) {
-		this.pnum = pnum;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
-	public String getMem_photo() {
-		return mem_photo;
+	public String getMpho() {
+		return mpho;
 	}
-	public void setMem_photo(String mem_photo) {
-		this.mem_photo = mem_photo;
+	public void setMpho(String mpho) {
+		this.mpho = mpho;
 	}
-	public String getMem_photopath() {
-		return mem_photopath;
+	public String getMpho_path() {
+		return mpho_path;
 	}
-	public void setMem_photopath(String mem_photopath) {
-		this.mem_photopath = mem_photopath;
+	public void setMpho_path(String mpho_path) {
+		this.mpho_path = mpho_path;
 	}
-	public String getMem_desc() {
-		return mem_desc;
+	public String getMdes() {
+		return mdes;
 	}
-	public void setMem_desc(String mem_desc) {
-		this.mem_desc = mem_desc;
+	public void setMdes(String mdes) {
+		this.mdes = mdes;
 	}
+
 	
 }//class
-
-/*
- * DTO의 종류
- * 1. Table DTO : 테이블 컬럼과 동일한 변수를 갖는 DTO
- * 2. View DTO : 화면 요소와 동일한 변수를 갖는 DTO
- * 3. Composite DTO : 복합적인 변수를 갖는 DTO
- * -> 결론은 개발자 맘대로 만드시면 되요.
- */

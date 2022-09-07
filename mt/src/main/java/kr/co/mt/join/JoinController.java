@@ -27,16 +27,17 @@ public class JoinController {
 		out.print(successCount);
 		out.close();
 	}//join
-
-	@RequestMapping( value = "/id_chk", method = RequestMethod.GET )
-	public void idCheck( String mid, PrintWriter out ) {
+	
+	@RequestMapping( value = "/email_chk", method = RequestMethod.GET )
+	public void emailCheck( String email, PrintWriter out ) {
 		int isYN = 0;
-		isYN = service.idCheck( mid );
+		isYN = service.emailCheck( email );
 		out.print(isYN);
 		out.close();
-	}//idCheck
+	}//emailCheck
 
-	@RequestMapping( value = "/form", method = RequestMethod.GET )
+
+	@RequestMapping( value = "", method = RequestMethod.GET )
 	public String joinForm() {
 		return "/join/join_form";//jsp file name
 	}//joinForm
@@ -46,15 +47,16 @@ public class JoinController {
 /*
 drop table member;
 
-CREATE TABLE `member` (
-  `mem_no` int NOT NULL AUTO_INCREMENT,
-  `mem_nick` varchar(100) NOT NULL,
-  `mem_email` varchar(255) NOT NULL,
-  `mem_pwd` varchar(255) NOT NULL,
-  `pnum` varchar(100) NOT NULL,
-  `mem_photo` varchar(100) DEFAULT NULL,
-  `mem_photopath` varchar(255) DEFAULT NULL,
-  `mem_desc` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`mem_no`)
+create table member (
+  mno int not null auto_increment,
+  mni varchar(100) not null,
+  mpwd varchar(255) not null,
+  tel varchar(100) default null,
+  email varchar(255) default null,
+  mpho varchar(100) default null,
+  mpho_path varchar(255) default null,
+  mdes varchar(255) default null,
+  primary key (mno)
 );
+
 */

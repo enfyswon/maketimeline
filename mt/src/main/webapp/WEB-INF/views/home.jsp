@@ -6,8 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/basic_style.css" />
-
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
 		<div id="header">
@@ -16,6 +15,23 @@
 			</a>
 		</div>
 		<main>
+		
+		<div>
+		<c:choose>
+                        <c:when test="${login_info != null && login_info.email != null}">
+                        ${login_info.email}
+                           <a href="${pageContext.request.contextPath}/login/logout">
+                        <button type="button">LOGOUT</button></a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="${pageContext.request.contextPath}/login/">
+                           <button>LOGIN</button></a>
+                           <a href="${pageContext.request.contextPath}/join/">
+                           <button>JOIN</button></a>
+                        </c:otherwise>
+                     </c:choose>
+        </div>  
+              
 			<div id="icon-bar">
 				<div>
 					<a href="${pageContext.request.contextPath}/travel">
@@ -28,38 +44,25 @@
 					</a>
 				</div>
 				<div>
-					<a href="#">
+					<a href="${pageContext.request.contextPath}/mypage/list">
 						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
 					</a>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/chat/chat_list">
+					<a href="${pageContext.request.contextPath}/memo/my_room_list">
 						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 					</a>
 				</div>
 			</div>
-			<div>
+			
+			<div class="text-center">
+													
 			</div>
-			<!-- Carousel -->
-				
-					<div class="col-sm-2" align="center">
-						<img id="photo" alt="photo" src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
-					</div>
-				
-				<br>
-				<br>
+						 <!-- container start -->
+						<div class="container width=100px align-center">
+										<img src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
+									</div >
+						<!-- container end -->
 		</main>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
-		
-		<!-- 메인페이지 사진 -->
-				<section class="carousel">
-					<div class="reel" align="center">
-						<article class="col-1 col-1-mobile special" >
-							<a class="image featured" ><img  src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" style="width:400px;" /></a>
-						</article >
-					</div>
-				</section>
-				<br>
-				<br>
 	</body>
 </html>

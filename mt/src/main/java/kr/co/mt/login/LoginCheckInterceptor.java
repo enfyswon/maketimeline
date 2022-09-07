@@ -11,7 +11,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import kr.co.mt.util.dto.MemberDTO;
 
-@SuppressWarnings("deprecation")
 public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 
 	private final static Logger logger = LoggerFactory.getLogger(LoginCheckInterceptor.class);
@@ -22,8 +21,8 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		//logger.info("호출된 메소드가 실행되기 전에 실행되는 부분이다.");
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("login_info");
-		if( dto == null || dto.getMem_no() == null || dto.getMem_no().equals("") ) {
-			response.sendRedirect( request.getContextPath() + "/login_form" );
+		if( dto == null || dto.getMno() == null || dto.getMno().equals("") ) {
+			response.sendRedirect( request.getContextPath() + "/" );
 			return false;//계속 진행할 메소드 호출 중지.
 		}
 		return super.preHandle(request, response, handler);//계속 진행할 메소드 호출.
@@ -37,3 +36,17 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	}//postHandle
 
 }//class
+
+/*
+ * create table member (
+mno int not null auto_increment,
+mni varchar(100) not null,
+mpwd varchar(255) not null,
+tel varchar(100) default null,
+email varchar(255) default null,
+mpho varchar(100) default null,
+mpho_path varchar(255) default null,
+mdes varchar(255) default null,
+primary key (mno)
+);
+*/

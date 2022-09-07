@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.co.mt.util.dto.MemberDTO;
 
 @Controller
+@RequestMapping( value = "/login" )
 public class LoginController {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -27,13 +28,13 @@ public class LoginController {
 		return "home";//jsp file name
 	}//logout
 
-	@RequestMapping( value = "/login", method = RequestMethod.POST )
+	@RequestMapping( value = "/", method = RequestMethod.POST )
 	public void login( MemberDTO dto, PrintWriter out, HttpSession session ) {
 		MemberDTO dtoFromDB = null;
 		dtoFromDB = service.login( dto );
 		if( dtoFromDB == null ) {
 			out.print(0);//아이디 없는 사용자 또는 패스워드 오류 사용자.
-		} else if( dtoFromDB != null && dtoFromDB.getMem_no() != null && dtoFromDB.getMem_no() != "" ) {
+		} else if( dtoFromDB != null && dtoFromDB.getMno() != null && dtoFromDB.getMno() != "" ) {
 			out.print(1);//아이디, 패스워드 모두 OK
 			session.setAttribute("login_info", dtoFromDB);
 		}
@@ -41,7 +42,7 @@ public class LoginController {
 
 	}//login
 
-	@RequestMapping( value = "/login_form", method = RequestMethod.GET )
+	@RequestMapping( value = "", method = RequestMethod.GET )
 	public String loginForm() {
 		return "/login/login_form";//jsp file name
 	}//loginForm
@@ -50,16 +51,23 @@ public class LoginController {
 
 /*
 drop table member;
-
 CREATE TABLE `member` (
-  `mem_no` int NOT NULL AUTO_INCREMENT,
-  `mem_nick` varchar(100) NOT NULL,
-  `mem_email` varchar(255) NOT NULL,
-  `mem_pwd` varchar(255) NOT NULL,
-  `pnum` varchar(100) NOT NULL,
-  `mem_photo` varchar(100) NULL,
-  `mem_photopath` varchar(255) NULL,
-  `mem_desc` varchar(255) NULL,
-  PRIMARY KEY (`mem_no`)
+  `mno` int NOT NULL AUTO_INCREMENT,
+  `mid` varchar(20) NOT NULL,
+  `mpwd` varchar(20) NOT NULL,
+  `tel` varchar(15) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `mdate` datetime NOT NULL,
+  `service_agree` varchar(5) NOT NULL DEFAULT 'true',
+  `info_agree` varchar(5) NOT NULL DEFAULT 'true',
+  `sms_agree` varchar(5) NOT NULL DEFAULT 'false',
+  `email_agree` varchar(5) NOT NULL DEFAULT 'false',
+  `post_code` varchar(10) DEFAULT NULL,
+  `addr1` varchar(150) DEFAULT NULL,
+  `addr2` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`mno`)
 );
+insert into member(mid, mpwd, tel, email, mdate)
+values('tea', '1111', '010-9999-8888', 'aaa@bbb.com', now());
+commit;
 */

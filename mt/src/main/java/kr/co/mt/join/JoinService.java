@@ -14,14 +14,16 @@ public class JoinService {
 	public int join( MemberDTO dto ) {
 		int successCount = 0;
 
+		
+
 		successCount = dao.join( dto );
 		return successCount;
 	}//join
 
-	public int idCheck( String mid ) {
+	public int emailCheck( String email ) {
 		int isYN = 0;
-		isYN = dao.idCheck( mid );
+		isYN = dao.emailCheck( email );
 		return isYN;
-	}//idCheck
+	}//emailCheck
 
 }//class
