@@ -33,4 +33,11 @@ public class TravelDAO {
 		
 		return list;
 	}
+
+	public int cate_delete(String cate_no) {
+		int successCnt = 0;
+		successCnt = sqlSession.delete("TravelMapper.cateDelete", cate_no);
+		
+		return successCnt;
+	}
 }

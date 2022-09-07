@@ -32,5 +32,12 @@ public class TravelService {
 		
 		return list;
 	}
+
+	public int cate_delete(String cate_no) {
+		int successCnt = 0;
+		successCnt = dao.cate_delete(cate_no);
+		
+		return successCnt;
+	}
 	
 }

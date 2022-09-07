@@ -18,4 +18,9 @@
 	from category
 	where mno = #{mno}
 	</select>
+	
+	<delete id="cateDelete" parameterType="java.lang.String">
+	delete from category
+	where cate_no = #{cate_no}
+	</delete>
 </mapper>

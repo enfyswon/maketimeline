@@ -100,4 +100,13 @@ public class TravelController {
 		out.print(successCnt);
 		out.close();
 	}
+	
+	@RequestMapping(value = "/cate_delete", method = RequestMethod.GET)
+	public void cateDelete(String cate_no, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.cate_delete(cate_no);
+		
+		out.print(successCnt);
+		out.close();
+	}
 }
