@@ -100,4 +100,66 @@ public class TravelController {
 		out.print(successCnt);
 		out.close();
 	}
+	
+	@RequestMapping(value = "/cate_delete", method = RequestMethod.GET)
+	public void cateDelete(String cate_no, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.cate_delete(cate_no);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String categoryUpdate(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = service.cate_select(cate_no);
+		model.addAttribute("category", dto);
+
+		return "/travel/category_update";
+	}
+	
+	@RequestMapping(value = "/cate_update", method = RequestMethod.POST)
+	public void cate_update(CategoryDTO dto, PrintWriter out, HttpSession session) throws IOException {
+		Date today = new Date();
+		DateFormat nalja = new SimpleDateFormat("YYYYMMdd");
+		DateFormat sigan = new SimpleDateFormat("HHmmss");
+		String todayNalja = nalja.format(today);
+		String todaySigan = sigan.format(today);
+		
+		String email = ((MemberDTO)session.getAttribute("login_info")).getEmail();
+		File newFolder = new File("C:/upload/category/" + email + "/");
+		if (!newFolder.exists()) {
+			newFolder.mkdirs();
+		}
+		
+		
+		MultipartFile cate_photo = dto.getCate_photo();
+		if (cate_photo != null && !cate_photo.getOriginalFilename().equals("")) {
+			InputStream is = cate_photo.getInputStream();
+			FileOutputStream fos = new FileOutputStream("C:/upload/category/" + email + "/" + todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+			FileCopyUtils.copy(is, fos);
+			is.close();
+			fos.close();
+			
+			dto.setCate_photoname(todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+			dto.setCate_photopath("/upload/category/" + email + "/" + todayNalja + "_" + todaySigan + "_" + cate_photo.getOriginalFilename());
+		}
+		
+		System.out.println(dto.toString());
+		int successCnt = 0;
+		successCnt = service.cate_update(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
+	@RequestMapping(value = "/plan", method = RequestMethod.GET)
+	public String plan(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = service.cate_select(cate_no);
+		model.addAttribute("category", dto);
+		
+		return "/travel/plan";
+	}
 }
