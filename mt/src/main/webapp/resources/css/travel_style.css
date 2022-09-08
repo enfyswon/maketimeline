@@ -1,2 +1,20 @@
 @charset "UTF-8";
 
+main {
+	display: flex;
+	flex-direction: row;
+}
+#tour-box {
+	width: 40%;
+}
+#calendar {
+	width: 60%;
+	height: 550px;
+	margin: 0 auto;
+}
+#calendar > div {
+	margin: 0;
+}
+#calendar table {
+	width: 100%;
+}
