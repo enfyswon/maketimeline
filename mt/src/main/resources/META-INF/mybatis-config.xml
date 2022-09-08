@@ -9,7 +9,7 @@
 		<mapper resource="META-INF/join-mapper.xml" />
 		<mapper resource="META-INF/memo-mapper.xml" />
 		<mapper resource="META-INF/login-mapper.xml" />
-		<mapper resource="META-INF/travel-mapper.xml" />
+		<mapper resource="META-INF/category-mapper.xml" />
 	</mappers>
 
 </configuration>
