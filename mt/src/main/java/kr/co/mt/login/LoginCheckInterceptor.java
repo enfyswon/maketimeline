@@ -22,7 +22,7 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO) session.getAttribute("login_info");
 		if( dto == null || dto.getMno() == null || dto.getMno().equals("") ) {
-			response.sendRedirect( request.getContextPath() + "/login" );
+			response.sendRedirect( request.getContextPath() + "/" );
 			return false;//계속 진행할 메소드 호출 중지.
 		}
 		return super.preHandle(request, response, handler);//계속 진행할 메소드 호출.
@@ -36,3 +36,17 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 	}//postHandle
 
 }//class
+
+/*
+ * create table member (
+mno int not null auto_increment,
+mni varchar(100) not null,
+mpwd varchar(255) not null,
+tel varchar(100) default null,
+email varchar(255) default null,
+mpho varchar(100) default null,
+mpho_path varchar(255) default null,
+mdes varchar(255) default null,
+primary key (mno)
+);
+*/

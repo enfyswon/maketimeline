@@ -3,6 +3,10 @@
 main {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+}
+button {
+	background-color: rgba(0, 0, 0, 0);
 }
 #tour-box {
 	width: 40%;
@@ -17,4 +21,16 @@ main {
 }
 #calendar table {
 	width: 100%;
+}
+#button-box img {
+	height: 50px;
+	object-fit: cover;
+}
+#map {
+	width: 60%;
+	height: 550px;
+	margin: 0 auto;
+}
+#timeline-box {
+	width: 40%;
 }
