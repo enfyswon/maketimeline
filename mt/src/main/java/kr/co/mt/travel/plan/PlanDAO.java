@@ -8,4 +8,11 @@ import org.springframework.stereotype.Repository;
 public class PlanDAO {
 	@Autowired
 	private SqlSession sqlSession;
+
+	public int insert(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.insert("PlanMapper.planInsert", dto);
+		
+		return successCnt;
+	}//insert
 }
