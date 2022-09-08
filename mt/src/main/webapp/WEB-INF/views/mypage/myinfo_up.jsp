@@ -13,6 +13,12 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
+	
+	<div id="header">
+			<a href="${pageContext.request.contextPath}/">
+				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			</a>
+	</div>
 
 			<div id="main-content">
 					<div class="info">
@@ -31,7 +37,7 @@
 							
 							<div class="info-line">
 								<div class="info-label">
-									<label for="mpwd">비밀번호</label>
+									<label for="mpwd">새 비밀번호</label>
 								</div>
 								<div class="info-contents">
 									<input type="password" id="mpwd" name="mpwd"  value="${myinfo.mpwd}">
@@ -56,23 +62,6 @@
 					<button type="button" id="save_btn" name="save_btn">저장</button>
 				</div>
 			</div>
-			
-			$.ajax({
-				type : "POST" 
-				, encType : "multipart/form-data" 
-				, url : "${pageContext.request.contextPath}/mypage/myinfo_update" 
-				, data : form 
-				, processData : false
-				, contentType : false 
-				, cache : false 
-				, success : function(result) {
-					alert("회원 정보가 수정되었습니다.");
-					location.href = "${pageContext.request.contextPath}/mypage/myinfo_update";
-				}, 
-				error : function(xhr) {
-					alert("잠시 후 다시 시도해주세요.");
-				}
-			});
 			
 	</body>
 </html>

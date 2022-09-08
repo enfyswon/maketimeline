@@ -13,7 +13,11 @@
 	</head>
 	<body>
 	
-	
+	<div id="header">
+			<a href="${pageContext.request.contextPath}/">
+				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
+			</a>
+	</div>
 	
 	<div class="info-contents">
 		<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">

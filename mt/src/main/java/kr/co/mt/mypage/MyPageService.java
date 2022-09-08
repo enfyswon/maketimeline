@@ -23,15 +23,8 @@ public class MyPageService {
 
 	public Object profileUpdate(MemberDTO dto) {
 		int updateYN = 0;
-		updateYN = dao.infoUpdate(dto);
+		updateYN = dao.profileUpdate(dto);
 		return updateYN;
 	}
 	
-	public int completeCnt(String mno) {
-		int completeCnt = 0;
-		completeCnt = dao.completeCnt(mno);
-		
-		return completeCnt;
-	}
-
 }

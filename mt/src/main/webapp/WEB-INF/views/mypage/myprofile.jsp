@@ -39,8 +39,8 @@
 			</div>
 				<hr>
 			
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/myinfo_up'">회원정보 수정</button>
-			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/myprofile_up'">프로필 수정</button>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
+			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
 			<button type="button" onclick="location.href='chat'">관리자 문의</button>
 		</div>	
 		
