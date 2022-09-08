@@ -1,4 +1,4 @@
-package kr.co.mt.travel;
+package kr.co.mt.travel.category;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,12 +28,12 @@ import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.dto.RegionDTO;
 
 @Controller
-@RequestMapping(value = "/travel")
-public class TravelController {
-	private final static Logger logger = LoggerFactory.getLogger(TravelController.class);
-
+@RequestMapping(value = "/category")
+public class CategoryController {
+	private final static Logger logger = LoggerFactory.getLogger(CategoryController.class);
+	
 	@Autowired
-	private TravelService service;
+	private CategoryService service;
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String list(HttpSession session, Model model) {
@@ -44,13 +44,13 @@ public class TravelController {
 		
 		model.addAttribute("catelist", list);
 		
-		return "/travel/category_list";
+		return "/travel/category/category_list";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String categoryAdd() {
 		
-		return "/travel/category_write";
+		return "/travel/category/category_write";
 	}
 	
 	@RequestMapping(value = "/region", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class TravelController {
 		out.close();
 	}
 	
-	@RequestMapping(value = "/cate_insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public void cate_insert(CategoryDTO dto, HttpSession session, PrintWriter out) throws IOException {
 		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
 		dto.setMno(mno);
@@ -101,7 +101,7 @@ public class TravelController {
 		out.close();
 	}
 	
-	@RequestMapping(value = "/cate_delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public void cateDelete(String cate_no, PrintWriter out) {
 		int successCnt = 0;
 		successCnt = service.cate_delete(cate_no);
@@ -116,7 +116,7 @@ public class TravelController {
 		dto = service.cate_select(cate_no);
 		model.addAttribute("category", dto);
 
-		return "/travel/category_update";
+		return "/travel/category/category_update";
 	}
 	
 	@RequestMapping(value = "/cate_update", method = RequestMethod.POST)
@@ -152,14 +152,5 @@ public class TravelController {
 		
 		out.print(successCnt);
 		out.close();
-	}
-	
-	@RequestMapping(value = "/plan", method = RequestMethod.GET)
-	public String plan(String cate_no, Model model) {
-		CategoryDTO dto = new CategoryDTO();
-		dto = service.cate_select(cate_no);
-		model.addAttribute("category", dto);
-		
-		return "/travel/plan";
 	}
 }

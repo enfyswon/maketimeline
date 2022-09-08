@@ -13,7 +13,7 @@
 	values (#{cate_name}, #{mno}, #{region_no}, #{cate_startdate}, #{cate_enddate}, #{cate_photoname}, #{cate_photopath})
 	</insert>
 	
-	<select id="cateList" parameterType="java.lang.String" resultType="kr.co.mt.travel.CategoryDTO">
+	<select id="cateList" parameterType="java.lang.String" resultType="kr.co.mt.travel.category.CategoryDTO">
 	select cate_no, cate_name, mno, region_no, cate_startdate, cate_enddate, cate_photoname, cate_photopath
 	from category
 	where mno = #{mno}
@@ -24,13 +24,13 @@
 	where cate_no = #{cate_no}
 	</delete>
 	
-	<select id="cateSelect" parameterType="java.lang.String" resultType="kr.co.mt.travel.CategoryDTO">
+	<select id="cateSelect" parameterType="java.lang.String" resultType="kr.co.mt.travel.category.CategoryDTO">
 	select cate_no, cate_name, mno, region_no, cate_startdate, cate_enddate, cate_photoname, cate_photopath
 	from category
 	where cate_no = #{cate_no}
 	</select>
 	
-	<update id="cateUpdate" parameterType="kr.co.mt.travel.CategoryDTO">
+	<update id="cateUpdate" parameterType="kr.co.mt.travel.category.CategoryDTO">
 	update category set cate_name = #{cate_name}, region_no = #{region_no}, cate_startdate = #{cate_startdate},
 		   cate_enddate = #{cate_enddate}, cate_photoname = #{cate_photoname}, cate_photopath = #{cate_photopath}
 	where cate_no = #{cate_no}

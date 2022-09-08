@@ -1,4 +1,4 @@
-package kr.co.mt.travel;
+package kr.co.mt.travel.category;
 
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,56 +1,56 @@
-package kr.co.mt.travel;
+package kr.co.mt.travel.category;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import kr.co.mt.dto.RegionDTO;
 
-@Repository
-public class TravelDAO {
+@Service
+public class CategoryService {
+	
 	@Autowired
-	private SqlSession sqlSession;
-
+	private CategoryDAO dao;
+	
 	public List<RegionDTO> regionList() {
 		List<RegionDTO> list = null;
-		list = sqlSession.selectList("TravelMapper.regionList");
+		list = dao.regionList();
 		
 		return list;
 	}
 
 	public int cate_insert(CategoryDTO dto) {
 		int successCnt = 0;
-		successCnt = sqlSession.insert("TravelMapper.cateInsert", dto);
+		successCnt = dao.cate_insert(dto);
 		
 		return successCnt;
 	}
 
 	public List<CategoryDTO> cateList(String mno) {
 		List<CategoryDTO> list = null;
-		list = sqlSession.selectList("TravelMapper.cateList", mno);
+		list = dao.cateList(mno);
 		
 		return list;
 	}
 
 	public int cate_delete(String cate_no) {
 		int successCnt = 0;
-		successCnt = sqlSession.delete("TravelMapper.cateDelete", cate_no);
+		successCnt = dao.cate_delete(cate_no);
 		
 		return successCnt;
 	}
 
 	public CategoryDTO cate_select(String cate_no) {
 		CategoryDTO dto = new CategoryDTO();
-		dto = sqlSession.selectOne("TravelMapper.cateSelect", cate_no);
+		dto = dao.cate_select(cate_no);
 		
 		return dto;
 	}
 
 	public int cate_update(CategoryDTO dto) {
 		int successCnt = 0;
-		successCnt = sqlSession.update("TravelMapper.cateUpdate", dto);
+		successCnt = dao.cate_update(dto);
 		
 		return successCnt;
 	}
