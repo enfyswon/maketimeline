@@ -18,10 +18,10 @@
 									<p>프로필 사진</p>
 								</div>
 								<div class="info-contents">
-									<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
-									<img alt="profile_photo" src="${myinfo.mpho_path}">
+									<c:if test="${myinfo.mem_photopath != null && myinfo.mem_photopath != '0'}">
+									<img alt="profile_photo" src="${myinfo.mem_photopath}">
 									</c:if>
-									<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
+									<c:if test="${myinfo.mem_photopath == null || myinfo.mem_photopath == '0'}">
 									<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
 									</c:if>
 								</div>
@@ -30,7 +30,7 @@
 									<p>이메일</p>
 								</div>
 								<div class="info-contents">
-									${myinfo.email}
+									${myinfo.mem_email}
 								</div>
 							</div>
 							<div class="info-line">
@@ -38,8 +38,8 @@
 									<label for="mem_pwd">비밀번호</label>
 								</div>
 								<div class="info-contents">
-									<input type="password" id="mpwd" name="mpwd"  value="${myinfo.mpwd}">
-									<input type="password" id="repwd" name="repwd"  value="${myinfo.mpwd}">
+									<input type="password" id="mem_pwd" name="mem_pwd"  value="${myinfo.mem_pwd}">
+									<input type="password" id="repwd" name="repwd"  value="${myinfo.mem_pwd}">
 									<label for="mem_pwd" id="mem_pwd_label"></label>
 								</div>
 							</div>
