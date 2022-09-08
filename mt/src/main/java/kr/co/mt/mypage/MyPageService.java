@@ -26,5 +26,10 @@ public class MyPageService {
 		updateYN = dao.profileUpdate(dto);
 		return updateYN;
 	}
+
+	public MemberDTO myprofile(String mno) {
+		MemberDTO dto=dao.myprofile(mno);
+		return dto;
+	}
 	
 }

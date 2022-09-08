@@ -26,13 +26,13 @@
 				<hr>
 			<div class="info-line">
 				<div class="info-label">
-					<p class="mni">닉네임 ${dto.mni}</p>
+					<p class="mni">닉네임 ${pf.mni}</p>
 				</div>
 			</div>
 				<hr>
 			<div class="info-line">
 				<div class="info-label">
-					<p class="mdes">소개 ${dto.mdes}</p>
+					<p class="mdes">소개 ${pf.mdes}</p>
 				</div>
 			</div>
 				<hr>

@@ -1,22 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-	<!-- 
-	private String mno;
-	private String mni;
-	private String email;
-	private String mpwd;
-	private String tel;
-	
-	private String mpho;
-	private String mpho_path;
-	private String mdes;
-	public String getMno() -->
-	
+<mapper namespace="MyPageMapper">
+
 	<!-- 프로필 조회 -->
 	<select id="myProfile" parameterType="java.lang.String" resultType="kr.co.mt.dto.MemberDTO">
-		select member set mdes = #{mdes}
-						, mdes = #{mdes}
-		where mno = #{mno}
+	select mno, email, mpwd, mni, tel, mpho, mpho_path, mdes
+	from member
+	where mno = #{mno}
 	</select>
 	
 	<!-- 프로필 수정 -->
@@ -38,4 +30,4 @@
 		where mno = #{mno}
 	</update>
 
-	</update>
+</mapper>

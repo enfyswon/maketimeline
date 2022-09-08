@@ -26,9 +26,9 @@ public class MyPageDAO {
 		return updateYN;
 	}
 
-	public int mypage() {
-		// TODO Auto-generated method stub
-		return 0;
+	public MemberDTO myprofile(String mno) {
+		MemberDTO dto=sqlSession.selectOne("MyPageMapper.myProfile", mno);
+		return dto;
 	}
-	
+
 }
