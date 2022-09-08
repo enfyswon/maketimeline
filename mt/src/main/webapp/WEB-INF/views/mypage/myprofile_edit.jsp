@@ -14,17 +14,19 @@
 	<script type="text/javascript">
 		
 			$("#submit").on("click", function(){
-				if($("#mni").val()==""){
+				if($("#mem_nick").val()==""){
 					alert("닉네임을 입력해주세요.");
-					$("#mni").focus();
+					$("#mem_nick").focus();
 					return false;
 				}
-				if($("#mdes").val()==""){
+				if($("#mem_desc").val()==""){
 					alert("자기소개를 입력해주세요.");
-					$("#mdes").focus();
+					$("#mem_desc").focus();
 					return false;
 				}
 			});
+			
+				
 			
 		})
 	</script>
@@ -32,19 +34,23 @@
 		<section id="container">
 			<form action="/mypage/myprofile_edit" method="post">
 				<div class="form-group has-feedback">
-					<label class="control-label" for="mni">닉네임</label>
-					<input class="form-control" type="text" id="userName" name="mni" />
+					<label class="control-label" for="mem_nick">닉네임</label>
+					<input class="form-control" type="text" id="mem_nick" name="mem_nick" />
 				</div>
 				<div class="form-group has-feedback">
-					<label class="control-label" for="mdes">소개</label>
-					<input class="form-control" type="text" id=" " name="mdes" value="${member.mdes}"/>
+					<label class="control-label" for="mem_desc">소개</label>
+					<input class="form-control" type="text" id="userName" name="mem_desc" value="${member.mem_desc}"/>
 				</div>
 				<div class="form-group has-feedback">
 					<button class="btn btn-success" type="submit" id="submit">저장</button>
 				</div>
 			</form>
 		</section>
+		
 	</body>
+	
 
 </head>
+
+</body>
 </html>

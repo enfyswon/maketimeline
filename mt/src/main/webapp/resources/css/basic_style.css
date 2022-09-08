@@ -9,14 +9,11 @@ a {
 }
 li {
 	list-style: none;
+<<<<<<< HEAD
 }
 
 body {
 	background-color: #f4fbff;
-}
-button {
-	border: 0;
-	outline: 0;
 }
 #header {
 	height: 100px;
