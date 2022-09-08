@@ -19,7 +19,7 @@
 			</a>
 	</div>
 	
-	<div style="width:50%;margin:auto;">
+	<div style="width:15%;margin:auto;">
 		<div class="info-contents">
 			<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
 			<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">

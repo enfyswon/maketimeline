@@ -19,7 +19,7 @@
 				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 			</a>
 	</div>
-	<div style="width:50%;margin:auto;">
+	<div style="width:15%;margin:auto;">
 			<div id="main-content">
 					<div class="info">
 						
