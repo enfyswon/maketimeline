@@ -35,7 +35,6 @@ public class MyPageController {
 		MemberDTO mDto = (MemberDTO) session.getAttribute("login_info");
 		int successCount = 0;
 		successCount = service.myprofile(mDto.getMno());
-		out.
 		return "/mypage/myprofile";
 	}
 
