@@ -5,7 +5,7 @@
  
 <mapper namespace="JoinMapper">
 
-	<insert id="join" parameterType="kr.co.mt.util.dto.MemberDTO">
+	<insert id="join" parameterType="kr.co.mt.dto.MemberDTO">
 	INSERT INTO member ( mni, mpwd, tel, email )
 	VALUES ( #{mni}, #{mpwd}, #{tel}, #{email} )
 	</insert>
