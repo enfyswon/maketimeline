@@ -32,7 +32,7 @@
 									<label for="mni">닉네임</label>
 								</div>
 								<div class="info-label">
-									<input type="text" id="mni" name="mni"  value="${dto.mni}">
+									<input type="text" id="mni" name="mni"  value="${pf.mni}">
 									<label id="mni_label" for="mni"></label>
 								</div>
 							</div>
@@ -42,7 +42,7 @@
 									<label for="mdes">소개</label>
 								</div>
 								<div class="info-label">
-									<input type="text" id="mdes" name="mdes"  value="${dto.mdes}">
+									<input type="text" id="mdes" name="mdes"  value="${pf.mdes}">
 									<label id="mdes_label" for="mdes"></label>
 								</div>
 							</div>
