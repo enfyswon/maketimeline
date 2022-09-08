@@ -14,7 +14,8 @@
 		<script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
 		<style type="text/css">
 		#chat_list_div {
-			width : 100%;
+			float: right;
+			width : 50%;
 			height : 470px;
 			border : 1px solid gray;
 			overflow : auto;
@@ -22,7 +23,6 @@
 		</style>
 	</head>
 	<body>
-
 
 		<div id="chat_list_div">
 			<c:forEach var="dto" items="${chat_list}">
@@ -50,18 +50,19 @@
 				</c:choose>
 			</c:forEach>
 		</div>
-	
-	
-	
+
 	<script type="text/javascript">
 	$(document).ready(function() {
+
 		$("#chat_list_div").scrollTop($("#chat_list_div")[0].scrollHeight);
+
 	});//ready
+
 	function pageReload() {
 		alert();
 		window.location.reload();
 	}
 	</script>
-	
+
 	</body>
 </html>

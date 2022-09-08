@@ -10,18 +10,33 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
+		<style type="text/css">
+		#ckd_div {
+			float: right;
+			width : 50%;
+			height : 670px;
+			overflow : auto;
+		}
+		#memo_header_div {
+			float: right;
+			width : 50%;
+			height : 50px;
+			border : 1px solid gray;
+			
+		}
+		</style>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-		<hr>
+		<br><br><br>
+		<div id="memo_header_div">
 		<h3> ChatRoom : ${room_dto.mni_from} &lt;=&gt; ${room_dto.mni_to} </h3>
-		<hr>
-
+		</div>
+		<br><br>
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
 				name="chatList" width="100%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
-
-		<div>
-			<textarea id="cnts" name="cnts" class="form-control" style="height:100px;"></textarea>
+				<div id="ckd_div">
+			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px;"></textarea>
 			<script type="text/javascript">
 				CKEDITOR.replace('cnts');
 			</script>

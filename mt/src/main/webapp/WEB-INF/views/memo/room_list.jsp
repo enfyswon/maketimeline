@@ -5,14 +5,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title> My Memo List </title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 		
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<br><br><br><br>
 		<br><br><br><br>
-		<h1> My Memo List </h1>
+		<h1 class="text-center"> My Memo List </h1>
 		
 			<table class="table table-hover">
 				<c:forEach var="dto" items="${room_list}">
@@ -32,7 +32,7 @@
 			<div class="input-group">
          <div class="input-group-prepend">
          </div>
-         <input class="bar_search" id="mni_to" name="mni_to">
+         <input class="bar_search" id="mno_to" name="mno_to">
          <div class="input-group-append">
             <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
          </div>
@@ -41,14 +41,14 @@
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
-            if( $.trim( $("#mni_to").val() ) == "" ){
+            if( $.trim( $("#mno_to").val() ) == "" ){
                alert("대화 상대방 아이디를 입력 하세요.");
                return;
             }
             $.get(
                   "${pageContext.request.contextPath}/memo/start"
                   , {
-                	  mni_to : $("#mni_to").val()
+                	  mno_to : $("#mno_to").val()
                   }
                   , function(data, status) {
                      if(data >= 1){
