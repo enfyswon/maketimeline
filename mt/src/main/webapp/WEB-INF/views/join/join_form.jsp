@@ -32,9 +32,63 @@
             <tr>
                <th> 이메일 </th>
                <td>
-                     <input type="text" id="email" name="email" maxlength="25" class="form-control"  placeholder="이메일 주소 입력 ">
-                        <button id="email_btn" class="btn btn-secondary" > 중복 확인 </button>
-                  <label for="email" id="email_label"></label>
+					<input type="text" id="email" name="email" maxlength="25" class="form-control"  placeholder="이메일 주소 입력 ">
+                    <button id="email_btn" class="btn btn-secondary" > 중복 확인 </button>
+                  	<label for="email" id="email_label"></label>
+               </td>
+            </tr>
+            <tr>
+               <th> 메일 본인 인증 </th>
+               <td>
+                    <button id="email_ck" class="btn btn-secondary" > 메일 발송 </button>
+                    <script type="text/javascript">
+                   	let email_cf = "";
+                    $(document).ready(function() {
+                        $("#email_ck").click(function() {
+                        	if(checkedEMAIL == ""){
+                        		alert("먼저 중복 확인을 하세요.");
+                        		return;
+                        	}
+                        	let tmpyn = confirm(checkedEMAIL + "으로 인증 메일을 보내시게습니까?");
+                        	if( tmpyn == false ){
+                        		return;
+                        	}
+                        	
+                        	$.get(
+                        			"${pageContext.request.contextPath}/join/send"
+                        			, {
+                        				email : $("#email").val()
+                        			}
+                        			, function(data, status) {
+                        				alert(data.message);
+                        				email_cf = data.contents;
+                        			}
+                        			, "json"
+                        	);//get
+                        });//click
+                    });//ready
+                    </script>
+               </td>
+            </tr>
+            <tr>
+               <th> 인증 번호  </th>
+               <td>
+					<input type="text" id="email2" name="email2" class="form-control">
+                    <button id="email_ck2" class="btn btn-secondary" > 인증번호 확인 </button>
+                    <label for="email" id="email_label2"></label>
+                  	<script type="text/javascript">
+                    $(document).ready(function() {
+                        $("#email_ck2").click(function() {
+                        	if( $("#email2").val() == email_cf ){
+                        		alert("인증번호가 일치합니다.")
+                        	} else {
+                        		alert("인증번호가 일치하지않습니다.")
+                        		return;
+                        	}
+                        });//click
+                    });//ready
+                    </script>
+                  	
                </td>
             </tr>
             <tr>
@@ -51,7 +105,7 @@
                   <label for="rempwd" id="rempwd_label"></label>
                </td>
             </tr>
-            <tr>
+            <tr> 
                <th> 닉네임 </th>
                <td>
                   <input type="text" id="mni" name="mni" maxlength="20" class="form-control" placeholder="닉네임 ">
@@ -101,6 +155,12 @@
               $("#email_label").css("color", "red");
               return;
            } else { $("#email_label").text(""); }
+         
+    	  if( email_cf == "" || email_cf != $("#email2").val() ){
+              $("#email_label2").text("인증번호를 확인해주세요.");
+              $("#email_label2").css("color", "red");
+              return;
+           } else { $("#email_label2").text(""); }
          
          if( $("#mpwd").val().match(onlyPwd) == null ){//허용되지 않은 글자는 null.
             $("#mpwd_label").text("영문 소문자, 숫자, 특수 문자만 허용 됩니다.");
@@ -155,11 +215,11 @@
             return;
          }
 
-         if( $("#email").val().match(onlyEmail) == null ){//허용되지 않은 글자는 null.
-             $("#email_label").text("영문 대소문자와 숫자 . @만 허용 됩니다.");
-             $("#email_label").css("color", "red");
-             return;
-          } else { $("#email_label").text(""); }
+//          if( $("#email").val().match(onlyEmail) == null ){//허용되지 않은 글자는 null.
+//              $("#email_label").text("영문 대소문자와 숫자 . @만 허용 됩니다.");
+//              $("#email_label").css("color", "red");
+//              return;
+//           } else { $("#email_label").text(""); }
 
          if( $("#email").val().includes(".") == false || $("#email").val().includes("@") == false ){//허용되지 않은 글자는 null.
              $("#email_label").text("이메일 형식이 올바르지 않습니다.");
