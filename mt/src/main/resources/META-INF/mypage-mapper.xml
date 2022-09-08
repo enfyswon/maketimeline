@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+	<!-- 
+	private String mno;
+	private String mni;
+	private String email;
+	private String mpwd;
+	private String tel;
+	
+	private String mpho;
+	private String mpho_path;
+	private String mdes;
+	public String getMno() -->
+	
+	<!-- 프로필 조회 -->
+	<select id="myProfile" parameterType="java.lang.String" resultType="kr.co.mt.dto.MemberDTO">
+		select member set mdes = #{mdes}
+						, mdes = #{mdes}
+		where mno = #{mno}
+	</select>
+	
 	<!-- 프로필 수정 -->
 	<update id="profileUpdate" parameterType="kr.co.mt.dto.MemberDTO">
 		update member set mni = #{mni}
@@ -10,11 +29,13 @@
 					</if>
 		where mno = #{mno}
 	</update>
-	
+		
 	<!-- 회원정보 수정 -->
 	<update id="infoUpdate" parameterType="kr.co.mt.dto.MemberDTO">
 		update member set mpwd = #{mpwd}
-					, email = #{email}
-					, tel = #{tel}
+						, email = #{email}
+						, tel = #{tel}
 		where mno = #{mno}
+	</update>
+
 	</update>

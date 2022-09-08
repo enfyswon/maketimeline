@@ -18,7 +18,7 @@
 				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 			</a>
 	</div>
-			
+	<div class="profile">
 		<div style="width:50%;margin:auto;">
 			<div class="info-contents">
 				<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
@@ -26,15 +26,13 @@
 				<hr>
 			<div class="info-line">
 				<div class="info-label">
-					<label for="mni">닉네임</label>
-					<p class="nickname">${dto.mni}</p>
+					<p class="mni">닉네임 ${dto.mni}</p>
 				</div>
 			</div>
 				<hr>
 			<div class="info-line">
 				<div class="info-label">
-					<label for="mdes">소개</label>
-					<p class="introduce">${dto.mdes}</p>
+					<p class="mdes">소개 ${dto.mdes}</p>
 				</div>
 			</div>
 				<hr>
@@ -42,7 +40,10 @@
 			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
 			<button type="button" onclick="location.href='chat'">관리자 문의</button>
-		</div>	
+		</div>
+			<button type="button" onclick="location.href='chat'">채팅</button>
+	</div>
+		
 		
 	</body>
 </html>

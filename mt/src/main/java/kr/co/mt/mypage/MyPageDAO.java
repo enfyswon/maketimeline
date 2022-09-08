@@ -12,7 +12,6 @@ public class MyPageDAO {
 	@Autowired
 	SqlSession sqlSession;
 		
-	
 	public int infoUpdate(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = sqlSession.update("MyPageMapper.infoUpdate", dto);
@@ -25,6 +24,11 @@ public class MyPageDAO {
 		updateYN = sqlSession.update("MyPageMapper.profileUpdate", dto);
 		
 		return updateYN;
+	}
+
+	public int mypage() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

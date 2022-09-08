@@ -14,7 +14,7 @@ public class MyPageService {
 
 	@Autowired
 	MyPageDAO dao;
-		
+	
 	public int infoUpdate(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = dao.infoUpdate(dto);
