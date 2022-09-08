@@ -19,7 +19,7 @@
 				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 			</a>
 	</div>
-
+	<div style="width:50%;margin:auto;">
 			<div id="main-content">
 					<div class="info">
 						
@@ -62,6 +62,7 @@
 					<button type="button" id="save_btn" name="save_btn">저장</button>
 				</div>
 			</div>
-			
+	</div>
+	
 	</body>
 </html>

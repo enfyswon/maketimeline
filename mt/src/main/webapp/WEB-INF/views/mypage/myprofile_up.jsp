@@ -19,15 +19,13 @@
 			</a>
 	</div>
 	
-	<div class="info-contents">
-		<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
-		<img alt="profile_photo" src="${myinfo.mpho_path}">
-		</c:if>
-		<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
-		<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
-		</c:if>
-		<input type="file" id="profile" name="profile">
-	</div>
+	<div style="width:50%;margin:auto;">
+		<div class="info-contents">
+			<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
+			<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
+			</c:if>
+			<input type="file" id="profile" name="profile">
+		</div>
 	
 							<div class="info-line">
 								<div class="info-label">
@@ -50,9 +48,10 @@
 							</div>
 							
 				<div class="form-group has-feedback">
-					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/myinfo_up'">회원정보 수정</button>
+					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 					<button class="btn btn-success" type="submit" id="submit">저장</button>
 				</div>
-	
+		</div>
+		
 	</body>
 </html>
