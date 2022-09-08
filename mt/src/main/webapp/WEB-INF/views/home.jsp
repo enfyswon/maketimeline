@@ -49,13 +49,19 @@
 					</a>
 				</div>
 				<div>
-					<a href="#">
+					<a href="${pageContext.request.contextPath}/memo/my_room_list">
 						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 					</a>
 				</div>
 			</div>
 			<div>
 			</div>
+			<div class="row" align="center">
+							
+								<img src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
+								
+							
+							</div>
 		</main>
 	</body>
 </html>

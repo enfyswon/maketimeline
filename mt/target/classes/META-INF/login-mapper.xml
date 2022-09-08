@@ -5,8 +5,8 @@
 
 <mapper namespace="LoginMapper">
 
-	<select id="login" parameterType="kr.co.mt.dto.MemberDTO"
-						resultType="kr.co.mt.dto.MemberDTO">
+	<select id="login" parameterType="kr.co.mt.util.dto.MemberDTO"
+						resultType="kr.co.mt.util.dto.MemberDTO">
 	select mno, email, mpwd, mni, tel
 	from member
 	where email = #{email} 
