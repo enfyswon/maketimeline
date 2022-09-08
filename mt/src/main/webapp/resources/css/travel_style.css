@@ -26,3 +26,9 @@ button {
 	height: 50px;
 	object-fit: cover;
 }
+#map {
+	width: 60%;
+}
+#timeline-box {
+	width: 40%;
+}
