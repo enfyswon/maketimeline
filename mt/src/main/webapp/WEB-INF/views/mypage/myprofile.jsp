@@ -18,31 +18,7 @@
 				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 			</a>
 	</div>
-	
-	
-	<div id="icon-bar">
-				<div>
-					<a href="${pageContext.request.contextPath}/travel">
-						<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
-					</a>
-				</div>
-				<div>
-					<a href="#">
-						<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
-					</a>
-				</div>
-				<div>
-				<a href="${pageContext.request.contextPath}/mypage/myprofile">
-						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
-					</a>
-				</div>
-				<div>
-					<a href="#">
-						<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
-					</a>
-				</div>
-		</div>
-		
+			
 		<div style="width:50%;margin:auto;">
 			<div class="info-contents">
 				<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
@@ -51,12 +27,14 @@
 			<div class="info-line">
 				<div class="info-label">
 					<label for="mni">닉네임</label>
+					<p class="nickname">${dto.mni}</p>
 				</div>
 			</div>
 				<hr>
 			<div class="info-line">
 				<div class="info-label">
 					<label for="mdes">소개</label>
+					<p class="introduce">${dto.mdes}</p>
 				</div>
 			</div>
 				<hr>
