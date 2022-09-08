@@ -3,7 +3,7 @@ package kr.co.mt.join;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.mt.util.dto.MemberDTO;
+import kr.co.mt.dto.MemberDTO;
 
 @Service
 public class JoinService {
