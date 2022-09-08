@@ -58,17 +58,17 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#plan_add_btn").click(function() {
-			location.href="${pageContext.request.contextPath}/travel/plan_add?cate_no=${category.cate_no}";
+			//location.href="${pageContext.request.contextPath}/plan/plan_add?cate_no=${category.cate_no}";
 		});
 	});
 	$(document).ready(function() {
 		$("#timeline_btn").click(function() {
-			location.href="${pageContext.request.contextPath}/travel/timeline?cate_no=${category.cate_no}";
+			//location.href="${pageContext.request.contextPath}/plan/timeline?cate_no=${category.cate_no}";
 		});
 	});
 	$(document).ready(function() {
 		$("#plan_money_btn").click(function() {
-			location.href="${pageContext.request.context}/travel/plan_money?cate_no=${category.cate_no}";
+			//location.href="${pageContext.request.contextPath}/plan/plan_money?cate_no=${category.cate_no}";
 		});
 	});
 	</script>

@@ -34,7 +34,7 @@
               
 			<div id="icon-bar">
 				<div>
-					<a href="${pageContext.request.contextPath}/travel">
+					<a href="${pageContext.request.contextPath}/category">
 						<img alt="travel" src="${pageContext.request.contextPath}/resources/img/plane.png">
 					</a>
 				</div>

@@ -12,7 +12,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginCheckInterceptor())
-		.addPathPatterns("/travel*")
-		.addPathPatterns("/travel/*");
+		.addPathPatterns("/category*")
+		.addPathPatterns("/category/*")
+		.addPathPatterns("/plan*")
+		.addPathPatterns("/plan/*");
 	}
 }

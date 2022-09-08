@@ -16,7 +16,7 @@
 				<c:forEach var="dto" items="${catelist}">
 				<div class="ticket">
 					<div class="travel-ticket">
-						<a href="${pageContext.request.contextPath}/travel/plan?cate_no=${dto.cate_no}" class="travel-ticket-link">
+						<a href="${pageContext.request.contextPath}/plan?cate_no=${dto.cate_no}" class="travel-ticket-link">
 							<div class="ticket-desc">
 								<div class="ticket-desc-border">
 									<p>Travel Ticket</p>
@@ -55,7 +55,7 @@
 				</c:forEach>
 				<div class="ticket">
 					<div class="travel-ticket ticket-empty">
-						<a href="${pageContext.request.contextPath}/travel/add" class="travel-ticket-link">
+						<a href="${pageContext.request.contextPath}/category/add" class="travel-ticket-link">
 							<img alt="plus" src="${pageContext.request.contextPath}/resources/img/plus.png">
 						</a>
 					</div>
@@ -67,14 +67,14 @@
 		$(document).ready(function() {
 			$(".delete_btn").click(function() {
 				$.get(
-						"${pageContext.request.contextPath}/travel/cate_delete", 
+						"${pageContext.request.contextPath}/category/delete", 
 						{
 							cate_no : $(this).val()
 						},
 						function(data, status) {
 							if (data >= 1) {
 								alert("카테고리를 삭제했습니다.");
-								location.href="${pageContext.request.contextPath}/travel";
+								location.href="${pageContext.request.contextPath}/category";
 							} else if (data == 0) {
 								alert("삭제에 실패했습니다.");
 							} else {
@@ -86,7 +86,7 @@
 		});
 		$(document).ready(function() {
 			$(".update_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/travel/update?cate_no=" + $(this).val();
+				location.href="${pageContext.request.contextPath}/category/update?cate_no=" + $(this).val();
 			});
 		});
 		</script>
