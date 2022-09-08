@@ -15,15 +15,15 @@ public class MyPageService {
 	@Autowired
 	MyPageDAO dao;
 	
-	public int infoUpdate(MemberDTO dto) {
+	public int info_update(MemberDTO dto) {
 		int updateYN = 0;
-		updateYN = dao.infoUpdate(dto);
+		updateYN = dao.info_update(dto);
 		return updateYN;
 	}
 
-	public Object profileUpdate(MemberDTO dto) {
+	public Object profile_update(MemberDTO dto) {
 		int updateYN = 0;
-		updateYN = dao.profileUpdate(dto);
+		updateYN = dao.profile_update(dto);
 		return updateYN;
 	}
 

@@ -12,16 +12,16 @@ public class MyPageDAO {
 	@Autowired
 	SqlSession sqlSession;
 		
-	public int infoUpdate(MemberDTO dto) {
+	public int info_update(MemberDTO dto) {
 		int updateYN = 0;
-		updateYN = sqlSession.update("MyPageMapper.infoUpdate", dto);
+		updateYN = sqlSession.update("MyPageMapper.info_update", dto);
 		
 		return updateYN;
 	}
 
-	public int profileUpdate(MemberDTO dto) {
+	public int profile_update(MemberDTO dto) {
 		int updateYN = 0;
-		updateYN = sqlSession.update("MyPageMapper.profileUpdate", dto);
+		updateYN = sqlSession.update("MyPageMapper.profile_update", dto);
 		
 		return updateYN;
 	}

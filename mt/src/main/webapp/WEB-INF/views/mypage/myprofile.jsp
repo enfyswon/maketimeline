@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -36,12 +37,17 @@
 				</div>
 			</div>
 				<hr>
-			
+			<c:choose>
+			<c:when test="${login_info.mno == pf.mno}">
 			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 			<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
 			<button type="button" onclick="location.href='chat'">관리자 문의</button>
-		</div>
+			</c:when>
+			<c:otherwise>
 			<button type="button" onclick="location.href='chat'">채팅</button>
+			</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 		
 		

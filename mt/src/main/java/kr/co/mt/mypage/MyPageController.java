@@ -41,13 +41,13 @@ public class MyPageController {
 
 	// 프로필 수정
 	@RequestMapping(value = "/profile_update", method = RequestMethod.GET)
-	public String profileUpdate(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
+	public String profile_update(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
 		return "/mypage/myprofile_up";
 	}
 	
 	// 회원정보 수정
 	@RequestMapping(value = "/info_update", method = RequestMethod.GET)
-	   public String infoUpdate(@ModelAttribute MemberDTO member, HttpSession session, PrintWriter out) throws IOException {
+	   public String info_update(@ModelAttribute MemberDTO member, HttpSession session, PrintWriter out) throws IOException {
 	      return "/mypage/myinfo_up";
 	   }
 
