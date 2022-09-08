@@ -24,6 +24,17 @@
 			<div id="tour-box">
 			</div>
 			<div id='calendar'></div>
+			<div id="button-box">
+				<button id="timeline_btn">
+					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
+				</button>
+				<button id="plan_add_btn">
+					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
+				</button>
+				<button id="plan_money_btn">
+					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
+				</button>
+			</div>
 		</main>
 	</body>
 	<script>
@@ -43,5 +54,22 @@
 
 		  calendar.render();
 		});
+	</script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#plan_add_btn").click(function() {
+			location.href="${pageContext.request.contextPath}/travel/plan_add?cate_no=${category.cate_no}";
+		});
+	});
+	$(document).ready(function() {
+		$("#timeline_btn").click(function() {
+			location.href="${pageContext.request.contextPath}/travel/timeline?cate_no=${category.cate_no}";
+		});
+	});
+	$(document).ready(function() {
+		$("#plan_money_btn").click(function() {
+			location.href="${pageContext.request.context}/travel/plan_money?cate_no=${category.cate_no}";
+		});
+	});
 	</script>
 </html>
