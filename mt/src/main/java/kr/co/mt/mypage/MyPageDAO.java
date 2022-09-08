@@ -27,10 +27,4 @@ public class MyPageDAO {
 		return updateYN;
 	}
 	
-	public int completeCnt(String mno) {
-		int completeCnt = 0;
-		completeCnt = sqlSession.selectOne("MyPageMapper.completeCnt", mno);
-		
-		return completeCnt;
-	}
 }

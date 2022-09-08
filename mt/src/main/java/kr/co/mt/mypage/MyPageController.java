@@ -30,7 +30,6 @@ public class MyPageController {
 		return "/mypage/myprofile";
 	}
 
-	
 	// 프로필 수정
 	@RequestMapping(value = "/profileUpdate", method = RequestMethod.POST)
 	public String profileUpdate(@ModelAttribute MemberDTO member, HttpSession session, RedirectAttributes rttr) throws Exception{
