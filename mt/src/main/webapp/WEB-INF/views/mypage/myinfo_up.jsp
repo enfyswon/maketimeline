@@ -30,7 +30,7 @@
 									<label for="email">이메일</label>
 								</div>
 								<div class="info-contents">
-									<input type="text" id="email" name="email"  value="${myinfo.email}">
+									<input type="text" id="email" name="email"  value="${pf.email}">
 									<label id="email_label" for="email"></label>
 								</div>
 							</div>
@@ -40,7 +40,7 @@
 									<label for="mpwd">새 비밀번호</label>
 								</div>
 								<div class="info-contents">
-									<input type="password" id="mpwd" name="mpwd"  value="${myinfo.mpwd}">
+									<input type="password" id="mpwd" name="mpwd"  value="${pf.mpwd}">
 									<label for="mpwd" id="mpwd_label"></label>
 								</div>
 							</div>
@@ -50,8 +50,8 @@
 									<label for="pnum">휴대폰 번호</label>
 								</div>
 								<div class="info-contents">
-									<input type="text" id="pnum" name="pnum" value="${myinfo.pnum}">
-									<label id="pnum_label" for="pnum"></label>
+									<input type="text" id="tel" name="tel" value="${pf.tel}">
+									<label id="tel_label" for="tel"></label>
 								</div>
 							</div>
 							
