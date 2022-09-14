@@ -56,7 +56,8 @@
 							
 						</div>
 					</div>
-					</form>
+				</form>
+				
 				<div id="button-box">
 					<button type="button" id="save_btn" name="save_btn">저장</button>
 				</div>

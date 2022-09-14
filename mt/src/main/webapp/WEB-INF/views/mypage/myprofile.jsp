@@ -41,7 +41,7 @@
 				<c:when test="${login_info.mno == pf.mno}">
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
-					<button type="button" onclick="location.href='chat'">관리자 문의</button>
+					<button type="button" onclick="location.href='${pageContext.request.contextPath}/memo/open_room'">관리자 문의</button>
 				</c:when>
 				<c:otherwise>
 					<button type="button" onclick="location.href='chat'">채팅</button>
