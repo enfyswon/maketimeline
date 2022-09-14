@@ -21,10 +21,9 @@
 	</div>
 	<div style="width:15%;margin:auto;">
 			<div id="main-content">
+				<form id="user_info">
 					<div class="info">
-						
 						<div class="info-box">
-								
 							<div class="info-line">
 								<div class="info-label">
 									<label for="email">이메일</label>
@@ -57,7 +56,7 @@
 							
 						</div>
 					</div>
-					
+					</form>
 				<div id="button-box">
 					<button type="button" id="save_btn" name="save_btn">저장</button>
 				</div>
@@ -66,18 +65,23 @@
 	
 	<script type="text/javascript">
 	$(document).ready(function() {
-		let pwd = ${login_info.mpwd};
 		let onlyPwd = /^[a-z0-9~!@#$%^&*().]+$/;
 		let onlyNum = /^[0-9]+$/;
 		$("#save_btn").click(function() {
-			if ($("#mpwd").val() != "") {
-				if( $("#mpwd").val().match(onlyPwd) == null ){//허용되지 않은 글자는 null.
-					$("#mpwd_label").text("영문 소문자, 숫자, 특수 문자만 허용 됩니다.");
-					return;
-				} else { $("#mpwd_label").text(""); }
-			
+
+			let pwd = $.trim($("#mpwd").val());
+			if( pwd.match(onlyPwd) == null ){//허용되지 않은 글자는 null.
+				$("#mpwd_label").text("영문 소문자, 숫자, 특수 문자만 허용 됩니다.");
+				return;
+			} else { $("#mpwd_label").text(""); }
+
+			let email = $.trim($("#email").val());
+			if( email == "") {
+				$("#email_label").text("이메일을 입력해주세요.");
+				return;
+			} else { $("#email_label").text(""); }
+
 			let tel = $.trim($("#tel").val());
-			
 			if (tel == "") {
 				$("#tel_label").text("전화번호를 입력해주세요.");
 				return;
@@ -87,9 +91,7 @@
 				$("#tel_label").text("숫자만 허용 됩니다.");
 				return;
 			} else { $("#tel_label").text(""); }
-			
-			
-			
+
 			let form = new FormData( document.getElementById( "user_info" ) );
 			
 			let keys = form.keys();
