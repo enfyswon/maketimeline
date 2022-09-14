@@ -20,6 +20,8 @@
 	</div>
 	
 	<div style="width:15%;margin:auto;">
+		<div id="main-content">
+			<form id="user_info">
 		<div class="info-contents">
 			<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
 			<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
@@ -46,12 +48,13 @@
 									<label id="mdes_label" for="mdes"></label>
 								</div>
 							</div>
-							
+			</form>
 				<div class="form-group has-feedback">
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 					<button class="btn btn-success" type="submit" id="submit">저장</button>
 				</div>
 		</div>
+	</div>
 		
 	</body>
 </html>
