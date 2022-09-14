@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="PlanMapper">
+
+	<insert id="planInsert" parameterType="kr.co.mt.travel.plan.PlanDTO">
+	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no )
+	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no} )
+	</insert>
+	
+	
+	
+</mapper>

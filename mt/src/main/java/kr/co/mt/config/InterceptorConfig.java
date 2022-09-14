@@ -15,6 +15,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/category*")
 		.addPathPatterns("/category/*")
 		.addPathPatterns("/plan*")
-		.addPathPatterns("/plan/*");
+		.addPathPatterns("/plan/*")
+		.addPathPatterns("/timeline*")
+		.addPathPatterns("/timeline/*")
+		.addPathPatterns("/memo/*");
 	}
 }
