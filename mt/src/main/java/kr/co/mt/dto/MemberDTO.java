@@ -1,5 +1,7 @@
 package kr.co.mt.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberDTO {
 
 	private String mno;
@@ -11,6 +13,8 @@ public class MemberDTO {
 	private String mpho;
 	private String mpho_path;
 	private String mdes;
+	private MultipartFile profile;
+
 	public String getMno() {
 		return mno;
 	}
@@ -59,6 +63,11 @@ public class MemberDTO {
 	public void setMdes(String mdes) {
 		this.mdes = mdes;
 	}
-
+	public MultipartFile getProfile() {
+		return profile;
+	}
+	public void setProfile(MultipartFile profile) {
+		this.profile = profile;
+	}
 	
 }//class

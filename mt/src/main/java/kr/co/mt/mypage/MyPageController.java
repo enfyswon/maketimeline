@@ -55,6 +55,37 @@ public class MyPageController {
 		MemberDTO dto=service.myprofile(mDto.getMno());
 		model.addAttribute("pf", dto);
 	      return "/mypage/myinfo_up";
-	   }
+	}
+	
+	@RequestMapping(value = "/info_update", method = RequestMethod.POST)
+		
+		public void infoUpdate( MemberDTO dto, HttpSession session, PrintWriter out) throws IOException {
+			
+			String mno = ((MemberDTO) session.getAttribute("login_info")).getMno();
+			File newFolder = new File("C:/upload/user/" + mno + "/");
+			
+			if( newFolder.exists() == false ) newFolder.mkdirs();
+			InputStream is = null;
+			FileOutputStream fos = null;
+			
+			MultipartFile profile = dto.getProfile();
+			if (profile != null && !profile.getOriginalFilename().equals("")) {
+				
+				is = profile.getInputStream();
+				fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
+				
+				FileCopyUtils.copy(is, fos);
+				is.close();
+				fos.close();
+				dto.setMpho(profile.getOriginalFilename());
+				dto.setMpho_path("/upload/user/" + mno + "_" + profile.getOriginalFilename());
+			}
+			int updateYn = 0;
+			dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );
+			updateYn = service.info_update(dto);
+			System.out.println(dto.toString());
+			out.print(updateYn);
+			out.close();
+		}
 
 }

@@ -37,7 +37,7 @@
 							
 							<div class="info-line">
 								<div class="info-label">
-									<label for="mpwd">새 비밀번호</label>
+									<label for="mpwd">비밀번호</label>
 								</div>
 								<div class="info-contents">
 									<input type="password" id="mpwd" name="mpwd"  value="${pf.mpwd}">
@@ -47,7 +47,7 @@
 							
 							<div class="info-line">
 								<div class="info-label">
-									<label for="pnum">휴대폰 번호</label>
+									<label for="tel">휴대폰 번호</label>
 								</div>
 								<div class="info-contents">
 									<input type="text" id="tel" name="tel" value="${pf.tel}">
@@ -63,6 +63,61 @@
 				</div>
 			</div>
 	</div>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+		let pwd = ${login_info.mpwd};
+		let onlyPwd = /^[a-z0-9~!@#$%^&*().]+$/;
+		let onlyNum = /^[0-9]+$/;
+		$("#save_btn").click(function() {
+			if ($("#mpwd").val() != "") {
+				if( $("#mpwd").val().match(onlyPwd) == null ){//허용되지 않은 글자는 null.
+					$("#mpwd_label").text("영문 소문자, 숫자, 특수 문자만 허용 됩니다.");
+					return;
+				} else { $("#mpwd_label").text(""); }
+			
+			let tel = $.trim($("#tel").val());
+			
+			if (tel == "") {
+				$("#tel_label").text("전화번호를 입력해주세요.");
+				return;
+			} else { $("#tel_label").text(""); }
+
+			if( ( tel != "" && tel.match(onlyNum) == null )){
+				$("#tel_label").text("숫자만 허용 됩니다.");
+				return;
+			} else { $("#tel_label").text(""); }
+			
+			
+			
+			let form = new FormData( document.getElementById( "user_info" ) );
+			
+			let keys = form.keys();
+			for(key of keys) console.log(key);
+
+			let values = form.values();
+			for(value of values) console.log(value);
+			
+			$.ajax({
+				type : "POST" 
+				, encType : "multipart/form-data" 
+				, url : "${pageContext.request.contextPath}/mypage/info_update" 
+				, data : form 
+				, processData : false
+				, contentType : false 
+				, cache : false 
+				, success : function(result) {
+					alert("회원 정보가 수정되었습니다.");
+					location.href = "${pageContext.request.contextPath}/mypage/myinfo_up";
+				}, 
+				error : function(xhr) {
+					alert("잠시 후 다시 시도해주세요.");
+				}
+			});
+			
+		});//click
+	});//ready
+	</script>
 	
 	</body>
 </html>
