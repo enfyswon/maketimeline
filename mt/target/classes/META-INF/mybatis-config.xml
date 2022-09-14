@@ -12,6 +12,7 @@
 		<mapper resource="META-INF/login-mapper.xml" />
 		<mapper resource="META-INF/plan-mapper.xml" />
 		<mapper resource="META-INF/money-mapper.xml" />
+		<mapper resource="META-INF/mypage-mapper.xml" />
 	</mappers>
 
 </configuration>

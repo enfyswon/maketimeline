@@ -41,7 +41,7 @@
 				<c:when test="${login_info.mno == pf.mno}">
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
-					<button type="button" onclick="location.href='chat'">관리자 문의</button>
+					<button type="button" id="#open_room_btn">관리자 문의</button>
 				</c:when>
 				<c:otherwise>
 					<button type="button" onclick="location.href='chat'">채팅</button>
@@ -49,7 +49,32 @@
 			</c:choose>
 		</div>
 	</div>
-		
+		 <script type="text/javascript">
+      $(document).ready(function() {
+         $("#open_room_btn").click(function() {
+            if( $.trim( $("#mno_to").val() ) == "" ){
+               alert("대화 상대방 아이디를 입력 하세요.");
+               return;
+            }
+            $.get(
+                  "${pageContext.request.contextPath}/memo/start"
+                  , {
+                	  mno_to : $("#mno_to").val()
+                  }
+                  , function(data, status) {
+                     if(data >= 1){
+                        alert("쪽지방이 성공적으로 만들어졌습니다.");
+                        location.href="${pageContext.request.contextPath}/memo/open_room?room_no="${'manager' == dto.mno_to}"+data;
+                     } else if(data <= 0){
+                        alert("쪽지방 만들기가 실패 하였습니다.");
+                     } else {
+                        alert("잠시 후 다시 시도해 주세요.");
+                     }
+                  }//call back function
+            );//post
+         });//click
+      });//ready
+      </script>
 		
 	</body>
 </html>

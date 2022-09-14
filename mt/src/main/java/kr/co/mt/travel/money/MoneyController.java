@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.travel.plan.PlanDTO;
@@ -32,6 +35,30 @@ public class MoneyController {
 	@Autowired
 	private PlanService pservice;
 	
+	
+	@RequestMapping( value = "/dong_name", method = RequestMethod.GET )
+	public void moneyName( String key_word, PrintWriter out ) {
+		List<MoneyDTO> list = null;
+		list = service.moneyName( key_word );
+		out.print( new Gson().toJson( list ) );
+		out.close();
+	}//dongName
+
+	
+	@RequestMapping( value = "/money_search", method = RequestMethod.GET )
+	public String moneySearch() {
+		return "/money/money_search";//jsp file name
+	}//moneySearch
+
+	@RequestMapping( value = "/value_no", method = RequestMethod.GET )
+	public void MoneySelect( String value_no, PrintWriter out ) {
+		List<MoneyDTO> list = null;
+		list = service.moneySelect( value_no );
+		out.print( new Gson().toJson( list ) );
+		out.close();
+	}//moneySelect
+
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String plan(String plan_no, Model model) {
 		PlanDTO dto = new PlanDTO();
@@ -45,8 +72,8 @@ public class MoneyController {
 	public String plan_add(String plan_no, Model model) {
 		model.addAttribute("plan_no", plan_no);
 		
-		return "/travel/plan/money";
-	}//travel/add
+		return "/travel/plan/money_select";
+	}//
 	
 	@RequestMapping( value = "/insert", method = RequestMethod.POST )
 	
@@ -55,10 +82,5 @@ public class MoneyController {
 		successCount = service.insert( dto );
 		out.print(successCount);
 		out.close();
-		
 	}//insert
-	
-	
-	
-	
 }//class

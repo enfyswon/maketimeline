@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>detail plan</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/category_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>

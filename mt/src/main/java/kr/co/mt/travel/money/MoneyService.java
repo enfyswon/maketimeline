@@ -1,9 +1,11 @@
 package kr.co.mt.travel.money;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.mt.travel.category.CategoryDTO;
+
 
 @Service
 public class MoneyService {
@@ -16,4 +18,15 @@ public class MoneyService {
 		
 		return successCnt;
 	}
+	public List<MoneyDTO> moneyName( String key_word ) {
+		List<MoneyDTO> list = null;
+		list = dao.dongName( key_word );
+		return list;
+	}//dongName
+	
+	public List<MoneyDTO> moneySelect( String value_no ) {
+		List<MoneyDTO> list = null;
+		list = dao.MoneyDTO( value_no );
+		return list;
+	}//dongSelect
 }

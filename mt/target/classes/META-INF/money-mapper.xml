@@ -6,9 +6,21 @@
 <mapper namespace="MoneyMapper">
 
 	<insert id="moneyInsert" parameterType="kr.co.mt.travel.money.MoneyDTO">
-	INSERT INTO money ( stay, meals, traffic, admission , plan_no )
-	VALUES ( #{stay}, #{meals}, #{traffic},#{admission} , #{plan_no} )
+	INSERT INTO money ( money_no, value_no, value_name)
+	VALUES ( #{money_no}, #{value_no}, #{value_name} )
 	</insert>
+	
+	<select id="moneyName" parameterType="java.lang.String" resultType="kr.co.mt.travel.money.MoneyDTO">
+	select value_no, value_name
+	from money_no
+	where value_name like concat('%', #{key_word}, '%')
+	</select>
+
+	<select id="moneySelect" resultType="kr.co.mt.travel.money.MoneyDTO">
+	select value_no, value_name
+	from money_no
+	order by value_no
+	</select>
 	
 	
 	
