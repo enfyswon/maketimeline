@@ -22,13 +22,17 @@
 	<div style="width:15%;margin:auto;">
 		<div id="main-content">
 			<form id="user_info">
+			
 		<div class="info-contents">
+			<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
+			<img alt="profile_photo" src="${myinfo.mem_photopath}">
+			</c:if>
 			<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
 			<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
 			</c:if>
 			<input type="file" id="profile" name="profile">
 		</div>
-	
+			
 							<div class="info-line">
 								<div class="info-label">
 									<label for="mni">닉네임</label>

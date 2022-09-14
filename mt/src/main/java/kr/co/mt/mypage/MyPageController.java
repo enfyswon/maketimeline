@@ -106,8 +106,6 @@ public class MyPageController {
 				FileCopyUtils.copy(is, fos);
 				is.close();
 				fos.close();
-				dto.setMpho(profile.getOriginalFilename());
-				dto.setMpho_path("/upload/user/" + mno + "_" + profile.getOriginalFilename());
 			}
 			int updateYn = 0;
 			dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );

@@ -21,8 +21,8 @@
 	</div>
 	<div class="profile">
 		<div style="width:50%;margin:auto;">
-			<div class="info-contents">
-				<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
+			<div>
+				<img alt="profile_photo" src="${pf.mpho_path}">
 			</div>
 				<hr>
 			<div class="info-line">

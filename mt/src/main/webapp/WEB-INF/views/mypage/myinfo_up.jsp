@@ -110,7 +110,7 @@
 				, cache : false 
 				, success : function(result) {
 					alert("회원 정보가 수정되었습니다.");
-					location.href = "${pageContext.request.contextPath}/mypage/myinfo_up";
+					window.location.reload();
 				}, 
 				error : function(xhr) {
 					alert("잠시 후 다시 시도해주세요.");
