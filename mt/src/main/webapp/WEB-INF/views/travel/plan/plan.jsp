@@ -8,15 +8,9 @@
 		<title>Make Timeline</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-<!-- 
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5/locales-all.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5/main.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5/main.min.css">
- -->		
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -58,17 +52,17 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#plan_add_btn").click(function() {
-			//location.href="${pageContext.request.contextPath}/plan/plan_add?cate_no=${category.cate_no}";
+			location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
 		});
 	});
 	$(document).ready(function() {
 		$("#timeline_btn").click(function() {
-			//location.href="${pageContext.request.contextPath}/plan/timeline?cate_no=${category.cate_no}";
+			location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
 		});
 	});
 	$(document).ready(function() {
 		$("#plan_money_btn").click(function() {
-			//location.href="${pageContext.request.contextPath}/plan/plan_money?cate_no=${category.cate_no}";
+			location.href="${pageContext.request.contextPath}/plan/money?cate_no=${category.cate_no}";
 		});
 	});
 	</script>
