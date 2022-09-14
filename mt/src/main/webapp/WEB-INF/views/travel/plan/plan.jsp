@@ -62,7 +62,7 @@
 	});
 	$(document).ready(function() {
 		$("#plan_money_btn").click(function() {
-			location.href="${pageContext.request.contextPath}/plan/money?cate_no=${category.cate_no}";
+			location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
 		});
 	});
 	</script>

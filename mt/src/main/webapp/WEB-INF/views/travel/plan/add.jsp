@@ -81,7 +81,7 @@
 					, cache : false
 					, success : function(result) {
 						alert("여행계획일정이 등록 되었습니다.");
-						location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
+						location.href="${pageContext.request.contextPath}/plan/add?plan_no=${plan.money_no}";
 					}//call back function
 					, error : function(xhr) {
 						alert("잠시 후 다시 시도해 주세요.");
