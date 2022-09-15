@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="TimelineMapper">
+
+	<insert id="timeInsert">
+	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
+	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
+	</insert>
+	
+	<select id="timeList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
+	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	from timeline t, member m, category c
+	where t.cate_no = #{cate_no}
+	and c.mno = m.mno
+	and c.cate_no = #{cate_no}
+	order by timeline_date desc
+	</select>
+	
+	<select id="mapList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
+	select timeline_name, timeline_loc
+	from timeline
+	where cate_no = #{cate_no}
+	</select>
+</mapper>

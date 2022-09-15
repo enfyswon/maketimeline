@@ -22,7 +22,7 @@
 	</script>
 
 <div id="header">
-	<a href="${pageContext.request.contextPath}/">
+	<a href="${pageContext.request.contextPath}/" id="logo-link">
 		<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 	</a>
 	<div id="header-icon">

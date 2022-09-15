@@ -6,7 +6,7 @@
    <head>
       <meta charset="UTF-8">
       <title> Login </title>
-     
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member-style.css"> 
      <style type="text/css">
       h1 { 
       text-align : center; 
@@ -22,10 +22,6 @@
    
    <body>
       <%@ include file="/WEB-INF/views/header.jsp" %>
-      <br><br><br>
-      <br><br><br>
-      <br><br><br>
-      
       <table class="table table-hover">
          <tbody>
 				<tr>
