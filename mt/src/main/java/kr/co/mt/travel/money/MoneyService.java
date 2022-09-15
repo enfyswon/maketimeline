@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.mt.memo.MemoDTO;
+import kr.co.mt.travel.category.CategoryDTO;
 
 @Service
 public class MoneyService {
@@ -17,11 +17,20 @@ public class MoneyService {
 		successCnt = dao.insert(dto);
 		
 		return successCnt;
-	}
+	}//insert
 	
-	public List<MoneyDTO> MoneyListByMno(String loginMno) {
+	public MoneyDTO plan_select(String plan_no) {
+		MoneyDTO dto = new MoneyDTO();
+		dto = dao.plan_select(plan_no);
+		
+		return dto;
+	}//plan_select
+	
+	public List<MoneyDTO> selectList( String cate_no ) {
 		List<MoneyDTO> list = null;
-		list = dao.moneyListByMno( loginMno );
+		list = dao.selectList( cate_no );
 		return list;
-	}//myRoomListByMno
-}
+	}//searchList
+	
+	
+}//class

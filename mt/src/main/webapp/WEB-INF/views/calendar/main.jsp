@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Make Timeline</title>
+		<title>정산</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
@@ -57,7 +57,7 @@
 	</style>
 	</head>
 	<body>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 		<main>
 			<div id="tour-box">
 			</div>
@@ -66,7 +66,7 @@
 				<div id='wrap'>    
 				<!-- 드래그 박스 -->    
 					<div id='external-events'>      
-						<h4>일정 목록</h4>      
+						<h4>지출 목록</h4>      
 						<div id='external-events-list'></div>    
 					</div>    
 				<!-- calendar 태그 -->    
@@ -75,23 +75,12 @@
 					</div>  
 				</div>
 			</div>
-			<div id="button-box">
-				<button id="timeline_btn">
-					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
-				</button>
-				<button id="plan_add_btn">
-					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
-				</button>
-				<button id="plan_money_btn">
-					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
-				</button>
-			</div>
-		</main>
+			</main>
 	
 		<script>
 		$(document).ready(function() {
 			$.get(
-					"${pageContext.request.contextPath}/money/list?plan_no=${plan.plan_no}",
+					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#external-events-list").append(
@@ -124,7 +113,6 @@
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
 			    initialView: 'dayGridMonth',
-			    initialdate: '${category.cate_startdate}' ,
 			    headerToolbar: {
 			      left: 'prev,next today',
 			      center: 'title',
@@ -142,22 +130,5 @@
 			  calendar.render();
 			});
 		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$("#plan_add_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#timeline_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
-			});
-		});
-		</script>
-	</body>
+		</body>
 </html>
