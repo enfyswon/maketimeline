@@ -124,6 +124,7 @@
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
 			    initialView: 'dayGridMonth',
+			    initialdate: '${category.cate_startdate}' ,
 			    headerToolbar: {
 			      left: 'prev,next today',
 			      center: 'title',
@@ -136,6 +137,12 @@
 				drop: function(arg) {                  
 					arg.draggedEl.parentNode.removeChild(arg.draggedEl);        
 				}    
+				, eventClick: function(arg) {	
+					if (confirm("일정을 삭제하시겠습니까?")) {
+						arg.event.remove()
+					}
+				}
+
 			  });
 	
 			  calendar.render();
