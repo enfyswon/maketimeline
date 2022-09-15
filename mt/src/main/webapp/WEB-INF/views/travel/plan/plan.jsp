@@ -142,6 +142,7 @@
 			  calendar.render();
 			});
 		</script>
+		
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#plan_add_btn").click(function() {

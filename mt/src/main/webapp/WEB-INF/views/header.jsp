@@ -33,7 +33,7 @@
 				</a>
 			</div>
 			<div>
-				<a href="#">
+				<a href="${pageContext.request.contextPath}/search/">
 					<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
 				</a>
 			</div>

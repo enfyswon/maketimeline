@@ -1,150 +1,199 @@
-+<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>write money</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
+		<title>정산</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
+		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
+		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
+	<style>
+	  /* body 스타일 */  
+	  body {    
+		  	margin-top: 40px;    
+		  	font-size: 14px;    
+		  	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;  
+	  	}  
+	  #wrap {
+	  	width: 20%;
+	  	vertical-align: right;
+	  }
+	   #spend {    
+	  	width: 100%; 
+	  	margin: 0 auto;
+	  	vertical-align: left;
+	  	text-align:left;
+	  }
+	  /* 드래그 박스의 스타일 */  
+	  #external-events {    
+	  		width: 100px;    
+	  		padding: 0 10px;    
+	  		border: 1px solid #ccc;    
+	  		background: #eee;    
+	  		align: right;  
+	  }  
+	  #external-events h4 {    
+	  		font-size: 16px;    
+	  		margin-top: 0;    
+	  		padding-top: 1em;  
+	  }  
+	  #external-events .fc-event {   
+	  	    margin: 3px 0;    
+	  	    cursor: move;  
+	  }   
+	  #external-events p {    
+	  		margin: 1.5em 0;    
+	  		font-size: 11px;    
+	  		color: #666;  
+	  }   
+	  #external-events p input {    
+	  		margin: 0;    
+	  		vertical-align: center; 
+	  }   
+	  #calendar-wrap {    
+	  		margin-left: 200px;  
+	  		
+	  }   
+	  #calendar1 {    
+	  max-width: 1100px;    
+	  margin: 0 auto; 
+	   
+	  }
+	 
+	  
+	</style>
 	</head>
 	<body>
-	
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-	<main>
-			<form id="money_form">
-			<div id="detailplan-input">
-				<div class="detailplan-detail">
-				<iframe src="${pageContext.request.contextPath}/calendar/main"
-				name="calendar" width="100%" height="500px" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0>></iframe>
-				</div>
-				
-				<div class="detailplan-detail">
-					<p>
-						<label for="money_no" id="money_no_label" class="write_label" ></label>
-					</p>
-						<input type="text" id="money_no" name="money_no" placeholder="지출 내역">
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label for="stay" id="stay_label" class="write_label" ></label>
-						</p>
-							<input type="text" id="stay" name="stay" placeholder="숙박비">
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label id="meals_label" class="write_label"></label>
-						</p>
-							<input type="text" id="meals" name="meals" placeholder="식비">	
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label id="traffic_label" class="write_label"></label>
-						</p>
-							<input type="text" id="traffic" name="traffic" placeholder="교통비">	
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label id="admission_label" class="write_label"></label>
-						</p>
-							<input type="text" id="admission" name="admission" placeholder="입장료">	
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label id="etc_label" class="write_label"></label>
-						</p>
-							<input type="text" id="etc" name="etc" placeholder="기타">	
-					</div>
-					<div class="detailplan-detail">
-						<p>
-							<label id="plan_no_label" class="write_label"></label>
-						</p>
-							<input type="text" id="plan_no" name="plan_no" placeholder="계획번호">	
-					</div>
-					<button type="button" id="add_btn" name="add_btn">등록</button>
+		<main>
+			<div id="tour-box">
 			</div>
-			</form>
-			
+			<div id="calender-box">
+				<div id='calendar'></div>
+				<div id='wrap'>    
+				<!-- 드래그 박스 -->    
+					<div id='external-events'>      
+						<h4>정산 목록</h4>      
+						<div id='external-events-list'></div>    
+					</div>    
+				<!-- calendar 태그 -->    
+					<div id='calendar-wrap'>      
+						<div id='calendar1'>
+								<div id="spend">
+											<table class="table table-hover">
+													<tbody>
+																	<tr>
+																		<td><h3> 지출 번호  :  ${dto.money_no} </h3></td>	
+																	</tr>
+																	<tr>
+																	<tr>
+																		<td><h3> 식비  :  ${dto.value_name =='식비'}</h3></td>	
+																	</tr>
+																	<tr>
+																	<td> <h3> 숙박비  : ${dto.value_name =='숙박비'}</h3></td>	
+																	</tr>
+																	<tr>
+																		<td><h3> 교통비  :  ${dto.value_name =='교통비'}</h3></td>	
+																	</tr>
+																	<tr>
+																	<td><h3> 입장료  : ${dto.value_name =='입장료'} </h3></td>
+																	</tr>
+																	<tr>
+																		<td><h3> 기타 : ${dto.value_name =='기타'}</h3></td>    
+																	</tr>
+																	
+													</tbody>
+											</table>
+									</div>
+						</div>    
+					</div>  
+				</div>
+			</div>
+			<div id="button-box">
+				<button id="timeline_btn">
+					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
+				</button>
+				<button id="plan_add_btn">
+					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
+				</button>
+				<button id="plan_money_btn">
+					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
+				</button>
+			</div>
 		</main>
-		<br><br><br>
+	
+		<script>
+		$(document).ready(function() {
+			$.get(
+					"${pageContext.request.contextPath}/money/list?plan_no=${plan.plan_no}",
+					function(data, status) {
+						$.each(JSON.parse(data), function(idx, dto) {
+							$("#external-events-list").append(
+									"<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>" + 
+									"<div class='fc-event-main'>" + 
+									dto.plan_name + 
+									"</div>" + 
+									"</div>"
+							);
+						})
+					}
+			);
+		});
+		
+		document.addEventListener('DOMContentLoaded', function() {
+			var containerEl = $('#external-events-list')[0];           
+			   new FullCalendar.Draggable(containerEl, {        
+				   itemSelector: '.fc-event',        
+				   eventData: function(eventEl) {          
+					   return {            
+						   title: eventEl.innerText.trim()          
+						   }       
+					   }      
+			   });         
+			   /* for(var i=1; i<=5;i++) {        
+				   var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");        
+				   $event = $("<div class='fc-event-main'></div>").text("event " + i);        
+				   $('#external-events-list').append($div.append($event));      
+				}     */      
+			  var calendarEl = document.getElementById('calendar');
+			  var calendar = new FullCalendar.Calendar(calendarEl, {
+			    initialView: 'dayGridMonth',
+			    headerToolbar: {
+			      left: 'prev,next today',
+			      center: 'title',
+			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			    },
+			    locale: 'ko',
+			    selectable: true,
+			    editable: true,        
+				droppable: true,         
+				drop: function(arg) {                  
+					arg.draggedEl.parentNode.removeChild(arg.draggedEl);        
+				}    
+			  });
+	
+			  calendar.render();
+			});
+		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("#add_btn").click(function() {
-				if ($.trim($("#money_no").val()) == "") {
-					$("#money_no_label").text("지출 제목을 입력하세요");
-					return;
-				} else {
-					$("#money_no_label").text("");
-				}
-				
-				if ($("#stay").val() == "") {
-					$("#stay_label").text("숙박비를 입력하세요.");
-					return;
-				} else {
-					$("#stay_label").text("");
-				}
-				
-				if ($("#meals").val() == "") {
-					$("#meals_label").text("식비를 입력하세요.");
-					return;
-				} else {
-					$("#meals_label").text("");
-					}
-				
-				if ($("#traffic").val() == "") {
-					$("#traffic_label").text("교통비를 입력하세요.");
-					return;
-				} else {
-					$("#traffic_label").text("");
-					}
-				if ($("#admission").val() == "") {
-					$("#admission_label").text("입장료를 입력하세요.");
-					return;
-				} else {
-					$("#admission_label").text("");
-					}
-				if ($("#etc").val() == "") {
-					$("#etc_label").text("기타금액을 입력하세요.");
-					return;
-				} else {
-					$("#etc_label").text("");
-					}
-				if ($("#plan_no").val() == "") {
-					$("#plan_no_label").text("계획번호을 입력하세요.");
-					return;
-				} else {
-					$("#plan_no_label").text("");
-					}
-				
-
-				let form = new FormData( document.getElementById("money_form"));
-				
-				let plan_no = $("#plan_no").val();
-				form.append('plan_no', plan_no);
-				
-				let keys = form.keys();
-				for(key of keys) console.log(key);
-				
-				let values = form.values();
-				for(value of values) console.log(value);
-
-				$.ajax({
-					type : "POST"
-					, encType : "multipart/form-data"
-					, url : "${pageContext.request.contextPath}/money/insert"
-					, data : form
-					, processData : false
-					, contentType : false
-					, cache : false
-					, success : function(result) {
-						alert("지출경비가 등록 되었습니다.");
-						location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
-					}//call back function
-					, error : function(xhr) {
-						alert("잠시 후 다시 시도해 주세요.");
-					}//call back function//xhr : xml http request/response
-			});//ajax
+			$("#plan_add_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
+			});
 		});
+		$(document).ready(function() {
+			$("#timeline_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#plan_money_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
+			});
 		});
 		</script>
 	</body>

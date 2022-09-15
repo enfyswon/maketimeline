@@ -24,4 +24,23 @@
 	from timeline
 	where cate_no = #{cate_no}
 	</select>
+	
+	<select id="selectList" parameterType="kr.co.mt.SearchDTO"
+			resultType="kr.co.mt.travel.timeline.TimelineDTO">
+	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	from timeline t, member m, category c
+	where t.cate_no = #{cate_no}
+		<if test="searchOption != null and searchOption != ''
+					and searchWord != null and searchWord != ''">
+			<choose>
+				<when test="searchOption == 'timeline_name'">
+					and t.timeline_name like concat('%', #{searchWord}, '%')
+				</when>
+				
+			</choose>
+		</if>
+	order by timeline_name desc
+	limit #{limitNum}, 10
+	</select>
+	
 </mapper>
