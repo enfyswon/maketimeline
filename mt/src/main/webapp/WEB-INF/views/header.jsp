@@ -38,7 +38,7 @@
 				</a>
 			</div>
 			<div>
-				<a href="${pageContext.request.contextPath}/mypage/list">
+				<a href="${pageContext.request.contextPath}/mypage/myprofile">
 					<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
 				</a>
 			</div>

@@ -47,7 +47,7 @@ public class MoneyController {
 	
 	@RequestMapping( value = "/money_search", method = RequestMethod.GET )
 	public String moneySearch() {
-		return "/money/money_search";//jsp file name
+		return "/money/money";//jsp file name
 	}//moneySearch
 
 	@RequestMapping( value = "/value_no", method = RequestMethod.GET )
@@ -72,7 +72,7 @@ public class MoneyController {
 	public String plan_add(String plan_no, Model model) {
 		model.addAttribute("plan_no", plan_no);
 		
-		return "/travel/plan/money_select";
+		return "/travel/plan/money";
 	}//
 	
 	@RequestMapping( value = "/insert", method = RequestMethod.POST )
