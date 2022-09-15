@@ -1,0 +1,86 @@
+package kr.co.mt.travel.money;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.google.gson.Gson;
+
+import kr.co.mt.dto.MemberDTO;
+import kr.co.mt.travel.plan.PlanDTO;
+import kr.co.mt.travel.plan.PlanService;
+
+@Controller
+@RequestMapping(value = "/money")
+public class MoneyController {
+	private final static Logger logger = LoggerFactory.getLogger(MoneyController.class);
+	
+	@Autowired
+	private MoneyService service;
+	
+	@Autowired
+	private PlanService pservice;
+	
+	
+	@RequestMapping( value = "/dong_name", method = RequestMethod.GET )
+	public void moneyName( String key_word, PrintWriter out ) {
+		List<MoneyDTO> list = null;
+		list = service.moneyName( key_word );
+		out.print( new Gson().toJson( list ) );
+		out.close();
+	}//dongName
+
+	
+	@RequestMapping( value = "/money_search", method = RequestMethod.GET )
+	public String moneySearch() {
+		return "/money/money_search";//jsp file name
+	}//moneySearch
+
+	@RequestMapping( value = "/value_no", method = RequestMethod.GET )
+	public void MoneySelect( String value_no, PrintWriter out ) {
+		List<MoneyDTO> list = null;
+		list = service.moneySelect( value_no );
+		out.print( new Gson().toJson( list ) );
+		out.close();
+	}//moneySelect
+
+	
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String plan(String plan_no, Model model) {
+		PlanDTO dto = new PlanDTO();
+		dto = pservice.plan_select(plan_no);
+		model.addAttribute("plan", dto);
+		
+		return "/travel/plan/plan";
+	}//travel/plan
+	
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public String plan_add(String plan_no, Model model) {
+		model.addAttribute("plan_no", plan_no);
+		
+		return "/travel/plan/money_select";
+	}//
+	
+	@RequestMapping( value = "/insert", method = RequestMethod.POST )
+	
+	public void insert( MoneyDTO dto, PrintWriter out ) {
+		int successCount = 0;
+		successCount = service.insert( dto );
+		out.print(successCount);
+		out.close();
+	}//insert
+}//class

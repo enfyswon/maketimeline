@@ -32,7 +32,7 @@
             <tr>
                <th> 이메일 </th>
                <td>
-					<input type="text" id="email" name="email" maxlength="25" class="form-control"  placeholder="이메일 주소 입력 ">
+					<input type="text" id="email" name="email" maxlength="30" class="form-control"  placeholder="이메일 주소 입력 ">
                     <button id="email_btn" class="btn btn-secondary" > 중복 확인 </button>
                   	<label for="email" id="email_label"></label>
                </td>

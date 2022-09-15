@@ -16,4 +16,10 @@ public class PlanService {
 		
 		return successCnt;
 	}
+	public PlanDTO plan_select(String plan_no) {
+		PlanDTO dto = new PlanDTO();
+		dto = dao.plan_select(plan_no);
+		
+		return dto;
+	}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="MoneyMapper">
+
+	<insert id="moneyInsert" parameterType="kr.co.mt.travel.money.MoneyDTO">
+	INSERT INTO money ( money_no, value_no, value_name)
+	VALUES ( #{money_no}, #{value_no}, #{value_name} )
+	</insert>
+	
+	<select id="moneyName" parameterType="java.lang.String" resultType="kr.co.mt.travel.money.MoneyDTO">
+	select value_no, value_name
+	from money_no
+	where value_name like concat('%', #{key_word}, '%')
+	</select>
+
+	<select id="moneySelect" resultType="kr.co.mt.travel.money.MoneyDTO">
+	select value_no, value_name
+	from money_no
+	order by value_no
+	</select>
+	
+	
+	
+</mapper>
