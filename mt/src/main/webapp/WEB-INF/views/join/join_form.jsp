@@ -3,38 +3,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="UTF-8">
-      <title> Join </title>
-     
-     <style type="text/css">
-      h1 { 
-      text-align : center; 
-      }
-      #buttons {
-         text-align: right;
-      }
-      #join_btn {
-         margin-right: 35%;
-      }
-      </style>
-   </head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Make Timeline</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member-style.css"> 
+		<style type="text/css">
+#join-form {
+	width: 40%;
+	text-align: center;
+}
+.label-box {
+	text-align: left;
+}
+input {
+	padding: 7px;
+}
+.write_label {
+	font-size: small;
+}
+		</style>
+	</head>
    
-   <body>
-      <%@ include file="/WEB-INF/views/header.jsp" %>
-      <br><br><br>
-      <br><br><br>
-      <br><br><br>
-      
+	<body>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+      	<main>
+			<div id="join-form">
+				<div class="label-box">
+					<label for="email">이메일</label>
+	              	<label for="email" id="email_label" class="write_label"></label>
+				</div>
+				<input type="text" id="email" name="email" maxlength="25" placeholder="이메일 주소 입력 ">
+                <button id="email_btn"> 중복 확인 </button>
+			</div>
+      	</main>
       <table class="table table-hover">
          <tbody>
          
             <tr>
                <th> 이메일 </th>
                <td>
-					<input type="text" id="email" name="email" maxlength="30" class="form-control"  placeholder="이메일 주소 입력 ">
-                    <button id="email_btn" class="btn btn-secondary" > 중복 확인 </button>
-                  	<label for="email" id="email_label"></label>
                </td>
             </tr>
             <tr>
