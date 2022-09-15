@@ -73,7 +73,7 @@
 														$.get(
 																"${pageContext.request.contextPath}/memo/start"
 																, {
-																	mno_to : $(this).attr("mni")
+																	mni_to : $(this).attr("mni")
 																}
 																, function(data, status) {
 																	if(data == 0){

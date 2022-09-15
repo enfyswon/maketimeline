@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="MoneyMapper">
+
+	<insert id="moneyInsert" parameterType="kr.co.mt.travel.money.MoneyDTO">
+	INSERT INTO money ( stay, meals ,traffic ,admission, etc, plan_no )
+	VALUES ( #{stay}, #{meals}, #{traffic},#{admission},#{etc}, #{plan_no} )
+	</insert>
+	
+	<select id="moneyListByMno" parameterType="java.lang.String" resultType="kr.co.mt.travel.money.MoneyDTO">
+	select money_no, plan_no, stay, meals, traffic, admission, etc
+	from money
+	where mno = #{mno}
+	
+	</select>
+	
+	
+</mapper>

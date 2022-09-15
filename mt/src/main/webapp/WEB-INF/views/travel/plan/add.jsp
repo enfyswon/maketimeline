@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>detail plan</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/category_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -81,7 +81,7 @@
 					, cache : false
 					, success : function(result) {
 						alert("여행계획일정이 등록 되었습니다.");
-						location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
+						location.href="${pageContext.request.contextPath}/plan?cate_no=${cate_no}";
 					}//call back function
 					, error : function(xhr) {
 						alert("잠시 후 다시 시도해 주세요.");

@@ -1,6 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- 회원정보 수정 -->
-<update id="update_mypage" parameterType="member">
-	update member set email = #{email} where id = #{id}
-</update>
+<mapper namespace="MyPageMapper">
+
+	<!-- 프로필 조회 -->
+	<select id="myProfile" parameterType="java.lang.String" resultType="kr.co.mt.dto.MemberDTO">
+	select mno, email, mpwd, mni, tel, mpho, mpho_path, mdes
+	from member
+	where mno = #{mno}
+	</select>
+	
+	<!-- 프로필 수정 -->
+	<update id="profile_update" parameterType="kr.co.mt.dto.MemberDTO">
+		update member set mni = #{mni}
+					, mdes = #{mdes}
+					<if test="mpho != null and mpho != ''">
+						, mpho = #{mpho}
+						, mpho_path = #{mpho_path}
+					</if>
+		where mno = #{mno}
+	</update>
+		
+	<!-- 회원정보 수정 -->
+	<update id="info_update" parameterType="kr.co.mt.dto.MemberDTO">
+		update member set mpwd = #{mpwd}
+						, email = #{email}
+						, tel = #{tel}
+		where mno = #{mno}
+	</update>
+
+</mapper>
