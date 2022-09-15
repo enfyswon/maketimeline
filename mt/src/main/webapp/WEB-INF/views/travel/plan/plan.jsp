@@ -137,12 +137,6 @@
 				drop: function(arg) {                  
 					arg.draggedEl.parentNode.removeChild(arg.draggedEl);        
 				}    
-				, eventClick: function(arg) {	
-					if (confirm("일정을 삭제하시겠습니까?")) {
-						arg.event.remove()
-					}
-				}
-
 			  });
 	
 			  calendar.render();
