@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mt.dto.MoneyDTO;
+
 @Service
 public class TimelineService {
 	@Autowired
@@ -27,6 +29,13 @@ public class TimelineService {
 	public List<TimelineDTO> timeline_maplist(String cate_no) {
 		List<TimelineDTO> list = null;
 		list = dao.timeline_maplist(cate_no);
+		
+		return list;
+	}
+
+	public List<MoneyDTO> selectMoneyList() {
+		List<MoneyDTO> list = null;
+		list = dao.selectMoneyList();
 		
 		return list;
 	}

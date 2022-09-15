@@ -12,12 +12,6 @@
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 	<style>
-	  /* body 스타일 */  
-	  body {    
-		  	margin-top: 40px;    
-		  	font-size: 14px;    
-		  	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;  
-	  	}  
 	  #wrap {
 	  	width: 20%;
 	  }
@@ -55,7 +49,7 @@
 			margin: 0 auto;  
 	  }
 	  #tour-box {
-	  		width: 20%;
+	  		width: 40%;
 	  }
 	</style>
 	</head>

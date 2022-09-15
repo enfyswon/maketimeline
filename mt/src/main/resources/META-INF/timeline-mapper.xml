@@ -6,8 +6,8 @@
 <mapper namespace="TimelineMapper">
 
 	<insert id="timeInsert">
-	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
-	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
+	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc, money_no)
+	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc}, #{money_no})
 	</insert>
 	
 	<select id="timeList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
@@ -23,5 +23,10 @@
 	select timeline_name, timeline_loc
 	from timeline
 	where cate_no = #{cate_no}
+	</select>
+	
+	<select id="selecetMoney" resultType="kr.co.mt.dto.MoneyDTO">
+	select money_no, value_name
+	from money
 	</select>
 </mapper>
