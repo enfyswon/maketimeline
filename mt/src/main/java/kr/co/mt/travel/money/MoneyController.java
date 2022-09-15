@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
-import kr.co.mt.travel.money.MoneyDTO;
 import kr.co.mt.travel.plan.PlanDTO;
 import kr.co.mt.travel.plan.PlanService;
 
@@ -36,23 +35,21 @@ public class MoneyController {
 	@Autowired
 	private PlanService pservice;
 	
-	@RequestMapping( value = "/list", method = RequestMethod.GET )
-	public String moneyList( HttpSession session, Model model ) {
-
-		String loginMno = ( (MemberDTO) session.getAttribute("login_info") ).getMno();
-
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void MoneyList(String plan_no, PrintWriter out) {
 		List<MoneyDTO> list = null;
-		list = service.MoneyListByMno(loginMno);
-		model.addAttribute("money_list", list);
-
-		return "money/money_list";//jsp file name
-	}//myRoomList
+		list = service.selectList(plan_no);
 		
+		out.print(new Gson().toJson(list));
+		out.close();
+	}
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String plan(String plan_no, Model model) {
 		PlanDTO dto = new PlanDTO();
 		dto = pservice.plan_select(plan_no);
+		
+		
 		model.addAttribute("plan", dto);
 		
 		return "/travel/money/money";
@@ -63,7 +60,7 @@ public class MoneyController {
 		model.addAttribute("plan_no", plan_no);
 		
 		return "/travel/money/money";
-	}//
+	}//travel/add
 	
 	@RequestMapping( value = "/insert", method = RequestMethod.POST )
 	
@@ -73,4 +70,8 @@ public class MoneyController {
 		out.print(successCount);
 		out.close();
 	}//insert
+	
+	
+	
+	
 }//class

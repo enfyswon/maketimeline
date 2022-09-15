@@ -58,7 +58,7 @@
  			$.get(
 					"${pageContext.request.contextPath}/memo/start"
 					, {
-						mno_to : 8
+						mno_to : 0
 					}
 					, function(data, status) {
 						if(data == 0){

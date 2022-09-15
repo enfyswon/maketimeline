@@ -6,22 +6,19 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>write money</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/category_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
 	
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 	<main>
-			
 			<form id="money_form">
 			<div id="detailplan-input">
-				
 				<div class="detailplan-detail">
-						<p>
-							<label>${dto.plan_no == '1'}</label>
-						</p>
-							
-					</div>
+				<iframe src="${pageContext.request.contextPath}/calendar/main"
+				name="calendar" width="100%" height="685px" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0>></iframe>
+				</div>
+				
 				<div class="detailplan-detail">
 					<p>
 						<label for="money_no" id="money_no_label" class="write_label" ></label>
