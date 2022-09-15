@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<html>
 	<head>
 		<meta charset="UTF-8">
@@ -78,6 +79,8 @@
 		
 	</body>
 =======
+=======
+>>>>>>> parent of 390889c (Merge branch '지성' into 찬영)
 <html>
 <head>
 <meta charset="UTF-8">
@@ -86,5 +89,8 @@
 <body>
 
 </body>
+<<<<<<< HEAD
+>>>>>>> parent of 390889c (Merge branch '지성' into 찬영)
+=======
 >>>>>>> parent of 390889c (Merge branch '지성' into 찬영)
 </html>
