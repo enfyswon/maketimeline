@@ -42,7 +42,7 @@ public class PlanController {
 		
 		out.print(new Gson().toJson(list));
 		out.close();
-	}
+	}//list
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String plan(String cate_no, Model model) {
