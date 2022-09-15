@@ -44,6 +44,10 @@
 							</div>
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>
+						<div class="timeline-btn-box">
+							<button type="button" class="timeline-update-btn"></button>
+							<button type="button" class="timeline-delete-btn"></button>
+						</div>
 					</div>
 				</div>
 				</c:forEach>
