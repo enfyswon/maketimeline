@@ -5,42 +5,85 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Search</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
+		<title>Make Timeline</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
-</head>
-<body>
-
-		
-		
-			<iframe src="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}" title="test"
-				width="100%" height="800" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0>
-				</iframe>
-				<h3> 타임라인 검색 </h3>
-		
-		<form action="${pageContext.request.contextPath}/timeline/timeline" method="get">
+	</head>
+	<body>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+		<main>
+		<form action="${pageContext.request.contextPath}/timeline/list" method="get">
 			<div class="input-group">
 				<div class="input-group-prepend">
 					<select class="form-control" id="searchOption" name="searchOption">
-						<option value="timeline-name"
-							<c:if test="${search_dto.searchOption == 'timeline-name'}">selected="selected"</c:if>
-						> 타임라인 이름 </option>
-						
+						<option value="timeline_name"
+							<c:if test="${search_dto.searchOption == 'timeline_name'}">selected="selected"</c:if>
+						> 제 목 </option>
+						<option value="searchPlaces"
+							<c:if test="${search_dto.searchOption == 'searchPlaces'}">selected="selected"</c:if>
+						> 장소 </option>
 					</select>
 				</div>
-				<input type="text" class="form-control" id="search" name="searchWord"
+				<input type="text" class="form-control" id="searchWord" name="searchWord"
 						value="${search_dto.searchWord}">
 				<div class="input-group-append">
 					<button type="submit" class="btn btn-primary"> 검 색 </button>
 				</div>
 			</div>
-				</form>
-				<script type="text/javascript">
+		</form>
+			<div id="map">
+			</div>
+			<div id="timeline-box">
+				<c:forEach var="dto" items="${list}">
+				<div class="timeline-card">
+					<div class="timeline-img">
+						<a href="${dto.timeline_photopath}" data-lightbox="image">
+							<img alt="timeline_img" src="${dto.timeline_photopath}">
+						</a>
+					</div>
+					<div class="timeline-cnts">
+						<p class="timeline-name">${dto.timeline_name}</p>
+						<div class="timeline-profile">
+							<div class="timeline-profile-img">
+								<c:if test="${dto.mpho_path == null}">
+								<img alt="profile" src="${pageContext.request.contextPath}/resources/img/user.png">
+								</c:if>
+								<c:if test="${dto.mpho_path != null}">
+								<img alt="profile" src="${dto.mpho_path}">
+								</c:if>
+							</div>
+							<div class="timeline-profile-desc">
+								<p class="timeline-nick">${dto.mni}</p>
+								<p class="timeline-date">${dto.timeline_date}</p>
+							</div>
+						</div>
+						<p class="timeline-desc">${dto.timeline_desc}</p>
+						<div class="timeline-btn-box">
+							<button type="button" class="timeline-update-btn"></button>
+							<button type="button" class="timeline-delete-btn"></button>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+			</div>
+			<div id="button-box">
+				<button id="plan_btn">
+					<img alt="plan" src="${pageContext.request.contextPath}/resources/img/plan.png">
+				</button>
+				<button id="timeline_add_btn">
+					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
+				</button>
+				<button id="timeline_money_btn">
+					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
+				</button>
+			</div>
+		</main>
+		<script type="text/javascript">
 		var markers = [];
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
@@ -120,5 +163,21 @@
 	            'maxHeight' : 600,
 	        })		
 		});//ready
-</body>
+		$(document).ready(function() {
+			$("#plan_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#timeline_add_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline/add?cate_no=${category.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#timeline_money_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline/money?cate_no=${category.cate_no}";
+			});
+		});
+		</script>
+	</body>
 </html>
