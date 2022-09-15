@@ -16,7 +16,7 @@
 			<div id="detailplan-input">
 				<div class="detailplan-detail">
 				<iframe src="${pageContext.request.contextPath}/calendar/main"
-				name="calendar" width="100%" height="685px" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0>></iframe>
+				name="calendar" width="100%" height="500px" frameborder=0 framespacing=0 marginheight=0 marginwidth=0 scrolling=no vspace=0>></iframe>
 				</div>
 				
 				<div class="detailplan-detail">
@@ -64,8 +64,9 @@
 					<button type="button" id="add_btn" name="add_btn">등록</button>
 			</div>
 			</form>
+			
 		</main>
-		
+		<br><br><br>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#add_btn").click(function() {

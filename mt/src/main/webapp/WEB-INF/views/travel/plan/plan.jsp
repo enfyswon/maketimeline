@@ -91,7 +91,7 @@
 		<script>
 		$(document).ready(function() {
 			$.get(
-					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
+					"${pageContext.request.contextPath}/money/list?plan_no=${plan.plan_no}",
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#external-events-list").append(
