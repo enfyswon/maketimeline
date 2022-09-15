@@ -12,23 +12,24 @@ public class MyPageDAO {
 	@Autowired
 	SqlSession sqlSession;
 		
-	public int info_update(MemberDTO dto) {
-		int updateYN = 0;
-		updateYN = sqlSession.update("MyPageMapper.info_update", dto);
+	public MemberDTO infoSelect(String mno) {
+		MemberDTO dto = null;
+		dto = sqlSession.selectOne("MyPageMapper.infoSelect", mno);
 		
-		return updateYN;
-	}
-
-	public int profile_update(MemberDTO dto) {
-		int updateYN = 0;
-		updateYN = sqlSession.update("MyPageMapper.profile_update", dto);
-		
-		return updateYN;
-	}
-
-	public MemberDTO myprofile(String mno) {
-		MemberDTO dto=sqlSession.selectOne("MyPageMapper.myProfile", mno);
 		return dto;
 	}
+	
+	public int infoUpdate(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = sqlSession.update("MyPageMapper.infoUpdate", dto);
+		
+		return updateYN;
+	}
 
+	public int completeCnt(String mno) {
+		int completeCnt = 0;
+		completeCnt = sqlSession.selectOne("MyPageMapper.completeCnt", mno);
+		
+		return completeCnt;
+	}
 }

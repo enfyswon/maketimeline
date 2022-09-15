@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
+<<<<<<< HEAD
 	<html>
 	<head>
 		<meta charset="UTF-8">
@@ -77,4 +77,14 @@
       </script>
 		
 	</body>
+=======
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My profile</title>
+</head>
+<body>
+
+</body>
+>>>>>>> parent of 390889c (Merge branch '지성' into 찬영)
 </html>
