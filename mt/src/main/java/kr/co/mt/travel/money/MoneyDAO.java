@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mt.memo.MemoDTO;
+
 @Repository
 public class MoneyDAO {
 	@Autowired
@@ -18,17 +20,12 @@ public class MoneyDAO {
 		return successCnt;
 	}//insert
 	
-	public List<MoneyDTO> MoneyDTO(String value_no) {
+	public List<MoneyDTO> moneyListByMno(String loginMno) {
 		List<MoneyDTO> list = null;
-		list = sqlSession.selectList("MoneyMapper.moneySelect", value_no);
+		list = sqlSession.selectList("MoneyMapper.moneyListByMno", loginMno);
 		return list;
-	}//moneySelect
+	}//myRoomListByMno
 	
-	public List<MoneyDTO> dongName( String key_word ) {
-		List<MoneyDTO> list = null;
-		list = sqlSession.selectList("MoneyMapper.moneyName", key_word);
-		return list;
-	}//dongName
 
 	
 
