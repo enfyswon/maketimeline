@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mt.SearchDTO;
+
 @Service
 public class TimelineService {
 	@Autowired
@@ -30,5 +32,11 @@ public class TimelineService {
 		
 		return list;
 	}
+	public List<TimelineDTO> searchList( SearchDTO dto ) {
+		List<TimelineDTO> list = null;
+		list = dao.searchList( dto );
+		return list;
+	}//searchList
+
 	
 }

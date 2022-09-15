@@ -20,6 +20,13 @@
 	  	}  
 	  #wrap {
 	  	width: 20%;
+	  	vertical-align: right;
+	  }
+	   #spend {    
+	  	width: 100%; 
+	  	margin: 0 auto;
+	  	vertical-align: left;
+	  	text-align:left;
 	  }
 	  /* 드래그 박스의 스타일 */  
 	  #external-events {    
@@ -27,7 +34,7 @@
 	  		padding: 0 10px;    
 	  		border: 1px solid #ccc;    
 	  		background: #eee;    
-	  		text-align: left;  
+	  		align: right;  
 	  }  
 	  #external-events h4 {    
 	  		font-size: 16px;    
@@ -45,15 +52,19 @@
 	  }   
 	  #external-events p input {    
 	  		margin: 0;    
-	  		vertical-align: middle; 
+	  		vertical-align: center; 
 	  }   
 	  #calendar-wrap {    
 	  		margin-left: 200px;  
+	  		
 	  }   
 	  #calendar1 {    
 	  max-width: 1100px;    
-	  margin: 0 auto;  
+	  margin: 0 auto; 
+	   
 	  }
+	 
+	  
 	</style>
 	</head>
 	<body>
@@ -71,7 +82,34 @@
 					</div>    
 				<!-- calendar 태그 -->    
 					<div id='calendar-wrap'>      
-						<div id='calendar1'></div>    
+						<div id='calendar1'>
+								<div id="spend">
+											<table class="table table-hover">
+													<tbody>
+																	<tr>
+																		<td><h3> 지출 번호  :  ${dto.money_no} </h3></td>	
+																	</tr>
+																	<tr>
+																	<tr>
+																		<td><h3> 식비  :  ${dto.value_name =='식비'}</h3></td>	
+																	</tr>
+																	<tr>
+																	<td> <h3> 숙박비  : ${dto.value_name =='숙박비'}</h3></td>	
+																	</tr>
+																	<tr>
+																		<td><h3> 교통비  :  ${dto.value_name =='교통비'}</h3></td>	
+																	</tr>
+																	<tr>
+																	<td><h3> 입장료  : ${dto.value_name =='입장료'} </h3></td>
+																	</tr>
+																	<tr>
+																		<td><h3> 기타 : ${dto.value_name =='기타'}</h3></td>    
+																	</tr>
+																	
+													</tbody>
+											</table>
+									</div>
+						</div>    
 					</div>  
 				</div>
 			</div>
@@ -86,32 +124,6 @@
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
 			</div>
-			<div>
-											<table class="table table-hover">
-													<tbody>
-																	<tr>
-																		<td><h5 style="color:gray;"> 지출 번호  :  ${dto.money_no} </h5></td>	
-																	</tr>
-																	<tr>
-																	<tr>
-																		<td><h5 style="color:gray;"> 식비  :  ${dto.value_name =='식비'}</h5></td>	
-																	</tr>
-																	<tr>
-																	<td> <h5 style="color:gray;"> 숙박비  : ${dto.value_name =='숙박비'}</h5></td>	
-																	</tr>
-																	<tr>
-																		<td><h5 style="color:gray;"> 교통비  :  ${dto.value_name =='교통비'}</h5></td>	
-																	</tr>
-																	<tr>
-																	<td><h5 style="color:gray;"> 입장료  : ${dto.value_name =='입장료'} </h5></td>
-																	</tr>
-																	<tr>
-																		<td><h5 style="color:gray;"> 기타 : ${dto.value_name =='기타'}</h5></td>    
-																	</tr>
-																	
-													</tbody>
-											</table>
-									</div>
 		</main>
 	
 		<script>
