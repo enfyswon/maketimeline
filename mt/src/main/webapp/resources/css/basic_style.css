@@ -9,11 +9,15 @@ a {
 }
 li {
 	list-style: none;
-<<<<<<< HEAD
 }
 
 body {
 	background-color: #f4fbff;
+}
+button {
+	border: 0;
+	outline: 0;
+	padding: 5px;
 }
 #header {
 	height: 100px;
@@ -21,9 +25,25 @@ body {
 	border-bottom: 1px solid #58606D;
 	position: relative;
 }
-#header > a {
+#logo-link {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0%);
 	height: 100px;
 	background-color: rgba(0, 0, 0, 0);
+}
+#member-box {
+	position: absolute;
+	top: 50px;
+	left: 90%;
+	transform: translate(0%, -50%);
+}
+#logout-btn, #join-btn {
+	margin-left: 5px;
+	border-radius: 5px;
+}
+#login-btn {
+	border-radius: 5px;
 }
 #logo {
 	height: 100px;
@@ -52,9 +72,11 @@ main {
 	height: 80px;
 }
 #header-icon {
+	position: absolute;
+	top: 100px;
 	width: 100%;
 	height: 150px;
 	background-color: rgba(244, 251, 255, 0.5);
 	visibility: hidden;
-	visibility: 
+	z-index: 999;
 }
