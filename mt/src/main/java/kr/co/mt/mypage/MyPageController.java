@@ -57,13 +57,11 @@ public class MyPageController {
 		if( newFolder.exists() == false ) newFolder.mkdirs();
 		InputStream is = null;
 		FileOutputStream fos = null;
-		
 		MultipartFile profile = dto.getProfile();
+		
 		if (profile != null && !profile.getOriginalFilename().equals("")) {
-			
 			is = profile.getInputStream();
 			fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
-			
 			FileCopyUtils.copy(is, fos);
 			is.close();
 			fos.close();
@@ -72,7 +70,7 @@ public class MyPageController {
 		}
 		int updateYn = 0;
 		dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );
-		updateYn = service.info_update(dto);
+		updateYn = service.profile_update(dto);
 		System.out.println(dto.toString());
 		out.print(updateYn);
 		out.close();
@@ -96,13 +94,11 @@ public class MyPageController {
 			if( newFolder.exists() == false ) newFolder.mkdirs();
 			InputStream is = null;
 			FileOutputStream fos = null;
-			
 			MultipartFile profile = dto.getProfile();
+			
 			if (profile != null && !profile.getOriginalFilename().equals("")) {
-				
 				is = profile.getInputStream();
 				fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
-				
 				FileCopyUtils.copy(is, fos);
 				is.close();
 				fos.close();

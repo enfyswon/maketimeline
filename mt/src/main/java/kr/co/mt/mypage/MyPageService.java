@@ -21,7 +21,7 @@ public class MyPageService {
 		return updateYN;
 	}
 
-	public Object profile_update(MemberDTO dto) {
+	public int profile_update(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = dao.profile_update(dto);
 		return updateYN;
