@@ -22,23 +22,25 @@
 	<div style="width:15%;margin:auto;">
 		<div id="main-content">
 			<form id="user_info">
-			
-		<div class="info-contents">
-			<c:if test="${myinfo.mpho_path != null && myinfo.mpho_path != '0'}">
-			<img alt="profile_photo" src="${myinfo.mem_photopath}">
-			</c:if>
-			<c:if test="${myinfo.mpho_path == null || myinfo.mpho_path == '0'}">
-			<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
-			</c:if>
-			<input type="file" id="profile" name="profile">
-		</div>
-			
+				
+				<div>
+					<c:choose>
+								<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
+									<img src="${pf.mpho_path}">
+								</c:when>
+								<c:otherwise>
+									<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+									<input type="file" id="mpho" name="mpho" class="form-control">
+									<label for="mpho" id="mpho_label" class="user_info"></label>
+								</c:otherwise>
+					</c:choose>
+				</div>
 							<div class="info-line">
 								<div class="info-label">
 									<label for="mni">닉네임</label>
 								</div>
 								<div class="info-label">
-									<input type="text" id="mni" name="mni"  value="${pf.mni}">
+									<input type="text" id="mni" name="mni" value="${pf.mni}">
 									<label id="mni_label" for="mni"></label>
 								</div>
 							</div>
@@ -60,47 +62,58 @@
 		</div>
 	</div>
 		
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$("#save_btn").click(function() {
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#save_btn").click(function() {
 
-			let mni = $.trim($("#mni").val());
-			if( mni == "") {
-				$("#mni_label").text("닉네임을 입력해주세요.");
-				return;
-			} else { $("#mni_label").text(""); }
-
-			let mdes = $.trim($("#mdes").val());
-			if (mdes == "") {
-				$("#mdes_label").text("자기소개를 입력해주세요.");
-				return;
-			} else { $("#mdes_label").text(""); }
-
-			let form = new FormData( document.getElementById( "user_info" ) );
-			
-			let keys = form.keys();
-			for(key of keys) console.log(key);
-
-			let values = form.values();
-			for(value of values) console.log(value);
-			
-			$.ajax({
-				type : "POST" 
-				, encType : "multipart/form-data" 
-				, url : "${pageContext.request.contextPath}/mypage/info_update" 
-				, data : form 
-				, processData : false
-				, contentType : false 
-				, cache : false 
-				, success : function(result) {
-					alert("프로필이 수정되었습니다.");
-					location.href = "${pageContext.request.contextPath}/mypage/myinfo_up";
-				}, 
-				error : function(xhr) {
-					alert("잠시 후 다시 시도해주세요.");
+				if( $.trim($("#mpho").val()) != "" ){
+					let tmp1 = $("#mpho").val().substring($("#mpho").val().length-3);
+					let tmp1_boolean = (tmp1 == "jpg" || tmp1 == "jpeg" || tmp1 == "gif" || tmp1 == "png"
+										|| tmp1 == "JPG" || tmp1 == "JPEG" || tmp1 == "GIF" || tmp1 == "PNG");
+					if( $.trim( $("#mpho").val() ) == "" || tmp1_boolean == false ){
+						$("#mpho_label").text("필수 입력 사항이며, jpg/jpeg/gif/png 파일만 허용 됩니다.");
+						return;
+					} else { $("#mpho_label").text(""); }
 				}
-			});
-		});//click
-	</script>
+								
+				let mni = $.trim($("#mni").val());
+				if( mni == "") {
+					$("#mni_label").text("닉네임을 입력해주세요.");
+					return;
+				} else { $("#mni_label").text(""); }
+	
+				let mdes = $.trim($("#mdes").val());
+				if (mdes == "") {
+					$("#mdes_label").text("자기소개를 입력해주세요.");
+					return;
+				} else { $("#mdes_label").text(""); }
+	
+				let form = new FormData( document.getElementById( "user_info" ) );
+				
+				let keys = form.keys();
+				for(key of keys) console.log(key);
+	
+				let values = form.values();
+				for(value of values) console.log(value);
+				
+				$.ajax({
+					type : "POST" 
+					, encType : "multipart/form-data" 
+					, url : "${pageContext.request.contextPath}/mypage/profile_update" 
+					, data : form 
+					, processData : false
+					, contentType : false 
+					, cache : false 
+					, success : function(result) {
+						alert("프로필이 수정되었습니다.");
+						window.location.reload();
+					}, 
+					error : function(xhr) {
+						alert("잠시 후 다시 시도해주세요.");
+					}
+				});
+			});//click
+		});//ready
+		</script>
 	</body>
 </html>

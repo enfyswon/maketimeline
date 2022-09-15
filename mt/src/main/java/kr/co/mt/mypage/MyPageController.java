@@ -1,4 +1,3 @@
-
 package kr.co.mt.mypage;
 
 import java.io.File;
@@ -39,6 +38,7 @@ public class MyPageController {
 		model.addAttribute("pf", dto);
 		return "/mypage/myprofile";
 	}
+
 	// 프로필 수정
 	@RequestMapping(value = "/profile_update", method = RequestMethod.GET)
 	public String profile_update(HttpSession session, Model model) {
@@ -46,6 +46,34 @@ public class MyPageController {
 		MemberDTO dto=service.myprofile(mDto.getMno());
 		model.addAttribute("pf", dto);
 		return "/mypage/myprofile_up";
+	}
+	
+	@RequestMapping(value = "/profile_update", method = RequestMethod.POST)
+	public void profile_update( MemberDTO dto, HttpSession session, PrintWriter out) throws IOException {
+		
+		String mno = ((MemberDTO) session.getAttribute("login_info")).getMno();
+		File newFolder = new File("C:/upload/user/" + mno + "/");
+		
+		if( newFolder.exists() == false ) newFolder.mkdirs();
+		InputStream is = null;
+		FileOutputStream fos = null;
+		MultipartFile profile = dto.getProfile();
+		
+		if (profile != null && !profile.getOriginalFilename().equals("")) {
+			is = profile.getInputStream();
+			fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
+			FileCopyUtils.copy(is, fos);
+			is.close();
+			fos.close();
+			dto.setMpho(profile.getOriginalFilename());
+			dto.setMpho_path("/upload/user/" + mno + "_" + profile.getOriginalFilename());
+		}
+		int updateYn = 0;
+		dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );
+		updateYn = service.profile_update(dto);
+		System.out.println(dto.toString());
+		out.print(updateYn);
+		out.close();
 	}
 	
 	// 회원정보 수정
@@ -58,8 +86,7 @@ public class MyPageController {
 	}
 	
 	@RequestMapping(value = "/info_update", method = RequestMethod.POST)
-		
-		public void infoUpdate( MemberDTO dto, HttpSession session, PrintWriter out) throws IOException {
+		public void info_update( MemberDTO dto, HttpSession session, PrintWriter out) throws IOException {
 			
 			String mno = ((MemberDTO) session.getAttribute("login_info")).getMno();
 			File newFolder = new File("C:/upload/user/" + mno + "/");
@@ -67,18 +94,14 @@ public class MyPageController {
 			if( newFolder.exists() == false ) newFolder.mkdirs();
 			InputStream is = null;
 			FileOutputStream fos = null;
-			
 			MultipartFile profile = dto.getProfile();
+			
 			if (profile != null && !profile.getOriginalFilename().equals("")) {
-				
 				is = profile.getInputStream();
 				fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
-				
 				FileCopyUtils.copy(is, fos);
 				is.close();
 				fos.close();
-				dto.setMpho(profile.getOriginalFilename());
-				dto.setMpho_path("/upload/user/" + mno + "_" + profile.getOriginalFilename());
 			}
 			int updateYn = 0;
 			dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );
@@ -88,4 +111,4 @@ public class MyPageController {
 			out.close();
 		}
 
-}//class
+}

@@ -21,21 +21,23 @@
 	</div>
 	<div class="profile">
 		<div style="width:50%;margin:auto;">
-			<div>
-				<img alt="profile_photo" src="${pf.mpho_path}">
-			</div>
-				<hr>
-			<div class="info-line">
-				<div class="info-label">
-					<p class="mni">닉네임 ${pf.mni}</p>
+			<form id="user_info">
+				<div>
+					<img alt="mpho" src="${pf.mpho_path}">
 				</div>
-			</div>
-				<hr>
-			<div class="info-line">
-				<div class="info-label">
-					<p class="mdes">소개 ${pf.mdes}</p>
+					<hr>
+				<div class="info-line">
+					<div class="info-label">
+						<p class="mni">닉네임 ${pf.mni}</p>
+					</div>
 				</div>
-			</div>
+					<hr>
+				<div class="info-line">
+					<div class="info-label">
+						<p class="mdes">소개 ${pf.mdes}</p>
+					</div>
+				</div>
+			</form>
 				<hr>
 			<c:choose>
 				<c:when test="${login_info.mno == pf.mno}">
