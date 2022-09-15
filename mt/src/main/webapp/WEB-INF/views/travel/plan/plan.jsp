@@ -18,11 +18,11 @@
 		  	font-size: 14px;    
 		  	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;  
 	  	}  
+	  #wrap {
+	  	width: 20%;
+	  }
 	  /* 드래그 박스의 스타일 */  
 	  #external-events {    
-	  		position: fixed;    
-	  		left: 20px;    
-	  		top: 20px;    
 	  		width: 100px;    
 	  		padding: 0 10px;    
 	  		border: 1px solid #ccc;    
@@ -61,7 +61,20 @@
 		<main>
 			<div id="tour-box">
 			</div>
-			<div id='calendar'></div>
+			<div id="calender-box">
+				<div id='calendar'></div>
+				<div id='wrap'>    
+				<!-- 드래그 박스 -->    
+					<div id='external-events'>      
+						<h4>일정 목록</h4>      
+						<div id='external-events-list'></div>    
+					</div>    
+				<!-- calendar 태그 -->    
+					<div id='calendar-wrap'>      
+						<div id='calendar1'></div>    
+					</div>  
+				</div>
+			</div>
 			<div id="button-box">
 				<button id="timeline_btn">
 					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
@@ -73,20 +86,26 @@
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
 			</div>
-			<div id='wrap'>    
-			<!-- 드래그 박스 -->    
-			<div id='external-events'>      
-				<h4>Draggable Events</h4>      
-				<div id='external-events-list'></div>    
-			</div>    
-			<!-- calendar 태그 -->    
-			<div id='calendar-wrap'>      
-				<div id='calendar1'></div>    
-			</div>  
-			</div>
 		</main>
 	
 		<script>
+		$(document).ready(function() {
+			$.get(
+					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
+					function(data, status) {
+						$.each(JSON.parse(data), function(idx, dto) {
+							$("#external-events-list").append(
+									"<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>" + 
+									"<div class='fc-event-main'>" + 
+									dto.plan_name + 
+									"</div>" + 
+									"</div>"
+							);
+						})
+					}
+			);
+		});
+		
 		document.addEventListener('DOMContentLoaded', function() {
 			var containerEl = $('#external-events-list')[0];           
 			   new FullCalendar.Draggable(containerEl, {        
@@ -97,11 +116,11 @@
 						   }       
 					   }      
 			   });         
-			   for(var i=1; i<=5;i++) {        
+			   /* for(var i=1; i<=5;i++) {        
 				   var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");        
-				   $event = $("<div class='fc-event-main'></div>").text("Event "+i);        
+				   $event = $("<div class='fc-event-main'></div>").text("event " + i);        
 				   $('#external-events-list').append($div.append($event));      
-				}          
+				}     */      
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
 			    initialView: 'dayGridMonth',
