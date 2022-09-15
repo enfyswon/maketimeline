@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
+import kr.co.mt.dto.MoneyDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 import kr.co.mt.travel.category.CategoryService;
 
@@ -57,7 +58,11 @@ public class PlanController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String plan_add(String cate_no, Model model) {
+		List<MoneyDTO> list = null;
+		list = service.selectMoneyList();
+		
 		model.addAttribute("cate_no", cate_no);
+		model.addAttribute("money", new Gson().toJson(list));
 		
 		return "/travel/plan/add";
 	}//travel/add

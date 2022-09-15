@@ -46,6 +46,9 @@
 							<label for="timeline_amount">지출 금액</label>
 							<label for="timeline_amount" id="timeline_amount_label" class="write_label"></label>
 						</p>
+						<select id="money_no" name="money_no">
+							<option value="0">---종류 선택---</option>
+						</select>
 						<input type="text" id="timeline_amount" name="timeline_amount" placeholder="지출 금액">
 					</div>
 					<div class="timeline-detail">
@@ -80,6 +83,15 @@
 				<button type="button" id="add_btn">등록</button>
 			</div>
 		</main>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.each(${money}, function(idx, dto) {
+				$("#money_no").append(
+					"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
+				);
+			});
+		});
+		</script>
 		<script type="text/javascript">
 		var markers = [];
 		var timeline_loc = "";
@@ -321,6 +333,7 @@
 		}
 		</script>
 		<script type="text/javascript">
+		let onlyNum = /^[0-9]+$/;
 		$(document).ready(function() {
 			$("#add_btn").click(function() {
 				if ($.trim($("#timeline_name").val()) == "") {
@@ -342,6 +355,29 @@
 					return;
 				} else {
 					$("#timeline_desc_label").text("");
+				}
+				
+				if ($("#money_no").val() == 0) {
+					$("#timeline_amount_label").text("지출 종류를 선택하세요.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
+				}
+				
+				let amount = $.trim($("#timeline_amount").val());
+				
+				if (amount == "") {
+					$("#timeline_amount_label").text("지출 금액을 입력하세요.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
+				}
+				
+				if ((amount != "") && (amount.match(onlyNum) == null)) {
+					$("#timeline_amount_label").text("숫자만 허용됩니다.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
 				}
 				
 				if ($.trim($("#timeline_photo").val()) == "") {

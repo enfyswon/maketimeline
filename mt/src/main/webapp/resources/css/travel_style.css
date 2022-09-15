@@ -8,6 +8,12 @@ main {
 button {
 	background-color: rgba(0, 0, 0, 0);
 }
+.write_label {
+	margin-left: 20px;
+	font-size: small;
+	text-align: right;
+	color: red;
+}
 #tour-box {
 	width: 40%;
 }
@@ -125,24 +131,32 @@ button {
 	height: 20px;
 	object-fit: cover;
 }
-#timeline-input {
+#timeline-input, #plan-input {
 	width: 80%;
 	text-align: center;
 }
-.timeline-detail {
+.timeline-detail, .plan-detail {
 	width: 80%;
 	margin: 10px auto;
 }
-.timeline-detail > p {
+.timeline-detail > p, .plan-detail > p {
 	width: 78%;
 	text-align: left;
 	margin-bottom: 5px;
 }
-.timeline-detail > input {
+.timeline-detail > input, .plan-detail > input {
 	padding: 8px;
 	width: 75%;
 	font-size: medium;
 	margin-bottom: 5px;
+}
+.timeline-detail > select, .plan-detail > select {
+	padding: 8px;
+	font-size: medium;
+	width: 20%;
+}
+#plan_amount, #timeline_amount {
+	width: 55%;
 }
 #input-map-box {
 	height: 550px;
@@ -266,3 +280,4 @@ button {
 	cursor: default;
 	color:#777;
 }
+

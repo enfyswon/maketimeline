@@ -6,8 +6,8 @@
 <mapper namespace="TimelineMapper">
 
 	<insert id="timeInsert">
-	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
-	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
+	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc, money_no)
+	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc}, #{money_no})
 	</insert>
 	
 	<select id="timeList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
@@ -25,22 +25,8 @@
 	where cate_no = #{cate_no}
 	</select>
 	
-	<select id="selectList" parameterType="kr.co.mt.SearchDTO"
-			resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
-	from timeline t, member m, category c
-	where t.cate_no = #{cate_no}
-		<if test="searchOption != null and searchOption != ''
-					and searchWord != null and searchWord != ''">
-			<choose>
-				<when test="searchOption == 'timeline_name'">
-					and t.timeline_name like concat('%', #{searchWord}, '%')
-				</when>
-				
-			</choose>
-		</if>
-	order by timeline_name desc
-	limit #{limitNum}, 10
+	<select id="selecetMoney" resultType="kr.co.mt.dto.MoneyDTO">
+	select money_no, value_name
+	from money
 	</select>
-	
 </mapper>

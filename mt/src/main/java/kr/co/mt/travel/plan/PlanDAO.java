@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mt.dto.MoneyDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 
 @Repository
@@ -32,5 +33,12 @@ public class PlanDAO {
 		list = sqlSession.selectList("PlanMapper.selectList", cate_no);
 		return list;
 	}//selectList
+
+	public List<MoneyDTO> selectMoneyList() {
+		List<MoneyDTO> list = null;
+		list = sqlSession.selectList("PlanMapper.selecetMoney");
+		
+		return list;
+	}
 	
 }//class

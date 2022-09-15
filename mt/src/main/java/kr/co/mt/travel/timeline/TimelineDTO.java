@@ -13,6 +13,7 @@ public class TimelineDTO {
 	private MultipartFile timeline_photo;
 	private String timeline_photoname;
 	private String timeline_photopath;
+	private String money_no;
 	
 	private String mno;
 	private String mni;
@@ -77,6 +78,12 @@ public class TimelineDTO {
 	}
 	public void setTimeline_photopath(String timeline_photopath) {
 		this.timeline_photopath = timeline_photopath;
+	}
+	public String getMoney_no() {
+		return money_no;
+	}
+	public void setMoney_no(String money_no) {
+		this.money_no = money_no;
 	}
 	public String getMno() {
 		return mno;
