@@ -58,6 +58,12 @@
 						</p>
 							<input type="text" id="etc" name="etc" placeholder="기타">	
 					</div>
+					<div class="detailplan-detail">
+						<p>
+							<label id="plan_no_label" class="write_label"></label>
+						</p>
+							<input type="text" id="plan_no" name="plan_no" placeholder="계획번호">	
+					</div>
 					<button type="button" id="add_btn" name="add_btn">등록</button>
 			</div>
 			</form>
@@ -104,6 +110,12 @@
 					return;
 				} else {
 					$("#etc_label").text("");
+					}
+				if ($("#plan_no").val() == "") {
+					$("#plan_no_label").text("계획번호을 입력하세요.");
+					return;
+				} else {
+					$("#plan_no_label").text("");
 					}
 				
 

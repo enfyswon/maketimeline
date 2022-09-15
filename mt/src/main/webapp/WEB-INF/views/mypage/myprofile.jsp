@@ -41,7 +41,7 @@
 				<c:when test="${login_info.mno == pf.mno}">
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/info_update'">회원정보 수정</button>
 					<button type="button" onclick="location.href='${pageContext.request.contextPath}/mypage/profile_update'">프로필 수정</button>
-					<button type="button" onclick="location.href='${pageContext.request.contextPath}/memo/open_room'">관리자 문의</button>
+					<button id="open_room_btn" type="button" value="${dto.mno_to =='8'}" >관리자 문의</button>
 				</c:when>
 				<c:otherwise>
 					<button type="button" onclick="location.href='chat'">채팅</button>
@@ -50,6 +50,26 @@
 		</div>
 	</div>
 		
-		
+	<script type="text/javascript">
+      $(document).ready(function() {
+         $("#open_room_btn").click(function() {
+ 			$.get(
+					"${pageContext.request.contextPath}/memo/start"
+					, {
+						mno_to : 8
+					}
+					, function(data, status) {
+						if(data == 0){
+							alert("잠시 후 다시 시도해 주세요.");
+						} else {
+							window.location.href="${pageContext.request.contextPath}/memo/open_room?room_no="+data;
+				          // location.href="${pageContext.request.contextPath}/memo/start?mno_to=8";
+						}
+					}//call back functiion
+			);//get
+
+         });//click
+      });//ready
+      </script>	
 	</body>
 </html>

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import kr.co.mt.memo.MemoDTO;
 
 @Service
 public class MoneyService {
@@ -18,15 +18,10 @@ public class MoneyService {
 		
 		return successCnt;
 	}
-	public List<MoneyDTO> moneyName( String key_word ) {
-		List<MoneyDTO> list = null;
-		list = dao.dongName( key_word );
-		return list;
-	}//dongName
 	
-	public List<MoneyDTO> moneySelect( String value_no ) {
+	public List<MoneyDTO> MoneyListByMno(String loginMno) {
 		List<MoneyDTO> list = null;
-		list = dao.MoneyDTO( value_no );
+		list = dao.moneyListByMno( loginMno );
 		return list;
-	}//dongSelect
+	}//myRoomListByMno
 }

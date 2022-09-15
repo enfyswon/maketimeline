@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
+import kr.co.mt.travel.money.MoneyDTO;
 import kr.co.mt.travel.plan.PlanDTO;
 import kr.co.mt.travel.plan.PlanService;
 
@@ -35,29 +36,18 @@ public class MoneyController {
 	@Autowired
 	private PlanService pservice;
 	
-	
-	@RequestMapping( value = "/dong_name", method = RequestMethod.GET )
-	public void moneyName( String key_word, PrintWriter out ) {
+	@RequestMapping( value = "/list", method = RequestMethod.GET )
+	public String moneyList( HttpSession session, Model model ) {
+
+		String loginMno = ( (MemberDTO) session.getAttribute("login_info") ).getMno();
+
 		List<MoneyDTO> list = null;
-		list = service.moneyName( key_word );
-		out.print( new Gson().toJson( list ) );
-		out.close();
-	}//dongName
+		list = service.MoneyListByMno(loginMno);
+		model.addAttribute("money_list", list);
 
-	
-	@RequestMapping( value = "/money_search", method = RequestMethod.GET )
-	public String moneySearch() {
-		return "/money/money";//jsp file name
-	}//moneySearch
-
-	@RequestMapping( value = "/value_no", method = RequestMethod.GET )
-	public void MoneySelect( String value_no, PrintWriter out ) {
-		List<MoneyDTO> list = null;
-		list = service.moneySelect( value_no );
-		out.print( new Gson().toJson( list ) );
-		out.close();
-	}//moneySelect
-
+		return "money/money_list";//jsp file name
+	}//myRoomList
+		
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String plan(String plan_no, Model model) {
@@ -65,14 +55,14 @@ public class MoneyController {
 		dto = pservice.plan_select(plan_no);
 		model.addAttribute("plan", dto);
 		
-		return "/travel/plan/plan";
+		return "/travel/money/money";
 	}//travel/plan
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String plan_add(String plan_no, Model model) {
 		model.addAttribute("plan_no", plan_no);
 		
-		return "/travel/plan/money";
+		return "/travel/money/money";
 	}//
 	
 	@RequestMapping( value = "/insert", method = RequestMethod.POST )
