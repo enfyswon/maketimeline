@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.travel.category.CategoryDTO;
@@ -32,10 +35,21 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void planList(String cate_no, PrintWriter out) {
+		List<PlanDTO> list = null;
+		list = service.selectList(cate_no);
+		
+		out.print(new Gson().toJson(list));
+		out.close();
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String plan(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
+		
+		
 		model.addAttribute("category", dto);
 		
 		return "/travel/plan/plan";
