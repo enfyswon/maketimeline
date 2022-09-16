@@ -41,16 +41,6 @@
 	  		margin: 0;    
 	  		vertical-align: middle; 
 	  }   
-	  #calendar-wrap {    
-	  		margin-left: 200px;  
-	  }   
-	  #calendar1 {    
-			max-width: 1100px;    
-			margin: 0 auto;  
-	  }
-	  #tour-box {
-	  		width: 40%;
-	  }
 	</style>
 	</head>
 	<body>
@@ -59,16 +49,22 @@
 			<div id="tour-box">
 			</div>
 			<div id="calender-box">
+				<div id="dialog" title="일정" style="display:none;">
+					<p class="plan-detail">장소</p>
+					<p class="plan-detail">위치</p>
+					<p class="plan-detail">날짜</p>
+					<p class="plan-detail">세부 설명</p>
+					<p class="plan-detail">예상 지출 금액</p>
+				</div>
 				<div id='calendar'></div>
 				<div id='wrap'>    
 				<!-- 드래그 박스 -->    
 					<div id='external-events'>      
 						<h4>일정 목록</h4>      
 						<div id='external-events-list'></div>    
-					</div>    
-				<!-- calendar 태그 -->    
-					<div id='calendar-wrap'>      
-						<div id='calendar1'></div>    
+					</div>  
+					<div id="plan-button-box">
+						<button type="button" id="save_btn">저장</button>
 					</div>  
 				</div>
 			</div>
@@ -86,6 +82,64 @@
 		</main>
 	
 		<script>
+		var diaLogOpt = {
+				modal: true, 
+				resizable: false, 
+				width: "570",
+				height: "470"
+		};
+		
+		var calFunc = {
+				calcDate: function(arg, calendar) {
+					var rObj = new Object();
+					var start = null;
+					var end = null;
+					var allDay = arg.allDay;
+					var startDisp = null;
+					var endDisp = null;
+					var plan_name = arg.plan_name;
+					var plan_desc = arg.plan_desc;
+					var plan_loc = arg.plan_loc;
+					var plan_startdate = null;
+					var plan_enddate = null;
+					var plan_amount = arg.plan_amount;
+					var value_name = arg.value_name;
+					
+					if (allDay) {
+						var start = arg.start.toISOString().slice(0, 10);
+						var end = null;
+						if(arg.end != "" && arg.end != null) {
+							end = arg.end.toISOString().slice(0, 10);
+						}
+						if (start == end) {
+							end = null;
+						}
+						
+						startDisp = start;
+						if (end != null) {
+							endDisp = dateRel(arg.end.toISOString().slice(0, 10));
+						}
+					}
+					rObj.start = start;
+					rObj.end = end;
+					rObj.startDisp = startDisp;
+					rObj.endDisp = endDisp;
+					rObj.plan_name = plan_name;
+					rObj.plan_desc = plan_desc;
+					rObj.plan_amount = plan_amount;
+					rObj.plan_loc = plan_loc;
+					rObj.value_name = value_name;
+					
+					return rObj;
+				}, 
+				setDataForm: function(xobj) {
+					var dispStr = xobj.startDisp;
+					if (xobj.endDisp != null) {
+						dispStr += " ~ " + xobj.endDisp;
+					}
+					
+				}
+		}
 		$(document).ready(function() {
 			$.get(
 					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
@@ -93,7 +147,7 @@
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#external-events-list").append(
 									"<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>" + 
-									"<div class='fc-event-main'>" + 
+									"<div class='fc-event-main event'>" + 
 									dto.plan_name + 
 									"</div>" + 
 									"</div>"
@@ -132,14 +186,24 @@
 			    editable: true,        
 				droppable: true,         
 				drop: function(arg) {                  
-					arg.draggedEl.parentNode.removeChild(arg.draggedEl);        
-				}    
+					arg.draggedEl.parentNode.removeChild(arg.draggedEl);   
+				},
+				eventDrop: function(info) {               
+			           alert(info.event.title + info.event.start.toISOString());
+			    },
+			    eventClick: function(calEvent, jsEvent) {
+			    }
 			  });
 	
 			  calendar.render();
 			});
 		</script>
 		<script type="text/javascript">
+		$(document).ready(function() {
+			$("#save_btn").click(function() {
+				alert();
+			});
+		});
 		$(document).ready(function() {
 			$("#plan_add_btn").click(function() {
 				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
