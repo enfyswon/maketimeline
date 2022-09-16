@@ -33,19 +33,28 @@ button {
 #calendar table {
 	width: 100%;
 }
+#plan-button-box {
+	
+}
+#save_btn {
+	padding: 7px;
+	background-color: gray;
+	border-radius: 5px;
+	color: white;
+}
 #button-box img {
 	height: 50px;
 	object-fit: cover;
 }
 #map {
-	width: 30%;
-	height: 500px;
-	margin: 1 auto;
+	width: 60%;
+	height: 600px;
+	margin: 0 auto;
 }
 #timeline-box {
 	width: 38%;
 	margin-left: 20px;
-	height: 700px;
+	height: 600px;
 	overflow: auto;
 }
 #timeline-box::-webkit-scrollbar {

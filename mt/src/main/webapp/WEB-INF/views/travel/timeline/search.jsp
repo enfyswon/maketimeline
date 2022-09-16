@@ -23,7 +23,7 @@
 					<select class="form-control" id="searchOption" name="searchOption">
 						<option value="timeline_name"
 							<c:if test="${search_dto.searchOption == 'timeline_name'}">selected="selected"</c:if>
-						> 제 목 </option>
+						> 타임라인 제목 </option>
 						<option value="searchPlaces"
 							<c:if test="${search_dto.searchOption == 'searchPlaces'}">selected="selected"</c:if>
 						> 장소 </option>
