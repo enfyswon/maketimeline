@@ -8,7 +8,6 @@
       <title>Make Timeline</title>
       <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member-style.css"> 
    </head>
-   
     <body>
     <%@ include file="/WEB-INF/views/header.jsp" %>
 		<main id="login-main">
@@ -26,7 +25,7 @@
 					<button id="login_btn" type="button" class="btn btn-dark "> L O G I N </button>
 				</div>
 			</div>
-		</main>	      
+		</main>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		$("#login_btn").click(function() {

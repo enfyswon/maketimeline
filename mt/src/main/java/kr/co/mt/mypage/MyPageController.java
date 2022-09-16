@@ -53,12 +53,12 @@ public class MyPageController {
 		
 		String mno = ((MemberDTO) session.getAttribute("login_info")).getMno();
 		File newFolder = new File("C:/upload/user/" + mno + "/");
-		
+		System.out.println(1111);
 		if( newFolder.exists() == false ) newFolder.mkdirs();
 		InputStream is = null;
 		FileOutputStream fos = null;
 		MultipartFile profile = dto.getProfile();
-		
+		System.out.println(2222);
 		if (profile != null && !profile.getOriginalFilename().equals("")) {
 			is = profile.getInputStream();
 			fos = new FileOutputStream("C:/upload/user/" + mno + "_" + profile.getOriginalFilename() );
@@ -68,6 +68,7 @@ public class MyPageController {
 			dto.setMpho(profile.getOriginalFilename());
 			dto.setMpho_path("/upload/user/" + mno + "_" + profile.getOriginalFilename());
 		}
+		System.out.println(3333);
 		int updateYn = 0;
 		dto.setMno( ( (MemberDTO) session.getAttribute("login_info") ).getMno() );
 		updateYn = service.profile_update(dto);

@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.co.mt.SearchDTO;
 import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.dto.MoneyDTO;
 import kr.co.mt.travel.category.CategoryDTO;
@@ -51,6 +52,8 @@ public class TimelineController {
 		List<TimelineDTO> mapList = null;
 		mapList = service.timeline_maplist(cate_no);
 		
+		
+		
 		model.addAttribute("category", dto);
 		model.addAttribute("list", list);
 		model.addAttribute("mapList", new Gson().toJson(mapList));
@@ -58,6 +61,18 @@ public class TimelineController {
 		return "/travel/timeline/timeline";
 	}
 
+	@RequestMapping( value = "/list", method = RequestMethod.GET )
+	public String list( Model model, SearchDTO dto ) {
+		List<TimelineDTO> list = null;
+		list = service.searchList( dto );
+		model.addAttribute("list", list);
+		model.addAttribute("search_dto", dto);
+		return "/travel/timeline/search";//jsp file name
+		
+	}//list
+	
+	
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String timeline_write(String cate_no, Model model) {
 		List<MoneyDTO> list = null;

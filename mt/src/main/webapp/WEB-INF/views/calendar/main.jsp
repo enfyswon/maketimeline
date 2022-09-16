@@ -20,13 +20,6 @@
 	  	}  
 	  #wrap {
 	  	width: 20%;
-	  	vertical-align: right;
-	  }
-	   #spend {    
-	  	width: 100%; 
-	  	margin: 0 auto;
-	  	vertical-align: left;
-	  	text-align:left;
 	  }
 	  /* 드래그 박스의 스타일 */  
 	  #external-events {    
@@ -34,7 +27,7 @@
 	  		padding: 0 10px;    
 	  		border: 1px solid #ccc;    
 	  		background: #eee;    
-	  		align: right;  
+	  		text-align: left;  
 	  }  
 	  #external-events h4 {    
 	  		font-size: 16px;    
@@ -52,23 +45,19 @@
 	  }   
 	  #external-events p input {    
 	  		margin: 0;    
-	  		vertical-align: center; 
+	  		vertical-align: middle; 
 	  }   
 	  #calendar-wrap {    
 	  		margin-left: 200px;  
-	  		
 	  }   
 	  #calendar1 {    
 	  max-width: 1100px;    
-	  margin: 0 auto; 
-	   
+	  margin: 0 auto;  
 	  }
-	 
-	  
 	</style>
 	</head>
 	<body>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
+	
 		<main>
 			<div id="tour-box">
 			</div>
@@ -77,39 +66,12 @@
 				<div id='wrap'>    
 				<!-- 드래그 박스 -->    
 					<div id='external-events'>      
-						<h4>정산 목록</h4>      
+						<h4>지출 목록</h4>      
 						<div id='external-events-list'></div>    
 					</div>    
 				<!-- calendar 태그 -->    
 					<div id='calendar-wrap'>      
-						<div id='calendar1'>
-								<div id="spend">
-											<table class="table table-hover">
-													<tbody>
-																	<tr>
-																		<td><h3> 지출 번호  :  ${dto.money_no} </h3></td>	
-																	</tr>
-																	<tr>
-																	<tr>
-																		<td><h3> 식비  :  ${dto.value_name =='식비'}</h3></td>	
-																	</tr>
-																	<tr>
-																	<td> <h3> 숙박비  : ${dto.value_name =='숙박비'}</h3></td>	
-																	</tr>
-																	<tr>
-																		<td><h3> 교통비  :  ${dto.value_name =='교통비'}</h3></td>	
-																	</tr>
-																	<tr>
-																	<td><h3> 입장료  : ${dto.value_name =='입장료'} </h3></td>
-																	</tr>
-																	<tr>
-																		<td><h3> 기타 : ${dto.value_name =='기타'}</h3></td>    
-																	</tr>
-																	
-													</tbody>
-											</table>
-									</div>
-						</div>    
+						<div id='calendar1'></div>    
 					</div>  
 				</div>
 			</div>
@@ -124,12 +86,12 @@
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
 			</div>
-		</main>
+			</main>
 	
 		<script>
 		$(document).ready(function() {
 			$.get(
-					"${pageContext.request.contextPath}/money/list?plan_no=${plan.plan_no}",
+					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#external-events-list").append(
@@ -179,22 +141,5 @@
 			  calendar.render();
 			});
 		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$("#plan_add_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#timeline_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
-			});
-		});
-		</script>
-	</body>
+		</body>
 </html>
