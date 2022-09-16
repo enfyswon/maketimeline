@@ -66,7 +66,6 @@
 		</main>
 		<script type="text/javascript">
 		var markers = [];
-		var selectedMarker = null;
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -95,10 +94,16 @@
 			            map: map,
 			            position: coords
 			        });
+			        
+			        kakao.maps.event.addListener(marker, 'click', function() {
+					      // 마커 위에 인포윈도우를 표시합니다
+					      infowindow.open(map, marker);  
+					});
 		
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;">' + name + '</div>'
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;">' + name + '</div>',
+			            removable : 'true'
 			        });
 			        infowindow.open(map, marker);
 			        
