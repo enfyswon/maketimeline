@@ -10,6 +10,7 @@ public class PlanDTO {
 	private String plan_date;
 	private String plan_loc;
 	private String mno;
+	private String money_no;
 	
 	public String getPlan_no() {
 		return plan_no;
@@ -59,5 +60,10 @@ public class PlanDTO {
 	public void setMno(String mno) {
 		this.mno = mno;
 	}
-	
+	public String getMoney_no() {
+		return money_no;
+	}
+	public void setMoney_no(String money_no) {
+		this.money_no = money_no;
+	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mt.dto.MoneyDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 
 @Service
@@ -31,6 +32,13 @@ public class PlanService {
 		list = dao.selectList( cate_no );
 		return list;
 	}//searchList
+
+	public List<MoneyDTO> selectMoneyList() {
+		List<MoneyDTO> list = null;
+		list = dao.selectMoneyList();
+		
+		return list;
+	}
 	
 	
 }//class

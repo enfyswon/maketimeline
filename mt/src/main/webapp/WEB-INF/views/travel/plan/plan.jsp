@@ -12,12 +12,6 @@
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 	<style>
-	  /* body 스타일 */  
-	  body {    
-		  	margin-top: 40px;    
-		  	font-size: 14px;    
-		  	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;  
-	  	}  
 	  #wrap {
 	  	width: 20%;
 	  }
@@ -51,8 +45,11 @@
 	  		margin-left: 200px;  
 	  }   
 	  #calendar1 {    
-	  max-width: 1100px;    
-	  margin: 0 auto;  
+			max-width: 1100px;    
+			margin: 0 auto;  
+	  }
+	  #tour-box {
+	  		width: 40%;
 	  }
 	</style>
 	</head>
@@ -91,7 +88,7 @@
 		<script>
 		$(document).ready(function() {
 			$.get(
-					"${pageContext.request.contextPath}/money/list?plan_no=${plan.plan_no}",
+					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
 							$("#external-events-list").append(
@@ -124,7 +121,7 @@
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
 			    initialView: 'dayGridMonth',
-			    initialdate: '${category.cate_startdate}' ,
+			    initialDate: '${category.cate_startdate}',
 			    headerToolbar: {
 			      left: 'prev,next today',
 			      center: 'title',
@@ -142,7 +139,6 @@
 			  calendar.render();
 			});
 		</script>
-		
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#plan_add_btn").click(function() {
