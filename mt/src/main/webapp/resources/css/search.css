@@ -39,13 +39,13 @@ button {
 }
 #map {
 	width: 45%;
-	height: 550px;
+	height: 800px;
 	margin: 0 auto;
 }
 #timeline-box {
 	width: 38%;
 	margin-left: 30px;
-	height: 500px;
+	height: 800px;
 	overflow: auto;
 }
 #timeline-box::-webkit-scrollbar {
