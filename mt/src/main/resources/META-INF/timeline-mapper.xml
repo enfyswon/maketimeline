@@ -42,6 +42,15 @@
 				
 			</choose>
 		</if>
+		<if test="searchOption != null and searchOption != ''
+					and searchWord != null and searchWord != ''">
+			<choose>
+				<when test="searchOption == 'timeline_desc'">
+					and t.timeline_desc  like concat('%', #{searchWord}, '%')
+				</when>
+				
+			</choose>
+		</if>
 		and t.cate_no = c.cate_no
 		and c.mno= m.mno 
 	order by timeline_name desc

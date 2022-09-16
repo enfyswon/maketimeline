@@ -24,9 +24,10 @@
 						<option value="timeline_name"
 							<c:if test="${search_dto.searchOption == 'timeline_name'}">selected="selected"</c:if>
 						> 타임라인 제목 </option>
-						<option value="searchPlaces"
-							<c:if test="${search_dto.searchOption == 'searchPlaces'}">selected="selected"</c:if>
-						> 내 용 </option>
+						<option value="timeline_desc"
+							<c:if test="${search_dto.searchOption == 'timeline_desc'}">selected="selected"</c:if>
+						> 글내용 </option>
+						
 					</select>
 				</div>
 				<input type="text" class="form-control" id="searchWord" name="searchWord"
