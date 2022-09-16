@@ -5,137 +5,110 @@
 <html>
    <head>
       <meta charset="UTF-8">
-      <title> Join </title>
-     
-     <style type="text/css">
-      h1 { 
-      text-align : center; 
-      }
-      #buttons {
-         text-align: right;
-      }
-      #join_btn {
-         margin-right: 35%;
-      }
-      </style>
+      <title>Make Timeline</title>
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/member-style.css"> 
    </head>
    
    <body>
-      <%@ include file="/WEB-INF/views/header.jsp" %>
-      <br><br><br>
-      <br><br><br>
-      <br><br><br>
-      
-      <table class="table table-hover">
-         <tbody>
-         
-            <tr>
-               <th> 이메일 </th>
-               <td>
-					<input type="text" id="email" name="email" maxlength="30" class="form-control"  placeholder="이메일 주소 입력 ">
-                    <button id="email_btn" class="btn btn-secondary" > 중복 확인 </button>
-                  	<label for="email" id="email_label"></label>
-               </td>
-            </tr>
-            <tr>
-               <th> 메일 본인 인증 </th>
-               <td>
-                    <button id="email_ck" class="btn btn-secondary" > 메일 발송 </button>
+   <%@ include file="/WEB-INF/views/header.jsp" %>
+   		<main>
+   			<div id="join-box">
+   				<div class="join-input">
+   					<p>
+	   					<label for="email" class="input-label">이메일</label>
+	                  	<label for="email" id="email_label" class="write_label"></label>
+   					</p>
+					<input type="text" id="email" name="email" maxlength="30" placeholder="이메일 주소 입력 ">
+                    <button id="email_btn"> 중복 확인 </button>
+   				</div>
+   				<div class="join-input join-email">
+   					<p>
+	   					<label class="input-label">메일 본인 인증</label>
+	                    <button id="email_ck"> 메일 발송 </button>
+   					</p>
+	                <script type="text/javascript">
+	               	let email_cf = "";
+	                $(document).ready(function() {
+	                	$("#email_ck").click(function() {
+	                    	if(checkedEMAIL == ""){
+	                        	alert("먼저 중복 확인을 하세요.");
+	                        	return;
+	                        }
+	                        let tmpyn = confirm(checkedEMAIL + "으로 인증 메일을 보내시게습니까?");
+	                       	if( tmpyn == false ){
+	                       		return;
+	                       	}
+	                       	
+	                       	$.get(
+	                       			"${pageContext.request.contextPath}/join/send"
+	                       			, {
+	                       				email : $("#email").val()
+	                       			}
+	                       			, function(data, status) {
+	                       				alert(data.message);
+	                       				email_cf = data.contents;
+	                       			}
+	                       			, "json"
+	                       	);//get
+	                    });//click
+	                });//ready
+	                </script>
+   				</div>
+   				<div class="join-input join-email">
+   					<p>
+	   					<label for="email2" class="input-label">인증 번호</label>
+	                  	<label for="email2" id="email2_label" class="write_label"></label>
+   					</p>
+					<input type="text" id="email2" name="email2" placeholder="인증번호 입력 ">
+                    <button id="email_ck2"> 인증번호 확인 </button>
                     <script type="text/javascript">
-                   	let email_cf = "";
-                    $(document).ready(function() {
-                        $("#email_ck").click(function() {
-                        	if(checkedEMAIL == ""){
-                        		alert("먼저 중복 확인을 하세요.");
-                        		return;
-                        	}
-                        	let tmpyn = confirm(checkedEMAIL + "으로 인증 메일을 보내시게습니까?");
-                        	if( tmpyn == false ){
-                        		return;
-                        	}
-                        	
-                        	$.get(
-                        			"${pageContext.request.contextPath}/join/send"
-                        			, {
-                        				email : $("#email").val()
-                        			}
-                        			, function(data, status) {
-                        				alert(data.message);
-                        				email_cf = data.contents;
-                        			}
-                        			, "json"
-                        	);//get
-                        });//click
-                    });//ready
-                    </script>
-               </td>
-            </tr>
-            <tr>
-               <th> 인증 번호  </th>
-               <td>
-					<input type="text" id="email2" name="email2" class="form-control">
-                    <button id="email_ck2" class="btn btn-secondary" > 인증번호 확인 </button>
-                    <label for="email" id="email_label2"></label>
-                  	<script type="text/javascript">
-                    $(document).ready(function() {
-                        $("#email_ck2").click(function() {
-                        	if( $("#email2").val() == email_cf ){
-                        		alert("인증번호가 일치합니다.")
-                        	} else {
-                        		alert("인증번호가 일치하지않습니다.")
-                        		return;
-                        	}
-                        });//click
-                    });//ready
-                    </script>
-                  	
-               </td>
-            </tr>
-            <tr>
-               <th> 비밀번호 </th>
-               <td>
-                  <input type="password" id="mpwd" name="mpwd" maxlength="20" class="form-control" placeholder="비밀번호 입력 ">
-                  <label for="mpwd" id="mpwd_label"></label>
-               </td>
-            </tr>
-            <tr>
-            	 <th>  </th>
-               <td>
-                  <input type="password" id="rempwd" name="rempwd" maxlength="20" class="form-control" placeholder="비밀번호 확인 ">
-                  <label for="rempwd" id="rempwd_label"></label>
-               </td>
-            </tr>
-            <tr> 
-               <th> 닉네임 </th>
-               <td>
-                  <input type="text" id="mni" name="mni" maxlength="20" class="form-control" placeholder="닉네임 ">
-                  <label for="mni" id="mni_label"></label>
-               </td>
-            </tr>
-            <tr>
-               <th> 핸드폰번호 </th>
-               <td>
-                     <input type="text" id="tel" name="tel" maxlength="11" class="form-control" placeholder="핸드폰 번호를 '-'없이 입력해주세요.">
-                  <label for="tel" id="tel_label"></label>
-               </td>
-            </tr>
-            <tr id="terms-box">
-            	<td>
+	                $(document).ready(function() {
+	                    $("#email_ck2").click(function() {
+	                       	if( $("#email2").val() == email_cf ){
+	                       		alert("인증번호가 일치합니다.")
+	                       	} else {
+	                       		alert("인증번호가 일치하지않습니다.")
+	                       		return;
+	                       	}
+	                    });//click
+	                });//ready
+	                </script>
+   				</div>
+   				<div class="join-input">
+   					<p>
+	   					<label for="mpwd" class="input-label">비밀번호</label>
+	                  	<label for="mpwd" id="mpwd_label" class="write_label"></label>
+   					</p>
+					<input type="password" id="mpwd" name="mpwd" maxlength="20" placeholder="비밀번호 입력 ">
+	                <input type="password" id="rempwd" name="rempwd" maxlength="20" placeholder="비밀번호 확인 ">
+   				</div>
+   				<div class="join-input">
+   					<p>
+	   					<label for="mni" class="input-label">닉네임</label>
+	                  	<label for="mni" id="mni_label" class="write_label"></label>
+   					</p>
+					<input type="text" id="mni" name="mni" maxlength="20" placeholder="닉네임 입력 ">
+   				</div>
+   				<div class="join-input">
+   					<p>
+	   					<label for="tel" class="input-label">핸드폰 번호</label>
+	                  	<label for="tel" id="tel_label" class="write_label"></label>
+   					</p>
+					<input type="text" id="tel" name="tel" maxlength="20" placeholder="핸드폰 번호를 '-'없이 입력해주세요.">
+   				</div>
+   				<div class="join-input" id="term-box">
 					<input type="checkbox" id="selectAll" name="selectAll" onclick="selectAll(this)"> 필수 내용 모두 동의합니다.
 					<hr>
 					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 만 14세 이상입니다. (필수)<br>
 					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 이용약관 필수 동의 (필수)<br>
 					<input type="checkbox" name="terms" onclick="checkSelectAll()"> 개인정보 수집 및 이용 동의 (필수)
 					<label id="terms_label"></label>
-				<td>
-           </tr>
-         </tbody>
-         
-      </table>
-      <div class="clearfix" id="buttons">
-         <button id="join_btn" class="btn btn-secondary float-right"> 회원 가입 </button>
-      </div>
-      <br><br><br>
+   				</div>
+   				<div>
+ 	            	<button id="join_btn"> 회원 가입 </button>
+   				</div>
+   			</div>
+   		</main>
    <script type="text/javascript">
    
    let checkedEMAIL = "";
@@ -169,10 +142,10 @@
          } else { $("#mpwd_label").text(""); }
 
          if( $("#mpwd").val() != $("#rempwd").val() ){
-            $("#rempwd_label").text("비밀번호와 비밀번호 확인이 서로 다릅니다.");
-            $("#rempwd_label").css("color", "red");
+            $("#mpwd_label").text("비밀번호와 비밀번호 확인이 서로 다릅니다.");
+            $("#mpwd_label").css("color", "red");
             return;
-         } else { $("#rempwd_label").text(""); }
+         } else { $("#mpwd_label").text(""); }
 
          if( $("#tel").val().match(onlyNum) == null  ){
             $("#tel_label").text("숫자만 허용 됩니다.");
@@ -235,6 +208,12 @@
                      $("#email_label").text("사용 가능한 이메일 입니다.");
                      $("#email_label").css("color", "blue");
                      checkedEMAIL = $("#email").val();
+                     
+                     if ($(".join-email").is(":visible")) {
+                    	 $(".join-email").hide();
+                     } else {
+                    	 email-$(".join-email").show();
+                     }
                   } else if(data >= 1){
                      $("#email_label").text("이미 사용 중인 이메일 입니다.");
                      $("#email_label").css("color", "red");
