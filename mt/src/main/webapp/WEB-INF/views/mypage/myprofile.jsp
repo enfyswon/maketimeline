@@ -13,17 +13,20 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
 	
-	<div id="header">
-			<a href="${pageContext.request.contextPath}/">
-				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
-			</a>
-	</div>
 	<div class="profile">
 		<div style="width:50%;margin:auto;">
 			<form id="user_info">
 				<div>
-					<img alt="profile_photo" src="${pf.mpho_path}" width=200px, height=200px>
+					<c:choose>
+						<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
+						<img alt="profile_photo" src="${pf.mpho_path}" width=200px, height=200px>
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+						</c:otherwise>
+					</c:choose>
 				</div>
 					<hr>
 				<div class="info-line">

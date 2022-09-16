@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -25,15 +26,15 @@
 				
 				<div>
 					<c:choose>
-								<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
-									<img src="${pf.mpho_path}" width=200px, height=200px>
-								</c:when>
-								<c:otherwise>
-									<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
-									<input type="file" id="profile" name="profile" class="form-control">
-									<label for="profile" id="profile_label"></label>
-								</c:otherwise>
+						<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
+						<img src="${pf.mpho_path}" width=200px, height=200px>
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+						</c:otherwise>
 					</c:choose>
+					<input type="file" id="profile" name="profile" class="form-control">
+					<label for="profile" id="profile_label"></label>
 				</div>
 							<div class="info-line">
 								<div class="info-label">
