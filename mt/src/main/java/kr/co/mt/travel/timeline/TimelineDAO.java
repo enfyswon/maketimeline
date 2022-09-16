@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mt.SearchDTO;
+import kr.co.mt.dto.MoneyDTO;
 
 @Repository
 public class TimelineDAO {
@@ -38,5 +39,12 @@ public class TimelineDAO {
 		list = sqlSession.selectList("TimelineMapper.selectList", dto);
 		return list;
 	}//searchList
+
+	public List<MoneyDTO> selectMoneyList() {
+		List<MoneyDTO> list = null;
+		list = sqlSession.selectList("TimelineMapper.selectMoney");
+		
+		return list;
+	}
 	
 }

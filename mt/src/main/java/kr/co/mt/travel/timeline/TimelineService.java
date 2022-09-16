@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mt.SearchDTO;
+import kr.co.mt.dto.MoneyDTO;
 
 @Service
 public class TimelineService {
@@ -37,6 +38,13 @@ public class TimelineService {
 		list = dao.searchList( dto );
 		return list;
 	}//searchList
+
+	public List<MoneyDTO> selectMoneyList() {
+		List<MoneyDTO> list = null;
+		list = dao.selectMoneyList();
+		
+		return list;
+	}
 
 	
 }
