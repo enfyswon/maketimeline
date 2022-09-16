@@ -21,7 +21,12 @@
 					</if>
 		where mno = #{mno}
 	</update>
-		
+	
+	<!-- 프로필 사진 삭제 -->
+	<delete id="delete">
+	delete from mypage where mpho_path = #{mpho_path}
+	</delete>
+	
 	<!-- 회원정보 수정 -->
 	<update id="info_update" parameterType="kr.co.mt.dto.MemberDTO">
 		update member set mpwd = #{mpwd}

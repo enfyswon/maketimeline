@@ -31,5 +31,11 @@ public class MyPageService {
 		MemberDTO dto=dao.myprofile(mno);
 		return dto;
 	}
+
+	public int delete(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = dao.delete(dto);
+		return 0;
+	}
 	
 }

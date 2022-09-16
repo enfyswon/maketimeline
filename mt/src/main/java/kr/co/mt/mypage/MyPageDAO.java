@@ -15,20 +15,24 @@ public class MyPageDAO {
 	public int info_update(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = sqlSession.update("MyPageMapper.info_update", dto);
-		
 		return updateYN;
 	}
 
 	public int profile_update(MemberDTO dto) {
 		int updateYN = 0;
 		updateYN = sqlSession.update("MyPageMapper.profile_update", dto);
-		
 		return updateYN;
 	}
 
 	public MemberDTO myprofile(String mno) {
 		MemberDTO dto=sqlSession.selectOne("MyPageMapper.myProfile", mno);
 		return dto;
+	}
+
+	public int delete(MemberDTO dto) {
+		int updateYN = 0;
+		updateYN = sqlSession.delete("MyPageMapper.delete", dto);
+		return 0;
 	}
 
 }
