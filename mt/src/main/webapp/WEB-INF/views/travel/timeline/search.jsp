@@ -26,7 +26,7 @@
 						> 제 목 </option>
 						<option value="searchPlaces"
 							<c:if test="${search_dto.searchOption == 'searchPlaces'}">selected="selected"</c:if>
-						> 장소 </option>
+						> 내 용 </option>
 					</select>
 				</div>
 				<input type="text" class="form-control" id="searchWord" name="searchWord"
