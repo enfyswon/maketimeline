@@ -38,14 +38,14 @@ button {
 	object-fit: cover;
 }
 #map {
-	width: 30%;
-	height: 500px;
-	margin: 1 auto;
+	width: 45%;
+	height: 550px;
+	margin: 0 auto;
 }
 #timeline-box {
 	width: 38%;
-	margin-left: 20px;
-	height: 700px;
+	margin-left: 30px;
+	height: 500px;
 	overflow: auto;
 }
 #timeline-box::-webkit-scrollbar {

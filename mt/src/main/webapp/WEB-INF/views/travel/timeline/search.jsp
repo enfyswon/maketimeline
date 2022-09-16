@@ -5,8 +5,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Make Timeline</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
+		<title>타임라인 검색</title>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/search.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
