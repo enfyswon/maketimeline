@@ -52,7 +52,7 @@ input[type='checkbox'] {
 	text-align: left;
 	margin-bottom: 3px;
 }
-#email, #email2 {
+.join-email-input {
 	width: 60%;
 }
 .join-email {
