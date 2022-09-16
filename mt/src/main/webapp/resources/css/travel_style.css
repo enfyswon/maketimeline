@@ -33,6 +33,15 @@ button {
 #calendar table {
 	width: 100%;
 }
+#plan-button-box {
+	
+}
+#save_btn {
+	padding: 7px;
+	background-color: gray;
+	border-radius: 5px;
+	color: white;
+}
 #button-box img {
 	height: 50px;
 	object-fit: cover;
