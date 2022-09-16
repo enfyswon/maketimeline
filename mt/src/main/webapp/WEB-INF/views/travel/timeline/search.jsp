@@ -28,6 +28,7 @@
 							<c:if test="${search_dto.searchOption == 'timeline_desc'}">selected="selected"</c:if>
 						> 글내용 </option>
 						
+						
 					</select>
 				</div>
 				<input type="text" class="form-control" id="searchWord" name="searchWord"
