@@ -71,17 +71,7 @@
 				</div>
 				</c:forEach>
 			</div>
-			<div id="button-box">
-				<button id="plan_btn">
-					<img alt="plan" src="${pageContext.request.contextPath}/resources/img/plan.png">
-				</button>
-				<button id="timeline_add_btn">
-					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
-				</button>
-				<button id="timeline_money_btn">
-					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
-				</button>
-			</div>
+			
 		</main>
 		<script type="text/javascript">
 		var markers = [];
