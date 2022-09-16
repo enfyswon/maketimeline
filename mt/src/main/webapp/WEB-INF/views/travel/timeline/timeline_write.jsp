@@ -94,6 +94,7 @@
 		</script>
 		<script type="text/javascript">
 		var markers = [];
+		var selectedMarker = null;
 		var timeline_loc = "";
 		var liClass = "";
 		var mapContainer = document.getElementById('input-map'), // 지도를 표시할 div 
@@ -189,17 +190,13 @@
 		            kakao.maps.event.addListener(marker, 'mouseout', function() {
 		                infowindow.close();
 		            });
-		            
-		            kakao.maps.event.addListener(marker, 'click', function() {
-		            	chooseLoc(marker, title, loc);
-		            });
 
 		            itemEl.onmouseover =  function () {
 		                displayInfowindow(marker, title);
 		            };
 
 		            itemEl.onmouseout =  function () {
-		                infowindow.close();
+			              infowindow.close();
 		            };
 		            
 		            itemEl.onclick =  function () {
@@ -321,13 +318,14 @@
 		}
 		 
 		function chooseLoc(marker, title, loc) {
+			var num = null;
 			if (liClass.length == 10) {
-				var num = liClass.substr(liClass.length-1, 1);
+				num = liClass.substr(liClass.length-1, 1);
 			} else if (liClass.length == 11) {
-				var num = liClass.substr(liClass.length-2, 2);
+				num = liClass.substr(liClass.length-2, 2);
 			}
 			//alert(num);
-			if (num != 'm' || num != 'em') {
+			if (num != null) {
 				$(".item").not(".item.item" + num).removeClass("active-item");
 				$(".item" + num).addClass("active-item");
 				if (loc.road_address_name != "") {

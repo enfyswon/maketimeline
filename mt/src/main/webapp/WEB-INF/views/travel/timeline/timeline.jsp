@@ -66,7 +66,6 @@
 		</main>
 		<script type="text/javascript">
 		var markers = [];
-		var selectedMarker = null;
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -98,9 +97,15 @@
 		
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;">' + name + '</div>'
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;">' + name + '</div>',
+			            removable : 'true'
 			        });
 			        infowindow.open(map, marker);
+			        
+			        kakao.maps.event.addListener(marker, 'click', function() {
+					      // 마커 위에 인포윈도우를 표시합니다
+					      infowindow.open(map, marker);  
+					});
 			        
 			        markers.push(marker);
 					
@@ -119,11 +124,6 @@
 		// "마커 보이기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에 표시하는 함수입니다
 		function showMarkers() {
 		    setMarkers(map);
-		}
-
-		// "마커 감추기" 버튼을 클릭하면 호출되어 배열에 추가된 마커를 지도에서 삭제하는 함수입니다
-		function hideMarkers() {
-		    setMarkers(null);    
 		}
 		</script>
 		<script type="text/javascript">

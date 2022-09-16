@@ -25,6 +25,23 @@
 	<a href="${pageContext.request.contextPath}/" id="logo-link">
 		<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
 	</a>
+	<div id="member-box">
+		<c:choose>
+	        <c:when test="${login_info != null && login_info.mni != null}">
+	        ${login_info.mni}
+	        <a href="${pageContext.request.contextPath}/login/logout">
+	        	<button type="button" id="logout-btn">LOGOUT</button></a>
+	        </c:when>
+	        <c:otherwise>
+	        <a href="${pageContext.request.contextPath}/login/">
+	        	<button id="login-btn">LOGIN</button>
+	        </a>
+	        <a href="${pageContext.request.contextPath}/join/">
+	        	<button id="join-btn">JOIN</button>
+	        </a>
+	        </c:otherwise>
+	    </c:choose>
+	</div>  
 	<div id="header-icon">
 		<div id="icon-bar">
 			<div>

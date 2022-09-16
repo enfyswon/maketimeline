@@ -80,3 +80,13 @@ main {
 	visibility: hidden;
 	z-index: 999;
 }
+hr {
+	height: 1px;
+	background: #bbbbbb;
+	background-image: -webkit-linear-gradient(left, #eee, #777, #eee);
+	background-image: -moz-linear-gradient(left, #eee, #777, #eee);
+	background-image: -ms-linear-gradient(left, #eee, #777, #eee);
+	background-image: -o-linear-gradient(left, #eee, #777, #eee);
+	border: 0;
+	margin: 5px 0;
+}

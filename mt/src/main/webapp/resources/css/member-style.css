@@ -1,1 +1,84 @@
 @charset "UTF-8";
+
+input {
+	width: 80%;
+	padding: 7px;
+	margin: 3px auto;
+}
+input[type='checkbox'] {
+	width: 10%;
+}
+.write_label {
+	font-size: small;
+	color: red;
+	margin-left: 30px;
+}
+#login-main {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#img-box {
+	width: 50%;
+}
+#img-box img {
+	width: 100%;
+}
+#login-box {
+	width: 50%;
+	text-align: center;
+}
+.login-input {
+	width: 80%;
+	margin: 5px auto;
+}
+#login_btn {
+	width: 85%;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: #595959;
+	color: white;
+}
+#join-box {
+	width: 60%;
+	text-align: center;
+}
+.join-input {
+	width: 80%;
+	margin: 20px auto;
+}
+.join-input p {
+	width: 80%;
+	text-align: left;
+	margin-bottom: 3px;
+}
+#email, #email2 {
+	width: 60%;
+}
+.join-email {
+	display: none;
+}
+#email_btn, #email_ck, #email_ck2 {
+	width: 20%;
+	padding: 7px;
+	border-radius: 5px;
+}
+#email_ck {
+	width: 25%;
+}
+#term-box {
+	text-align: left;
+	margin-top: 30px;
+}
+#term-box input {
+	margin-left: 25%;
+	margin-bottom: 10px;
+}
+#join_btn {
+	width: 70%;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: #595959;
+	color: white;
+	margin-bottom: 60px;
+}
