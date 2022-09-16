@@ -31,7 +31,7 @@
 					<input type="file" id="profile" name="profile" class="form-control">
 				</div>
 				<div class="input-group-append">
-					<button type="button" id="delete_btn" name="delete_btn">프로필 사진 삭제</button>
+					<button type="button" id="delete_btn" name="delete_btn" value="${pf.mpho_path}">프로필 사진 삭제</button>
 				</div>
 							<div class="info-line">
 								<div class="info-label">
