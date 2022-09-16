@@ -29,7 +29,10 @@
 			resultType="kr.co.mt.travel.timeline.TimelineDTO">
 	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
 	from timeline t, member m, category c
-	where t.cate_no = #{cate_no}
+	where 1 = 1
+		<if test="cate_no != null and cate_no != ''">
+		and t.cate_no = #{cate_no}
+		</if>
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
@@ -39,6 +42,8 @@
 				
 			</choose>
 		</if>
+		and t.cate_no = c.cate_no
+		and c.mno= m.mno 
 	order by timeline_name desc
 	limit #{limitNum}, 10
 	</select>
