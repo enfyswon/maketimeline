@@ -26,12 +26,12 @@
 				<div>
 					<c:choose>
 								<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
-									<img src="${pf.mpho_path}">
+									<img src="${pf.mpho_path}" width=200px, height=200px>
 								</c:when>
 								<c:otherwise>
 									<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
-									<input type="file" id="mpho" name="mpho" class="form-control">
-									<label for="mpho" id="mpho_label" class="user_info"></label>
+									<input type="file" id="profile" name="profile" class="form-control">
+									<label for="profile" id="profile_label"></label>
 								</c:otherwise>
 					</c:choose>
 				</div>
@@ -65,11 +65,11 @@
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$("#save_btn").click(function() {
-
+				
 				if( $.trim($("#mpho").val()) != "" ){
-					let tmp1 = $("#mpho").val().substring($("#mpho").val().length-3);
-					let tmp1_boolean = (tmp1 == "jpg" || tmp1 == "jpeg" || tmp1 == "gif" || tmp1 == "png"
-										|| tmp1 == "JPG" || tmp1 == "JPEG" || tmp1 == "GIF" || tmp1 == "PNG");
+					let tmp = $("#mpho").val().substring($("#mpho").val().length-3);
+					let tmp_boolean = (tmp == "jpg" || tmp == "jpeg" || tmp == "gif" || tmp == "png"
+										|| tmp == "JPG" || tmp == "JPEG" || tmp == "GIF" || tmp == "PNG");
 					if( $.trim( $("#mpho").val() ) == "" || tmp1_boolean == false ){
 						$("#mpho_label").text("필수 입력 사항이며, jpg/jpeg/gif/png 파일만 허용 됩니다.");
 						return;
@@ -87,7 +87,7 @@
 					$("#mdes_label").text("자기소개를 입력해주세요.");
 					return;
 				} else { $("#mdes_label").text(""); }
-	
+
 				let form = new FormData( document.getElementById( "user_info" ) );
 				
 				let keys = form.keys();
@@ -95,7 +95,7 @@
 	
 				let values = form.values();
 				for(value of values) console.log(value);
-				
+
 				$.ajax({
 					type : "POST" 
 					, encType : "multipart/form-data" 
