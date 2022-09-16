@@ -23,7 +23,7 @@
 		<div style="width:50%;margin:auto;">
 			<form id="user_info">
 				<div>
-					<img alt="mpho" src="${pf.mpho_path}">
+					<img alt="profile_photo" src="${pf.mpho_path}" width=200px, height=200px>
 				</div>
 					<hr>
 				<div class="info-line">
