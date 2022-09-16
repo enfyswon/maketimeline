@@ -48,4 +48,9 @@
 	limit #{limitNum}, 10
 	</select>
 	
+	<select id="selectMoney" resultType="kr.co.mt.dto.MoneyDTO">
+	select money_no, value_name
+	from money
+	</select>
+	
 </mapper>

@@ -76,7 +76,7 @@ public class TimelineController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String timeline_write(String cate_no, Model model) {
 		List<MoneyDTO> list = null;
-		
+		list = service.selectMoneyList();
 		
 		model.addAttribute("cate_no", cate_no);
 		model.addAttribute("money", new Gson().toJson(list));
