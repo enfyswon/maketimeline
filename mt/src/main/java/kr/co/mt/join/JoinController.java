@@ -84,7 +84,7 @@ public class JoinController {
 		}
 		//스프링 메일 전송 끝
 
-	}//gMailSend
+	}//mailSend
 
 	@RequestMapping( value = "/email_chk", method = RequestMethod.GET )
 	public void emailCheck( String email, PrintWriter out ) {
