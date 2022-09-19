@@ -30,7 +30,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<br><br><br>
 		<div id="memo_header_div">
-		<h3> ChatRoom : ${room_dto.mni_from} &lt;=&gt; ${room_dto.mni_to} </h3>
+		<h3> 닉네임 : ${room_dto.mni_from} =&gt; ${room_dto.mni_to} </h3>
 		</div>
 		<br><br>
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"

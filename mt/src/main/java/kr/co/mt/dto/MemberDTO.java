@@ -14,7 +14,7 @@ public class MemberDTO {
 	private String mpho_path;
 	private String mdes;
 	private MultipartFile profile;
-
+	
 	public String getMno() {
 		return mno;
 	}
@@ -69,5 +69,7 @@ public class MemberDTO {
 	public void setProfile(MultipartFile profile) {
 		this.profile = profile;
 	}
+	
+
 	
 }//class

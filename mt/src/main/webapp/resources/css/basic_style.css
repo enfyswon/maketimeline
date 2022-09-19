@@ -55,7 +55,7 @@ button {
 }
 main {
 	width: 80%;
-	margin-top: 40px;
+	margin-top: 100px;
 }
 #icon-bar {
 	width: 50%;
@@ -79,4 +79,14 @@ main {
 	background-color: rgba(244, 251, 255, 0.5);
 	visibility: hidden;
 	z-index: 999;
+}
+hr {
+	height: 1px;
+	background: #bbbbbb;
+	background-image: -webkit-linear-gradient(left, #eee, #777, #eee);
+	background-image: -moz-linear-gradient(left, #eee, #777, #eee);
+	background-image: -ms-linear-gradient(left, #eee, #777, #eee);
+	background-image: -o-linear-gradient(left, #eee, #777, #eee);
+	border: 0;
+	margin: 5px 0;
 }

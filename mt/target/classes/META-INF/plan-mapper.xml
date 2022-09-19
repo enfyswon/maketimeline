@@ -6,10 +6,18 @@
 <mapper namespace="PlanMapper">
 
 	<insert id="planInsert" parameterType="kr.co.mt.travel.plan.PlanDTO">
-	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no )
-	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no} )
+	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no, money_no )
+	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no} )
 	</insert>
 	
+	<select id="selectList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
+	select plan_name
+	from plan
+	where cate_no = #{cate_no}
+	</select>
 	
-	
+	<select id="selecetMoney" resultType="kr.co.mt.dto.MoneyDTO">
+	select money_no, value_name
+	from money
+	</select>
 </mapper>

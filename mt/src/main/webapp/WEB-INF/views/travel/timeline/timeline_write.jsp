@@ -8,6 +8,11 @@
 		<title>Make Timeline</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -41,6 +46,9 @@
 							<label for="timeline_amount">지출 금액</label>
 							<label for="timeline_amount" id="timeline_amount_label" class="write_label"></label>
 						</p>
+						<select id="money_no" name="money_no">
+							<option value="0">---종류 선택---</option>
+						</select>
 						<input type="text" id="timeline_amount" name="timeline_amount" placeholder="지출 금액">
 					</div>
 					<div class="timeline-detail">
@@ -76,7 +84,17 @@
 			</div>
 		</main>
 		<script type="text/javascript">
+		$(document).ready(function() {
+			$.each(${money}, function(idx, dto) {
+				$("#money_no").append(
+					"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
+				);
+			});
+		});
+		</script>
+		<script type="text/javascript">
 		var markers = [];
+		var selectedMarker = null;
 		var timeline_loc = "";
 		var liClass = "";
 		var mapContainer = document.getElementById('input-map'), // 지도를 표시할 div 
@@ -172,17 +190,13 @@
 		            kakao.maps.event.addListener(marker, 'mouseout', function() {
 		                infowindow.close();
 		            });
-		            
-		            kakao.maps.event.addListener(marker, 'click', function() {
-		            	chooseLoc(marker, title, loc);
-		            });
 
 		            itemEl.onmouseover =  function () {
 		                displayInfowindow(marker, title);
 		            };
 
 		            itemEl.onmouseout =  function () {
-		                infowindow.close();
+			              infowindow.close();
 		            };
 		            
 		            itemEl.onclick =  function () {
@@ -290,7 +304,7 @@
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, title) {
-		    var content = '<div style="padding:5px;z-index:1;font-size:small;">' + title + '</div>';
+		    var content = '<div style="padding:5px;z-index:1;font-size:small;text-align:center;">' + title + '</div>';
 
 		    infowindow.setContent(content);
 		    infowindow.open(map, marker);
@@ -304,18 +318,26 @@
 		}
 		 
 		function chooseLoc(marker, title, loc) {
-			var num = liClass.substr(liClass.length-1, 1);
+			var num = null;
+			if (liClass.length == 10) {
+				num = liClass.substr(liClass.length-1, 1);
+			} else if (liClass.length == 11) {
+				num = liClass.substr(liClass.length-2, 2);
+			}
 			//alert(num);
-			$(".item").not(".item.item" + num).removeClass("active-item");
-			$(".item" + num).addClass("active-item");
-			if (loc.road_address_name != "") {
-				timeline_loc = loc.road_address_name;
-			} else {
-				timeline_loc = loc.address_name;
+			if (num != null) {
+				$(".item").not(".item.item" + num).removeClass("active-item");
+				$(".item" + num).addClass("active-item");
+				if (loc.road_address_name != "") {
+					timeline_loc = loc.road_address_name;
+				} else {
+					timeline_loc = loc.address_name;
+				}
 			}
 		}
 		</script>
 		<script type="text/javascript">
+		let onlyNum = /^[0-9]+$/;
 		$(document).ready(function() {
 			$("#add_btn").click(function() {
 				if ($.trim($("#timeline_name").val()) == "") {
@@ -337,6 +359,29 @@
 					return;
 				} else {
 					$("#timeline_desc_label").text("");
+				}
+				
+				if ($("#money_no").val() == 0) {
+					$("#timeline_amount_label").text("지출 종류를 선택하세요.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
+				}
+				
+				let amount = $.trim($("#timeline_amount").val());
+				
+				if (amount == "") {
+					$("#timeline_amount_label").text("지출 금액을 입력하세요.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
+				}
+				
+				if ((amount != "") && (amount.match(onlyNum) == null)) {
+					$("#timeline_amount_label").text("숫자만 허용됩니다.");
+					return;
+				} else {
+					$("#timeline_amount_label").text("");
 				}
 				
 				if ($.trim($("#timeline_photo").val()) == "") {
