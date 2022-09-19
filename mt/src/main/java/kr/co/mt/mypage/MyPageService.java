@@ -32,9 +32,9 @@ public class MyPageService {
 		return dto;
 	}
 
-	public int delete(MemberDTO dto) {
+	public int delete(String mno) {
 		int updateYN = 0;
-		updateYN = dao.delete(dto);
+		updateYN = dao.delete(mno);
 		return 0;
 	}
 	

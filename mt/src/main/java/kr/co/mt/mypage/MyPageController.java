@@ -79,9 +79,10 @@ public class MyPageController {
 	
 	//프로필 사진 삭제
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	   public void delete(MemberDTO dto, PrintWriter out) {
+	   public void delete(PrintWriter out, HttpSession session) {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
 		int updateYn = 0;
-		updateYn = service.delete(dto);
+		updateYn = service.delete(mno);
 		out.print(updateYn);
 		out.close();
 	}

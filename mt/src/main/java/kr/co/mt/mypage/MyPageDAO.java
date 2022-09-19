@@ -29,9 +29,9 @@ public class MyPageDAO {
 		return dto;
 	}
 
-	public int delete(MemberDTO dto) {
+	public int delete(String mno) {
 		int updateYN = 0;
-		updateYN = sqlSession.delete("MyPageMapper.delete", dto);
+		updateYN = sqlSession.update("MyPageMapper.delete", mno);
 		return 0;
 	}
 

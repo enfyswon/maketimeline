@@ -64,12 +64,9 @@
 		$(document).ready(function() {
 			
 			$(document).ready(function() {
-				$(".delete_btn").click(function() {
+				$("#delete_btn").click(function() {
 					$.get(
 							"${pageContext.request.contextPath}/mypage/delete"
-							, {
-								mpho_path : ${pf.mpho_path}
-							}
 							, function(data, status) {
 								if(data >= 1){
 									alert("프로필 사진을 삭제 하였습니다.");
