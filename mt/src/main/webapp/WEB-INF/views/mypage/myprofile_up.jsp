@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -12,28 +13,25 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 	</head>
 	<body>
-	
-	<div id="header">
-			<a href="${pageContext.request.contextPath}/">
-				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
-			</a>
-	</div>
+	<%@ include file="/WEB-INF/views/header.jsp" %>
 	
 	<div style="width:15%;margin:auto;">
 		<div id="main-content">
 			<form id="user_info">
-				
 				<div>
 					<c:choose>
-								<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
-									<img src="${pf.mpho_path}" width=200px, height=200px>
-								</c:when>
-								<c:otherwise>
-									<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
-									<input type="file" id="profile" name="profile" class="form-control">
-									<label for="profile" id="profile_label"></label>
-								</c:otherwise>
+						<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
+						<img src="${pf.mpho_path}" width=200px, height=200px>
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+					<label for="profile" id="profile_label"></label>
+						</c:otherwise>
 					</c:choose>
+					<input type="file" id="profile" name="profile" class="form-control">
+				</div>
+				<div class="input-group-append">
+					<button type="button" id="delete_btn" name="delete_btn" value="${pf.mpho_path}">프로필 사진 삭제</button>
 				</div>
 							<div class="info-line">
 								<div class="info-label">
@@ -64,6 +62,23 @@
 		
 		<script type="text/javascript">
 		$(document).ready(function() {
+			
+			$(document).ready(function() {
+				$("#delete_btn").click(function() {
+					$.get(
+							"${pageContext.request.contextPath}/mypage/delete"
+							, function(data, status) {
+								if(data >= 1){
+									alert("프로필 사진을 삭제 하였습니다.");
+									window.location.reload();
+								} else {
+									alert("프로필 사진 삭제를 실패 하였습니다.");
+								}
+							}//call back function
+					);//get
+				});//click
+			});//ready
+			
 			$("#save_btn").click(function() {
 				
 				if( $.trim($("#mpho").val()) != "" ){
@@ -106,7 +121,7 @@
 					, cache : false 
 					, success : function(result) {
 						alert("프로필이 수정되었습니다.");
-						window.location.reload();
+						location.href="${pageContext.request.contextPath}/mypage/myprofile";
 					}, 
 					error : function(xhr) {
 						alert("잠시 후 다시 시도해주세요.");
