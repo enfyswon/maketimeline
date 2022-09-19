@@ -32,7 +32,7 @@ public class MyPageDAO {
 	public int delete(String mno) {
 		int updateYN = 0;
 		updateYN = sqlSession.update("MyPageMapper.delete", mno);
-		return 0;
+		return updateYN;
 	}
 
 }

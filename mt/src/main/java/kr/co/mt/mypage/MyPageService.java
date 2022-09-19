@@ -35,7 +35,7 @@ public class MyPageService {
 	public int delete(String mno) {
 		int updateYN = 0;
 		updateYN = dao.delete(mno);
-		return 0;
+		return updateYN;
 	}
 	
 }

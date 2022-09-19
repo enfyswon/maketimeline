@@ -70,7 +70,7 @@
 							, function(data, status) {
 								if(data >= 1){
 									alert("프로필 사진을 삭제 하였습니다.");
-									location.href="${pageContext.request.contextPath}/mypage/myprofile}";
+									window.location.reload();
 								} else {
 									alert("프로필 사진 삭제를 실패 하였습니다.");
 								}
@@ -121,7 +121,7 @@
 					, cache : false 
 					, success : function(result) {
 						alert("프로필이 수정되었습니다.");
-						window.location.reload();
+						location.href="${pageContext.request.contextPath}/mypage/myprofile";
 					}, 
 					error : function(xhr) {
 						alert("잠시 후 다시 시도해주세요.");
