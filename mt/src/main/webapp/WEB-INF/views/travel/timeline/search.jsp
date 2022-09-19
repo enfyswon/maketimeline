@@ -26,7 +26,7 @@
 						> 타임라인 제목 </option>
 						<option value="searchPlaces"
 							<c:if test="${search_dto.searchOption == 'searchPlaces'}">selected="selected"</c:if>
-						> 내 용 </option>
+						> 장소 </option>
 					</select>
 				</div>
 				<input type="text" class="form-control" id="searchWord" name="searchWord"
