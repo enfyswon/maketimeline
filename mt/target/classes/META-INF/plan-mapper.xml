@@ -6,8 +6,8 @@
 <mapper namespace="PlanMapper">
 
 	<insert id="planInsert" parameterType="kr.co.mt.travel.plan.PlanDTO">
-	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no, money_no )
-	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no} )
+	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no, money_no, plan_startdate, plan_enddate, plan_loc )
+	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no}, #{plan_startdate}, #{plan_enddate}, #{plan_loc} )
 	</insert>
 	
 	<select id="selectList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
