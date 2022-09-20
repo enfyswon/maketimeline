@@ -11,37 +11,7 @@
 		<link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
 		<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
-	<style>
-	  #wrap {
-	  	width: 20%;
-	  }
-	  /* 드래그 박스의 스타일 */  
-	  #external-events {    
-	  		width: 100px;    
-	  		padding: 0 10px;    
-	  		border: 1px solid #ccc;    
-	  		background: #eee;    
-	  		text-align: left;  
-	  }  
-	  #external-events h4 {    
-	  		font-size: 16px;    
-	  		margin-top: 0;    
-	  		padding-top: 1em;  
-	  }  
-	  #external-events .fc-event {   
-	  	    margin: 3px 0;    
-	  	    cursor: move;  
-	  }   
-	  #external-events p {    
-	  		margin: 1.5em 0;    
-	  		font-size: 11px;    
-	  		color: #666;  
-	  }   
-	  #external-events p input {    
-	  		margin: 0;    
-	  		vertical-align: middle; 
-	  }   
-	</style>
+		<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -49,24 +19,7 @@
 			<div id="tour-box">
 			</div>
 			<div id="calender-box">
-				<div id="dialog" title="일정" style="display:none;">
-					<p class="plan-detail">장소</p>
-					<p class="plan-detail">위치</p>
-					<p class="plan-detail">날짜</p>
-					<p class="plan-detail">세부 설명</p>
-					<p class="plan-detail">예상 지출 금액</p>
-				</div>
 				<div id='calendar'></div>
-				<div id='wrap'>    
-				<!-- 드래그 박스 -->    
-					<div id='external-events'>      
-						<h4>일정 목록</h4>      
-						<div id='external-events-list'></div>    
-					</div>  
-					<div id="plan-button-box">
-						<button type="button" id="save_btn">저장</button>
-					</div>  
-				</div>
 			</div>
 			<div id="button-box">
 				<button id="timeline_btn">
@@ -79,69 +32,55 @@
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
 			</div>
+			<div id="modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title"> title </h5>
+							<button type="button" id="close_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+						</div>
+						<h4>모달</h4>
+						<div class="modal-body">
+							<div id="plan-input">
+								<form id="plan_form">
+									<input type="hidden" id="cate_no" name="cate_no" value="${cate_no}">
+									<div class="plan-detail">
+										<p>
+											<label for="plan_name">여행 장소</label>
+											<label for="plan_name" id="plan_name_label" class="write_label" ></label>
+										</p>
+										<input type="text" id="plan_name" name="plan_name" placeholder="여행 장소">
+									</div>
+									<div class="plan-detail">
+										<p>
+											<label for="plan_name">세부 설명</label>
+											<label for="plan_desc" id="plan_desc_label" class="write_label" ></label>
+										</p>
+										<input type="text" id="plan_desc" name="plan_desc" placeholder="세부 설명">
+									</div>
+									<div class="plan-detail">
+										<p>
+											<label for="plan_name">예상 지출 금액</label>
+											<label id="plan_amount_label" class="write_label"></label>
+										</p>
+										<select id="money_no" name="money_no">
+											<option value="0">---종류 선택---</option>
+										</select>
+										<input type="text" id="plan_amount" name="plan_amount" placeholder="예상 지출 금액">	
+									</div>
+								</form>
+								<button type="button" id="add_btn" name="add_btn">등록</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</main>
 	
 		<script>
-		var diaLogOpt = {
-				modal: true, 
-				resizable: false, 
-				width: "570",
-				height: "470"
-		};
-		
-		var calFunc = {
-				calcDate: function(arg, calendar) {
-					var rObj = new Object();
-					var start = null;
-					var end = null;
-					var allDay = arg.allDay;
-					var startDisp = null;
-					var endDisp = null;
-					var plan_name = arg.plan_name;
-					var plan_desc = arg.plan_desc;
-					var plan_loc = arg.plan_loc;
-					var plan_startdate = null;
-					var plan_enddate = null;
-					var plan_amount = arg.plan_amount;
-					var value_name = arg.value_name;
-					
-					if (allDay) {
-						var start = arg.start.toISOString().slice(0, 10);
-						var end = null;
-						if(arg.end != "" && arg.end != null) {
-							end = arg.end.toISOString().slice(0, 10);
-						}
-						if (start == end) {
-							end = null;
-						}
-						
-						startDisp = start;
-						if (end != null) {
-							endDisp = dateRel(arg.end.toISOString().slice(0, 10));
-						}
-					}
-					rObj.start = start;
-					rObj.end = end;
-					rObj.startDisp = startDisp;
-					rObj.endDisp = endDisp;
-					rObj.plan_name = plan_name;
-					rObj.plan_desc = plan_desc;
-					rObj.plan_amount = plan_amount;
-					rObj.plan_loc = plan_loc;
-					rObj.value_name = value_name;
-					
-					return rObj;
-				}, 
-				setDataForm: function(xobj) {
-					var dispStr = xobj.startDisp;
-					if (xobj.endDisp != null) {
-						dispStr += " ~ " + xobj.endDisp;
-					}
-					
-				}
-		}
+		var modal = document.getElementById("modal");
 		$(document).ready(function() {
-			$.get(
+			/* $.get(
 					"${pageContext.request.contextPath}/plan/list?cate_no=${category.cate_no}",
 					function(data, status) {
 						$.each(JSON.parse(data), function(idx, dto) {
@@ -154,11 +93,11 @@
 							);
 						})
 					}
-			);
+			); */
 		});
 		
 		document.addEventListener('DOMContentLoaded', function() {
-			var containerEl = $('#external-events-list')[0];           
+			/* var containerEl = $('#external-events-list')[0];           
 			   new FullCalendar.Draggable(containerEl, {        
 				   itemSelector: '.fc-event',        
 				   eventData: function(eventEl) {          
@@ -166,7 +105,7 @@
 						   title: eventEl.innerText.trim()          
 						   }       
 					   }      
-			   });         
+			   });          */
 			   /* for(var i=1; i<=5;i++) {        
 				   var $div = $("<div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'></div>");        
 				   $event = $("<div class='fc-event-main'></div>").text("event " + i);        
@@ -182,26 +121,68 @@
 			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
 			    },
 			    locale: 'ko',
-			    selectable: true,
-			    editable: true,        
-				droppable: true,         
-				drop: function(arg) {                  
-					arg.draggedEl.parentNode.removeChild(arg.draggedEl);   
-				},
-				eventDrop: function(info) {               
-			           alert(info.event.title + info.event.start.toISOString());
+			    timeZone: 'local',
+			    allDaySlot: true,
+			    displayEventTime: true,
+			    displayEventEnd: true,
+			    views: {
+			    	month: {
+			    		eventLimit : 3, 
+			    		columnFormat: 'dddd'
+			    	}, 
+			    	agendaWeek: {
+			    		columnFormat: 'M/D ddd', 
+			    		titleFormat: "YYYY년 M월 D일", 
+			    		eventLimit: false
+			    	}, 
+			    	agendaDay: {
+			    		columnFormat: 'dddd', 
+			    		eventLimit: false
+			    	}, 
+			    	listWeek: {
+			    		columnFormat: ''
+			    	}
 			    },
-			    eventClick: function(calEvent, jsEvent) {
-			    }
+			    timeFormat: 'HH:mm',
+			    defaultTimedEventDuration: '01:00:00',
+			    editable: true,
+			    minTime: '00:00:00',
+			    maxTime: '24:00:00',
+			    slotLabelFormat: 'HH:mm',
+			    LongPressDeley: 0,
+			    eventLongPressDelay: 0,
+			    selectLongPressDelay: 0,
+			    selectable: true,
+				eventRender: function(event, element, view) {
+					element.popover({
+						
+					});
+					return filtering(event);
+				},
+				select: function(startDate, endDate, jsEvent, view) {
+					$(".fc-body").unbind('click');
+					var today = moment();
+					
+						startDate = moment(startDate).format('YYYY-MM-DD HH:mm');
+						endDate = moment(endDate).subtract(1, 'days');
+						
+						endDate = moment(endDate).format("YYYY-MM-DD HH:mm");
+					newEvent(startDate, endDate);
+				}
 			  });
 	
 			  calendar.render();
 			});
+		
+			var newEvent = function(start, end) {
+				modal.style.display = "flex";
+				
+			}
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("#save_btn").click(function() {
-				alert();
+			$("#close_btn").click(function() {
+				modal.style.display = "none";
 			});
 		});
 		$(document).ready(function() {
