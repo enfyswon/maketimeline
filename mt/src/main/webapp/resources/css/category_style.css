@@ -10,14 +10,14 @@
 	display: flex;
 	flex-direction: row;
 	align-items: flex-end;
-	width: 40%;
+	width: 44%;
 	margin: 0 3% 20px 3%;
 }
 .travel-ticket {
 	border: 1px solid #5b5b5b;
 	border-radius: 10px;
 	width: 100%;
-	height: 150px;
+	height: 250px;
 	overflow: hidden;
 }
 .travel-ticket-link {
@@ -25,33 +25,35 @@
 	flex-direction: row;
 }
 .ticket-desc {
-	width: 70%;
+	width: 65%;
 }
 .ticket-desc-border {
 	background-color: #51BCFF;
-	height: 20px;
+	height: 30px;
 	color: white;
+	align-items: center;
 }
 .ticket-desc-border > p {
 	margin-left: 5px;
-	font-size: medium;
+	font-size: large;
+	height: 100%;
 }
 .ticket-desc-main {
 	background-color: white;
-	height: 110px;
+	height: 190px;
 	text-align: center;
 }
 .ticket-title {
 	font-size: x-large;
 	font-weight: bold;
 	height: 40px;
-	padding-top: 25px;
+	padding-top: 60px;
 }
 .ticket-date {
 	font-size: small;
 }
 .ticket-img {
-	width: 30%;
+	width: 35%;
 }
 .ticket-img img {
 	width: 100%;
@@ -67,7 +69,7 @@
 	margin: 0;
 }
 .ticket-empty img {
-	padding: 50px 0;
+	padding: 100px 0;
 	height: 50px;
 	object-fit: cover;
 }
