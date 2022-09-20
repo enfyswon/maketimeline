@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.mt.SearchDTO;
 import kr.co.mt.dto.MoneyDTO;
+import kr.co.mt.travel.category.CategoryDTO;
 
 @Repository
 public class TimelineDAO {
@@ -26,6 +27,26 @@ public class TimelineDAO {
 		list = sqlSession.selectList("TimelineMapper.timeList", cate_no);
 		
 		return list;
+	}
+	
+	public int time_delete(String timeline_no) {
+		int successCnt = 0;
+		successCnt = sqlSession.delete("TimelineMapper.timeDelete", timeline_no);
+		
+		return successCnt;
+	}
+	
+	public int time_update(TimelineDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("TimelineMapper.timelineUpdate", dto);
+		
+		return successCnt;
+	}
+	public TimelineDTO time_select(String timeline_no) {
+		TimelineDTO dto = new TimelineDTO();
+		dto = sqlSession.selectOne("TimelineMapper.timeSelect", timeline_no);
+		
+		return dto;
 	}
 
 	public List<TimelineDTO> timeline_maplist(String cate_no) {

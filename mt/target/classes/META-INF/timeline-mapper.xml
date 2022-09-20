@@ -6,12 +6,12 @@
 <mapper namespace="TimelineMapper">
 
 	<insert id="timeInsert">
-	insert into timeline (timeline_name, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
-	values (#{timeline_name}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
+	insert into timeline (timeline_name, timeline_no, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
+	values (#{timeline_name}, #{timeline_no}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
 	</insert>
 	
 	<select id="timeList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
 	from timeline t, member m, category c
 	where t.cate_no = #{cate_no}
 	and c.mno = m.mno
@@ -25,9 +25,14 @@
 	where cate_no = #{cate_no}
 	</select>
 	
+	<delete id="timeDelete" parameterType="java.lang.String">
+	delete from timeline
+	where timeline_no = #{timeline_no} 
+	</delete>
+	
 	<select id="selectList" parameterType="kr.co.mt.SearchDTO"
 			resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
 	from timeline t, member m, category c
 	where 1 = 1
 		<if test="cate_no != null and cate_no != ''">
@@ -52,5 +57,17 @@
 	select money_no, value_name
 	from money
 	</select>
+	
+	<select id="timeSelect" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
+	select timeline_no, timeline_name, timeline_desc, timeline_date, timeline_amount, timeline_photoname, timeline_photopath
+	from timeline
+	where timeline_no = #{timeline_no}
+	</select>
+	
+	<update id="timeUpdate" parameterType="kr.co.mt.travel.timeline.TimelineDTO">
+	update timeline set timeline_name = #{timeline_name}, timeline_desc = #{timeline_desc}, timeline_amount = #{timeline_amount},
+		   timeline_date = #{timeline_date}, timeline_photoname = #{timeline_photoname}, timeline_photopath = #{timeline_photopath}
+	where timeline_no = #{timeline_no}
+	</update>
 	
 </mapper>

@@ -7,207 +7,83 @@
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js"></script>
-		<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
-			<div id="tour-box">
-			</div>
-			<div id="calender-box">
-				<div id='calendar'></div>
-			</div>
-			<div id="button-box">
-				<button id="timeline_btn">
-					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
-				</button>
-				<button id="plan_add_btn">
-					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
-				</button>
-				<button id="plan_money_btn">
-					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
-				</button>
-			</div>
-			<div id="modal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h3 class="modal-title"></h3>
-							<button type="button" id="close_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
-						</div>
-						<div class="modal-body">
-							<div id="plan-input">
-								<form id="plan_form">
-									<input type="hidden" id="cate_no" name="cate_no" value="${category.cate_no}">
-									<div class="plan-detail">
-										<p>
-											<label for="plan_name">여행 장소</label>
-											<label for="plan_name" id="plan_name_label" class="write_label" ></label>
-										</p>
-										<input type="text" id="plan_name" name="plan_name" placeholder="여행 장소">
-									</div>
-									<div class="plan-detail">
-										<p>
-											<label for="plan_startdate">여행 날짜</label>
-											<label for="plan_startdate" id="plan_startdate_label" class="write_label"></label>
-										</p>
-										<input type="datetime-local" id="plan_startdate" name="plan_startdate" class="plan-date"> ~ 
-										<input type="datetime-local" id="plan_enddate" name="plan_enddate" class="plan-date">
-									</div>
-									<div class="plan-detail">
-										<p>
-											<label for="plan_name">세부 설명</label>
-											<label for="plan_desc" id="plan_desc_label" class="write_label" ></label>
-										</p>
-										<input type="text" id="plan_desc" name="plan_desc" placeholder="세부 설명">
-									</div>
-									<div class="plan-detail">
-										<p>
-											<label for="plan_name">예상 지출 금액</label>
-											<label id="plan_amount_label" class="write_label"></label>
-										</p>
-										<select id="money_no" name="money_no">
-											<option value="0">---종류 선택---</option>
-										</select>
-										<input type="text" id="plan_amount" name="plan_amount" placeholder="예상 지출 금액">	
-									</div>
-									<div class="plan-detail">
-										<p>
-											위치
-											<label id="plan_loc_label" class="write_label"></label>
-										</p>
-										<div id="input-map-box">
-											<div id="input-map">
-											</div>
-											<div id="menu_wrap" class="bg_white">
-										        <div class="option">
-										            <div>
-										                <input type="text" id="keyword" size="20" placeholder="검색 키워드"> 
-										            	<button type="button" onclick="searchPlaces(); return false;">검색</button> 
-										            </div>
-										        </div>
-										        <hr>
-										        <ul id="placesList"></ul>
-											        <div id="pagination"></div>
-										    </div>
-										</div>
-									</div>
-								</form>
-								<button type="button" id="add_btn" name="add_btn">등록</button>
+			<div id="timeline-input">
+				<form id="timeline_form">
+					<input type="hidden" id="cate_no" name="cate_no" value="${cate_no}">
+					<div class="timeline-detail">
+						<p>
+							<label for="timeline_name">글 제목</label>
+							<label for="timeline_name" id="timeline_name_label" class="write_label"></label>
+						</p>
+						<input type="text" id="timeline_name" name="timeline_name" placeholder="글 제목" value="${timeline.timeline_name}">
+					</div>
+					<div class="timeline-detail">
+						<p>
+							<label for="timeline_date">여행 날짜</label>
+							<label for="timeline_date" id="timeline_date_label" class="write_label"></label>
+						</p>
+						<input type="datetime-local" id="timeline_date" name="timeline_date" value="${timeline.timeline_date}">
+					</div>
+					<div class="timeline-detail">
+						<p>
+							<label for="timeline_desc">글 내용</label>
+							<label for="timeline_desc" id="timeline_desc_label" class="write_label"></label>
+						</p>
+						<input type="text" id="timeline_desc" name="timeline_desc" placeholder="글 내용" value="${timeline.timeline_desc}">
+					</div>
+					<div class="timeline-detail">
+						<p>
+							<label for="timeline_amount">지출 금액</label>
+							<label for="timeline_amount" id="timeline_amount_label" class="write_label"></label>
+						</p>
+						<select id="money_no" name="money_no">
+							<option value="0">---종류 선택---</option>
+						</select>
+						<input type="text" id="timeline_amount" name="timeline_amount" placeholder="지출 금액" value="${timeline.timeline_amount}">
+					</div>
+					<div class="timeline-detail">
+						<p>
+							사진
+							<label id="timeline_photo_label" class="write_label"></label>
+						</p>
+						<input type="file" id="timeline_photo" name="timeline_photo" value="${timeline.timeline_photo}">
+					</div>
+					<div class="timeline-detail">
+						<p>
+							위치
+							<label id="timeline_loc_label" class="write_label"></label>
+						</p>
+						<div id="input-map-box">
+							<div id="input-map">
 							</div>
+							<div id="menu_wrap" class="bg_white">
+						        <div class="option">
+						            <div>
+						                <input type="text" id="keyword" size="20" placeholder="검색 키워드"> 
+						            	<button type="button" onclick="searchPlaces(); return false;">검색</button> 
+						            </div>
+						        </div>
+						        <hr>
+						        <ul id="placesList"></ul>
+						        <div id="pagination"></div>
+						    </div>
 						</div>
 					</div>
-				</div>
+				</form>
+				<button type="button" id="cancel_btn">취소</button>
+				<button type="button" id="update_btn">수정</button>
 			</div>
 		</main>
-	
-		<script>
-		var modal = document.getElementById("modal");
-		var modalTitle = $(".modal-title");
-		var planStart = $("#plan_startdate");
-		var planEnd = $("#plan_enddate");
-		document.addEventListener('DOMContentLoaded', function() {
-			  var calendarEl = document.getElementById('calendar');
-			  var calendar = new FullCalendar.Calendar(calendarEl, {
-			    headerToolbar: {
-			      left: 'prev,next today',
-			      center: 'title',
-			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-			    },
-			    initialView: 'dayGridMonth',
-			    initialDate: '${category.cate_startdate}',
-			    locale: 'ko',
-			    timeZone: 'local',
-			    navLinks: true,
-			    allDaySlot: true,
-			    displayEventTime: true,
-			    displayEventEnd: true,
-			    views: {
-			    	month: {
-			    		eventLimit : 3, 
-			    		columnFormat: 'dddd'
-			    	}, 
-			    	agendaWeek: {
-			    		columnFormat: 'M/D ddd', 
-			    		titleFormat: "YYYY년 M월 D일", 
-			    		eventLimit: false
-			    	}, 
-			    	agendaDay: {
-			    		columnFormat: 'dddd', 
-			    		eventLimit: false
-			    	}, 
-			    	listWeek: {
-			    		columnFormat: ''
-			    	}
-			    },
-			    timeFormat: 'HH:mm',
-			    defaultTimedEventDuration: '01:00:00',
-			    editable: true,
-			    minTime: '00:00:00',
-			    maxTime: '24:00:00',
-			    slotLabelFormat: 'HH:mm',
-			    LongPressDeley: 0,
-			    eventLongPressDelay: 0,
-			    selectLongPressDelay: 0,
-			    selectable: true,
-				eventRender: function(event, element, view) {
-					element.popover({
-						
-					});
-					return filtering(event);
-				},
-				select: function(info) {
-					$(".fc-body").unbind('click');
-					newEvent(info.startStr, info.endStr);
-				}
-			  });
-	
-			  calendar.render();
-			});
-		
-			var newEvent = function(start, end) {
-				modal.style.display = "flex";
-				modalTitle.html("여행 계획 추가");
-				planStart.val(start + " 00:00:00");
-				planEnd.val(end  + " 00:00:00");
-			}
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			planStart.change(function() {
-				let endTime = new Date(planStart.val());
-				endTime.setHours(endTime.getHours() + 1);
-				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
-				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
-				planEnd.val(endTime);
-			});
-		});
-		$(document).ready(function() {
-			$("#close_btn").click(function() {
-				modal.style.display = "none";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_add_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#timeline_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
-			});
-		});
-		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 			$.each(${money}, function(idx, dto) {
@@ -219,7 +95,8 @@
 		</script>
 		<script type="text/javascript">
 		var markers = [];
-		var plan_loc = "";
+		var selectedMarker = null;
+		var timeline_loc = "";
 		var liClass = "";
 		var mapContainer = document.getElementById('input-map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -314,17 +191,13 @@
 		            kakao.maps.event.addListener(marker, 'mouseout', function() {
 		                infowindow.close();
 		            });
-		            
-		            kakao.maps.event.addListener(marker, 'click', function() {
-		            	chooseLoc(marker, title, loc);
-		            });
 
 		            itemEl.onmouseover =  function () {
 		                displayInfowindow(marker, title);
 		            };
 
 		            itemEl.onmouseout =  function () {
-		                infowindow.close();
+			              infowindow.close();
 		            };
 		            
 		            itemEl.onclick =  function () {
@@ -432,7 +305,7 @@
 		// 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 		// 인포윈도우에 장소명을 표시합니다
 		function displayInfowindow(marker, title) {
-		    var content = '<div style="padding:5px;z-index:1;font-size:small;">' + title + '</div>';
+		    var content = '<div style="padding:5px;z-index:1;font-size:small;text-align:center;">' + title + '</div>';
 
 		    infowindow.setContent(content);
 		    infowindow.open(map, marker);
@@ -446,84 +319,125 @@
 		}
 		 
 		function chooseLoc(marker, title, loc) {
-			var num = liClass.substr(liClass.length-1, 1);
+			var num = null;
+			if (liClass.length == 10) {
+				num = liClass.substr(liClass.length-1, 1);
+			} else if (liClass.length == 11) {
+				num = liClass.substr(liClass.length-2, 2);
+			}
 			//alert(num);
-			$(".item").not(".item.item" + num).removeClass("active-item");
-			$(".item" + num).addClass("active-item");
-			if (loc.road_address_name != "") {
-				plan_loc = loc.road_address_name;
-			} else {
-				plan_loc = loc.address_name;
+			if (num != null) {
+				$(".item").not(".item.item" + num).removeClass("active-item");
+				$(".item" + num).addClass("active-item");
+				if (loc.road_address_name != "") {
+					timeline_loc = loc.road_address_name;
+				} else {
+					timeline_loc = loc.address_name;
+				}
 			}
 		}
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
 		$(document).ready(function() {
-			$("#add_btn").click(function() {
-				if ($.trim($("#plan_name").val()) == "") {
-					$("#plan_name_label").text("여행 장소를 입력하세요.");
+			$("#cancel_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/category";
+			});
+		});
+		$(document).ready(function() {
+			$("#update_btn").click(function() {
+				if ($.trim($("#timeline_name").val()) == "") {
+					$("#timeline_name_label").text("제목을 입력하세요.");
 					return;
 				} else {
-					$("#plan_name_label").text("");
+					$("#timeline_name_label").text("");
 				}
 				
-				if ($("#plan_desc").val() == "") {
-					$("#plan_desc_label").text("세부 설명을 입력하세요.");
+				if ($("#timeline_date").val() == "") {
+					$("#timeline_date_label").text("여행 날짜를 선택해주세요.");
 					return;
 				} else {
-					$("#plan_desc_label").text("");
+					$("#timeline_date_label").text("");
+				}
+				
+				if ($.trim($("#timeline_desc").val()) == "") {
+					$("#timeline_desc_label").text("내용을 입력하세요.");
+					return;
+				} else {
+					$("#timeline_desc_label").text("");
 				}
 				
 				if ($("#money_no").val() == 0) {
-					$("#plan_amount_label").text("지출 종류를 선택하세요.");
+					$("#timeline_amount_label").text("지출 종류를 선택하세요.");
 					return;
 				} else {
-					$("#plan_amount_label").text("");
+					$("#timeline_amount_label").text("");
 				}
 				
-				let amount = $.trim($("#plan_amount").val());
+				let amount = $.trim($("#timeline_amount").val());
 				
 				if (amount == "") {
-					$("#plan_amount_label").text("예상 지출 금액을 입력하세요.");
+					$("#timeline_amount_label").text("지출 금액을 입력하세요.");
 					return;
 				} else {
-					$("#plan_amount_label").text("");
+					$("#timeline_amount_label").text("");
 				}
 				
 				if ((amount != "") && (amount.match(onlyNum) == null)) {
-					$("#plan_amount_label").text("숫자만 허용됩니다.");
+					$("#timeline_amount_label").text("숫자만 허용됩니다.");
 					return;
 				} else {
-					$("#plan_amount_label").text("");
+					$("#timeline_amount_label").text("");
 				}
-
-				let form = new FormData( document.getElementById("plan_form"));
 				
-				form.append('plan_loc', plan_loc);
+				if ($.trim($("#timeline_photo").val()) == "") {
+					$("#timeline_photo_label").text("사진을 선택하세요.");
+					return;
+				} else {
+					$("#timeline_photo_label").text("");
+				}
+				
+				let tmp1 = $("#timeline_photo").val().substring($("#timeline_photo").val().length-3);
+				let tmp1_boolean = (tmp1 == "jpg" || tmp1 == "jpeg" || tmp1 == "gif" || tmp1 == "png"
+									|| tmp1 == "JPG" || tmp1 == "JPEG" || tmp1 == "GIF" || tmp1 == "PNG");
+				if( $.trim( $("#timeline_photo").val() ) != "" && tmp1_boolean == false ){
+					$("#timeline_photo_label").text("jpg/jpeg/gif/png 파일만 허용 됩니다.");
+					return;
+				} else { $("#timeline_photo_label").text(""); }
+				
+				if(timeline_loc == "") {
+					$("#timeline_loc_label").text("위치를 선택하세요.");
+					return;
+				} else {
+					$("#timeline_loc_label").text("");
+				}
+				
+				let form = new FormData( document.getElementById("timeline_form"));
+				form.append("timeline_loc", timeline_loc);
 				
 				let keys = form.keys();
 				for(key of keys) console.log(key);
 				
 				let values = form.values();
 				for(value of values) console.log(value);
-
+				
+				//return;
 				$.ajax({
-					type : "POST"
-					, encType : "multipart/form-data"
-					, url : "${pageContext.request.contextPath}/plan/insert"
-					, data : form
-					, processData : false
-					, contentType : false
-					, cache : false
-					, success : function(result) {
-						alert("여행 계획 일정이 등록 되었습니다.");
-						location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
-					}//call back function
-					, error : function(xhr) {
+					type : "POST", 
+					encType : "multipart/form-data", 
+					url : "${pageContext.request.contextPath}/timeline/update", 
+					data : form, 
+					processData : false, 
+					contentType : false, 
+					cache : false, 
+					success : function(result) {
+						alert("글이 등록되었습니다.");
+						location.href = "${pageContext.request.contextPath}/timeline?cate_no=${cate_no}";
+					}, 
+					error : function(xhr) {
 						alert("잠시 후 다시 시도해 주세요.");
-					}//call back function//xhr : xml http request/response
-				});//ajax
+					}
+				});
 			});
 		});
 		</script>

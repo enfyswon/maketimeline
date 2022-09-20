@@ -71,8 +71,6 @@ public class TimelineController {
 		
 	}//list
 	
-	
-	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String timeline_write(String cate_no, Model model) {
 		List<MoneyDTO> list = null;
@@ -82,6 +80,24 @@ public class TimelineController {
 		model.addAttribute("money", new Gson().toJson(list));
 		
 		return "/travel/timeline/timeline_write";
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public void timeDelete(String timeline_no, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.time_delete(timeline_no);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public String categoryUpdate(String timeline_no, Model model) {
+		TimelineDTO dto = new TimelineDTO();
+		dto = service.time_select(timeline_no);
+		model.addAttribute("timeline", dto);
+
+		return "/travel/timeline/timeline_update";
 	}
 	
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
