@@ -49,8 +49,10 @@ public class PlanController {
 	public String plan(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
+		List<MoneyDTO> list = null;
+		list = service.selectMoneyList();
 		
-		
+		model.addAttribute("money", new Gson().toJson(list));
 		model.addAttribute("category", dto);
 		
 		return "/travel/plan/plan";
@@ -58,11 +60,8 @@ public class PlanController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String plan_add(String cate_no, Model model) {
-		List<MoneyDTO> list = null;
-		list = service.selectMoneyList();
 		
 		model.addAttribute("cate_no", cate_no);
-		model.addAttribute("money", new Gson().toJson(list));
 		
 		return "/travel/plan/add";
 	}//travel/add
@@ -75,8 +74,4 @@ public class PlanController {
 		out.print(successCount);
 		out.close();
 	}//insert
-	
-	
-	
-	
 }//class
