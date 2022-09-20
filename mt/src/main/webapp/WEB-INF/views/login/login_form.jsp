@@ -16,7 +16,7 @@
 			</div>
 			<div id="login-box">
 				<div class="login-input">
-					<input type="text" id="email" name="email" maxlength="20" placeholder="이메일 주소">
+					<input type="text" id="email" name="email" maxlength="30" placeholder="이메일 주소">
 				</div>
 				<div class="login-input">
 					<input type="password" id="mpwd" name="mpwd" maxlength="20" placeholder="비밀번호">
