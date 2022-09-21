@@ -372,7 +372,7 @@
 					
 					map.setCenter(coords);
 				}
-			})
+			});
 		}
 		</script>
 		<script type="text/javascript">

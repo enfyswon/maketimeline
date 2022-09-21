@@ -95,8 +95,12 @@ public class TimelineController {
 	public String categoryUpdate(String timeline_no, Model model) {
 		TimelineDTO dto = new TimelineDTO();
 		dto = service.time_select(timeline_no);
-		model.addAttribute("timeline", dto);
+		List<MoneyDTO> list = null;
+		list = service.selectMoneyList();
 
+		model.addAttribute("timeline", dto);
+		model.addAttribute("money", new Gson().toJson(list));
+		
 		return "/travel/timeline/timeline_update";
 	}
 	

@@ -59,13 +59,13 @@
 	</select>
 	
 	<select id="timeSelect" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select timeline_no, timeline_name, timeline_desc, timeline_date, timeline_amount, timeline_photoname, timeline_photopath
+	select timeline_no, timeline_name, timeline_desc, timeline_date, timeline_amount, timeline_photoname, timeline_photopath, money_no, timeline_loc
 	from timeline
 	where timeline_no = #{timeline_no}
 	</select>
 	
 	<update id="timeUpdate" parameterType="kr.co.mt.travel.timeline.TimelineDTO">
-	update timeline set timeline_name = #{timeline_name}, timeline_desc = #{timeline_desc}, timeline_amount = #{timeline_amount},
+	update timeline set timeline_name = #{timeline_name}, timeline_desc = #{timeline_desc}, timeline_amount = #{timeline_amount}, money_no = #{money_no},
 		   timeline_date = #{timeline_date}, timeline_photoname = #{timeline_photoname}, timeline_photopath = #{timeline_photopath}
 	where timeline_no = #{timeline_no}
 	</update>

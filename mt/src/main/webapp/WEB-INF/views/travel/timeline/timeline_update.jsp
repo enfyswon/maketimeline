@@ -46,6 +46,7 @@
 							<label for="timeline_amount">지출 금액</label>
 							<label for="timeline_amount" id="timeline_amount_label" class="write_label"></label>
 						</p>
+						<input id="money" type="hidden" value="${timeline.money_no}">
 						<select id="money_no" name="money_no">
 							<option value="0">---종류 선택---</option>
 						</select>
@@ -91,12 +92,13 @@
 					"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
 				);
 			});
+			$("#money_no").val($("#money").val()).prop("selected", true);
 		});
 		</script>
 		<script type="text/javascript">
 		var markers = [];
 		var selectedMarker = null;
-		var timeline_loc = "";
+		var timeline_loc = "${timeline.timeline_loc}";
 		var liClass = "";
 		var mapContainer = document.getElementById('input-map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -106,13 +108,18 @@
 
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		searchLoc("${timeline.timeline_loc}", $("#timeline_name").val());
 
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();  
 
 		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
+		
 		// 키워드로 장소를 검색합니다
 		searchPlaces();
 
@@ -335,6 +342,26 @@
 					timeline_loc = loc.address_name;
 				}
 			}
+		}
+		
+		function searchLoc(loc, name) {
+			geocoder.addressSearch(loc, function(result, status) {
+				if (status === kakao.maps.services.Status.OK) {
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					
+					var mark = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+					
+					var window = new kakao.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;">' + name + '</div>'
+					});
+					window.open(map, mark);
+					
+					map.setCenter(coords);
+				}
+			});
 		}
 		</script>
 		<script type="text/javascript">
