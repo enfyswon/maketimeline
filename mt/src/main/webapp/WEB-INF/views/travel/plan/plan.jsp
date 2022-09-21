@@ -44,6 +44,7 @@
 							<div id="plan-input">
 								<form id="plan_form">
 									<input type="hidden" id="cate_no" name="cate_no" value="${category.cate_no}">
+									<input type="hidden" id="plan_no" name="plan_no">
 									<div class="plan-detail">
 										<p>
 											<label for="plan_name">여행 장소</label>
@@ -61,15 +62,15 @@
 									</div>
 									<div class="plan-detail">
 										<p>
-											<label for="plan_name">세부 설명</label>
+											<label for="plan_desc">세부 설명</label>
 											<label for="plan_desc" id="plan_desc_label" class="write_label" ></label>
 										</p>
 										<input type="text" id="plan_desc" name="plan_desc" placeholder="세부 설명">
 									</div>
 									<div class="plan-detail">
 										<p>
-											<label for="plan_name">예상 지출 금액</label>
-											<label id="plan_amount_label" class="write_label"></label>
+											<label for="plan_amount">예상 지출 금액</label>
+											<label for="plan_amount" id="plan_amount_label" class="write_label"></label>
 										</p>
 										<select id="money_no" name="money_no">
 											<option value="0">---종류 선택---</option>
@@ -98,150 +99,19 @@
 										</div>
 									</div>
 								</form>
-								<button type="button" id="add_btn" name="add_btn">등록</button>
+								<div id="plan-add-box">
+									<button type="button" id="add_btn" name="add_btn">등록</button>
+								</div>
+								<div id="plan-modify-box">
+									<button type="button" id="update_btn" name="update_btn">수정</button>
+									<button type="button" id="delete_btn" name="delete_btn">삭제</button>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</main>
-	
-		<script type="text/javascript">
-		var event = [];
-		var plan_event;
-		$(document).ready(function() {
-			$.get(
-					"${pageContext.request.contextPath}/plan/list",
-					{
-						cate_no : "${category.cate_no}"
-					},
-					function(data, status) {
-						$.each(JSON.parse(data), function(idx, dto) {
-							plan_event = {
-									id: dto.plan_no,
-									title: dto.plan_name,
-									start: dto.plan_startdate,
-									end: dto.plan_enddate
-							};
-							event.push(plan_event);
-						});
-						console.log(event);
-					}
-			);
-		});
-		</script>
-		<script>
-		var modal = document.getElementById("modal");
-		var modalTitle = $(".modal-title");
-		var planStart = $("#plan_startdate");
-		var planEnd = $("#plan_enddate");
-		console.log(event);
-		document.addEventListener('DOMContentLoaded', function() {
-			  var calendarEl = document.getElementById('calendar');
-			  var calendar = new FullCalendar.Calendar(calendarEl, {
-			    initialView: 'dayGridMonth',
-			    initialDate: '${category.cate_startdate}',
-			    headerToolbar: {
-			      left: 'prev,next today',
-			      center: 'title',
-			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
-			    },
-			    navLink: true,
-			    locale: 'ko',
-			    timeZone: 'local',
-			    allDaySlot: true,
-			    displayEventTime: false,
-			    displayEventEnd: false,
-			    defaultTimedEventDuration: '01:00:00',
-			    editable: true,
-			    slotLabelFormat: 'HH:mm',
-			    dayMaxEvents: true,
-			    eventLongPressDelay: 0,
-			    selectLongPressDelay: 0,
-			    selectable: true,
-				select: function(info) {
-					$(".fc-body").unbind('click');
-					newEvent(info.startStr, info.endStr);
-				},
-				events : function(info, successCallback) {
-					$.ajax({
-							type: 'get',
-							url: "${pageContext.request.contextPath}/plan/list",
-							dataType: "json",
-							data: {
-								cate_no : "${category.cate_no}"
-							},
-							success: function(data) {
-								$.each(data, function(idx, dto) {
-									plan_event = {
-											id: dto.plan_no,
-											title: dto.plan_name,
-											start: dto.plan_startdate,
-											end: dto.plan_enddate
-									};
-									event.push(plan_event);
-								});
-								successCallback(event);
-							}
-					});
-				}
-			  });
-	
-			  calendar.render();
-			});
-		
-			var newEvent = function(start, end) {
-				modal.style.display = "flex";
-				modalTitle.html("여행 계획 추가");
-				planStart.val(start + " 00:00:00");
-				planEnd.val(end  + " 00:00:00");
-			}
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			planStart.change(function() {
-				let endTime = new Date(planStart.val());
-				endTime.setHours(endTime.getHours() + 1);
-				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
-				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
-				planEnd.val(endTime);
-			});
-		});
-		$(document).ready(function() {
-			$("#close_btn").click(function() {
-				modal.style.display = "none";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_add_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#timeline_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
-			$("#plan_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
-			});
-		});
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$.get(
-					"${pageContext.request.contextPath}/plan/money",
-					function(data, status) {
-						$.each(JSON.parse(data), function(idx, dto) {
-							$("#money_no").append(
-								"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
-							);
-						});
-					}
-			);
-		});
-		</script>
 		<script type="text/javascript">
 		var markers = [];
 		var plan_loc = "";
@@ -254,7 +124,10 @@
 
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
-
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();  
 
@@ -481,6 +354,26 @@
 				plan_loc = loc.address_name;
 			}
 		}
+		
+		function searchLoc(loc, name) {
+			geocoder.addressSearch(loc, function(result, status) {
+				if (status === kakao.maps.services.Status.OK) {
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					
+					var mark = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+					
+					var window = new kakao.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;">' + name + '</div>'
+					});
+					window.open(map, mark);
+					
+					map.setCenter(coords);
+				}
+			})
+		}
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
@@ -550,6 +443,232 @@
 					}//call back function//xhr : xml http request/response
 				});//ajax
 			});
+		});
+		$(document).ready(function() {
+			$("#update_btn").click(function() {
+				if ($.trim($("#plan_name").val()) == "") {
+					$("#plan_name_label").text("여행 장소를 입력하세요.");
+					return;
+				} else {
+					$("#plan_name_label").text("");
+				}
+				
+				if ($("#plan_desc").val() == "") {
+					$("#plan_desc_label").text("세부 설명을 입력하세요.");
+					return;
+				} else {
+					$("#plan_desc_label").text("");
+				}
+				
+				if ($("#money_no").val() == 0) {
+					$("#plan_amount_label").text("지출 종류를 선택하세요.");
+					return;
+				} else {
+					$("#plan_amount_label").text("");
+				}
+				
+				let amount = $.trim($("#plan_amount").val());
+				
+				if (amount == "") {
+					$("#plan_amount_label").text("예상 지출 금액을 입력하세요.");
+					return;
+				} else {
+					$("#plan_amount_label").text("");
+				}
+				
+				if ((amount != "") && (amount.match(onlyNum) == null)) {
+					$("#plan_amount_label").text("숫자만 허용됩니다.");
+					return;
+				} else {
+					$("#plan_amount_label").text("");
+				}
+
+				let form = new FormData( document.getElementById("plan_form"));
+				
+				form.append('plan_loc', plan_loc);
+				
+				let keys = form.keys();
+				for(key of keys) console.log(key);
+				
+				let values = form.values();
+				for(value of values) console.log(value);
+
+				$.ajax({
+					type : "POST"
+					, encType : "multipart/form-data"
+					, url : "${pageContext.request.contextPath}/plan/update"
+					, data : form
+					, processData : false
+					, contentType : false
+					, cache : false
+					, success : function(result) {
+						alert("여행 계획 일정이 수정 되었습니다.");
+						location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
+					}//call back function
+					, error : function(xhr) {
+						alert("잠시 후 다시 시도해 주세요.");
+					}//call back function//xhr : xml http request/response
+				});//ajax
+			});
+		});
+		$(document).ready(function() {
+			$("#delete_btn").click(function() {
+				$.get(
+						"${pageContext.request.contextPath}/plan/delete",
+						{
+							plan_no : $("#plan_no").val()
+						},
+						function(data, status) {
+							if (data == 1) {
+								alert("여행 계획 일정이 삭제되었습니다.");
+								location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
+							} else if (data <= 0) {
+								alert("잠시 후 다시 시도해 주세요.");
+							}
+						}
+				);
+			});
+		});
+		</script>
+		<script>
+		var event = [];
+		var plan_event;
+		var modal = document.getElementById("modal");
+		var addBox = document.getElementById("plan-add-box");
+		var modifyBox = document.getElementById("plan-modify-box");
+		var modalTitle = $(".modal-title");
+		var planStart = $("#plan_startdate");
+		var planEnd = $("#plan_enddate");
+		var loc;
+		document.addEventListener('DOMContentLoaded', function() {
+			  var calendarEl = document.getElementById('calendar');
+			  var calendar = new FullCalendar.Calendar(calendarEl, {
+			    initialView: 'dayGridMonth',
+			    initialDate: '${category.cate_startdate}',
+			    headerToolbar: {
+			      left: 'prev,next today',
+			      center: 'title',
+			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
+			    },
+			    navLink: true,
+			    locale: 'ko',
+			    timeZone: 'local',
+			    allDaySlot: true,
+			    displayEventTime: false,
+			    displayEventEnd: false,
+			    defaultTimedEventDuration: '01:00:00',
+			    editable: true,
+			    slotLabelFormat: 'HH:mm',
+			    dayMaxEvents: true,
+			    eventLongPressDelay: 0,
+			    selectLongPressDelay: 0,
+			    selectable: true,
+				select: function(info) {
+					$(".fc-body").unbind('click');
+					newEvent(info.startStr, info.endStr);
+				},
+				events : function(info, successCallback) {
+					$.ajax({
+							type: 'get',
+							url: "${pageContext.request.contextPath}/plan/list",
+							dataType: "json",
+							data: {
+								cate_no : "${category.cate_no}"
+							},
+							success: function(data) {
+								$.each(data, function(idx, dto) {
+									plan_event = {
+											id: dto.plan_no,
+											title: dto.plan_name,
+											start: dto.plan_startdate,
+											end: dto.plan_enddate,
+											money: dto.money_no,
+											amount: dto.plan_amount,
+											desc: dto.plan_desc,
+											loc: dto.plan_loc
+									};
+									event.push(plan_event);
+								});
+								successCallback(event);
+							}
+					});
+				},
+				eventClick: function(info) {
+					editEvent(info);
+				}
+			  });
+	
+			  calendar.render();
+			});
+		
+			var newEvent = function(start, end) {
+				modal.style.display = "flex";
+				modalTitle.html("여행 계획 추가");
+				addBox.style.display = "flex";
+				modifyBox.style.display = "none";
+				planStart.val(start + " 00:00:00");
+				planEnd.val(end  + " 00:00:00");
+			}
+			var editEvent = function(info) {
+				modal.style.display = "flex";
+				modalTitle.html("여행 계획 수정");
+				addBox.style.display = "none";
+				modifyBox.style.display = "flex";
+				$("#plan_no").val(info.event.id);
+				$("#plan_name").val(info.event.title);
+				$("#plan_desc").val(info.event.extendedProps.desc);
+				$("#plan_amount").val(info.event.extendedProps.amount);
+				$("#money_no").val(info.event.extendedProps.money).prop("selected", true);
+				planStart.val(moment(info.event.start).format("YYYY-MM-DD HH:mm"));
+				planEnd.val(moment(info.event.end).format("YYYY-MM-DD HH:mm"));
+				searchLoc(info.event.extendedProps.loc, info.event.title);
+				plan_loc = info.event.extendedProps.loc;
+			}
+			
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			planStart.change(function() {
+				let endTime = new Date(planStart.val());
+				endTime.setHours(endTime.getHours() + 1);
+				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
+				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
+				planEnd.val(endTime);
+			});
+		});
+		$(document).ready(function() {
+			$("#close_btn").click(function() {
+				modal.style.display = "none";
+			});
+		});
+		$(document).ready(function() {
+			$("#plan_add_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#timeline_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#plan_money_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
+			});
+		});
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$.get(
+					"${pageContext.request.contextPath}/plan/money",
+					function(data, status) {
+						$.each(JSON.parse(data), function(idx, dto) {
+							$("#money_no").append(
+								"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
+							);
+						});
+					}
+			);
 		});
 		</script>
 	</body>

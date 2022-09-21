@@ -36,6 +36,23 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public void delete(String plan_no, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.delete(plan_no);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void update(PlanDTO dto, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.update(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
 	@RequestMapping(value = "/money", method = RequestMethod.GET)
 	public void money(PrintWriter out) {
 		List<MoneyDTO> list = null;
@@ -44,6 +61,7 @@ public class PlanController {
 		out.print(new Gson().toJson(list));
 		out.close();
 	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void planList(String cate_no, PrintWriter out) {
 		List<PlanDTO> list = null;

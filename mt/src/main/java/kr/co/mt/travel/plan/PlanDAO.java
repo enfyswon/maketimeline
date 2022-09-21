@@ -40,5 +40,19 @@ public class PlanDAO {
 		
 		return list;
 	}
+
+	public int update(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("PlanMapper.planUpdate", dto);
+		
+		return successCnt;
+	}
+
+	public int delete(String plan_no) {
+		int successCnt = 0;
+		successCnt = sqlSession.delete("PlanMapper.planDelete", plan_no);
+		
+		return successCnt;
+	}
 	
 }//class
