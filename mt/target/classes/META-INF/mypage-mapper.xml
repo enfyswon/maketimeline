@@ -21,7 +21,14 @@
 					</if>
 		where mno = #{mno}
 	</update>
-		
+	
+	<!-- 프로필 사진 삭제 -->
+	<update id="delete" parameterType="java.lang.String">
+		update member set mpho_path = NULL, mpho = NULL
+	
+		where mno = #{mno}
+	</update>
+	
 	<!-- 회원정보 수정 -->
 	<update id="info_update" parameterType="kr.co.mt.dto.MemberDTO">
 		update member set mpwd = #{mpwd}

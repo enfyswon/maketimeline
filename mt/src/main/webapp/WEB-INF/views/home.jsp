@@ -7,6 +7,10 @@
 		<meta charset="UTF-8">
 		<title>Make Timeline</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 	</head>
 	<body>
 		<div id="header">
@@ -54,12 +58,27 @@
 					</a>
 				</div>
 			</div>
-			<div class="row" align="center">
-							
-								<img src="${pageContext.request.contextPath}/resources/img/pic2.jpg" alt="" />
-								
-							
-							</div>
+			<div id="test" class="carousel slide" align="center" data-ride="carousel">
+				<ul class="carousel-indicators">
+					<li data-target="#test" data-slide-to="0" class="active"></li>
+					<li data-target="#test" data-slide-to="1" ></li>
+				</ul>	
+					<div class="carousel-inner">
+						<div class="carousel-item active">
+								<img src="${pageContext.request.contextPath}/resources/img/pic2.jpg"/>
+						</div>
+					<div class="carousel-item">
+								<img src="${pageContext.request.contextPath}/resources/img/pic3.jpg" />
+						</div>
+					</div>
+					<a class="carousel-control-prev" href="#text" data-slide="prev">
+						<span class="carousel-control-prev-icon"></span>				
+					</a>
+					<a class="carousel-control-next" href="#text" data-slide="next">
+						<span class="carousel-control-next-icon"></span>				
+					</a>
+			</div>
 		</main>
 	</body>
+	<br>
 </html>

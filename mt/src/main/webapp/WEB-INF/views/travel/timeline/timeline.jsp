@@ -45,8 +45,8 @@
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>
 						<div class="timeline-btn-box">
-							<button type="button" class="timeline-update-btn"></button>
-							<button type="button" class="timeline-delete-btn"></button>
+							<button type="button" class="timeline-update-btn" value="${dto.timeline_no}"></button>
+							<button type="button" class="timeline-delete-btn" value="${dto.timeline_no}"></button>
 						</div>
 					</div>
 				</div>
@@ -161,5 +161,34 @@
 			});
 		});
 		</script>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {
+			$(".timeline-delete-btn").click(function() {
+				$.get(
+						"${pageContext.request.contextPath}/timeline/delete", 
+						{
+							timeline_no : $(this).val()
+						},
+						function(data, status) {
+							if (data >= 1) {
+								alert("타임라인을 삭제했습니다.");
+								location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
+							} else if (data == 0) {
+								alert("삭제에 실패했습니다.");
+							} else {
+								alert("잠시 후 다시 시도해주세요.");
+							}
+						}
+				);
+			});
+		});
+		$(document).ready(function() {
+			$(".timeline-update-btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline/update?timeline_no=" + $(this).val();
+			});
+		});
+		</script>
+		
 	</body>
 </html>

@@ -77,6 +77,16 @@ public class MyPageController {
 		out.close();
 	}
 	
+	//프로필 사진 삭제
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	   public void delete(PrintWriter out, HttpSession session) {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		int updateYn = 0;
+		updateYn = service.delete(mno);
+		out.print(updateYn);
+		out.close();
+	}
+	
 	// 회원정보 수정
 	@RequestMapping(value = "/info_update", method = RequestMethod.GET)
 	   public String info_update(HttpSession session, Model model) {
