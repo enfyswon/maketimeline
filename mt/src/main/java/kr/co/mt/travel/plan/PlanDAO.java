@@ -54,5 +54,12 @@ public class PlanDAO {
 		
 		return successCnt;
 	}
+
+	public int dateUpdate(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("PlanMapper.planDateUpdate", dto);
+		
+		return successCnt;
+	}
 	
 }//class

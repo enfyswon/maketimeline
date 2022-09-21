@@ -32,4 +32,9 @@
 	delete from plan
 	where plan_no = #{plan_no}
 	</delete>
+	
+	<update id="planDateUpdate" parameterType="kr.co.mt.travel.plan.PlanDTO">
+	update plan set plan_startdate = #{plan_startdate}, plan_enddate = #{plan_enddate}
+	where plan_no = #{plan_no}
+	</update>
 </mapper>

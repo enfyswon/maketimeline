@@ -53,6 +53,13 @@ public class PlanService {
 		
 		return successCnt;
 	}
+
+	public int dateUpdate(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = dao.dateUpdate(dto);
+		
+		return successCnt;
+	}
 	
 	
 }//class

@@ -36,6 +36,15 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/dateUpdate", method = RequestMethod.POST)
+	public void dateUpdate(PlanDTO dto, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.dateUpdate(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public void delete(String plan_no, PrintWriter out) {
 		int successCnt = 0;

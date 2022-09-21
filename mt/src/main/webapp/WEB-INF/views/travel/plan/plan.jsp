@@ -598,6 +598,23 @@
 				},
 				eventClick: function(info) {
 					editEvent(info);
+				},
+				eventDrop : function(info) {
+					$.post(
+							"${pageContext.request.contextPath}/plan/dateUpdate",
+							{
+								plan_no : info.event.id,
+								plan_startdate : moment(info.event.start).format("YYYY-MM-DD HH:mm"),
+								plan_enddate : moment(info.event.end).format("YYYY-MM-DD HH:mm")
+							},
+							function(data, status) {
+								if (data == 1) {
+									alert("여행 계획 일정 시간이 수정되었습니다.");
+								} else {
+									alert("잠시 후 다시 시도해주세요.");
+								}
+							}
+					);
 				}
 			  });
 	
