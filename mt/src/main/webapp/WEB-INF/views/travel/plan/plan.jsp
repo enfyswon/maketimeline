@@ -540,6 +540,7 @@
 		var planStart = $("#plan_startdate");
 		var planEnd = $("#plan_enddate");
 		var loc;
+		console.log(event);
 		document.addEventListener('DOMContentLoaded', function() {
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -576,20 +577,22 @@
 								cate_no : "${category.cate_no}"
 							},
 							success: function(data) {
-								$.each(data, function(idx, dto) {
-									plan_event = {
-											id: dto.plan_no,
-											title: dto.plan_name,
-											start: dto.plan_startdate,
-											end: dto.plan_enddate,
-											money: dto.money_no,
-											amount: dto.plan_amount,
-											desc: dto.plan_desc,
-											loc: dto.plan_loc
-									};
-									event.push(plan_event);
-								});
-								successCallback(event);
+								if (event.length == 0) {
+									$.each(data, function(idx, dto) {
+										plan_event = {
+												id: dto.plan_no,
+												title: dto.plan_name,
+												start: dto.plan_startdate,
+												end: dto.plan_enddate,
+												money: dto.money_no,
+												amount: dto.plan_amount,
+												desc: dto.plan_desc,
+												loc: dto.plan_loc
+										};
+										event.push(plan_event);
+									});
+									successCallback(event);
+								}
 							}
 					});
 				},
