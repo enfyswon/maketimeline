@@ -10,8 +10,9 @@
 	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no}, #{plan_startdate}, #{plan_enddate}, #{plan_loc} )
 	</insert>
 	
-	<select id="selectList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
-	select plan_name
+	<select id="planList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
+	select plan_no, plan_name, plan_desc, plan_amount, plan_loc, money_no,
+		   date_format(plan_startdate, "%Y-%m-%dT%H:%i") plan_startdate, date_format(plan_enddate, "%Y-%m-%dT%H:%i") plan_enddate
 	from plan
 	where cate_no = #{cate_no}
 	</select>

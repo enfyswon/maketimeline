@@ -8,9 +8,9 @@
 		<title>Make Timeline</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.css">
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
 		<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 	</head>
@@ -106,11 +106,36 @@
 			</div>
 		</main>
 	
+		<script type="text/javascript">
+		var event = [];
+		var plan_event;
+		$(document).ready(function() {
+			$.get(
+					"${pageContext.request.contextPath}/plan/list",
+					{
+						cate_no : "${category.cate_no}"
+					},
+					function(data, status) {
+						$.each(JSON.parse(data), function(idx, dto) {
+							plan_event = {
+									id: dto.plan_no,
+									title: dto.plan_name,
+									start: dto.plan_startdate,
+									end: dto.plan_enddate
+							};
+							event.push(plan_event);
+						});
+						console.log(event);
+					}
+			);
+		});
+		</script>
 		<script>
 		var modal = document.getElementById("modal");
 		var modalTitle = $(".modal-title");
 		var planStart = $("#plan_startdate");
 		var planEnd = $("#plan_enddate");
+		console.log(event);
 		document.addEventListener('DOMContentLoaded', function() {
 			  var calendarEl = document.getElementById('calendar');
 			  var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -121,48 +146,44 @@
 			      center: 'title',
 			      right: 'dayGridMonth,timeGridWeek,timeGridDay'
 			    },
+			    navLink: true,
 			    locale: 'ko',
 			    timeZone: 'local',
 			    allDaySlot: true,
-			    displayEventTime: true,
-			    displayEventEnd: true,
-			    views: {
-			    	month: {
-			    		eventLimit : 3, 
-			    		columnFormat: 'dddd'
-			    	}, 
-			    	agendaWeek: {
-			    		columnFormat: 'M/D ddd', 
-			    		titleFormat: "YYYY년 M월 D일", 
-			    		eventLimit: false
-			    	}, 
-			    	agendaDay: {
-			    		columnFormat: 'dddd', 
-			    		eventLimit: false
-			    	}, 
-			    	listWeek: {
-			    		columnFormat: ''
-			    	}
-			    },
-			    timeFormat: 'HH:mm',
+			    displayEventTime: false,
+			    displayEventEnd: false,
 			    defaultTimedEventDuration: '01:00:00',
 			    editable: true,
-			    minTime: '00:00:00',
-			    maxTime: '24:00:00',
 			    slotLabelFormat: 'HH:mm',
-			    LongPressDeley: 0,
+			    dayMaxEvents: true,
 			    eventLongPressDelay: 0,
 			    selectLongPressDelay: 0,
 			    selectable: true,
-				eventRender: function(event, element, view) {
-					element.popover({
-						
-					});
-					return filtering(event);
-				},
 				select: function(info) {
 					$(".fc-body").unbind('click');
 					newEvent(info.startStr, info.endStr);
+				},
+				events : function(info, successCallback) {
+					$.ajax({
+							type: 'get',
+							url: "${pageContext.request.contextPath}/plan/list",
+							dataType: "json",
+							data: {
+								cate_no : "${category.cate_no}"
+							},
+							success: function(data) {
+								$.each(data, function(idx, dto) {
+									plan_event = {
+											id: dto.plan_no,
+											title: dto.plan_name,
+											start: dto.plan_startdate,
+											end: dto.plan_enddate
+									};
+									event.push(plan_event);
+								});
+								successCallback(event);
+							}
+					});
 				}
 			  });
 	
@@ -209,11 +230,16 @@
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$.each(${money}, function(idx, dto) {
-				$("#money_no").append(
-					"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
-				);
-			});
+			$.get(
+					"${pageContext.request.contextPath}/plan/money",
+					function(data, status) {
+						$.each(JSON.parse(data), function(idx, dto) {
+							$("#money_no").append(
+								"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
+							);
+						});
+					}
+			);
 		});
 		</script>
 		<script type="text/javascript">

@@ -36,10 +36,18 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/money", method = RequestMethod.GET)
+	public void money(PrintWriter out) {
+		List<MoneyDTO> list = null;
+		list = service.selectMoneyList();
+		
+		out.print(new Gson().toJson(list));
+		out.close();
+	}
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void planList(String cate_no, PrintWriter out) {
 		List<PlanDTO> list = null;
-		list = service.selectList(cate_no);
+		list = service.planList(cate_no);
 		
 		out.print(new Gson().toJson(list));
 		out.close();
@@ -49,10 +57,7 @@ public class PlanController {
 	public String plan(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
-		List<MoneyDTO> list = null;
-		list = service.selectMoneyList();
-		
-		model.addAttribute("money", new Gson().toJson(list));
+
 		model.addAttribute("category", dto);
 		
 		return "/travel/plan/plan";

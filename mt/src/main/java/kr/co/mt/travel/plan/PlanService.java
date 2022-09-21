@@ -27,9 +27,9 @@ public class PlanService {
 		return dto;
 	}//plan_select
 	
-	public List<PlanDTO> selectList( String cate_no ) {
+	public List<PlanDTO> planList( String cate_no ) {
 		List<PlanDTO> list = null;
-		list = dao.selectList( cate_no );
+		list = dao.planList( cate_no );
 		return list;
 	}//searchList
 
