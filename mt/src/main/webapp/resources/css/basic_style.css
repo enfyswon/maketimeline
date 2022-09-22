@@ -25,6 +25,9 @@ button {
 	border-bottom: 1px solid #58606D;
 	position: relative;
 }
+#a-link {
+	text-decoration: none;
+}
 #logo-link {
 	position: absolute;
 	left: 50%;
