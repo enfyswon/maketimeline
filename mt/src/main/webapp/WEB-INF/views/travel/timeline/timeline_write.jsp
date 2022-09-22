@@ -9,10 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -29,10 +26,13 @@
 					</div>
 					<div class="timeline-detail">
 						<p>
-							<label for="timeline_date">여행 날짜</label>
-							<label for="timeline_date" id="timeline_date_label" class="write_label"></label>
+							<label for="timeline_startdate">여행 날짜</label>
+							<label for="timeline_startdate" id="timeline_stsartdate_label" class="write_label"></label>
+							<input type="checkbox" id="timeline_allDay">
+							<label for="timeline_allDay">하루 종일</label>
 						</p>
-						<input type="datetime-local" id="timeline_date" name="timeline_date">
+						<input type="datetime-local" id="timeline_startdate" name="timeline_startdate"> ~ 
+						<input type="datetime-local" id="timeline_enddate" name="timeline_enddate">
 					</div>
 					<div class="timeline-detail">
 						<p>
@@ -338,6 +338,31 @@
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
+		let allDay = 'false';
+		$(document).ready(function() {
+			$("#timeline_startdate").change(function() {
+				//$("#timeline_allDay").prop("checked", false);
+				alert($("#timeline_startdate").val());
+				let endTime = new Date($("#timeline_startdate").val());
+				alert(endTime);
+				endTime.setHours(endTime.getHours() + 1);
+				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
+				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
+				 $("#timeline_enddate").val(endTime);
+			});
+		});
+// 		$(document).ready(function() {
+// 			$("#timeline_enddate").change(function() {
+// 				if ($("#timeline_startdate").val() != null) {
+// 					let startTime = moment($("timeline_startdate").val()).format("YYYY-MM-DD");
+// 					let endTime = moment($("timeline_enddate").val()).format("YYYY-MM-DD");
+// 					alert(startTime + " : " + endTime);
+// 					if (startTime < endTime) {
+// 						$("#timeline_allDay").prop("checked", true);
+// 					}
+// 				}
+// 			});
+// 		});
 		$(document).ready(function() {
 			$("#add_btn").click(function() {
 				if ($.trim($("#timeline_name").val()) == "") {
@@ -347,11 +372,15 @@
 					$("#timeline_name_label").text("");
 				}
 				
-				if ($("#timeline_date").val() == "") {
-					$("#timeline_date_label").text("여행 날짜를 선택해주세요.");
+				if ($("#timeline_startdate").val() == "") {
+					$("#timeline_startdate_label").text("여행 날짜를 선택해주세요.");
 					return;
 				} else {
-					$("#timeline_date_label").text("");
+					$("#timeline_startdate_label").text("");
+				}
+				
+				if ($("#timeline_allDay").is(":checked")) {
+					allDay = 'true';
 				}
 				
 				if ($.trim($("#timeline_desc").val()) == "") {
@@ -407,6 +436,7 @@
 				}
 				
 				let form = new FormData( document.getElementById("timeline_form"));
+				form.append("timeline_allDay", allDay);
 				form.append("timeline_loc", timeline_loc);
 				
 				let keys = form.keys();

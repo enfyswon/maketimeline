@@ -40,7 +40,7 @@
 							</div>
 							<div class="timeline-profile-desc">
 								<p class="timeline-nick">${dto.mni}</p>
-								<p class="timeline-date">${dto.timeline_date}</p>
+								<p class="timeline-date">${dto.timeline_startdate}</p>
 							</div>
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>
@@ -97,7 +97,7 @@
 		
 			        // 인포윈도우로 장소에 대한 설명을 표시합니다
 			        var infowindow = new kakao.maps.InfoWindow({
-			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;">' + name + '</div>',
+			            content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:small;z-index:5;">' + name + '</div>',
 			            removable : 'true'
 			        });
 			        infowindow.open(map, marker);
@@ -157,7 +157,7 @@
 		});
 		$(document).ready(function() {
 			$("#timeline_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/timeline/money?cate_no=${category.cate_no}";
+				location.href="${pageContext.request.contextPath}/timeline/calc?cate_no=${category.cate_no}";
 			});
 		});
 		</script>

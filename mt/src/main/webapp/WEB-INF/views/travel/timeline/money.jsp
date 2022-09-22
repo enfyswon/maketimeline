@@ -23,7 +23,7 @@
 			</div>
 			<div id="money-box">
 				<div class="money-title">
-					<h1><span id="date"></span> 예상 지출</h1>
+					<h1><span id="date"></span> 지출 사항</h1>
 				</div>
 				<div class="money-detail">
 					<h3>숙박비</h3>
@@ -52,14 +52,14 @@
 				</div>
 			</div>
 			<div id="button-box">
-				<button id="plan_btn">
-					<img alt="plan" src="${pageContext.request.contextPath}/resources/img/plan.png">
+				<button id="timeline_btn">
+					<img alt="plan" src="${pageContext.request.contextPath}/resources/img/timeline.png">
 				</button>
 			</div>
 		</main>
 		<script>
 		var event = [];
-		var plan_event;
+		var timeline_event;
 		console.log(event);
 		document.addEventListener('DOMContentLoaded', function() {
 			  var calendarEl = document.getElementById('calendar');
@@ -87,7 +87,7 @@
 				events : function(info, successCallback) {
 					$.ajax({
 							type: 'get',
-							url: "${pageContext.request.contextPath}/plan/list",
+							url: "${pageContext.request.contextPath}/timeline/list",
 							dataType: "json",
 							data: {
 								cate_no : "${category.cate_no}"
@@ -95,18 +95,18 @@
 							success: function(data) {
 								if (event.length == 0) {
 									$.each(data, function(idx, dto) {
-										plan_event = {
-												id: dto.plan_no,
-												title: dto.plan_name,
-												start: dto.plan_startdate,
-												end: dto.plan_enddate,
+										timeline_event = {
+												id: dto.timeline_no,
+												title: dto.timeline_name,
+												start: dto.timeline_startdate,
+												end: dto.timeline_enddate,
 												money: dto.money_no,
-												amount: dto.plan_amount,
-												desc: dto.plan_desc,
-												loc: dto.plan_loc,
-												allDay: JSON.parse(dto.plan_allDay)
+												amount: dto.timeline_amount,
+												desc: dto.timeline_desc,
+												loc: dto.timeline_loc,
+												allDay: JSON.parse(dto.timeline_allDay)
 										};
-										event.push(plan_event);
+										event.push(timeline_event);
 									});
 									successCallback(event);
 								}
@@ -192,7 +192,6 @@
 							}
 						}
 					}
-					
 		            $("#date").html(moment(date).format("YYYY년 MM월 DD일"));
 		            $("#bedamount").text(bedamount);
 		            $("#foodamount").text(foodamount);
@@ -200,6 +199,7 @@
 		            $("#enteramount").text(enteramount);
 		            $("#etcamount").text(etcamount);
 		            $("#amount").text(amount);
+		            //alert(bedamount + " : " + foodamount + " : " + trafficamount + " : " + enteramount + " : " + etcamount + " : " + amount);
 				}
 			  });
 	
@@ -209,8 +209,8 @@
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$("#plan_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan?cate_no=${category.cate_no}";
+			$("#timeline_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
 			});
 		});
 		</script>
