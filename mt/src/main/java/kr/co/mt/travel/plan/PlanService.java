@@ -27,9 +27,9 @@ public class PlanService {
 		return dto;
 	}//plan_select
 	
-	public List<PlanDTO> selectList( String cate_no ) {
+	public List<PlanDTO> planList( String cate_no ) {
 		List<PlanDTO> list = null;
-		list = dao.selectList( cate_no );
+		list = dao.planList( cate_no );
 		return list;
 	}//searchList
 
@@ -38,6 +38,27 @@ public class PlanService {
 		list = dao.selectMoneyList();
 		
 		return list;
+	}
+
+	public int update(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = dao.update(dto);
+		
+		return successCnt;
+	}
+
+	public int delete(String plan_no) {
+		int successCnt = 0;
+		successCnt = dao.delete(plan_no);
+		
+		return successCnt;
+	}
+
+	public int dateUpdate(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = dao.dateUpdate(dto);
+		
+		return successCnt;
 	}
 	
 	

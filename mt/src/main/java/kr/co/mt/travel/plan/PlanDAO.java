@@ -28,9 +28,9 @@ public class PlanDAO {
 		return dto;
 	}//plan_select
 	
-	public List<PlanDTO> selectList( String cate_no ) {
+	public List<PlanDTO> planList( String cate_no ) {
 		List<PlanDTO> list = null;
-		list = sqlSession.selectList("PlanMapper.selectList", cate_no);
+		list = sqlSession.selectList("PlanMapper.planList", cate_no);
 		return list;
 	}//selectList
 
@@ -39,6 +39,27 @@ public class PlanDAO {
 		list = sqlSession.selectList("PlanMapper.selecetMoney");
 		
 		return list;
+	}
+
+	public int update(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("PlanMapper.planUpdate", dto);
+		
+		return successCnt;
+	}
+
+	public int delete(String plan_no) {
+		int successCnt = 0;
+		successCnt = sqlSession.delete("PlanMapper.planDelete", plan_no);
+		
+		return successCnt;
+	}
+
+	public int dateUpdate(PlanDTO dto) {
+		int successCnt = 0;
+		successCnt = sqlSession.update("PlanMapper.planDateUpdate", dto);
+		
+		return successCnt;
 	}
 	
 }//class

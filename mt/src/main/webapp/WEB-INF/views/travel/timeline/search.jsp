@@ -63,10 +63,12 @@
 							</div>
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>
+						<c:if test="${login_info.mno == dto.mno}">
 						<div class="timeline-btn-box">
 							<button type="button" class="timeline-update-btn"></button>
 							<button type="button" class="timeline-delete-btn"></button>
 						</div>
+						</c:if>
 					</div>
 				</div>
 				</c:forEach>
