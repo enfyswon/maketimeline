@@ -64,9 +64,9 @@ public class PlanDAO {
 		return successCnt;
 	}
 	
-	public List<KoreaDTO> tourlist() {
+	public List<KoreaDTO> tourlist(String region_no) {
 		List<KoreaDTO> list = null;
-		list = sqlSession.selectList("PlanMapper.tourList");
+		list = sqlSession.selectList("PlanMapper.tourList", region_no);
 		
 		return list;
 	}
