@@ -37,4 +37,9 @@
 	update plan set plan_startdate = #{plan_startdate}, plan_enddate = #{plan_enddate}
 	where plan_no = #{plan_no}
 	</update>
+	
+	<select id="tourList" resultType="kr.co.mt.test.KoreaDTO">
+	select tour_title, tour_loc, tour_desc
+	from tour
+	</select>
 </mapper>

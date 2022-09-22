@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mt.dto.MoneyDTO;
+import kr.co.mt.test.KoreaDTO;
 import kr.co.mt.travel.category.CategoryDTO;
+import kr.co.mt.travel.timeline.TimelineDTO;
 
 @Repository
 public class PlanDAO {
@@ -60,6 +62,13 @@ public class PlanDAO {
 		successCnt = sqlSession.update("PlanMapper.planDateUpdate", dto);
 		
 		return successCnt;
+	}
+	
+	public List<KoreaDTO> tourlist() {
+		List<KoreaDTO> list = null;
+		list = sqlSession.selectList("PlanMapper.tourList");
+		
+		return list;
 	}
 	
 }//class

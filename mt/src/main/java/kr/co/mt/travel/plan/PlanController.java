@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.dto.MoneyDTO;
+import kr.co.mt.test.KoreaDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 import kr.co.mt.travel.category.CategoryService;
 
@@ -94,8 +95,12 @@ public class PlanController {
 	public String plan(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
+		
+		List<KoreaDTO> list = null;
+		list = service.tourlist();
 
 		model.addAttribute("category", dto);
+		model.addAttribute("list", list);
 		
 		return "/travel/plan/plan";
 	}//travel/plan
