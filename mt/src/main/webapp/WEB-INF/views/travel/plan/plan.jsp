@@ -26,9 +26,6 @@
 				<button id="timeline_btn">
 					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
 				</button>
-				<button id="plan_add_btn">
-					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
-				</button>
 				<button id="plan_money_btn">
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
@@ -56,6 +53,8 @@
 										<p>
 											<label for="plan_startdate">여행 날짜</label>
 											<label for="plan_startdate" id="plan_startdate_label" class="write_label"></label>
+											<input type="checkbox" id="plan_allDay" checked="checked">
+											<label for="plan_allDay">하루 종일</label>
 										</p>
 										<input type="datetime-local" id="plan_startdate" name="plan_startdate" class="plan-date"> ~ 
 										<input type="datetime-local" id="plan_enddate" name="plan_enddate" class="plan-date">
@@ -377,6 +376,7 @@
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
+		let allDay = 'false';
 		$(document).ready(function() {
 			$("#add_btn").click(function() {
 				if ($.trim($("#plan_name").val()) == "") {
@@ -416,9 +416,13 @@
 					$("#plan_amount_label").text("");
 				}
 
+				if ($("#plan_allDay").is(":checked")) {
+					allDay = 'true';
+				}
 				let form = new FormData( document.getElementById("plan_form"));
 				
 				form.append('plan_loc', plan_loc);
+				form.append('plan_allDay', allDay);
 				
 				let keys = form.keys();
 				for(key of keys) console.log(key);
@@ -481,6 +485,10 @@
 					return;
 				} else {
 					$("#plan_amount_label").text("");
+				}
+				
+				if ($("#plan_allDay").is(":checked")) {
+					allDay = 'true';
 				}
 
 				let form = new FormData( document.getElementById("plan_form"));
@@ -587,7 +595,8 @@
 												money: dto.money_no,
 												amount: dto.plan_amount,
 												desc: dto.plan_desc,
-												loc: dto.plan_loc
+												loc: dto.plan_loc,
+												allDay: JSON.parse(dto.plan_allDay)
 										};
 										event.push(plan_event);
 									});
@@ -615,6 +624,9 @@
 								}
 							}
 					);
+				},
+				eventResize: function(info) {
+					alert(info.event.id + " : " + moment(info.event.start).format("YYYY-MM-DD HH:mm") + " : " + moment(info.event.end).format("YYYY-MM-DD HH:mm"));
 				}
 			  });
 	
@@ -649,6 +661,7 @@
 		<script type="text/javascript">
 		$(document).ready(function() {
 			planStart.change(function() {
+				$("#plan_allDay").prop("checked", false);
 				let endTime = new Date(planStart.val());
 				endTime.setHours(endTime.getHours() + 1);
 				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
@@ -662,18 +675,13 @@
 			});
 		});
 		$(document).ready(function() {
-			$("#plan_add_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/plan/add?cate_no=${category.cate_no}";
-			});
-		});
-		$(document).ready(function() {
 			$("#timeline_btn").click(function() {
 				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
 			});
 		});
 		$(document).ready(function() {
 			$("#plan_money_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/money/add?plan_no=${plan.money_no}";
+				location.href="${pageContext.request.contextPath}/plan/calc?cate_no=${category.cate_no}";
 			});
 		});
 		</script>

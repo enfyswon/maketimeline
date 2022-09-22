@@ -17,6 +17,30 @@ button {
 #tour-box {
 	width: 40%;
 }
+#money-box {
+	width: 40%;
+}
+.money-title {
+	text-align: center;
+	margin: 30px auto;
+}
+.money-detail {
+	width: 80%;
+	display: flex;
+	flex-direction: row;
+	margin: 25px auto;
+}
+#money-box hr {
+	margin: 25px auto;
+}
+.money-detail h3 {
+	width: 40%;
+	text-align: left;
+}
+.money-detail p {
+	width: 60%;
+	text-align: right;
+}
 #calender-box {
 	width: 60%;
 	display: flex;

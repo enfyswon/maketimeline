@@ -36,6 +36,16 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/calc", method = RequestMethod.GET)
+	public String money(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = cservice.cate_select(cate_no);
+
+		model.addAttribute("category", dto);
+		
+		return "/travel/plan/money";
+	}
+	
 	@RequestMapping(value = "/dateUpdate", method = RequestMethod.POST)
 	public void dateUpdate(PlanDTO dto, PrintWriter out) {
 		int successCnt = 0;
