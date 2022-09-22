@@ -46,6 +46,22 @@ public class MemoController {
 		return "memo/chat_list";//jsp file name
 	}//myRoomList
 
+	@RequestMapping( value = "/my_room_list2", method = RequestMethod.GET )
+	public String myRoomList2( String room_no, HttpSession session, Model model ) {
+
+		String loginMno = ( (MemberDTO) session.getAttribute("login_info") ).getMno();
+
+		List<MemoDTO> list = null;
+		list = service.myRoomListByMno(loginMno);
+		model.addAttribute("room_list", list);
+
+		MemoDTO dto = null;
+		dto = service.roomInfoByNo(room_no);
+		model.addAttribute("room_dto", dto);
+
+		return "memo/room_list";//jsp file name
+	}//myRoomList
+
 	@RequestMapping( value = "/my_room_list", method = RequestMethod.GET )
 	public String myRoomList( HttpSession session, Model model ) {
 

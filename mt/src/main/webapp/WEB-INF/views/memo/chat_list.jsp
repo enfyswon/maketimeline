@@ -15,7 +15,7 @@
 		<style type="text/css">
 		#chat_list_div {
 			float: right;
-			width : 50%;
+			width : 150%;
 			height : 470px;
 			border : 1px solid gray;
 			overflow : auto;
