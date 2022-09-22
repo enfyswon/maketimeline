@@ -6,17 +6,17 @@
 <mapper namespace="TimelineMapper">
 
 	<insert id="timeInsert">
-	insert into timeline (timeline_name, timeline_no, cate_no, timeline_date, timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
-	values (#{timeline_name}, #{timeline_no}, #{cate_no}, #{timeline_date}, #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
+	insert into timeline (timeline_name, timeline_no, cate_no, timeline_startdate, timeline_enddate timeline_desc, timeline_amount, timeline_photoname, timeline_photopath, timeline_loc)
+	values (#{timeline_name}, #{timeline_no}, #{cate_no}, #{timeline_startdate}, #{timeline_enddate} #{timeline_desc}, #{timeline_amount}, #{timeline_photoname}, #{timeline_photopath}, #{timeline_loc})
 	</insert>
 	
 	<select id="timeList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_startdate, t.timeline_enddate, t.timeline_desc, t.timeline_photopath, t.timeline_loc, t.timeline_allDay, t.timeline_amount, t.money_no
 	from timeline t, member m, category c
 	where t.cate_no = #{cate_no}
 	and c.mno = m.mno
 	and c.cate_no = #{cate_no}
-	order by timeline_date desc
+	order by timeline_startdate desc
 	</select>
 	
 	<select id="mapList" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
@@ -30,9 +30,9 @@
 	where timeline_no = #{timeline_no} 
 	</delete>
 	
-	<select id="selectList" parameterType="kr.co.mt.SearchDTO"
+	<select id="selectList" parameterType="kr.co.mt.dto.SearchDTO"
 			resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_date, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_startdate, t.timeline_desc, t.timeline_photopath, t.timeline_loc
 	from timeline t, member m, category c
 	where 1 = 1
 		<if test="cate_no != null and cate_no != ''">
@@ -69,14 +69,14 @@
 	</select>
 	
 	<select id="timeSelect" parameterType="java.lang.String" resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select timeline_no, timeline_name, timeline_desc, timeline_date, timeline_amount, timeline_photoname, timeline_photopath, money_no, timeline_loc
+	select timeline_no, timeline_name, timeline_desc, timeline_startdate, timeline_amount, timeline_photoname, timeline_photopath, money_no, timeline_loc
 	from timeline
 	where timeline_no = #{timeline_no}
 	</select>
 	
 	<update id="timeUpdate" parameterType="kr.co.mt.travel.timeline.TimelineDTO">
 	update timeline set timeline_name = #{timeline_name}, timeline_desc = #{timeline_desc}, timeline_amount = #{timeline_amount}, money_no = #{money_no},
-		   timeline_date = #{timeline_date}, timeline_photoname = #{timeline_photoname}, timeline_photopath = #{timeline_photopath}
+		   timeline_startdate = #{timeline_startdate}, timeline_photoname = #{timeline_photoname}, timeline_photopath = #{timeline_photopath}
 	where timeline_no = #{timeline_no}
 	</update>
 	

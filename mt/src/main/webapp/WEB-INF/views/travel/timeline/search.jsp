@@ -59,7 +59,7 @@
 							</div>
 							<div class="timeline-profile-desc">
 								<p class="timeline-nick">${dto.mni}</p>
-								<p class="timeline-date">${dto.timeline_date}</p>
+								<p class="timeline-date">${dto.timeline_startdate}</p>
 							</div>
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>

@@ -7,13 +7,15 @@ public class TimelineDTO {
 	private String cate_no;
 	private String timeline_name;
 	private String timeline_desc;
-	private String timeline_date;
+	private String timeline_startdate;
+	private String timeline_enddate;
 	private int timeline_amount;
 	private String timeline_loc;
 	private MultipartFile timeline_photo;
 	private String timeline_photoname;
 	private String timeline_photopath;
 	private String money_no;
+	private String timeline_allDay;
 	
 	private String mno;
 	private String mni;
@@ -43,11 +45,17 @@ public class TimelineDTO {
 	public void setTimeline_desc(String timeline_desc) {
 		this.timeline_desc = timeline_desc;
 	}
-	public String getTimeline_date() {
-		return timeline_date;
+	public String getTimeline_startdate() {
+		return timeline_startdate;
 	}
-	public void setTimeline_date(String timeline_date) {
-		this.timeline_date = timeline_date;
+	public void setTimeline_date(String timeline_stratdate) {
+		this.timeline_startdate = timeline_startdate;
+	}
+	public String getTimeline_enddate() {
+		return timeline_enddate;
+	}
+	public void setTimeline_enddate(String timeline_enddate) {
+		this.timeline_enddate = timeline_enddate;
 	}
 	public int getTimeline_amount() {
 		return timeline_amount;
@@ -84,6 +92,12 @@ public class TimelineDTO {
 	}
 	public void setMoney_no(String money_no) {
 		this.money_no = money_no;
+	}
+	public String getTimeline_allDay() {
+		return timeline_allDay;
+	}
+	public void setTimeline_allDay(String timeline_allDay) {
+		this.timeline_allDay = timeline_allDay;
 	}
 	public String getMno() {
 		return mno;
