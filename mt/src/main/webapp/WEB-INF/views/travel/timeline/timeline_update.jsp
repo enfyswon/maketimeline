@@ -29,10 +29,13 @@
 					</div>
 					<div class="timeline-detail">
 						<p>
-							<label for="timeline_date">여행 날짜</label>
-							<label for="timeline_date" id="timeline_date_label" class="write_label"></label>
+							<label for="timeline_startdate">여행 날짜</label>
+							<label for="timeline_startdate" id="timeline_startdate_label" class="write_label"></label>
+							<input type="checkbox" id="timeline_allDay">
+							<label for="timeline_allDay">하루 종일</label>
 						</p>
-						<input type="datetime-local" id="timeline_date" name="timeline_date" value="${timeline.timeline_date}">
+						<input type="datetime-local" id="timeline_startdate" name="timeline_date" value="${timeline.timeline_startdate}"> ~ 
+						<input type="datetime-local" id="timeline_enddate" name="timeline_enddate" value="${timeline.timeline_enddate}">
 					</div>
 					<div class="timeline-detail">
 						<p>
@@ -366,9 +369,20 @@
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
+		let allDay = 'false';
+		$(document).ready(function() {
+			$("#timeline_startdate").change(function() {
+				//$("#timeline_allDay").prop("checked", false);
+				let endTime = new Date($("#timeline_startdate").val());
+				endTime.setHours(endTime.getHours() + 1);
+				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
+				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
+				 $("#timeline_enddate").val(endTime);
+			});
+		});
 		$(document).ready(function() {
 			$("#cancel_btn").click(function() {
-				location.href="${pageContext.request.contextPath}/category";
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${timeline.cate_no}";
 			});
 		});
 		$(document).ready(function() {

@@ -342,25 +342,27 @@
 		$(document).ready(function() {
 			$("#timeline_startdate").change(function() {
 				//$("#timeline_allDay").prop("checked", false);
+				alert($("#timeline_startdate").val());
 				let endTime = new Date($("#timeline_startdate").val());
+				alert(endTime);
 				endTime.setHours(endTime.getHours() + 1);
 				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
 				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
 				 $("#timeline_enddate").val(endTime);
 			});
 		});
-		$(document).ready(function() {
-			$("#timeline_enddate").change(function() {
-				if ($("#timeline_startdate").val() != null) {
-					let startTime = moment($("timeline_startdate").val()).format("YYYY-MM-DD");
-					let endTime = moment($("timeline_enddate").val()).format("YYYY-MM-DD");
-					alert(startTime + " : " + endTime);
-					if (startTime < endTime) {
-						$("#timeline_allDay").prop("checked", true);
-					}
-				}
-			});
-		});
+// 		$(document).ready(function() {
+// 			$("#timeline_enddate").change(function() {
+// 				if ($("#timeline_startdate").val() != null) {
+// 					let startTime = moment($("timeline_startdate").val()).format("YYYY-MM-DD");
+// 					let endTime = moment($("timeline_enddate").val()).format("YYYY-MM-DD");
+// 					alert(startTime + " : " + endTime);
+// 					if (startTime < endTime) {
+// 						$("#timeline_allDay").prop("checked", true);
+// 					}
+// 				}
+// 			});
+// 		});
 		$(document).ready(function() {
 			$("#add_btn").click(function() {
 				if ($.trim($("#timeline_name").val()) == "") {

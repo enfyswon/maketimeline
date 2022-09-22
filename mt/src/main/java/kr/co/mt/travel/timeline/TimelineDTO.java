@@ -48,7 +48,7 @@ public class TimelineDTO {
 	public String getTimeline_startdate() {
 		return timeline_startdate;
 	}
-	public void setTimeline_date(String timeline_stratdate) {
+	public void setTimeline_startdate(String timeline_startdate) {
 		this.timeline_startdate = timeline_startdate;
 	}
 	public String getTimeline_enddate() {
