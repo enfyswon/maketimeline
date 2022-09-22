@@ -26,9 +26,6 @@
 				<button id="timeline_btn">
 					<img alt="timeline" src="${pageContext.request.contextPath}/resources/img/timeline.png">
 				</button>
-				<button id="plan_add_btn">
-					<img alt="plan_plus" src="${pageContext.request.contextPath}/resources/img/travel_plus.png">
-				</button>
 				<button id="plan_money_btn">
 					<img alt="plan_money" src="${pageContext.request.contextPath}/resources/img/moneybox.png">
 				</button>
@@ -677,7 +674,11 @@
 				modal.style.display = "none";
 			});
 		});
-		
+		$(document).ready(function() {
+			$("#timeline_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${category.cate_no}";
+			});
+		});
 		$(document).ready(function() {
 			$("#plan_money_btn").click(function() {
 				location.href="${pageContext.request.contextPath}/plan/calc?cate_no=${category.cate_no}";
