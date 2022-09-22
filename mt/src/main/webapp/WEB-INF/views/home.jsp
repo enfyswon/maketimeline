@@ -43,7 +43,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/timeline/list">
+					<a href="${pageContext.request.contextPath}/timeline/search">
 						<img alt="search" src="${pageContext.request.contextPath}/resources/img/search.png">
 					</a>
 				</div>

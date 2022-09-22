@@ -41,6 +41,25 @@ public class TimelineController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void timelineList(String cate_no, PrintWriter out) {
+		List<TimelineDTO> list = null;
+		list = service.timeline_list(cate_no);
+		
+		out.print(new Gson().toJson(list));
+		out.close();
+	}
+	
+	@RequestMapping(value = "/calc", method = RequestMethod.GET)
+	public String calc(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = cservice.cate_select(cate_no);
+
+		model.addAttribute("category", dto);
+		
+		return "/travel/timeline/money";
+	}
+	
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String timeline(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
@@ -61,7 +80,7 @@ public class TimelineController {
 		return "/travel/timeline/timeline";
 	}
 
-	@RequestMapping( value = "/list", method = RequestMethod.GET )
+	@RequestMapping( value = "/search", method = RequestMethod.GET )
 	public String list( Model model, SearchDTO dto ) {
 		List<TimelineDTO> list = null;
 		list = service.searchList( dto );
