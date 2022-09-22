@@ -19,6 +19,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/timeline*")
 		.addPathPatterns("/timeline/*")
 		.addPathPatterns("/memo/*")
-		.addPathPatterns("/mypage/*");
+		.addPathPatterns("/mypage/*")
+		.excludePathPatterns("/timeline/search*");
 	}
 }
