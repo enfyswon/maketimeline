@@ -17,6 +17,11 @@ button {
 #tour-box {
 	width: 40%;
 }
+#tour-list-box {
+	width: 100%;
+	heigth: 650px;
+	overflow: auto;
+}
 #money-box {
 	width: 40%;
 }
