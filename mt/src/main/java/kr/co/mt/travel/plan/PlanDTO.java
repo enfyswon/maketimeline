@@ -12,6 +12,7 @@ public class PlanDTO {
 	private String money_no;
 	private String plan_startdate;
 	private String plan_enddate;
+	private String plan_allDay;
 	
 	public String getPlan_no() {
 		return plan_no;
@@ -72,5 +73,11 @@ public class PlanDTO {
 	}
 	public void setPlan_enddate(String plan_enddate) {
 		this.plan_enddate = plan_enddate;
+	}
+	public String getPlan_allDay() {
+		return plan_allDay;
+	}
+	public void setPlan_allDay(String plan_allDay) {
+		this.plan_allDay = plan_allDay;
 	}
 }
