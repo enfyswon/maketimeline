@@ -1,28 +1,17 @@
 @charset "UTF-8";
 
-* {
-	margin: 0 auto;
-}
 tr{
  background-color: #77adea;
  height: 60px;
 
 }
-a {
-	text-decoration: none;
-	color: black;
-}
-li {
-	list-style: none;
-}
 
 body {
-	background-color: #9bc4f0;
 }
 button {
 	border: 0;
 	outline: 0;
-	padding: 3px;
+	padding: 0px;
 }
 
 #cnts {
@@ -46,7 +35,10 @@ button {
 #center-box
 {
 	position: center;
-
+	border-radius: 5px;
+}
+.right-box {
+	text-align: center;
 }
 #right-box
 {
@@ -99,18 +91,16 @@ button {
 }
 
 #ckd_div {
-			float: right;
 			width : 80%;
-			height : 670px;
+			height : 470px;
 			overflow : auto;
 		}
 #memo_header_div {
-		float: right;
 		width : 80%;
 		height : 30px;
 		background-color: #77adea;
 		border : 1px solid gray;
-			
+		overflow : 100 auto;
 		}
 
 #memo_list_div {

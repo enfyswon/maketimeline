@@ -15,14 +15,13 @@
 		<style type="text/css">
 		#chat_list_div {
 			float: right;
-			width : 80%;
+			width : 100%;
 			height : 470px;
-			border : 1px solid gray;
 			overflow : auto;
 		}
 		</style>
 	</head>
-	<body>
+	<body style = "background-color: #9bc4f0;">
 
 		<div id="chat_list_div">
 			<c:forEach var="dto" items="${chat_list}">

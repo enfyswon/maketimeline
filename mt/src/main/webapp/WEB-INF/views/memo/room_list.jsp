@@ -13,20 +13,24 @@
 		<title> My Memo List </title>
 		
 		<style>
+* {
+	margin: 0 auto;
+}
 .left-box {
   float: left;
-  width: 78%;
-    border: 2;
+  width: 48%;
+   border: 2;
 
 }
 .right-box {
   float: right;
+  width: 52%;
   border: 2;
 
 }
 .center-box {
   float: center;
-  width: 48%;
+  width: 70%;
   margin-top: 30px;
 }
 h1, h4{
@@ -37,7 +41,8 @@ h1, h4{
  text-align: center;
 }
 table{
-width: 20%;
+width: 80%;
+height : 20px;
 }
 </style>
 	</head>
@@ -50,18 +55,20 @@ width: 20%;
             <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
             <a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"></a>
          </div>
-		<div class="center-box" id="center-box">
+		<main>
 		<div class='left-box' id="profile" >
 			<div class="input-group">
          <div class="input-group-prepend">
-				<h4>상대방 ID</h4>
+         <div id="memo_header_div">
+				<h5>상대방 ID</h4>
+		 </div>
 			<table class="table table-hover" border="2" >
 				<c:forEach var="dto" items="${room_list}">
 					<tr>
 						<td>
 							<h5 class="text-left">
 							${dto.mni_to} 
-						<button type="submit" class="btn_delete" value="${dto.room_no}"> 채팅방 삭제 </button>
+						<button type="submit" class="btn_delete" value="${dto.room_no}">삭제</button>
 						<a href="${pageContext.request.contextPath}/memo/my_room_list2?room_no=${dto.room_no}"
 									style="text-decoration:none;" class="text-dark">
 						<c:choose>
@@ -86,16 +93,16 @@ width: 20%;
 		<h5> 상대방 ID :${room_dto.mni_to} </h5>
 		</div>
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
-				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
+				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1" ></iframe>
 				<div id="ckd_div">
 			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px; background-color:blue;"></textarea>
 			<script type="text/javascript">
 				CKEDITOR.replace('cnts');
 			</script>
 			<button id="chat_send_btn" class="btn btn-dark btn-sm float-right"> 글 전 송 </button>
+				</div>
 		</div>
-		</div>
-		</div>
+		</main>
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
