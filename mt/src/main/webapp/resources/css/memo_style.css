@@ -3,6 +3,11 @@
 * {
 	margin: 0 auto;
 }
+tr{
+ background-color: #77adea;
+ height: 60px;
+
+}
 a {
 	text-decoration: none;
 	color: black;
@@ -12,13 +17,18 @@ li {
 }
 
 body {
-	background-color: #f4fbff;
+	background-color: #9bc4f0;
 }
 button {
 	border: 0;
 	outline: 0;
-	padding: 5px;
+	padding: 3px;
 }
+
+#cnts {
+		 backgroung-color:#77adea;
+		
+		}
 
 #logo-link {
 	position: absolute;
@@ -32,6 +42,15 @@ button {
 	top: 50px;
 	left: 90%;
 	transform: translate(0%, -50%);
+}
+#center-box
+{
+	position: center;
+
+}
+#right-box
+{
+	border: 2px;
 }
 #logout-btn, #join-btn {
 	margin-left: 5px;
@@ -48,6 +67,13 @@ button {
 	margin: 40px 0;
 	height: 20px;
 }
+
+#profile img {
+	float: left;
+	width : 15%;
+	height : 30px;	
+}
+
 #icon-bar {
 	width: 50%;
 	height: 160px;
@@ -71,27 +97,36 @@ button {
 	visibility: hidden;
 	z-index: 50;
 }
+
 #ckd_div {
 			float: right;
-			width : 100%;
+			width : 80%;
 			height : 670px;
 			overflow : auto;
 		}
 #memo_header_div {
 		float: right;
-		width : 100%;
-		height : 50px;
+		width : 80%;
+		height : 30px;
+		background-color: #77adea;
 		border : 1px solid gray;
 			
 		}
 
 #memo_list_div {
 			float: left;
-			width : 100%;
+			width : 80%;
 			height : 470px;
 			border : 1px solid gray;
-			overflow : auto;
+			background-color: #77adea;
+			
 		}
+
+
+textarea {
+		 backgroung-color:#77adea;
+		 border : 1px solid gray;
+}
 
 hr {
 	height: 1px;

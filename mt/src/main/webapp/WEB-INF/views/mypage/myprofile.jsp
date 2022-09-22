@@ -21,7 +21,7 @@
 				<div>
 					<c:choose>
 						<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
-						<img alt="profile_photo" src="${pf.mpho_path}" width=200px, height=200px>
+						<img id="profile" alt="profile_photo" src="${pf.mpho_path}" width=30px, height=30px>
 						</c:when>
 						<c:otherwise>
 						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">

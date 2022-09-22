@@ -22,19 +22,23 @@
 			width : 50%;
 			height : 50px;
 			border : 1px solid gray;
-			
 		}
+		.form-control:focus {
+		 backgroung-color:#77adea;
+		
+		}
+		
 		</style>
 	</head>
 	<body>
-	<%@ include file="/WEB-INF/views/header.jsp" %>
-		<br><br><br>
+	
+		
 		<div id="memo_header_div">
 		<h3> 닉네임 : ${room_dto.mni_from} =&gt; ${room_dto.mni_to} </h3>
 		</div>
-		<br><br>
+		
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
-				name="chatList" width="100%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
+				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
 				<div id="ckd_div">
 			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px;"></textarea>
 			<script type="text/javascript">

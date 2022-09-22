@@ -15,61 +15,64 @@
 		<style>
 .left-box {
   float: left;
-  width: 50%;
+  width: 78%;
+    border: 2;
+
 }
 .right-box {
   float: right;
-  
+  border: 2;
 
 }
 .center-box {
   float: center;
-  width: 50%;
+  width: 48%;
   margin-top: 30px;
 }
-h1{
+h1, h4{
  text-align: center;
  margin-top: 30px;
 }
 #insert{
  text-align: center;
 }
+table{
+width: 20%;
+}
 </style>
-
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-		
-		<br><br>
 		<h1 class="text-center"> My Memo List </h1>
 		<br>
          <div id="insert">
          <input class="bar_search" id="mno_to" name="mno_to">
-         
             <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
-            <a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"
-									style="text-decoration:none;" class="text-dark">
-									
-								</a>
-         
+            <a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"></a>
          </div>
-		<br><br>
-		<div class="center-box">
-		<div class='left-box' >
-
+		<div class="center-box" id="center-box">
+		<div class='left-box' id="profile" >
 			<div class="input-group">
          <div class="input-group-prepend">
-			<table class="table table-hover" class="mt-3 mb-3 ml-5">
+				<h4>상대방 ID</h4>
+			<table class="table table-hover" border="2" >
 				<c:forEach var="dto" items="${room_list}">
-				<br>
 					<tr>
 						<td>
 							<h5 class="text-left">
-									<button type="submit" class="btn_delete" value="${dto.room_no}"> 채팅방 삭제 </button>
-								<a href="${pageContext.request.contextPath}/memo/my_room_list2?room_no=${dto.room_no}"
+							${dto.mni_to} 
+						<button type="submit" class="btn_delete" value="${dto.room_no}"> 채팅방 삭제 </button>
+						<a href="${pageContext.request.contextPath}/memo/my_room_list2?room_no=${dto.room_no}"
 									style="text-decoration:none;" class="text-dark">
-									${dto.room_no} : ${dto.mni_from} &lt;=&gt; ${dto.mni_to} 
-								</a>
+						<c:choose>
+						<c:when test="${pf.mpho_path != null && dto.mni_from != ''}">
+						<img id="profile" alt="profile_photo" src="${pf.mpho_path}">
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+						</c:otherwise>
+						</c:choose>  
+						</a>
 							</h5>
 						</td>
 					</tr>
@@ -80,23 +83,19 @@ h1{
       </div>
       <div class='right-box'>
 		<div id="memo_header_div">
-		<h5> 닉네임 : ${room_dto.mni_from} =&gt; ${room_dto.mni_to} </h5>
+		<h5> 상대방 ID :${room_dto.mni_to} </h5>
 		</div>
-		<br><br>
 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
-				name="chatList" width="100%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
+				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1"></iframe>
 				<div id="ckd_div">
-			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px;"></textarea>
+			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px; background-color:blue;"></textarea>
 			<script type="text/javascript">
 				CKEDITOR.replace('cnts');
 			</script>
 			<button id="chat_send_btn" class="btn btn-dark btn-sm float-right"> 글 전 송 </button>
-			
 		</div>
 		</div>
 		</div>
-		
-		
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
@@ -147,16 +146,12 @@ h1{
       </script>
       <script type="text/javascript">
 	$(document).ready(function() {
-
 		$("#chat_send_btn").click(function() {
-
 			let chat = CKEDITOR.instances.cnts.getData();
-
 			if( chat == '' ){
 				alert("내용을 입력해 주세요.");
 				return;
 			}
-
 			$.post(
 					"${pageContext.request.contextPath}/memo/insert"
 					, {
@@ -174,9 +169,7 @@ h1{
 						}
 					}//call back functiion
 			);//post
-
 		});//click
-
 	});//ready
 	</script>
 	</body>
