@@ -15,6 +15,7 @@ public class MemoDTO {
 	private String chat;
 	private String chat_date;
 	private String read_yn;
+	private String mpho_path;
 
 	@Override
 	public String toString() {
@@ -137,4 +138,11 @@ public class MemoDTO {
 		this.read_yn = read_yn;
 	}
 
+	public String getMpho_path() {
+		return mpho_path;
+	}
+
+	public void setMpho_path(String mpho_path) {
+		this.mpho_path = mpho_path;
+	}
 }//class

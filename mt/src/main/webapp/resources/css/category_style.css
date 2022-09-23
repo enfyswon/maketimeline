@@ -97,6 +97,7 @@
 #add_btn {
 	padding: 8px;
 	border-radius: 7px;
+	width: 100px;
 }
 #category-input {
 	width: 80%;
