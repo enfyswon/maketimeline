@@ -42,11 +42,16 @@ public class MemoController {
 	}//delete
 
 	@RequestMapping( value = "/chat_list", method = RequestMethod.GET )
-	public String chatList( String room_no, HttpSession session, Model model ) {
-
+	public String chatList( MemoDTO dto, HttpSession session, Model model ) {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		dto.setMno(mno);
 		List<MemoDTO> list = null;
-		list = service.chatListByNo(room_no);
+		list = service.chatListByNo(dto);
+		
+		String mpho_path = service.getPhoto(dto.getOther_mno());
+		
 		model.addAttribute("chat_list", list);
+		model.addAttribute("photo", mpho_path);
 
 		return "memo/chat_list";//jsp file name
 	}//myRoomList

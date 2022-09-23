@@ -3,11 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:forEach var="dto" items="${room_list}">
 <div class="room-box room-box${dto.room_no}">
-	<button type="button" class="room" value="${dto.room_no}" mno="${dto.mno_to}" mni="${dto.mni_to}">
+	<button type="button" class="room" value="${dto.room_no}" mno="${dto.other_mno}" mni="${dto.other_mni}">
 		<div class="room-info">
 			<div class="room-img">	
 			<c:choose>
-				<c:when test="${dto.mpho_path != null && dto.mni_from != ''}">
+				<c:when test="${dto.mpho_path != null}">
 				<img id="profile" alt="profile_photo" src="${dto.mpho_path}">
 				</c:when>
 				<c:otherwise>
@@ -16,9 +16,13 @@
 			</c:choose>  
 			</div>
 			<div class="room-cnts">
-				<p class="room-cnts-to">${dto.mni_to}</p>
-				<p></p>
+				<p class="room-cnts-to">${dto.other_mni}</p>
 			</div>
+			<c:if test="${dto.unread > 0}">
+			<div class="room-cnts-unread">
+				<p>${dto.unread}</p>
+			</div>
+			</c:if>
 		</div>
 	</button>
 </div>

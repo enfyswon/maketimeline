@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mt.dto.MemberDTO;
+
 @Repository
 public class MemoDAO {
 
@@ -26,9 +28,9 @@ public class MemoDAO {
 		return successCount;
 	}//insert
 
-	public List<MemoDTO> chatListByNo(String room_no) {
+	public List<MemoDTO> chatListByNo(MemoDTO dto) {
 		List<MemoDTO> list = null;
-		list = sqlSession.selectList("MemoMapper.chatListByNo", room_no);
+		list = sqlSession.selectList("MemoMapper.chatListByNo", dto);
 		return list;
 	}//chatListByNo
 
@@ -61,5 +63,30 @@ public class MemoDAO {
 		successCount = sqlSession.delete("MemoMapper.delete", dto);
 		return successCount;
 	}//delete
+
+	public int unreadCnt(MemoDTO dto) {
+		int unread = 0;
+		unread = sqlSession.selectOne("MemoMapper.unreadCnt", dto);
+		
+		return unread;
+	}
+
+	public MemberDTO otherMem(MemoDTO dto) {
+		MemberDTO mdto = null;
+		mdto = sqlSession.selectOne("MemoMapper.otherMem", dto);
+		
+		return mdto;
+	}
+
+	public String getPhoto(String mno) {
+		String mpho_path = null;
+		mpho_path = sqlSession.selectOne("MemoMapper.getPhoto", mno);
+		
+		return mpho_path;
+	}
+
+	public void updateChat(MemoDTO dto) {
+		sqlSession.update("MemoMapper.updateChat", dto);
+	}
 
 }//class

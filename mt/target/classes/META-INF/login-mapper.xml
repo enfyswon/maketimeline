@@ -7,7 +7,7 @@
 
 	<select id="login" parameterType="kr.co.mt.dto.MemberDTO"
 						resultType="kr.co.mt.dto.MemberDTO">
-	select mno, email, mpwd, mni, tel
+	select mno, email, mpwd, mni, tel, mpho_path
 	from member
 	where email = #{email} 
 	and mpwd = #{mpwd}

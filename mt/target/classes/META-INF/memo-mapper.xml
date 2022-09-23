@@ -29,7 +29,7 @@
 	VALUES (#{room_no}, #{mno_ins}, #{mno_read}, #{chat}, now());
 	</insert>
 
-	<select id="chatListByNo" parameterType="java.lang.String" resultType="kr.co.mt.memo.MemoDTO">
+	<select id="chatListByNo" parameterType="kr.co.mt.memo.MemoDTO" resultType="kr.co.mt.memo.MemoDTO">
 	SELECT chat_no, room_no, mno_ins, m1.mni mni_ins, mno_read, m2.mni mni_read
 			, chat, chat_date, read_yn
 	FROM memo_chat, member m1, member m2
@@ -63,5 +63,47 @@
 		SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
+	<select id="unreadCnt" parameterType="kr.co.mt.memo.MemoDTO" resultType="Integer">
+	select count(chat_no) cnt from memo_chat
+	where mno_read = #{mno}
+	and read_yn = 1 
+	and room_no = #{room_no}
+	</select>
 
+	<select id="otherMem" parameterType="kr.co.mt.memo.MemoDTO" resultType="kr.co.mt.dto.MemberDTO">
+	select mno, mni, mpho_path
+	from member
+	<choose>
+		<when test="mno_from == mno">
+		where mno = #{mno_to}
+		</when>
+		<otherwise>
+		where mno = #{mno_from}
+		</otherwise>
+	</choose>
+	</select>
+	
+	<select id="getPhoto" parameterType="java.lang.String" resultType="java.lang.String">
+	select mpho_path
+	from member
+	where mno = #{mno}
+	</select>
+	
+	<update id="updateChat" parameterType="kr.co.mt.memo.MemoDTO">
+	update memo_chat set read_yn = 0
+	<choose>
+		<when test="room_no != 0">
+		where room_no = #{room_no}
+		and read_yn = 1
+		and mno_read = #{mno}
+		</when>
+		<otherwise>
+		where mno_ins = #{mno}
+		and read_yn = 1
+		and mno_read = #{other_mno}
+		</otherwise>
+	</choose>
+	</update>
+	
 </mapper>

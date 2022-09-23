@@ -13,7 +13,7 @@
 				</div>
 				<div class="memo-profile">
 				<c:choose>
-					<c:when test="${login_info.mpho_path != null && login_info.mni_from != ''}">
+					<c:when test="${login_info.mpho_path != null && login_info.mni != ''}">
 					<img alt="profile_photo" src="${login_info.mpho_path}">
 					</c:when>
 					<c:otherwise>
@@ -27,8 +27,8 @@
 			<div class="receive-memo">
 				<div class="memo-profile">
 				<c:choose>
-					<c:when test="${login_info.mpho_path != null && login_info.mni_from != ''}">
-					<img alt="profile_photo" src="${login_info.mpho_path}">
+					<c:when test="${photo != null}">
+					<img alt="profile_photo" src="${photo}">
 					</c:when>
 					<c:otherwise>
 					<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
