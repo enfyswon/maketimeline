@@ -27,8 +27,8 @@ public class MyPageService {
 		return updateYN;
 	}
 
-	public MemberDTO myprofile(String mno) {
-		MemberDTO dto=dao.myprofile(mno);
+	public MemberDTO myprofile(String email) {
+		MemberDTO dto=dao.myprofile(email);
 		return dto;
 	}
 

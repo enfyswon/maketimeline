@@ -32,7 +32,7 @@
 	
 	<select id="selectList" parameterType="kr.co.mt.dto.SearchDTO"
 			resultType="kr.co.mt.travel.timeline.TimelineDTO">
-	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.mpho_path, t.timeline_startdate, t.timeline_desc, t.timeline_photopath, t.timeline_loc
+	select t.timeline_no, t.timeline_name, m.mno, m.mni, m.email, m.mpho_path, t.timeline_startdate, t.timeline_desc, t.timeline_photopath, t.timeline_loc
 	from timeline t, member m, category c
 	where 1 = 1
 		<if test="cate_no != null and cate_no != ''">

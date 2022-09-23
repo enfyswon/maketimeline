@@ -43,11 +43,11 @@
 					</form>
 				</div>
 				<div id="tour-list-box">
-					<c:forEach var="dto" items="list">
+					<c:forEach var="dto" items="${list}">
 					<div>
-						<h3>${tour_title}</h3>
-						<h5>${tour_loc}</h5>
-						<h5>${tour_desc}</h5>
+						<h3>${dto.tour_title}</h3>
+						<h5>${dto.tour_loc}</h5>
+						<h5>${dto.tour_desc}</h5>
 					</div>
 					</c:forEach>
 				</div>

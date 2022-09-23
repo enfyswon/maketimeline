@@ -9,34 +9,29 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/search.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
-		<form action="${pageContext.request.contextPath}/timeline/list" method="get">
-			<div class="input-group">
-				<div class="input-group-prepend">
-					<select class="form-control" id="searchOption" name="searchOption">
-						<option value="timeline_name"
-							<c:if test="${search_dto.searchOption == 'timeline_name'}">selected="selected"</c:if>
-						> 타임라인 제목 </option>
-						<option value="timeline_desc"
-							<c:if test="${search_dto.searchOption == 'timeline_desc'}">selected="selected"</c:if>
-						> 글내용 </option>
-					</select>
+			<div id="search-box">
+				<form action="${pageContext.request.contextPath}/timeline/list" method="get">
+					<div id="search">
+						<select id="searchOption" name="searchOption">
+							<option value="timeline_name"
+								<c:if test="${search_dto.searchOption == 'timeline_name'}">selected="selected"</c:if>
+							> 타임라인 제목 </option>
+							<option value="timeline_desc"
+								<c:if test="${search_dto.searchOption == 'timeline_desc'}">selected="selected"</c:if>
+							> 글내용 </option>
+						</select>
+						<input type="text" id="searchWord" name="searchWord" value="${search_dto.searchWord}">
+						<button type="submit" class="btn btn-primary"> 검 색 </button>
+					</div>
+				</form>
+				<div id="search-map">
 				</div>
-				<input type="text" class="form-control" id="searchWord" name="searchWord"
-						value="${search_dto.searchWord}">
-				<div class="input-group-append">
-					<button type="submit" class="btn btn-primary"> 검 색 </button>
-				</div>
-			</div>
-		</form>
-			<div id="map">
 			</div>
 			<div id="timeline-box">
 				<c:forEach var="dto" items="${list}">
@@ -50,12 +45,14 @@
 						<p class="timeline-name">${dto.timeline_name}</p>
 						<div class="timeline-profile">
 							<div class="timeline-profile-img">
+								<a href="${pageContext.request.contextPath}/profile?email=${dto.email}">
 								<c:if test="${dto.mpho_path == null}">
-								<img alt="profile" src="${pageContext.request.contextPath}/resources/img/user.png">
+									<img alt="profile" src="${pageContext.request.contextPath}/resources/img/user.png">
 								</c:if>
 								<c:if test="${dto.mpho_path != null}">
-								<img alt="profile" src="${dto.mpho_path}">
+									<img alt="profile" src="${dto.mpho_path}">
 								</c:if>
+								</a>
 							</div>
 							<div class="timeline-profile-desc">
 								<p class="timeline-nick">${dto.mni}</p>
@@ -77,7 +74,7 @@
 		</main>
 		<script type="text/javascript">
 		var markers = [];
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		var mapContainer = document.getElementById('search-map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
 	        level: 3 // 지도의 확대 레벨
@@ -136,14 +133,14 @@
 		    setMarkers(null);    
 		}
 		</script>
-		<script type="text/javascript">
-		 $(document).ready(function() {
-			$.each(${mapList}, function(idx, dto) {
-				addMarker(dto.timeline_loc, dto.timeline_name);
-				showMarkers();
-			});//each
-		});//ready
-		</script>
+<!-- 		<script type="text/javascript">
+// 		 $(document).ready(function() {
+// 			$.each(${mapList}, function(idx, dto) {
+// 				addMarker(dto.timeline_loc, dto.timeline_name);
+// 				showMarkers();
+// 			});//each
+// 		});//ready
+</script> -->
 		<script type="text/javascript">
 		$(document).ready(function() {
 	        lightbox.option({

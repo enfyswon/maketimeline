@@ -24,17 +24,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kr.co.mt.dto.MemberDTO;
 
 @Controller
-@RequestMapping(value = "/mypage")
 public class MyPageController {
 	private final static Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
 	@Autowired
 	private MyPageService service;
 	
-	@RequestMapping(value = "/myprofile", method = RequestMethod.GET)
-	public String myprofile(HttpSession session, Model model) {
-		MemberDTO mDto = (MemberDTO) session.getAttribute("login_info");
-		MemberDTO dto=service.myprofile(mDto.getMno());
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public String myprofile(String email, HttpSession session, Model model) {
+		MemberDTO dto=service.myprofile(email);
 		model.addAttribute("pf", dto);
 		return "/mypage/myprofile";
 	}
@@ -42,9 +40,12 @@ public class MyPageController {
 	// 프로필 수정
 	@RequestMapping(value = "/profile_update", method = RequestMethod.GET)
 	public String profile_update(HttpSession session, Model model) {
-		MemberDTO mDto = (MemberDTO) session.getAttribute("login_info");
-		MemberDTO dto=service.myprofile(mDto.getMno());
+		String email = ((MemberDTO) session.getAttribute("login_info")).getEmail();
+		MemberDTO dto = new MemberDTO(); 
+		dto = service.myprofile(email);
+
 		model.addAttribute("pf", dto);
+
 		return "/mypage/myprofile_up";
 	}
 	
@@ -90,10 +91,13 @@ public class MyPageController {
 	// 회원정보 수정
 	@RequestMapping(value = "/info_update", method = RequestMethod.GET)
 	   public String info_update(HttpSession session, Model model) {
-		MemberDTO mDto = (MemberDTO) session.getAttribute("login_info");
-		MemberDTO dto=service.myprofile(mDto.getMno());
+		String email = ((MemberDTO) session.getAttribute("login_info")).getEmail();
+		MemberDTO dto = new MemberDTO(); 
+		dto = service.myprofile(email);
+		
 		model.addAttribute("pf", dto);
-	      return "/mypage/myinfo_up";
+	    
+		return "/mypage/myinfo_up";
 	}
 	
 	@RequestMapping(value = "/info_update", method = RequestMethod.POST)

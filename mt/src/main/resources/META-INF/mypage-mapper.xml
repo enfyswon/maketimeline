@@ -8,7 +8,7 @@
 	<select id="myProfile" parameterType="java.lang.String" resultType="kr.co.mt.dto.MemberDTO">
 	select mno, email, mpwd, mni, tel, mpho, mpho_path, mdes
 	from member
-	where mno = #{mno}
+	where email = #{email}
 	</select>
 	
 	<!-- 프로필 수정 -->

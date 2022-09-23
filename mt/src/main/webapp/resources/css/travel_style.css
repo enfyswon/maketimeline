@@ -19,7 +19,7 @@ button {
 }
 #tour-list-box {
 	width: 100%;
-	heigth: 650px;
+	height: 650px;
 	overflow: auto;
 }
 #money-box {
@@ -85,7 +85,7 @@ button {
 }
 #timeline-box {
 	width: 38%;
-	margin-left: 20px;
+	margin-left: 1.5%;
 	height: 600px;
 	overflow: auto;
 }

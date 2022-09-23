@@ -4,9 +4,29 @@ main {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin-bottom: 40px;
 }
 button {
 	background-color: rgba(0, 0, 0, 0);
+}
+#search-box {
+	width: 60%;
+}
+#search {
+	width: 90%;
+	display: flex;
+	flex-direction: row;
+	height: 50px;
+	align-items: center;
+}
+#search select, input, button {
+	padding: 7px;
+	margin: 0;
+	font-size: medium;
+}
+#search-map {
+	width: 90%;
+	height: 750px;
 }
 .write_label {
 	margin-left: 20px;
@@ -14,37 +34,13 @@ button {
 	text-align: right;
 	color: red;
 }
-#tour-box {
-	width: 40%;
-}
-#calender-box {
-	width: 60%;
-	display: flex;
-	flex-direction: row;
-}
-#calendar {
-	width: 80%;
-	height: 550px;
-	margin: 0 auto;
-}
-#calendar > div {
-	margin: 0;
-}
-#calendar table {
-	width: 100%;
-}
 #button-box img {
 	height: 50px;
 	object-fit: cover;
 }
-#map {
-	width: 45%;
-	height: 800px;
-	margin: 0 auto;
-}
 #timeline-box {
 	width: 38%;
-	margin-left: 30px;
+	margin-left: 1.5%;
 	height: 800px;
 	overflow: auto;
 }
