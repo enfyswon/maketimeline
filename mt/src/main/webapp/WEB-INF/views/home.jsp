@@ -48,7 +48,7 @@
 					</a>
 				</div>
 				<div>
-					<a href="${pageContext.request.contextPath}/mypage/myprofile">
+					<a href="${pageContext.request.contextPath}/profile?email=${login_info.email}">
 						<img alt="mypage" src="${pageContext.request.contextPath}/resources/img/mypage.png">
 					</a>
 				</div>
