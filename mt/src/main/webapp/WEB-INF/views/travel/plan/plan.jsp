@@ -21,7 +21,8 @@
       
 			<div id="tour-box">
 				<div>
-					<form action="${pageContext.request.contextPath}/plan?cate_no=${cate_no}" method="get">
+					<form action="${pageContext.request.contextPath}/plan" method="get">
+						<input type="hidden" id="cate_no" name="cate_no" value="${category.cate_no}">
 				         <div class="input-group" id="tour_search">
 				            <div class="input-group-prepend">
 				               <select class="form-control" id="searchOption" name="searchOption">
