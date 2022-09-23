@@ -63,7 +63,7 @@
 	 <script type="text/javascript">
 	 $(document).ready(function() {
 		$("#chat_btn").click(function() {
-			location.href="${pageContext.request.contextPath}/memo?other_mno=${pf.mno}";
+			location.href="${pageContext.request.contextPath}/memo?mno_to=${pf.mno}";
 		}); 
 	 });
       $(document).ready(function() {

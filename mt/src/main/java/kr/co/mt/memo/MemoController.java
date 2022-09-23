@@ -29,13 +29,13 @@ public class MemoController {
 	private MemoService service;
 	
 	@RequestMapping( value = "", method = RequestMethod.GET)
-	public String memo(String other_mno, HttpSession session, Model model) {
-		if (other_mno != null) {
+	public String memo(String mno_to, HttpSession session, Model model) {
+		if (mno_to != null) {
 			MemoDTO dto = new MemoDTO();
-			dto.setOther_mno(other_mno);
-			dto.setMno(((MemberDTO)session.getAttribute("login_info")).getMno());
-			dto.setRoom_no(service.setRoomNo(dto));
-			dto.setOther_mni(service.getName(other_mno));
+			dto.setMno_to(mno_to);
+			dto.setOther_mni(service.getName(mno_to));
+			dto.setMno_from(((MemberDTO)session.getAttribute("login_info")).getMno());
+			dto.setRoom_no(service.getRoomNo(dto));
 			
 			model.addAttribute("chat_send", dto);
 		}

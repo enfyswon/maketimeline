@@ -106,12 +106,6 @@
 	</choose>
 	</update>
 	
-	<select id="setRoomNo" parameterType="kr.co.mt.memo.MemoDTO" resultType="java.lang.String">
-	select room_no from memo_room
-	where (mno_from = #{mno} and mno_to = #{other_mno})
-	or (mno_from = #{other_mno} and mno_to = #{mno})
-	</select>
-	
 	<select id="getName" parameterType="java.lang.String" resultType="java.lang.String">
 	select mni from member
 	where mno = #{other_mno}
