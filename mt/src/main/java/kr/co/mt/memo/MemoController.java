@@ -29,7 +29,16 @@ public class MemoController {
 	private MemoService service;
 	
 	@RequestMapping( value = "", method = RequestMethod.GET)
-	public String memo() {
+	public String memo(String other_mno, HttpSession session, Model model) {
+		if (other_mno != null) {
+			MemoDTO dto = new MemoDTO();
+			dto.setOther_mno(other_mno);
+			dto.setMno(((MemberDTO)session.getAttribute("login_info")).getMno());
+			dto.setRoom_no(service.setRoomNo(dto));
+			dto.setOther_mni(service.getName(other_mno));
+			
+			model.addAttribute("chat_send", dto);
+		}
 		return "/memo/memo";
 	}
 

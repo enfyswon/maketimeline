@@ -83,6 +83,20 @@ System.out.println(roomNo);
 		
 		return mpho_path;
 	}
+
+	public String setRoomNo(MemoDTO dto) {
+		String room_no = null;
+		room_no = dao.setRoomNo(dto);
+		
+		return room_no;
+	}
+
+	public String getName(String other_mno) {
+		String other_mni = null;
+		other_mni = dao.getName(other_mno);
+		
+		return other_mni;
+	}
 	
 
 }//class

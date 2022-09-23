@@ -109,6 +109,9 @@
 		}
 		$(document).ready(function() {
 			roomList();
+			if (${chat_send.other_mno != null}) {
+				chatList("${chat_send.room_no}", "${chat_send.other_mni}", "${chat_send.other_mno}");
+			}
 		});
       	$(document).ready(function() {
         	$("#open_room_btn").click(function() {

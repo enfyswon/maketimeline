@@ -89,4 +89,18 @@ public class MemoDAO {
 		sqlSession.update("MemoMapper.updateChat", dto);
 	}
 
+	public String setRoomNo(MemoDTO dto) {
+		String room_no = null;
+		room_no = sqlSession.selectOne("MemoMapper.setRoomNo", dto);
+		
+		return room_no;
+	}
+
+	public String getName(String other_mno) {
+		String other_mni = null;
+		other_mni = sqlSession.selectOne("MemoMapper.getName", other_mno);
+		
+		return other_mni;
+	}
+
 }//class
