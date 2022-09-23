@@ -7,6 +7,7 @@ public class SearchDTO {
 	private int limitNum;
 	private String mno;
 	private String cate_no;
+	private String region_no;
 
 	public String getCate_no() {
 		return cate_no;
@@ -46,4 +47,11 @@ public class SearchDTO {
 		this.mno = mno;
 	}
 
+	public String getRegion_no() {
+		return region_no;
+	}
+
+	public void setRegion_no(String region_no) {
+		this.region_no = region_no;
+	}
 }//class

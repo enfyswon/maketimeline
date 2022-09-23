@@ -17,8 +17,6 @@
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
-		
-      
 			<div id="tour-box">
 				<div>
 					<form action="${pageContext.request.contextPath}/plan" method="get">
