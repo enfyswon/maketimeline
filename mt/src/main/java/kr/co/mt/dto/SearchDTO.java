@@ -1,4 +1,4 @@
-package kr.co.mt;
+package kr.co.mt.dto;
 
 public class SearchDTO {
 

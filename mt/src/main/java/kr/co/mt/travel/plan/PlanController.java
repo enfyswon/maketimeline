@@ -36,10 +36,55 @@ public class PlanController {
 	@Autowired
 	private CategoryService cservice;
 	
+	@RequestMapping(value = "/calc", method = RequestMethod.GET)
+	public String money(String cate_no, Model model) {
+		CategoryDTO dto = new CategoryDTO();
+		dto = cservice.cate_select(cate_no);
+
+		model.addAttribute("category", dto);
+		
+		return "/travel/plan/money";
+	}
+	
+	@RequestMapping(value = "/dateUpdate", method = RequestMethod.POST)
+	public void dateUpdate(PlanDTO dto, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.dateUpdate(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public void delete(String plan_no, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.delete(plan_no);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void update(PlanDTO dto, PrintWriter out) {
+		int successCnt = 0;
+		successCnt = service.update(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
+	@RequestMapping(value = "/money", method = RequestMethod.GET)
+	public void money(PrintWriter out) {
+		List<MoneyDTO> list = null;
+		list = service.selectMoneyList();
+		
+		out.print(new Gson().toJson(list));
+		out.close();
+	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void planList(String cate_no, PrintWriter out) {
 		List<PlanDTO> list = null;
-		list = service.selectList(cate_no);
+		list = service.planList(cate_no);
 		
 		out.print(new Gson().toJson(list));
 		out.close();
@@ -49,8 +94,7 @@ public class PlanController {
 	public String plan(String cate_no, Model model) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
-		
-		
+
 		model.addAttribute("category", dto);
 		
 		return "/travel/plan/plan";
@@ -58,11 +102,8 @@ public class PlanController {
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String plan_add(String cate_no, Model model) {
-		List<MoneyDTO> list = null;
-		list = service.selectMoneyList();
 		
 		model.addAttribute("cate_no", cate_no);
-		model.addAttribute("money", new Gson().toJson(list));
 		
 		return "/travel/plan/add";
 	}//travel/add
@@ -75,8 +116,4 @@ public class PlanController {
 		out.print(successCount);
 		out.close();
 	}//insert
-	
-	
-	
-	
 }//class

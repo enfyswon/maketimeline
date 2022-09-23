@@ -59,14 +59,16 @@
 							</div>
 							<div class="timeline-profile-desc">
 								<p class="timeline-nick">${dto.mni}</p>
-								<p class="timeline-date">${dto.timeline_date}</p>
+								<p class="timeline-date">${dto.timeline_startdate}</p>
 							</div>
 						</div>
 						<p class="timeline-desc">${dto.timeline_desc}</p>
+						<c:if test="${login_info.mno == dto.mno}">
 						<div class="timeline-btn-box">
 							<button type="button" class="timeline-update-btn"></button>
 							<button type="button" class="timeline-delete-btn"></button>
 						</div>
+						</c:if>
 					</div>
 				</div>
 				</c:forEach>

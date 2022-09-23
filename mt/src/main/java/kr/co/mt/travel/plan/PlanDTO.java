@@ -7,10 +7,12 @@ public class PlanDTO {
 	private String plan_name;
 	private String plan_desc;
 	private String plan_amount;
-	private String plan_date;
 	private String plan_loc;
 	private String mno;
 	private String money_no;
+	private String plan_startdate;
+	private String plan_enddate;
+	private String plan_allDay;
 	
 	public String getPlan_no() {
 		return plan_no;
@@ -42,12 +44,6 @@ public class PlanDTO {
 	public void setPlan_amount(String plan_amount) {
 		this.plan_amount = plan_amount;
 	}
-	public String getPlan_date() {
-		return plan_date;
-	}
-	public void setPlan_date(String plan_date) {
-		this.plan_date = plan_date;
-	}
 	public String getPlan_loc() {
 		return plan_loc;
 	}
@@ -65,5 +61,23 @@ public class PlanDTO {
 	}
 	public void setMoney_no(String money_no) {
 		this.money_no = money_no;
+	}
+	public String getPlan_startdate() {
+		return plan_startdate;
+	}
+	public void setPlan_startdate(String plan_startdate) {
+		this.plan_startdate = plan_startdate;
+	}
+	public String getPlan_enddate() {
+		return plan_enddate;
+	}
+	public void setPlan_enddate(String plan_enddate) {
+		this.plan_enddate = plan_enddate;
+	}
+	public String getPlan_allDay() {
+		return plan_allDay;
+	}
+	public void setPlan_allDay(String plan_allDay) {
+		this.plan_allDay = plan_allDay;
 	}
 }

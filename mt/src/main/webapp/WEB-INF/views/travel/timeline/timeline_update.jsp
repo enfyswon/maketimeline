@@ -9,7 +9,10 @@
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/travel_style.css">
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c5018921c91408548d9d5f456c15b27b&libraries=services"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
@@ -22,41 +25,42 @@
 							<label for="timeline_name">글 제목</label>
 							<label for="timeline_name" id="timeline_name_label" class="write_label"></label>
 						</p>
-						<input type="text" id="timeline_name" name="timeline_name" placeholder="글 제목">
+						<input type="text" id="timeline_name" name="timeline_name" placeholder="글 제목" value="${timeline.timeline_name}">
 					</div>
 					<div class="timeline-detail">
 						<p>
 							<label for="timeline_startdate">여행 날짜</label>
-							<label for="timeline_startdate" id="timeline_stsartdate_label" class="write_label"></label>
+							<label for="timeline_startdate" id="timeline_startdate_label" class="write_label"></label>
 							<input type="checkbox" id="timeline_allDay">
 							<label for="timeline_allDay">하루 종일</label>
 						</p>
-						<input type="datetime-local" id="timeline_startdate" name="timeline_startdate"> ~ 
-						<input type="datetime-local" id="timeline_enddate" name="timeline_enddate">
+						<input type="datetime-local" id="timeline_startdate" name="timeline_date" value="${timeline.timeline_startdate}"> ~ 
+						<input type="datetime-local" id="timeline_enddate" name="timeline_enddate" value="${timeline.timeline_enddate}">
 					</div>
 					<div class="timeline-detail">
 						<p>
 							<label for="timeline_desc">글 내용</label>
 							<label for="timeline_desc" id="timeline_desc_label" class="write_label"></label>
 						</p>
-						<input type="text" id="timeline_desc" name="timeline_desc" placeholder="글 내용">
+						<input type="text" id="timeline_desc" name="timeline_desc" placeholder="글 내용" value="${timeline.timeline_desc}">
 					</div>
 					<div class="timeline-detail">
 						<p>
 							<label for="timeline_amount">지출 금액</label>
 							<label for="timeline_amount" id="timeline_amount_label" class="write_label"></label>
 						</p>
+						<input id="money" type="hidden" value="${timeline.money_no}">
 						<select id="money_no" name="money_no">
 							<option value="0">---종류 선택---</option>
 						</select>
-						<input type="text" id="timeline_amount" name="timeline_amount" placeholder="지출 금액">
+						<input type="text" id="timeline_amount" name="timeline_amount" placeholder="지출 금액" value="${timeline.timeline_amount}">
 					</div>
 					<div class="timeline-detail">
 						<p>
 							사진
 							<label id="timeline_photo_label" class="write_label"></label>
 						</p>
-						<input type="file" id="timeline_photo" name="timeline_photo">
+						<input type="file" id="timeline_photo" name="timeline_photo" value="${timeline.timeline_photo}">
 					</div>
 					<div class="timeline-detail">
 						<p>
@@ -80,7 +84,8 @@
 						</div>
 					</div>
 				</form>
-				<button type="button" id="add_btn">등록</button>
+				<button type="button" id="cancel_btn">취소</button>
+				<button type="button" id="update_btn">수정</button>
 			</div>
 		</main>
 		<script type="text/javascript">
@@ -90,12 +95,13 @@
 					"<option value='" + dto.money_no + "'>" + dto.value_name + "</option>"	
 				);
 			});
+			$("#money_no").val($("#money").val()).prop("selected", true);
 		});
 		</script>
 		<script type="text/javascript">
 		var markers = [];
 		var selectedMarker = null;
-		var timeline_loc = "";
+		var timeline_loc = "${timeline.timeline_loc}";
 		var liClass = "";
 		var mapContainer = document.getElementById('input-map'), // 지도를 표시할 div 
 		    mapOption = {
@@ -105,13 +111,18 @@
 
 		// 지도를 생성합니다    
 		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		searchLoc("${timeline.timeline_loc}", $("#timeline_name").val());
 
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();  
 
 		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 		var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
+		
 		// 키워드로 장소를 검색합니다
 		searchPlaces();
 
@@ -335,6 +346,26 @@
 				}
 			}
 		}
+		
+		function searchLoc(loc, name) {
+			geocoder.addressSearch(loc, function(result, status) {
+				if (status === kakao.maps.services.Status.OK) {
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					
+					var mark = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+					
+					var window = new kakao.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;">' + name + '</div>'
+					});
+					window.open(map, mark);
+					
+					map.setCenter(coords);
+				}
+			});
+		}
 		</script>
 		<script type="text/javascript">
 		let onlyNum = /^[0-9]+$/;
@@ -342,29 +373,20 @@
 		$(document).ready(function() {
 			$("#timeline_startdate").change(function() {
 				//$("#timeline_allDay").prop("checked", false);
-				alert($("#timeline_startdate").val());
 				let endTime = new Date($("#timeline_startdate").val());
-				alert(endTime);
 				endTime.setHours(endTime.getHours() + 1);
 				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
 				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";
 				 $("#timeline_enddate").val(endTime);
 			});
 		});
-// 		$(document).ready(function() {
-// 			$("#timeline_enddate").change(function() {
-// 				if ($("#timeline_startdate").val() != null) {
-// 					let startTime = moment($("timeline_startdate").val()).format("YYYY-MM-DD");
-// 					let endTime = moment($("timeline_enddate").val()).format("YYYY-MM-DD");
-// 					alert(startTime + " : " + endTime);
-// 					if (startTime < endTime) {
-// 						$("#timeline_allDay").prop("checked", true);
-// 					}
-// 				}
-// 			});
-// 		});
 		$(document).ready(function() {
-			$("#add_btn").click(function() {
+			$("#cancel_btn").click(function() {
+				location.href="${pageContext.request.contextPath}/timeline?cate_no=${timeline.cate_no}";
+			});
+		});
+		$(document).ready(function() {
+			$("#update_btn").click(function() {
 				if ($.trim($("#timeline_name").val()) == "") {
 					$("#timeline_name_label").text("제목을 입력하세요.");
 					return;
@@ -372,15 +394,11 @@
 					$("#timeline_name_label").text("");
 				}
 				
-				if ($("#timeline_startdate").val() == "") {
-					$("#timeline_startdate_label").text("여행 날짜를 선택해주세요.");
+				if ($("#timeline_date").val() == "") {
+					$("#timeline_date_label").text("여행 날짜를 선택해주세요.");
 					return;
 				} else {
-					$("#timeline_startdate_label").text("");
-				}
-				
-				if ($("#timeline_allDay").is(":checked")) {
-					allDay = 'true';
+					$("#timeline_date_label").text("");
 				}
 				
 				if ($.trim($("#timeline_desc").val()) == "") {
@@ -436,7 +454,6 @@
 				}
 				
 				let form = new FormData( document.getElementById("timeline_form"));
-				form.append("timeline_allDay", allDay);
 				form.append("timeline_loc", timeline_loc);
 				
 				let keys = form.keys();
@@ -449,7 +466,7 @@
 				$.ajax({
 					type : "POST", 
 					encType : "multipart/form-data", 
-					url : "${pageContext.request.contextPath}/timeline/insert", 
+					url : "${pageContext.request.contextPath}/timeline/update", 
 					data : form, 
 					processData : false, 
 					contentType : false, 

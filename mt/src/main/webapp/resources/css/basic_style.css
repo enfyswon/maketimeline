@@ -25,6 +25,9 @@ button {
 	border-bottom: 1px solid #58606D;
 	position: relative;
 }
+#a-link {
+	text-decoration: none;
+}
 #logo-link {
 	position: absolute;
 	left: 50%;
@@ -55,7 +58,7 @@ button {
 }
 main {
 	width: 80%;
-	margin-top: 100px;
+	margin-top: 30px;
 }
 #icon-bar {
 	width: 50%;
@@ -78,7 +81,7 @@ main {
 	height: 150px;
 	background-color: rgba(244, 251, 255, 0.5);
 	visibility: hidden;
-	z-index: 999;
+	z-index: 50;
 }
 hr {
 	height: 1px;

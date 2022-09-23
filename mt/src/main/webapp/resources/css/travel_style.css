@@ -17,14 +17,38 @@ button {
 #tour-box {
 	width: 40%;
 }
+#money-box {
+	width: 40%;
+}
+.money-title {
+	text-align: center;
+	margin: 30px auto;
+}
+.money-detail {
+	width: 80%;
+	display: flex;
+	flex-direction: row;
+	margin: 25px auto;
+}
+#money-box hr {
+	margin: 25px auto;
+}
+.money-detail h3 {
+	width: 40%;
+	text-align: left;
+}
+.money-detail p {
+	width: 60%;
+	text-align: right;
+}
 #calender-box {
 	width: 60%;
 	display: flex;
 	flex-direction: row;
 }
 #calendar {
-	width: 80%;
-	height: 550px;
+	width: 90%;
+	height: 750px;
 	margin: 0 auto;
 }
 #calendar > div {
@@ -41,6 +65,9 @@ button {
 	background-color: gray;
 	border-radius: 5px;
 	color: white;
+}
+#button-box {
+	margin: 30px auto;
 }
 #button-box img {
 	height: 50px;
@@ -159,6 +186,11 @@ button {
 	font-size: medium;
 	margin-bottom: 5px;
 }
+#plan_enddate, #plan_startdate, #timeline_enddate, #timeline_startdate {
+	width: 35%;
+}
+#timeline_enddate, #timeline_startdate {
+}
 .timeline-detail > select, .plan-detail > select {
 	padding: 8px;
 	font-size: medium;
@@ -166,6 +198,24 @@ button {
 }
 #plan_amount, #timeline_amount {
 	width: 55%;
+}
+#add_btn, #update_btn {
+	width: 100px;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: #E0F0FF;
+	margin-bottom: 20px;
+}
+#delete_btn {
+	width: 100px;
+	padding: 7px;
+	border-radius: 5px;
+	background-color: #595959;
+	margin-bottom: 20px;
+	color: white;
+}
+#plan-add-box, #plan-modify-box {
+	display: none;
 }
 #input-map-box {
 	height: 550px;
@@ -289,4 +339,58 @@ button {
 	cursor: default;
 	color:#777;
 }
-
+#modal {
+	width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 30px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    z-index: 10;
+}
+#modal .modal-dialog {
+	background: rgba( 255, 255, 255, 0.9 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 80%;
+    height: 600px;
+    position: relative;
+    top: -50px;
+    padding: 10px;
+    z-index: 100;
+}
+#modal .modal-header {
+	width: 100%;
+	height: 50px;
+}
+#modal .modal-body {
+	width: 100%;
+	height: 550px;
+    overflow: auto;
+}
+#modal .modal-body::-webkit-scrollbar {
+	width: 5px;
+}
+#modal .modal-body::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: #217AF4;
+	border-radius: 10px;
+}
+#modal .modal-body::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, 0.1);
+	border-radius: 10px;
+}
+.modal-header {
+	display: flex;
+	flex-direction: row;
+}

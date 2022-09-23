@@ -6,12 +6,12 @@
 <mapper namespace="PlanMapper">
 
 	<insert id="planInsert" parameterType="kr.co.mt.travel.plan.PlanDTO">
-	INSERT INTO plan ( plan_name,plan_desc,plan_amount, cate_no, money_no )
-	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no} )
+	INSERT INTO plan ( plan_name, plan_desc, plan_amount, cate_no, money_no, plan_startdate, plan_enddate, plan_loc, plan_allDay )
+	VALUES ( #{plan_name}, #{plan_desc}, #{plan_amount}, #{cate_no}, #{money_no}, #{plan_startdate}, #{plan_enddate}, #{plan_loc}, #{plan_allDay} )
 	</insert>
 	
-	<select id="selectList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
-	select plan_name
+	<select id="planList" parameterType="java.lang.String" resultType="kr.co.mt.travel.plan.PlanDTO">
+	select plan_no, plan_name, plan_desc, plan_amount, plan_loc, money_no, plan_allDay, plan_startdate, plan_enddate
 	from plan
 	where cate_no = #{cate_no}
 	</select>
@@ -20,4 +20,20 @@
 	select money_no, value_name
 	from money
 	</select>
+	
+	<update id="planUpdate" parameterType="kr.co.mt.travel.plan.PlanDTO">
+	update plan set plan_name = #{plan_name}, plan_desc = #{plan_desc}, plan_amount = #{plan_amount}, plan_startdate = #{plan_startdate},
+		   plan_enddate = #{plan_enddate}, plan_loc = #{plan_loc}, money_no = #{money_no}, plan_allDay = #{plan_allDay}
+	where plan_no = #{plan_no}
+	</update>
+	
+	<delete id="planDelete" parameterType="java.lang.String">
+	delete from plan
+	where plan_no = #{plan_no}
+	</delete>
+	
+	<update id="planDateUpdate" parameterType="kr.co.mt.travel.plan.PlanDTO">
+	update plan set plan_startdate = #{plan_startdate}, plan_enddate = #{plan_enddate}
+	where plan_no = #{plan_no}
+	</update>
 </mapper>
