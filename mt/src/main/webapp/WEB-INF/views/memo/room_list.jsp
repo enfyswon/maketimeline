@@ -4,40 +4,105 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> My Memo List </title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
+		<title> My Memo List </title>
+		
+		<style>
+* {
+	margin: 0 auto;
+}
+.left-box {
+  float: left;
+  width: 48%;
+   border: 2;
+
+}
+.right-box {
+  float: right;
+  width: 52%;
+  border: 2;
+
+}
+.center-box {
+  float: center;
+  width: 70%;
+  margin-top: 30px;
+}
+h1, h4{
+ text-align: center;
+ margin-top: 30px;
+}
+#insert{
+ text-align: center;
+}
+table{
+width: 80%;
+height : 20px;
+}
+</style>
 	</head>
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
-		<br><br><br><br>
-		<br><br><br><br>
 		<h1 class="text-center"> My Memo List </h1>
-		
-			<table class="table table-hover">
+		<br>
+         <div id="insert">
+         <input class="bar_search" id="mno_to" name="mno_to">
+            <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
+            <a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"></a>
+         </div>
+		<main>
+		<div class='left-box' id="profile" >
+			<div class="input-group">
+         <div class="input-group-prepend">
+         <div id="memo_header_div">
+				<h5>상대방 ID</h4>
+		 </div>
+			<table class="table table-hover" border="2" >
 				<c:forEach var="dto" items="${room_list}">
 					<tr>
 						<td>
-							<h3 class="text-center">
-									<button type="submit" class="btn_delete" value="${dto.room_no}"> 채팅방 삭제 </button>
-								<a href="${pageContext.request.contextPath}/memo/open_room?room_no=${dto.room_no}"
+							<h5 class="text-left">
+							${dto.mni_to} 
+						<button type="submit" class="btn_delete" value="${dto.room_no}">삭제</button>
+						<a href="${pageContext.request.contextPath}/memo/my_room_list2?room_no=${dto.room_no}"
 									style="text-decoration:none;" class="text-dark">
-									${dto.room_no} : ${dto.mni_from} &lt;=&gt; ${dto.mni_to} 
-								</a>
-							</h3>
+						<c:choose>
+						<c:when test="${pf.mpho_path != null && dto.mni_from != ''}">
+						<img id="profile" alt="profile_photo" src="${pf.mpho_path}">
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+						</c:otherwise>
+						</c:choose>  
+						</a>
+							</h5>
 						</td>
 					</tr>
 				</c:forEach>
 			</table>
-			<div class="input-group">
-         <div class="input-group-prepend">
-         </div>
-         <input class="bar_search" id="mno_to" name="mno_to">
-         <div class="input-group-append">
-            <button id="open_room_btn" type="button" class="btn btn-dark float-right">insert</button>
          </div>
       </div>
-      
+      </div>
+      <div class='right-box'>
+		<div id="memo_header_div">
+		<h5> 상대방 ID :${room_dto.mni_to} </h5>
+		</div>
+		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}"
+				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1" ></iframe>
+				<div id="ckd_div">
+			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px; background-color:blue;"></textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace('cnts');
+			</script>
+			<button id="chat_send_btn" class="btn btn-dark btn-sm float-right"> 글 전 송 </button>
+				</div>
+		</div>
+		</main>
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
@@ -67,12 +132,10 @@
       <script type="text/javascript">
       $(document).ready(function() {
          $(".btn_delete").click(function() {
-            
             $.post(
                   "${pageContext.request.contextPath}/memo/delete"
                   , {
                      room_no : $(this).val()
-                     
                   }
                   , function(data, status) {
                      if( data >= 1 ){
@@ -85,9 +148,36 @@
                      }
                   }//call back function
             );//get
-
          });//click
       });//ready
       </script>
+      <script type="text/javascript">
+	$(document).ready(function() {
+		$("#chat_send_btn").click(function() {
+			let chat = CKEDITOR.instances.cnts.getData();
+			if( chat == '' ){
+				alert("내용을 입력해 주세요.");
+				return;
+			}
+			$.post(
+					"${pageContext.request.contextPath}/memo/insert"
+					, {
+						room_no : "${room_dto.room_no}"
+						, mno_ins : "${room_dto.mno_from}"
+						, mno_read : "${room_dto.mno_to}"
+						, chat : chat
+					}
+					, function(data, status) {
+						if(data >= 1){
+							CKEDITOR.instances.cnts.setData("");
+							chatList.pageReload();
+						} else {
+							alert("잠시 후 다시 시도해 주세요.");
+						}
+					}//call back functiion
+			);//post
+		});//click
+	});//ready
+	</script>
 	</body>
 </html>

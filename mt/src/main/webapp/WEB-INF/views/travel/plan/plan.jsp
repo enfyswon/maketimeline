@@ -17,7 +17,40 @@
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
+		
+      
 			<div id="tour-box">
+				<div>
+					<form action="${pageContext.request.contextPath}/plan?cate_no=${cate_no}" method="get">
+				         <div class="input-group" id="tour_search">
+				            <div class="input-group-prepend">
+				               <select class="form-control" id="searchOption" name="searchOption">
+				                  <option value="tour_title"
+				                  
+				                     <c:if test="${search_dto.searchOption == 'tour_title'}">selected="selected"</c:if>
+				                  > 장 소 </option>
+				                  <option value="tour_loc"
+				                     <c:if test="${search_dto.searchOption == 'tour_loc'}">selected="selected"</c:if>
+				                  > 위 치 </option>
+				               </select>
+				            </div>
+				            <input type="text" class="form-control" id="searchWord" name="searchWord"
+										value="${search_dto.searchWord}">
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-primary"> 검 색 </button>
+							</div>
+				    	</div>
+					</form>
+				</div>
+				<div id="tour-list-box">
+					<c:forEach var="dto" items="list">
+					<div>
+						<h3>${tour_title}</h3>
+						<h5>${tour_loc}</h5>
+						<h5>${tour_desc}</h5>
+					</div>
+					</c:forEach>
+				</div>
 			</div>
 			<div id="calender-box">
 				<div id='calendar'></div>
