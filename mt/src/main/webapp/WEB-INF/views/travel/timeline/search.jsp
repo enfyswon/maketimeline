@@ -27,7 +27,7 @@
 							> 글내용 </option>
 						</select>
 						<input type="text" id="searchWord" name="searchWord" value="${search_dto.searchWord}">
-						<button type="submit" class="btn btn-primary"> 검 색 </button>
+						<button type="submit" id="search_btn"> 검 색 </button>
 					</div>
 				</form>
 				<div id="search-map">
