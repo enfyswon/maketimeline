@@ -28,13 +28,18 @@ public class MemoController {
 	@Autowired
 	private MemoService service;
 	
-	 @RequestMapping( value = "/delete", method = RequestMethod.POST )
-	   public void delete( MemoDTO dto, HttpSession session, PrintWriter out ) {
-	      int successCount = 0;
-	      successCount = service.delete( dto );
-	      out.print(successCount);
-	      out.close();
-	   }//delete
+	@RequestMapping( value = "", method = RequestMethod.GET)
+	public String memo() {
+		return "/memo/memo";
+	}
+
+	@RequestMapping( value = "/delete", method = RequestMethod.POST )
+	public void delete( MemoDTO dto, HttpSession session, PrintWriter out ) {
+		int successCount = 0;
+	    successCount = service.delete( dto );
+	    out.print(successCount);
+	    out.close();
+	}//delete
 
 	@RequestMapping( value = "/chat_list", method = RequestMethod.GET )
 	public String chatList( String room_no, HttpSession session, Model model ) {

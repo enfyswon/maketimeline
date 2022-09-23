@@ -5,7 +5,7 @@
 	<html>
 	<head>
 		<meta charset="UTF-8">
-		<title>내 프로필 수정</title>
+		<title>Make Timeline</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mypage_style.css">
 	</head>
@@ -109,14 +109,14 @@
 				$.ajax({
 					type : "POST" 
 					, encType : "multipart/form-data" 
-					, url : "${pageContext.request.contextPath}/mypage/profile_update" 
+					, url : "${pageContext.request.contextPath}/profile_update" 
 					, data : form 
 					, processData : false
 					, contentType : false 
 					, cache : false 
 					, success : function(result) {
 						alert("프로필이 수정되었습니다.");
-						location.href="${pageContext.request.contextPath}/mypage/myprofile";
+						location.href="${pageContext.request.contextPath}/profile?email=${login_info.email}";
 					}, 
 					error : function(xhr) {
 						alert("잠시 후 다시 시도해주세요.");

@@ -60,7 +60,7 @@
 				</a>
 			</div>
 			<div>
-				<a href="${pageContext.request.contextPath}/memo/my_room_list">
+				<a href="${pageContext.request.contextPath}/memo">
 					<img alt="chat" src="${pageContext.request.contextPath}/resources/img/chat.png">
 				</a>
 			</div>
