@@ -20,6 +20,7 @@ public class TimelineDTO {
 	private String mno;
 	private String mni;
 	private String mpho_path;
+	private String email;
 	
 	public String getTimeline_no() {
 		return timeline_no;
@@ -116,5 +117,11 @@ public class TimelineDTO {
 	}
 	public void setMpho_path(String mpho_path) {
 		this.mpho_path = mpho_path;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

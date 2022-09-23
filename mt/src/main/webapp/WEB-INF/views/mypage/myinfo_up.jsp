@@ -10,58 +10,68 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/basic_style.css">
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/mypage_style.css">
 	</head>
 	<body>
-	
-	<div id="header">
-			<a href="${pageContext.request.contextPath}/">
-				<img id="logo" alt="logo" src="${pageContext.request.contextPath}/resources/img/logo.png">
-			</a>
-	</div>
-	<div style="width:15%;margin:auto;">
-			<div id="main-content">
+	<%@ include file="/WEB-INF/views/header.jsp" %>
+		<main>
+			<div id="profile">
+				<div id="info-profile">
+					<div id="info-img">
+					<c:choose>
+						<c:when test="${pf.mpho_path != null && pf.mpho_path != ''}">
+						<img id="profile" alt="profile_photo" src="${pf.mpho_path}">
+						</c:when>
+						<c:otherwise>
+						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png">
+						</c:otherwise>
+					</c:choose>
+					</div>
+					<div id="info-mni">
+						<p>${pf.mni}</p>
+					</div>
+				</div>
 				<form id="user_info">
-					<div class="info">
-						<div class="info-box">
-							<div class="info-line">
-								<div class="info-label">
-									<label for="email">이메일</label>
-								</div>
-								<div class="info-contents">
-									<input type="text" id="email" name="email"  value="${pf.email}">
-									<label id="email_label" for="email"></label>
-								</div>
+					<div id="profile-info">
+						<div class="profile-detail">
+							<div class="profile-label">
+								<label for="email">이메일</label>
 							</div>
-							
-							<div class="info-line">
-								<div class="info-label">
-									<label for="mpwd">비밀번호</label>
-								</div>
-								<div class="info-contents">
-									<input type="password" id="mpwd" name="mpwd"  value="${pf.mpwd}">
-									<label for="mpwd" id="mpwd_label"></label>
-								</div>
+							<div class="profile-desc">
+								<input type="text" id="email" name="email"  value="${pf.email}">
+								<label id="email_label" for="email"><br></label>
 							</div>
-							
-							<div class="info-line">
-								<div class="info-label">
-									<label for="tel">휴대폰 번호</label>
-								</div>
-								<div class="info-contents">
-									<input type="text" id="tel" name="tel" value="${pf.tel}">
-									<label id="tel_label" for="tel"></label>
-								</div>
+						</div>
+						<div class="profile-detail">
+							<div class="profile-label">
+								<label for="mpwd">비밀번호</label>
 							</div>
-							
+							<div class="profile-desc">
+								<input type="password" id="mpwd" name="mpwd"  value="${pf.mpwd}">
+								<label for="mpwd" id="mpwd_label"><br></label>
+							</div>
+						</div>
+						<div class="profile-detail">
+							<div class="profile-label">
+								<label for="tel">휴대폰 번호</label>
+							</div>
+							<div class="profile-desc">
+								<input type="text" id="tel" name="tel" value="${pf.tel}">
+								<label id="tel_label" for="tel"><br></label>
+							</div>
 						</div>
 					</div>
 				</form>
-					<div id="button-box">
+				<div id="button-box">
+					<div id="left-button-box">
+						<p class="none">test</p>
+					</div>
+					<div id="right-button-box">
 						<button type="button" id="save_btn" name="save_btn">저장</button>
 					</div>
+				</div>
 			</div>
-	</div>
+		</main>
 	
 	<script type="text/javascript">
 	$(document).ready(function() {

@@ -24,8 +24,8 @@ public class MyPageDAO {
 		return updateYN;
 	}
 
-	public MemberDTO myprofile(String mno) {
-		MemberDTO dto=sqlSession.selectOne("MyPageMapper.myProfile", mno);
+	public MemberDTO myprofile(String email) {
+		MemberDTO dto=sqlSession.selectOne("MyPageMapper.myProfile", email);
 		return dto;
 	}
 
