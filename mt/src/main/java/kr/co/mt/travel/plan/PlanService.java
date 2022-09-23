@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mt.dto.MoneyDTO;
+import kr.co.mt.dto.SearchDTO;
 import kr.co.mt.test.KoreaDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 import kr.co.mt.travel.timeline.TimelineDTO;
@@ -63,9 +64,9 @@ public class PlanService {
 		return successCnt;
 	}
 	
-	public List<KoreaDTO> tourlist(String region_no) {
+	public List<KoreaDTO> tourlist(SearchDTO sear) {
 		List<KoreaDTO> list = null;
-		list = dao.tourlist(region_no);
+		list = dao.tourlist(sear);
 		
 		return list;
 	}
