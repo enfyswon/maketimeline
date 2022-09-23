@@ -97,7 +97,7 @@ public class PlanController {
 		dto = cservice.cate_select(cate_no);
 		
 		List<KoreaDTO> list = null;
-		list = service.tourlist();
+		list = service.tourlist(dto.getRegion_no());
 
 		model.addAttribute("category", dto);
 		model.addAttribute("list", list);

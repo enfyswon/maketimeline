@@ -63,9 +63,9 @@ public class PlanService {
 		return successCnt;
 	}
 	
-	public List<KoreaDTO> tourlist() {
+	public List<KoreaDTO> tourlist(String region_no) {
 		List<KoreaDTO> list = null;
-		list = dao.tourlist();
+		list = dao.tourlist(region_no);
 		
 		return list;
 	}
