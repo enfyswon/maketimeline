@@ -342,9 +342,7 @@
 		$(document).ready(function() {
 			$("#timeline_startdate").change(function() {
 				//$("#timeline_allDay").prop("checked", false);
-				alert($("#timeline_startdate").val());
 				let endTime = new Date($("#timeline_startdate").val());
-				alert(endTime);
 				endTime.setHours(endTime.getHours() + 1);
 				endTime = endTime.getFullYear() + "-" + ("0"+(endTime.getMonth()+1)).slice(-2) + "-" + ("0" + endTime.getDate()).slice(-2) 
 				 + " " + ("0" + endTime.getHours()).slice(-2) + ":" + ("0" + endTime.getMinutes()).slice(-2) + ":00";

@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mt.dto.MemberDTO;
+
 
 @Service
 public class MemoService {
@@ -15,6 +17,18 @@ public class MemoService {
 	public List<MemoDTO> myRoomListByMno(String loginMno) {
 		List<MemoDTO> list = null;
 		list = dao.myRoomListByMno( loginMno );
+		
+		for (MemoDTO dto : list) {
+			dto.setMno(loginMno);
+			int unread = dao.unreadCnt(dto);
+			MemberDTO mdto = new MemberDTO();
+			mdto = dao.otherMem(dto);
+			dto.setUnread(unread);
+			dto.setOther_mno(mdto.getMno());
+			dto.setOther_mni(mdto.getMni());
+			dto.setMpho_path(mdto.getMpho_path());
+		}
+		
 		return list;
 	}//myRoomListByMno
 
@@ -24,9 +38,14 @@ public class MemoService {
 		return successCount;
 	}//insert
 
-	public List<MemoDTO> chatListByNo(String room_no) {
+	public List<MemoDTO> chatListByNo(MemoDTO dto) {
 		List<MemoDTO> list = null;
-		list = dao.chatListByNo( room_no );
+		list = dao.chatListByNo( dto );
+		
+		if (list.size() > 0) {
+			dao.updateChat(dto);
+		}
+		
 		return list;
 	}//chatListByNo
 
@@ -57,6 +76,20 @@ System.out.println(roomNo);
 		successCount = dao.deleteChat( dto );
 		return successCount;
 	}//delete
+
+	public String getPhoto(String mno) {
+		String mpho_path = null;
+		mpho_path = dao.getPhoto(mno);
+		
+		return mpho_path;
+	}
+
+	public String getName(String other_mno) {
+		String other_mni = null;
+		other_mni = dao.getName(other_mno);
+		
+		return other_mni;
+	}
 	
 
 }//class

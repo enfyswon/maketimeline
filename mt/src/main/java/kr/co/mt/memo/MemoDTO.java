@@ -15,6 +15,11 @@ public class MemoDTO {
 	private String chat;
 	private String chat_date;
 	private String read_yn;
+	private String mno;
+	private String other_mno;
+	private String other_mni;
+	private String mpho_path;
+	private int unread;
 
 	@Override
 	public String toString() {
@@ -137,4 +142,43 @@ public class MemoDTO {
 		this.read_yn = read_yn;
 	}
 
+	public String getMno() {
+		return mno;
+	}
+
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+
+	public String getOther_mno() {
+		return other_mno;
+	}
+
+	public void setOther_mno(String other_mno) {
+		this.other_mno = other_mno;
+	}
+
+	public String getOther_mni() {
+		return other_mni;
+	}
+
+	public void setOther_mni(String other_mni) {
+		this.other_mni = other_mni;
+	}
+
+	public String getMpho_path() {
+		return mpho_path;
+	}
+
+	public void setMpho_path(String mpho_path) {
+		this.mpho_path = mpho_path;
+	}
+
+	public int getUnread() {
+		return unread;
+	}
+
+	public void setUnread(int unread) {
+		this.unread = unread;
+	}
 }//class

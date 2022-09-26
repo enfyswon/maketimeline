@@ -24,6 +24,10 @@ button {
 	margin: 0;
 	font-size: medium;
 }
+#search_btn {
+	width: 20%;
+	background-color: #bbbbbb;
+}
 #search-map {
 	width: 90%;
 	height: 750px;

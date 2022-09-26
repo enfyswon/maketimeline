@@ -1,66 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="refresh" content="30">
-		<title> Chat List </title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/memo_style.css">
-		<script src="//cdn.ckeditor.com/4.19.1/basic/ckeditor.js"></script>
-		<style type="text/css">
-		#chat_list_div {
-			float: right;
-			width : 100%;
-			height : 470px;
-			overflow : auto;
-		}
-		</style>
-	</head>
-	<body style = "background-color: #9bc4f0;">
 
-		<div id="chat_list_div">
-			<c:forEach var="dto" items="${chat_list}">
+<div id="memo-cnts-list">
+<c:forEach var="dto" items="${chat_list}">
+	<c:choose>
+		<c:when test="${dto.mno_ins == login_info.mno}">
+			<div class="outgoing-memo">
+				<div class="memo-chat">
+					<div class="chat-cnts">${dto.chat}</div>
+					<p class="chat-date">${dto.chat_date}</p>
+				</div>
+				<div class="memo-profile">
 				<c:choose>
-					<c:when test="${dto.mno_ins == login_info.mno}">
-						<div class="clearfix mt-3 mb-3 mr-5">
-							<div class="w-25 float-right">
-								${dto.chat_date}
-								<div class="card w-100">
-									<div class="card-header">${dto.mni_ins}</div>
-									<div class="card-body">${dto.chat}</div>
-								</div>
-							</div>
-						</div>
+					<c:when test="${login_info.mpho_path != null && login_info.mni != ''}">
+					<img alt="profile_photo" src="${login_info.mpho_path}">
 					</c:when>
 					<c:otherwise>
-						<div class="mt-3 mb-3 ml-5">
-							${dto.chat_date}
-							<div class="card w-25">
-								<div class="card-header">${dto.mni_ins}</div>
-								<div class="card-body">${dto.chat}</div>
-							</div>
-						</div>
+					<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
-		</div>
-
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="receive-memo">
+				<div class="memo-profile">
+				<c:choose>
+					<c:when test="${photo != null}">
+					<img alt="profile_photo" src="${photo}">
+					</c:when>
+					<c:otherwise>
+					<img alt="profile_photo" src="${pageContext.request.contextPath}/resources/img/user.png">
+					</c:otherwise>
+				</c:choose>
+				</div>
+				<div class="memo-chat">
+					<div class="chat-cnts">${dto.chat}</div>
+					<p class="chat-date">${dto.chat_date}</p>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+</div>
+<div id="send-box">
+	<div id="editor">
+		<textarea id="cnts" name="cnts"></textarea>
+		<script type="text/javascript">
+			CKEDITOR.inline('cnts');
+		</script>
+	</div>
+	<button type="button" id="chat_send_btn">전송</button>
+</div>
 	<script type="text/javascript">
 	$(document).ready(function() {
 
-		$("#chat_list_div").scrollTop($("#chat_list_div")[0].scrollHeight);
-
 	});//ready
-
 	function pageReload() {
 		alert();
 		window.location.reload();
 	}
+	
 	</script>
 
 	</body>

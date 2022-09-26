@@ -28,20 +28,39 @@ public class MemoController {
 	@Autowired
 	private MemoService service;
 	
-	 @RequestMapping( value = "/delete", method = RequestMethod.POST )
-	   public void delete( MemoDTO dto, HttpSession session, PrintWriter out ) {
-	      int successCount = 0;
-	      successCount = service.delete( dto );
-	      out.print(successCount);
-	      out.close();
-	   }//delete
+	@RequestMapping( value = "", method = RequestMethod.GET)
+	public String memo(String mno_to, HttpSession session, Model model) {
+		if (mno_to != null) {
+			MemoDTO dto = new MemoDTO();
+			dto.setMno_to(mno_to);
+			dto.setOther_mni(service.getName(mno_to));
+			dto.setMno_from(((MemberDTO)session.getAttribute("login_info")).getMno());
+			dto.setRoom_no(service.getRoomNo(dto));
+			
+			model.addAttribute("chat_send", dto);
+		}
+		return "/memo/memo";
+	}
+
+	@RequestMapping( value = "/delete", method = RequestMethod.POST )
+	public void delete( MemoDTO dto, HttpSession session, PrintWriter out ) {
+		int successCount = 0;
+	    successCount = service.delete( dto );
+	    out.print(successCount);
+	    out.close();
+	}//delete
 
 	@RequestMapping( value = "/chat_list", method = RequestMethod.GET )
-	public String chatList( String room_no, HttpSession session, Model model ) {
-
+	public String chatList( MemoDTO dto, HttpSession session, Model model ) {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		dto.setMno(mno);
 		List<MemoDTO> list = null;
-		list = service.chatListByNo(room_no);
+		list = service.chatListByNo(dto);
+		
+		String mpho_path = service.getPhoto(dto.getOther_mno());
+		
 		model.addAttribute("chat_list", list);
+		model.addAttribute("photo", mpho_path);
 
 		return "memo/chat_list";//jsp file name
 	}//myRoomList
