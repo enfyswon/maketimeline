@@ -16,7 +16,7 @@
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
 			<div id="search-box">
-				<form action="${pageContext.request.contextPath}/timeline/list" method="get">
+				<form action="${pageContext.request.contextPath}/timeline/search" method="get">
 					<div id="search">
 						<select id="searchOption" name="searchOption">
 							<option value="timeline_name"
