@@ -37,7 +37,7 @@
 		</main>
 		
 		<script type="text/javascript">
-		const roomList = function() {
+		const firstRoomList = function() {
 			$.ajax({
 				url: "${pageContext.request.contextPath}/memo/my_room_list", 
 				method: "get",
@@ -59,6 +59,29 @@
 			});
 		}
 		
+		const roomList = function() {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/memo/my_room_list", 
+				method: "get",
+				data : {},
+				success: function(data) {
+					$("#room-list").html(data);
+					
+					$(".room").on('click', function() {
+						let roomno = $(this).val();
+						let mno = $(this).attr('mno');
+						let mni = $(this).attr('mni');
+
+						$(".room-box").not(".room-box.room-box" + roomno).removeClass("active-room");
+						$(".room-box" + roomno).addClass("active-room");
+						
+						chatList(roomno, mni, mno);
+					});
+					$(".room-box:first").addClass("active-room");
+				}
+			});
+		}
+		
 		const chatList = function(roomno, mni, mno) {
 			$.ajax({
 				url: "${pageContext.request.contextPath}/memo/chat_list",
@@ -75,9 +98,10 @@
 					$("#chat_send_btn").click(function() {
 						sendChat(roomno, mni, mno)
 					});//click
-					roomList();
 				}
 			});
+			$(".room-cnts-unread" + roomno).empty();
+			$(".room-cnts-unread" + roomno).css('background', 'rgba(0, 0, 0, 0)');
 		}
 		
 		const sendChat = function(roomno, mni, mno) {
@@ -108,7 +132,7 @@
 			);//post
 		}
 		$(document).ready(function() {
-			roomList();
+			firstRoomList();
 			if (${chat_send.mno_to != null}) {
 				chatList("${chat_send.room_no}", "${chat_send.other_mni}", "${chat_send.mno_to}");
 			}

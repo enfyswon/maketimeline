@@ -16,12 +16,15 @@
 	</delete>
 
 	<select id="myRoomListByMno" parameterType="java.lang.String" resultType="kr.co.mt.memo.MemoDTO">
-	select room_no, mno_from, m1.mni mni_from, mno_to, m2.mni mni_to
-	from memo_room, member m1, member m2
+	select r.room_no, r.mno_from, m1.mni mni_from, r.mno_to, m2.mni mni_to, c.chat
+	from memo_room r, member m1, member m2, memo_chat c
 	where del_yn = 0
 	and ( mno_from = #{loginMno} or mno_to = #{loginMno} )
 	and mno_from = m1.mno
 	and mno_to = m2.mno
+    and r.room_no = c.room_no
+    and c.chat_no in (select max(chat_no) from memo_chat group by room_no)
+    order by chat_no desc;
 	</select>
 
 	<insert id="insert" parameterType="kr.co.mt.memo.MemoDTO">

@@ -43,7 +43,7 @@
 								<p class="timeline-date">${dto.timeline_startdate}</p>
 							</div>
 						</div>
-						<p class="timeline-desc">${dto.timeline_desc}</p>
+						<div class="timeline-desc">${dto.timeline_desc}</div>
 						<div class="timeline-btn-box">
 							<button type="button" class="timeline-update-btn" value="${dto.timeline_no}"></button>
 							<button type="button" class="timeline-delete-btn" value="${dto.timeline_no}"></button>
