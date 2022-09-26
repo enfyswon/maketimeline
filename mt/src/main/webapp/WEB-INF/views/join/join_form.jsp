@@ -23,9 +23,10 @@
    				</div>
    				<div class="join-input join-email">
    					<p>
-	   					<label class="input-label">메일 본인 인증</label>
-	                    <button id="email_ck"> 메일 발송 </button>
+	   					<label for="email2" class="input-label">메일 인증</label>
+	                  	<label for="email2" id="email2_label" class="write_label"></label>
    					</p>
+	                <button id="email_ck"> 메일 발송 </button>
 	                <script type="text/javascript">
 	               	let email_cf = "";
 	                $(document).ready(function() {
@@ -34,7 +35,7 @@
 	                        	alert("먼저 중복 확인을 하세요.");
 	                        	return;
 	                        }
-	                        let tmpyn = confirm(checkedEMAIL + "으로 인증 메일을 보내시게습니까?");
+	                        let tmpyn = confirm(checkedEMAIL + "으로 인증 메일을 보내시겠습니까?");
 	                       	if( tmpyn == false ){
 	                       		return;
 	                       	}
@@ -47,29 +48,30 @@
 	                       			, function(data, status) {
 	                       				alert(data.message);
 	                       				email_cf = data.contents;
+	                       				$("#email_ck").css("background-color", "blue");
+	                       				$("#email_ck").css("color", "white");
+	                       				$("#email_ck").text("메일 확인");
 	                       			}
 	                       			, "json"
 	                       	);//get
 	                    });//click
 	                });//ready
 	                </script>
-   				</div>
-   				<div class="join-input join-email">
-   					<p>
-	   					<label for="email2" class="input-label">인증 번호</label>
-	                  	<label for="email2" id="email2_label" class="write_label"></label>
-   					</p>
 					<input type="text" id="email2" name="email2" class="join-email-input" placeholder="인증번호 입력 ">
                     <button id="email_ck2"> 인증번호 확인 </button>
                     <script type="text/javascript">
 	                $(document).ready(function() {
 	                    $("#email_ck2").click(function() {
-	                       	if( $("#email2").val() == email_cf ){
-	                       		alert("인증번호가 일치합니다.")
-	                       	} else {
-	                       		alert("인증번호가 일치하지않습니다.")
-	                       		return;
-	                       	}
+	                    	if (email_cf == "") {
+	                    		alert("메일 발송 버튼을 눌러주세요.");
+	                    	} else {
+		                       	if( $("#email2").val() == email_cf ){
+		                       		alert("인증번호가 일치합니다.")
+		                       	} else {
+		                       		alert("인증번호가 일치하지않습니다.")
+		                       		return;
+		                       	}
+	                    	}
 	                    });//click
 	                });//ready
 	                </script>

@@ -64,7 +64,10 @@ input[type='checkbox'] {
 	border-radius: 5px;
 }
 #email_ck {
-	width: 25%;
+	width: 15%;
+}
+#email2 {
+	width: 44%;
 }
 #term-box {
 	text-align: left;
