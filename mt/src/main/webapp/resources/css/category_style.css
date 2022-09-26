@@ -128,7 +128,7 @@
 	overflow: auto;
 }
 #category-region::-webkit-scrollbar {
-	width: 5px;
+	height: 5px;
 }
 #category-region::-webkit-scrollbar-thumb {
 	height: 30%;

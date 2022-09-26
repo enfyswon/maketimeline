@@ -63,7 +63,7 @@
 		
 		<when test="region_no == 2">
 		where tour_loc like concat('%', '경기', '%')
-		and tour_loc like concat('%', '인천', '%')
+		or tour_loc like concat('%', '인천', '%')
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
@@ -104,7 +104,7 @@
 		
 		<when test="region_no == 4">
 		where tour_loc like concat('%', '대전', '%')
-		and tour_loc like concat('%', '충청', '%')
+		or tour_loc like concat('%', '충청', '%')
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
@@ -125,7 +125,7 @@
 		
 		<when test="region_no == 5">
 		where tour_loc like concat('%', '광주', '%')
-		and tour_loc like concat('%', '전라', '%')
+		or tour_loc like concat('%', '전라', '%')
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
@@ -146,7 +146,7 @@
 		
 		<when test="region_no == 6">
 		where tour_loc like concat('%', '경상', '%')
-		and tour_loc like concat('%', '대구', '%')
+		or tour_loc like concat('%', '대구', '%')
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
@@ -167,7 +167,7 @@
 		
 		<when test="region_no == 7">
 		where tour_loc like concat('%', '부산', '%')
-		and tour_loc like concat('%', '울산', '%')
+		or tour_loc like concat('%', '울산', '%')
 		<if test="searchOption != null and searchOption != ''
 					and searchWord != null and searchWord != ''">
 			<choose>
