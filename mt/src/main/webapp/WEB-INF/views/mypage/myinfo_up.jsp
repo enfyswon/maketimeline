@@ -113,7 +113,7 @@
 			$.ajax({
 				type : "POST" 
 				, encType : "multipart/form-data" 
-				, url : "${pageContext.request.contextPath}/mypage/info_update" 
+				, url : "${pageContext.request.contextPath}/info_update" 
 				, data : form 
 				, processData : false
 				, contentType : false 

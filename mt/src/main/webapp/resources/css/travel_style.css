@@ -17,10 +17,58 @@ button {
 #tour-box {
 	width: 40%;
 }
+#tour-search-box {
+	width: 100%;
+	height: 50px;
+}
+#tour_search {
+	width: 90%;
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	align-items: center;
+}
+#tour_search select, input, button {
+	padding: 7px;
+	margin: 0;
+	font-size: medium;
+}
+#tour_search_btn {
+	width: 20%;
+	background-color: #bbbbbb;
+}
 #tour-list-box {
 	width: 100%;
 	height: 650px;
 	overflow: auto;
+}
+#tour-list-box::-webkit-scrollbar {
+	width: 5px;
+}
+#tour-list-box::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: #217AF4;
+	border-radius: 10px;
+}
+#tour-list-box::-webkit-scrollbar-track {
+	background: rgba(33, 122, 244, 0.1);
+	border-radius: 10px;
+}
+.tour-list {
+	margin: 10px;
+	border-bottom: 1px solid black;
+}
+.tour-list .loc {
+	font-size: small;
+}
+.tour-list .desc {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	word-wrap: break-word;
+	margin-bottom: 10px;
 }
 #money-box {
 	width: 40%;
@@ -154,9 +202,25 @@ button {
 }
 .timeline-desc {
 	margin-top: 5px;
+	height: 90px;
+	margin-right: 5px;
+	overflow: auto;
+}
+.timeline-desc::-webkit-scrollbar {
+	width: 5px;
+}
+.timeline-desc::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+.timeline-desc::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 .timeline-btn-box {
 	text-align: right;
+	margin-right: 10px;
 }
 .timeline-delete-btn {
 	background: url('../img/delete.png') no-repeat;
@@ -164,6 +228,7 @@ button {
 	width: 20px;
 	height: 20px;
 	object-fit: cover;
+	margin-left: 5px;
 }
 .timeline-update-btn {
 	background: url('../img/update.png') no-repeat;

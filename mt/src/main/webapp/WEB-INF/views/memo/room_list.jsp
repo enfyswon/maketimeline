@@ -3,11 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:forEach var="dto" items="${room_list}">
 <div class="room-box room-box${dto.room_no}">
-	<button type="button" class="room" value="${dto.room_no}" mno="${dto.mno_to}" mni="${dto.mni_to}">
+	<button type="button" class="room" value="${dto.room_no}" mno="${dto.other_mno}" mni="${dto.other_mni}">
 		<div class="room-info">
 			<div class="room-img">	
 			<c:choose>
-				<c:when test="${dto.mpho_path != null && dto.mni_from != ''}">
+				<c:when test="${dto.mpho_path != null}">
 				<img id="profile" alt="profile_photo" src="${dto.mpho_path}">
 				</c:when>
 				<c:otherwise>
@@ -16,53 +16,18 @@
 			</c:choose>  
 			</div>
 			<div class="room-cnts">
-				<p class="room-cnts-to">${dto.mni_to}</p>
-				<p></p>
+				<p class="room-cnts-to">${dto.other_mni}</p>
+				<div class="room-cnts-chat">${dto.chat}</div>
 			</div>
+			<c:if test="${dto.unread > 0}">
+			<div class="room-cnts-unread room-cnts-unread${dto.room_no}">
+				<span>${dto.unread}</span>
+			</div>
+			</c:if>
 		</div>
 	</button>
 </div>
 </c:forEach>
-<!--          <div class="input-group-prepend"> -->
-<!-- 			<table class="table table-hover" border="2" > -->
-<%-- 				<c:forEach var="dto" items="${room_list}"> --%>
-<!-- 					<tr> -->
-<!-- 						<td> -->
-<!-- 							<h5 class="text-left"> -->
-<%-- 							${dto.mni_to}  --%>
-<%-- 						<button type="submit" class="btn_delete" value="${dto.room_no}">삭제</button> --%>
-<%-- 						<a href="${pageContext.request.contextPath}/memo/my_room_list2?room_no=${dto.room_no}" --%>
-<!-- 									style="text-decoration:none;" class="text-dark"> -->
-<%-- 						<c:choose> --%>
-<%-- 						<c:when test="${pf.mpho_path != null && dto.mni_from != ''}"> --%>
-<%-- 						<img id="profile" alt="profile_photo" src="${pf.mpho_path}"> --%>
-<%-- 						</c:when> --%>
-<%-- 						<c:otherwise> --%>
-<%-- 						<img id="defaultImg" src="${pageContext.request.contextPath}/resources/img/user.png"> --%>
-<%-- 						</c:otherwise> --%>
-<%-- 						</c:choose>   --%>
-<!-- 						</a> -->
-<!-- 							</h5> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<%-- 				</c:forEach> --%>
-<!-- 			</table> -->
-<!--          </div> -->
-<!--       <div class='right-box'> -->
-<!-- 		<div id="memo_header_div"> -->
-<%-- 		<h5> 상대방 ID :${room_dto.mni_to} </h5> --%>
-<!-- 		</div> -->
-<%-- 		<iframe src="${pageContext.request.contextPath}/memo/chat_list?room_no=${room_dto.room_no}" --%>
-<!-- 				name="chatList" width="80%" height="470px" frameborder="0" scrolling="no" class="mb-1" ></iframe> -->
-<!-- 				<div id="ckd_div"> -->
-<!-- 			<textarea id="cnts" name="cnts" class="form-control" style="height:100px; width:50px; background-color:blue;"></textarea> -->
-<!-- 			<script type="text/javascript">
-// 				CKEDITOR.replace('cnts');
-			</script> -->
-<!-- 			<button id="chat_send_btn" class="btn btn-dark btn-sm float-right"> 글 전 송 </button> -->
-<!-- 				</div> -->
-<!-- 		</div> -->
-<!-- 		</main> -->
       <script type="text/javascript">
       $(document).ready(function() {
          $("#open_room_btn").click(function() {

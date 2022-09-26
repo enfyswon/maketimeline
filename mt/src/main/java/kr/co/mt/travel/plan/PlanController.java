@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 
 import kr.co.mt.dto.MemberDTO;
 import kr.co.mt.dto.MoneyDTO;
+import kr.co.mt.dto.SearchDTO;
 import kr.co.mt.test.KoreaDTO;
 import kr.co.mt.travel.category.CategoryDTO;
 import kr.co.mt.travel.category.CategoryService;
@@ -92,15 +93,17 @@ public class PlanController {
 	}//list
 	
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String plan(String cate_no, Model model) {
+	public String plan(String cate_no, Model model, SearchDTO sear) {
 		CategoryDTO dto = new CategoryDTO();
 		dto = cservice.cate_select(cate_no);
 		
 		List<KoreaDTO> list = null;
-		list = service.tourlist(dto.getRegion_no());
+		sear.setRegion_no(dto.getRegion_no());
+		list = service.tourlist(sear);
 
 		model.addAttribute("category", dto);
 		model.addAttribute("list", list);
+		model.addAttribute("search_dto", sear);
 		
 		return "/travel/plan/plan";
 	}//travel/plan

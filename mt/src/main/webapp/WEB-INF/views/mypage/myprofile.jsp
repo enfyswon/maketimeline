@@ -51,7 +51,7 @@
 					<p class="none">test</p>
 				</div>
 				<div id="right-button-box">
-					<button type="button" onclick="location.href='chat'">채팅</button>
+					<button type="button" id="chat_btn">채팅</button>
 				</div>
 				</c:otherwise>
 			</c:choose>
@@ -61,23 +61,14 @@
 		
 		
 	 <script type="text/javascript">
+	 $(document).ready(function() {
+		$("#chat_btn").click(function() {
+			location.href="${pageContext.request.contextPath}/memo?mno_to=${pf.mno}";
+		}); 
+	 });
       $(document).ready(function() {
          $("#open_room_btn").click(function() {
-          $.get(
-               "${pageContext.request.contextPath}/memo/start"
-               , {
-                  mno_to : 0
-               }
-               , function(data, status) {
-                  if(data == 0){
-                     alert("잠시 후 다시 시도해 주세요.");
-                  } else {
-                     window.location.href="${pageContext.request.contextPath}/memo/open_room?room_no="+data;
-                      // location.href="${pageContext.request.contextPath}/memo/start?mno_to=8";
-                  }
-               }//call back functiion
-         );//get
-
+        	 location.href="${pageContext.request.contextPath}/memo?mno_to=0";
          });//click
       });//ready
       </script>   

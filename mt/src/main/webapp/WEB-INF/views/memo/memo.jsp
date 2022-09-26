@@ -37,6 +37,28 @@
 		</main>
 		
 		<script type="text/javascript">
+		const firstRoomList = function() {
+			$.ajax({
+				url: "${pageContext.request.contextPath}/memo/my_room_list", 
+				method: "get",
+				data : {},
+				success: function(data) {
+					$("#room-list").html(data);
+					
+					$(".room").on('click', function() {
+						let roomno = $(this).val();
+						let mno = $(this).attr('mno');
+						let mni = $(this).attr('mni');
+
+						$(".room-box").not(".room-box.room-box" + roomno).removeClass("active-room");
+						$(".room-box" + roomno).addClass("active-room");
+						
+						chatList(roomno, mni, mno);
+					});
+				}
+			});
+		}
+		
 		const roomList = function() {
 			$.ajax({
 				url: "${pageContext.request.contextPath}/memo/my_room_list", 
@@ -47,38 +69,42 @@
 					
 					$(".room").on('click', function() {
 						let roomno = $(this).val();
-						let mno_to = $(this).attr('mno');
-						let mni_to = $(this).attr('mni');
+						let mno = $(this).attr('mno');
+						let mni = $(this).attr('mni');
 
 						$(".room-box").not(".room-box.room-box" + roomno).removeClass("active-room");
 						$(".room-box" + roomno).addClass("active-room");
 						
-						chatList(roomno, mni_to, mno_to);
+						chatList(roomno, mni, mno);
 					});
+					$(".room-box:first").addClass("active-room");
 				}
 			});
 		}
 		
-		const chatList = function(roomno, mni_to, mno_to) {
+		const chatList = function(roomno, mni, mno) {
 			$.ajax({
 				url: "${pageContext.request.contextPath}/memo/chat_list",
 				method: 'get',
 				data: {
-					room_no: roomno
+					room_no: roomno,
+					other_mno: mno
 				},
 				success: function(data) {
-					$("#cnts-title").text(mni_to);
+					$("#cnts-title").text(mni);
 					$("#memo-cnts").html(data);
 					$("#memo-cnts-list").scrollTop($("#memo-cnts-list")[0].scrollHeight);
 					
 					$("#chat_send_btn").click(function() {
-						sendChat(roomno, mni_to, mno_to)
+						sendChat(roomno, mni, mno)
 					});//click
 				}
 			});
+			$(".room-cnts-unread" + roomno).empty();
+			$(".room-cnts-unread" + roomno).css('background', 'rgba(0, 0, 0, 0)');
 		}
 		
-		const sendChat = function(roomno, mni_to, mno_to) {
+		const sendChat = function(roomno, mni, mno) {
 			let chat = CKEDITOR.instances.cnts.getData();
 
 			if( chat == '' ){
@@ -91,13 +117,13 @@
 					, {
 						room_no : roomno
 						, mno_ins : "${login_info.mno}"
-						, mno_read : mno_to
+						, mno_read : mno
 						, chat : chat
 					}
 					, function(data, status) {
 						if(data >= 1){
 							CKEDITOR.instances.cnts.setData("");
-							chatList(roomno, mni_to, mno_to);
+							chatList(roomno, mni, mno);
 							roomList();
 						} else {
 							alert("잠시 후 다시 시도해 주세요.");
@@ -106,7 +132,10 @@
 			);//post
 		}
 		$(document).ready(function() {
-			roomList();
+			firstRoomList();
+			if (${chat_send.mno_to != null}) {
+				chatList("${chat_send.room_no}", "${chat_send.other_mni}", "${chat_send.mno_to}");
+			}
 		});
       	$(document).ready(function() {
         	$("#open_room_btn").click(function() {

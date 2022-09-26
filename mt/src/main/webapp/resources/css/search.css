@@ -24,6 +24,10 @@ button {
 	margin: 0;
 	font-size: medium;
 }
+#search_btn {
+	width: 20%;
+	background-color: #bbbbbb;
+}
 #search-map {
 	width: 90%;
 	height: 750px;
@@ -109,9 +113,33 @@ button {
 }
 .timeline-desc {
 	margin-top: 5px;
+	height: 87px;
+	margin-right: 5px;
+	overflow: auto;
+}
+.timeline-desc::-webkit-scrollbar {
+	width: 5px;
+}
+.timeline-desc::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+.timeline-desc::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 .timeline-btn-box {
 	text-align: right;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+	margin-top: 3px;
+}
+.loc-search-btn {
+	font-size: small;
+	text-align: center;
+	background-color: #bbbbbb;
 }
 .timeline-delete-btn {
 	background: url('../img/delete.png') no-repeat;
@@ -119,6 +147,7 @@ button {
 	width: 20px;
 	height: 20px;
 	object-fit: cover;
+	margin-left: 5px;
 }
 .timeline-update-btn {
 	background: url('../img/update.png') no-repeat;

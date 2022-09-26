@@ -17,37 +17,31 @@
 	<body>
 	<%@ include file="/WEB-INF/views/header.jsp" %>
 		<main>
-		
-      
 			<div id="tour-box">
-				<div>
-					<form action="${pageContext.request.contextPath}/plan?cate_no=${cate_no}" method="get">
-				         <div class="input-group" id="tour_search">
-				            <div class="input-group-prepend">
-				               <select class="form-control" id="searchOption" name="searchOption">
-				                  <option value="tour_title"
-				                  
-				                     <c:if test="${search_dto.searchOption == 'tour_title'}">selected="selected"</c:if>
-				                  > 장 소 </option>
-				                  <option value="tour_loc"
-				                     <c:if test="${search_dto.searchOption == 'tour_loc'}">selected="selected"</c:if>
-				                  > 위 치 </option>
-				               </select>
-				            </div>
-				            <input type="text" class="form-control" id="searchWord" name="searchWord"
+				<div id="tour-search-box">
+					<form action="${pageContext.request.contextPath}/plan" method="get">
+						<input type="hidden" id="cate_no" name="cate_no" value="${category.cate_no}">
+				         <div id="tour_search">
+				            <select id="searchOption" name="searchOption">
+				            	<option value="tour_title"
+				                    <c:if test="${search_dto.searchOption == 'tour_title'}">selected="selected"</c:if>
+				                > 장 소 </option>
+			                	<option value="tour_loc"
+				                    <c:if test="${search_dto.searchOption == 'tour_loc'}">selected="selected"</c:if>
+				                > 위 치 </option>
+				            </select>
+				            <input type="text" id="searchWord" name="searchWord"
 										value="${search_dto.searchWord}">
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-primary"> 검 색 </button>
-							</div>
+							<button type="submit" id="tour_search_btn"> 검 색 </button>
 				    	</div>
 					</form>
 				</div>
 				<div id="tour-list-box">
 					<c:forEach var="dto" items="${list}">
-					<div>
-						<h3>${dto.tour_title}</h3>
-						<h5>${dto.tour_loc}</h5>
-						<h5>${dto.tour_desc}</h5>
+					<div class="tour-list">
+						<h3 class="title">${dto.tour_title}</h3>
+						<p class="loc">${dto.tour_loc}</p>
+						<p class="desc">${dto.tour_desc}</p>
 					</div>
 					</c:forEach>
 				</div>

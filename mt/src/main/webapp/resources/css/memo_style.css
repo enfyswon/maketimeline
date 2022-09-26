@@ -43,8 +43,21 @@
 	border-radius: 0 5px 5px 0;
 }
 #room-list {
-	height: 625px;
+	height: 615px;
 	overflow: auto;
+	margin-top: 5px;
+}
+#room-list::-webkit-scrollbar {
+	width: 5px;
+}
+#room-list::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+#room-list::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 .room-box {
 	width: 100%;
@@ -52,7 +65,7 @@
 	border-bottom: 1px solid black;
 }
 .active-room {
-	background-color: #bbbbbb;
+	background-color: #eeeeee;
 }
 .room-box button {
 	background-color: rgba(0, 0, 0, 0);
@@ -77,10 +90,15 @@
 }
 .room-cnts {
 	margin: 0 10px;
+	flex-grow: 1;
+}
+.room-cnts-chat {
+	text-align: left;
 }
 .room-cnts-to {
 	font-size: medium;
 	font-weight: bold;
+	text-align: left;
 }
 #memo-cnts-box {
 	width: 60%;
@@ -92,7 +110,19 @@
 #memo-cnts-list {
 	width: 100%;
 	height: 600px;
-	overflow: hidden;
+	overflow: auto;
+}
+#memo-cnts-list::-webkit-scrollbar {
+	width: 5px;
+}
+#memo-cnts-list::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+#memo-cnts-list::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 #send-box {
 	width: 100%;
@@ -104,6 +134,7 @@
 	height: 95%;
 	float: left;
 	overflow: hidden;
+	background-color: white;
 }
 .cke_textarea_inline.cke_editable.cke_editable_inline.cke_contents_ltr.cke_show_borders {
 	height: 100%;
@@ -111,6 +142,8 @@
 #chat_send_btn {
 	width: 20.5%;
 	height: 98%;
+	background-color: #84C1FF;
+	border-left: 1px solid black;
 }
 .outgoing-memo, .receive-memo {
 	display: flex;
@@ -175,123 +208,21 @@
 .chat-date {
 	font-size: x-small;
 	margin: 0;
+	margin-top: 4px;
 }
-tr{
- background-color: #77adea;
- height: 60px;
-
-}
-#cnts {
-		 backgroung-color:#77adea;
-		
-		}
-
-#logo-link {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	height: 100px;
-	background-color: rgba(0, 0, 0, 0);
-}
-#member-box {
-	position: absolute;
-	top: 50px;
-	left: 90%;
-	transform: translate(0%, -50%);
-}
-#center-box
-{
-	position: center;
-	border-radius: 5px;
-}
-.right-box {
-	text-align: center;
-}
-#right-box
-{
-	border: 2px;
-}
-#logout-btn, #join-btn {
-	margin-left: 5px;
-	border-radius: 5px;
-}
-#login-btn {
-	border-radius: 5px;
-}
-#logo {
-	height: 100px;
-}
-
-#photo img {
-	margin: 40px 0;
+.room-cnts-unread {
+	border-radius: 70%;
+	width: 20px;
 	height: 20px;
+	margin: 0 20px;
+	color: white;
+	overflow: hidden;
+	background-color: red;
 }
-
-#profile img {
-	float: left;
-	width : 15%;
-	height : 30px;	
-}
-
-#icon-bar {
-	width: 50%;
-	height: 160px;
-	display: flex;
-	flex-direction: row;
-}
-#icon-bar > div {
-	width: 25%;
-	text-align: center;
-}
-#icon-bar img {
-	margin: 40px 0;
-	height: 80px;
-}
-#header-icon {
-	position: absolute;
-	top: 100px;
+.room-cnts-unread span {
 	width: 100%;
-	height: 150px;
-	background-color: rgba(244, 251, 255, 0.5);
-	visibility: hidden;
-	z-index: 50;
-}
-
-#ckd_div {
-			width : 80%;
-			height : 470px;
-			overflow : auto;
-		}
-#memo_header_div {
-		width : 80%;
-		height : 30px;
-		background-color: #77adea;
-		border : 1px solid gray;
-		overflow : 100 auto;
-		}
-
-#memo_list_div {
-			float: left;
-			width : 80%;
-			height : 470px;
-			border : 1px solid gray;
-			background-color: #77adea;
-			
-		}
-
-
-textarea {
-		 backgroung-color:#77adea;
-		 border : 1px solid gray;
-}
-
-hr {
-	height: 1px;
-	background: #bbbbbb;
-	background-image: -webkit-linear-gradient(left, #eee, #777, #eee);
-	background-image: -moz-linear-gradient(left, #eee, #777, #eee);
-	background-image: -ms-linear-gradient(left, #eee, #777, #eee);
-	background-image: -o-linear-gradient(left, #eee, #777, #eee);
-	border: 0;
-	margin: 5px 0;
+	height: 100%;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
 }
