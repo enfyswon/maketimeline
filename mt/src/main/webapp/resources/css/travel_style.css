@@ -285,6 +285,7 @@ button {
 	color: white;
 }
 #plan-add-box, #plan-modify-box {
+	text-align: center;
 	display: none;
 }
 #input-map-box {

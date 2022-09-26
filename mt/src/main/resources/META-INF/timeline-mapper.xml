@@ -74,7 +74,7 @@
 	where timeline_no = #{timeline_no}
 	</select>
 	
-	<update id="timeUpdate" parameterType="kr.co.mt.travel.timeline.TimelineDTO">
+	<update id="timelineUpdate" parameterType="kr.co.mt.travel.timeline.TimelineDTO">
 	update timeline set timeline_name = #{timeline_name}, timeline_desc = #{timeline_desc}, timeline_amount = #{timeline_amount}, money_no = #{money_no}, timeline_allDay = #{timeline_allDay},
 		   timeline_startdate = #{timeline_startdate}, timeline_enddate = #{timeline_enddate}, timeline_photoname = #{timeline_photoname}, timeline_photopath = #{timeline_photopath}
 	where timeline_no = #{timeline_no}

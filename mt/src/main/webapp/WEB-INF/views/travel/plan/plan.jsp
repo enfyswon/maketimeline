@@ -516,11 +516,14 @@
 				
 				if ($("#plan_allDay").is(":checked")) {
 					allDay = 'true';
+				} else {
+					allDay = 'false';
 				}
 
 				let form = new FormData( document.getElementById("plan_form"));
 				
 				form.append('plan_loc', plan_loc);
+				form.append('plan_allDay', allDay);
 				
 				let keys = form.keys();
 				for(key of keys) console.log(key);
@@ -663,7 +666,7 @@
 			var newEvent = function(start, end) {
 				modal.style.display = "flex";
 				modalTitle.html("여행 계획 추가");
-				addBox.style.display = "flex";
+				addBox.style.display = "block";
 				modifyBox.style.display = "none";
 				planStart.val(start + " 00:00:00");
 				planEnd.val(end  + " 00:00:00");
@@ -672,7 +675,7 @@
 				modal.style.display = "flex";
 				modalTitle.html("여행 계획 수정");
 				addBox.style.display = "none";
-				modifyBox.style.display = "flex";
+				modifyBox.style.display = "block";
 				$("#plan_no").val(info.event.id);
 				$("#plan_name").val(info.event.title);
 				$("#plan_desc").val(info.event.extendedProps.desc);

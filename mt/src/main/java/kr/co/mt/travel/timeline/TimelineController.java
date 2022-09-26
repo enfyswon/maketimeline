@@ -110,6 +110,45 @@ public class TimelineController {
 		out.close();
 	}
 	
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public void tlUpdate(TimelineDTO dto, HttpSession session, PrintWriter out) throws IOException {
+		String mno = ((MemberDTO)session.getAttribute("login_info")).getMno();
+		dto.setMno(mno);
+		
+		Date today = new Date();
+		DateFormat nalja = new SimpleDateFormat("YYYYMMdd");
+		DateFormat sigan = new SimpleDateFormat("HHmmss");
+		String todayNalja = nalja.format(today);
+		String todaySigan = sigan.format(today);
+		
+		String email = ((MemberDTO)session.getAttribute("login_info")).getEmail();
+		File newFolder = new File("C:/upload/timeline/" + email + "/");
+		if (!newFolder.exists()) {
+			newFolder.mkdirs();
+		}
+		
+		
+		MultipartFile timeline_photo = dto.getTimeline_photo();
+		if (timeline_photo != null && !timeline_photo.getOriginalFilename().equals("")) {
+			InputStream is = timeline_photo.getInputStream();
+			FileOutputStream fos = new FileOutputStream("C:/upload/timeline/" + email + "/" + todayNalja + "_" + todaySigan + "_" + timeline_photo.getOriginalFilename());
+			FileCopyUtils.copy(is, fos);
+			is.close();
+			fos.close();
+			
+			dto.setTimeline_photoname(todayNalja + "_" + todaySigan + "_" + timeline_photo.getOriginalFilename());
+			dto.setTimeline_photopath("/upload/timeline/" + email + "/" + todayNalja + "_" + todaySigan + "_" + timeline_photo.getOriginalFilename());
+		}
+		
+		System.out.println(dto.toString());
+		
+		int successCnt = 0;
+		successCnt = service.time_update(dto);
+		
+		out.print(successCnt);
+		out.close();
+	}
+	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String categoryUpdate(String timeline_no, Model model) {
 		TimelineDTO dto = new TimelineDTO();

@@ -38,7 +38,7 @@
 								<label for="email">이메일</label>
 							</div>
 							<div class="profile-desc">
-								<input type="text" id="email" name="email"  value="${pf.email}">
+								<input type="text" id="email" name="email"  value="${pf.email}" readonly="readonly">
 								<label id="email_label" for="email"><br></label>
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 				, cache : false 
 				, success : function(result) {
 					alert("회원 정보가 수정되었습니다.");
-					window.location.reload();
+					location.href="${pageContext.request.contextPath}/profile?email=${pf.email}";
 				}, 
 				error : function(xhr) {
 					alert("잠시 후 다시 시도해주세요.");

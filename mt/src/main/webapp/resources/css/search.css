@@ -24,7 +24,11 @@ button {
 	margin: 0;
 	font-size: medium;
 }
+#searchOption {
+	height: 37px;
+}
 #search_btn {
+	height: 37px;
 	width: 20%;
 	background-color: #bbbbbb;
 }

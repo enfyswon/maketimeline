@@ -19,7 +19,8 @@
 		<main>
 			<div id="timeline-input">
 				<form id="timeline_form">
-					<input type="hidden" id="cate_no" name="cate_no" value="${cate_no}">
+					<input type="hidden" id="cate_no" name="cate_no" value="${timeline.cate_no}">
+					<input type="hidden" id="timeline_no" name="timeline_no" value="${timeline.timeline_no}">
 					<div class="timeline-detail">
 						<p>
 							<label for="timeline_name">글 제목</label>
@@ -34,7 +35,7 @@
 							<input type="checkbox" id="timeline_allDay">
 							<label for="timeline_allDay">하루 종일</label>
 						</p>
-						<input type="datetime-local" id="timeline_startdate" name="timeline_date" value="${timeline.timeline_startdate}"> ~ 
+						<input type="datetime-local" id="timeline_startdate" name="timeline_startdate" value="${timeline.timeline_startdate}"> ~ 
 						<input type="datetime-local" id="timeline_enddate" name="timeline_enddate" value="${timeline.timeline_enddate}">
 					</div>
 					<div class="timeline-detail">
@@ -60,7 +61,7 @@
 							사진
 							<label id="timeline_photo_label" class="write_label"></label>
 						</p>
-						<input type="file" id="timeline_photo" name="timeline_photo" value="${timeline.timeline_photo}">
+						<input type="file" id="timeline_photo" name="timeline_photo" path="${timeline.timeline_photopath}">
 					</div>
 					<div class="timeline-detail">
 						<p>
@@ -401,6 +402,10 @@
 					$("#timeline_date_label").text("");
 				}
 				
+				if ($("#timeline_allDay").is(":checked")) {
+					allDay = 'true';
+				}
+				
 				if ($.trim($("#timeline_desc").val()) == "") {
 					$("#timeline_desc_label").text("내용을 입력하세요.");
 					return;
@@ -430,8 +435,8 @@
 				} else {
 					$("#timeline_amount_label").text("");
 				}
-				
-				if ($.trim($("#timeline_photo").val()) == "") {
+
+				if ($.trim($("#timeline_photo").attr('path')) == "") {
 					$("#timeline_photo_label").text("사진을 선택하세요.");
 					return;
 				} else {
@@ -454,7 +459,10 @@
 				}
 				
 				let form = new FormData( document.getElementById("timeline_form"));
+				form.append("timeline_photoname", "${timeline.timeline_photoname}");
+				form.append("timeline_photopath", $("#timeline_photo").attr('path'));
 				form.append("timeline_loc", timeline_loc);
+				form.append("timeline_allDay", allDay);
 				
 				let keys = form.keys();
 				for(key of keys) console.log(key);
@@ -473,7 +481,7 @@
 					cache : false, 
 					success : function(result) {
 						alert("글이 등록되었습니다.");
-						location.href = "${pageContext.request.contextPath}/timeline?cate_no=${cate_no}";
+						location.href = "${pageContext.request.contextPath}/timeline?cate_no=${timeline.cate_no}";
 					}, 
 					error : function(xhr) {
 						alert("잠시 후 다시 시도해 주세요.");
