@@ -59,13 +59,20 @@
 								<p class="timeline-date">${dto.timeline_startdate}</p>
 							</div>
 						</div>
-						<p class="timeline-desc">${dto.timeline_desc}</p>
-						<c:if test="${login_info.mno == dto.mno}">
-						<div class="timeline-btn-box">
-							<button type="button" class="timeline-update-btn"></button>
-							<button type="button" class="timeline-delete-btn"></button>
+						<div class="timeline-desc">
+							<p>${dto.timeline_desc}</p>
 						</div>
-						</c:if>
+						<div class="timeline-btn-box">
+							<div class="left-btn-box">
+								<button type="button" class="loc-search-btn" value="${dto.timeline_loc}" title="${dto.timeline_name}">위치 검색</button>
+							</div>
+							<c:if test="${login_info.mno == dto.mno}">
+							<div class="right-btn-box">
+								<button type="button" class="timeline-update-btn"></button>
+								<button type="button" class="timeline-delete-btn"></button>
+							</div>
+							</c:if>
+						</div>
 					</div>
 				</div>
 				</c:forEach>
@@ -132,15 +139,37 @@
 		function hideMarkers() {
 		    setMarkers(null);    
 		}
+		
+		function searchLoc(loc, name) {
+			geocoder.addressSearch(loc, function(result, status) {
+				if (status === kakao.maps.services.Status.OK) {
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+					
+					var mark = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+					
+					var window = new kakao.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;">' + name + '</div>'
+					});
+					window.open(map, mark);
+					
+					map.setCenter(coords);
+				}
+			});
+		}
 		</script>
-<!-- 		<script type="text/javascript">
-// 		 $(document).ready(function() {
-// 			$.each(${mapList}, function(idx, dto) {
-// 				addMarker(dto.timeline_loc, dto.timeline_name);
-// 				showMarkers();
-// 			});//each
-// 		});//ready
-</script> -->
+		<script type="text/javascript">
+ 		$(document).ready(function() {
+ 			$(".loc-search-btn").click(function() {
+ 				let loc = $(this).val();
+ 				let name = $(this).attr('title');
+ 				
+ 				searchLoc(loc, name);
+ 			});
+ 		});//ready
+		</script>
 		<script type="text/javascript">
 		$(document).ready(function() {
 	        lightbox.option({

@@ -202,9 +202,25 @@ button {
 }
 .timeline-desc {
 	margin-top: 5px;
+	height: 90px;
+	margin-right: 5px;
+	overflow: auto;
+}
+.timeline-desc::-webkit-scrollbar {
+	width: 5px;
+}
+.timeline-desc::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+.timeline-desc::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 .timeline-btn-box {
 	text-align: right;
+	margin-right: 10px;
 }
 .timeline-delete-btn {
 	background: url('../img/delete.png') no-repeat;
@@ -212,6 +228,7 @@ button {
 	width: 20px;
 	height: 20px;
 	object-fit: cover;
+	margin-left: 5px;
 }
 .timeline-update-btn {
 	background: url('../img/update.png') no-repeat;

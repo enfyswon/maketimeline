@@ -43,8 +43,21 @@
 	border-radius: 0 5px 5px 0;
 }
 #room-list {
-	height: 625px;
+	height: 615px;
 	overflow: auto;
+	margin-top: 5px;
+}
+#room-list::-webkit-scrollbar {
+	width: 5px;
+}
+#room-list::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+#room-list::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 .room-box {
 	width: 100%;
@@ -52,7 +65,7 @@
 	border-bottom: 1px solid black;
 }
 .active-room {
-	background-color: #bbbbbb;
+	background-color: #eeeeee;
 }
 .room-box button {
 	background-color: rgba(0, 0, 0, 0);
@@ -77,10 +90,15 @@
 }
 .room-cnts {
 	margin: 0 10px;
+	flex-grow: 1;
+}
+.room-cnts-chat {
+	text-align: left;
 }
 .room-cnts-to {
 	font-size: medium;
 	font-weight: bold;
+	text-align: left;
 }
 #memo-cnts-box {
 	width: 60%;
@@ -92,7 +110,19 @@
 #memo-cnts-list {
 	width: 100%;
 	height: 600px;
-	overflow: hidden;
+	overflow: auto;
+}
+#memo-cnts-list::-webkit-scrollbar {
+	width: 5px;
+}
+#memo-cnts-list::-webkit-scrollbar-thumb {
+	height: 30%;
+	background: rgba(10, 8, 43, 0.1);
+	border-radius: 10px;
+}
+#memo-cnts-list::-webkit-scrollbar-track {
+	background: white;
+	border-radius: 10px;
 }
 #send-box {
 	width: 100%;
@@ -104,6 +134,7 @@
 	height: 95%;
 	float: left;
 	overflow: hidden;
+	background-color: white;
 }
 .cke_textarea_inline.cke_editable.cke_editable_inline.cke_contents_ltr.cke_show_borders {
 	height: 100%;
@@ -111,6 +142,8 @@
 #chat_send_btn {
 	width: 20.5%;
 	height: 98%;
+	background-color: #84C1FF;
+	border-left: 1px solid black;
 }
 .outgoing-memo, .receive-memo {
 	display: flex;
@@ -178,12 +211,18 @@
 	margin-top: 4px;
 }
 .room-cnts-unread {
-	background-color: red;
 	border-radius: 70%;
 	width: 20px;
 	height: 20px;
-}
-.room-cnts-unread p {
+	margin: 0 20px;
 	color: white;
-	margin-top: 3px;
+	overflow: hidden;
+	background-color: red;
+}
+.room-cnts-unread span {
+	width: 100%;
+	height: 100%;
+	line-height: 20px;
+	text-align: center;
+	vertical-align: middle;
 }
